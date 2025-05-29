@@ -26,7 +26,7 @@ import { SDKValidationError } from "@midday-ai/sdk/models/errors/sdkvalidationer
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {

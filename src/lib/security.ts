@@ -244,7 +244,7 @@ export function resolveGlobalSecurity(
       {
         fieldName: "Authorization",
         type: "http:bearer",
-        value: security?.bearer ?? env().MIDDAY_BEARER,
+        value: security?.token ?? env().MIDDAY_TOKEN,
       },
     ],
   );

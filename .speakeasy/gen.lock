@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: 74cf8ffc74b31f65b6a990cfedf6b063
+  docChecksum: 0032e112b4a5f03bf277c99f15dced65
   docVersion: 0.0.1
-  speakeasyVersion: 1.554.0
+  speakeasyVersion: 1.554.1
   generationVersion: 2.616.1
-  releaseVersion: 0.2.0
-  configChecksum: fc418cc5546e0dbb2bbbb619204d589c
+  releaseVersion: 0.2.1
+  configChecksum: 947560ee0df9a424aa3d4c0acede2f25
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true

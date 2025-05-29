@@ -21,7 +21,7 @@ List all tracker projects for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -64,7 +64,7 @@ import { trackerProjectsList } from "@midday-ai/sdk/funcs/trackerProjectsList.js
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -131,7 +131,7 @@ Create a tracker project for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -157,7 +157,7 @@ import { trackerProjectsCreate } from "@midday-ai/sdk/funcs/trackerProjectsCreat
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -207,7 +207,7 @@ Update a tracker project for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -252,7 +252,7 @@ import { trackerProjectsUpdate } from "@midday-ai/sdk/funcs/trackerProjectsUpdat
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -321,7 +321,7 @@ Retrieve a tracker project for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -347,7 +347,7 @@ import { trackerProjectsGet } from "@midday-ai/sdk/funcs/trackerProjectsGet.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -397,7 +397,7 @@ Delete a tracker project for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -423,7 +423,7 @@ import { trackerProjectsDelete } from "@midday-ai/sdk/funcs/trackerProjectsDelet
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {

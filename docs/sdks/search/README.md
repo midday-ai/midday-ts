@@ -17,7 +17,7 @@ Search across all data, invoices, documents, customers, transactions, and more.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -44,7 +44,7 @@ import { searchSearch } from "@midday-ai/sdk/funcs/searchSearch.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {

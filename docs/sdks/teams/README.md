@@ -20,7 +20,7 @@ Retrieve a list of teams for the authenticated user.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -44,7 +44,7 @@ import { teamsList } from "@midday-ai/sdk/funcs/teamsList.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -91,7 +91,7 @@ Retrieve a team by its ID for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -117,7 +117,7 @@ import { teamsGet } from "@midday-ai/sdk/funcs/teamsGet.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -167,7 +167,7 @@ Update a team for the authenticated workspace. If there’s no change, returns i
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -199,7 +199,7 @@ import { teamsUpdate } from "@midday-ai/sdk/funcs/teamsUpdate.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -255,7 +255,7 @@ List all team members for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -281,7 +281,7 @@ import { teamsMembers } from "@midday-ai/sdk/funcs/teamsMembers.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {

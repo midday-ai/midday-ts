@@ -1,21 +1,21 @@
-speakeasyVersion: 1.554.0
+speakeasyVersion: 1.554.1
 sources:
     Midday API:
         sourceNamespace: midday-api
-        sourceRevisionDigest: sha256:3154f23e76599f16be162ed9779576123e1d2f4a55479268d7b3159e835bb2ca
-        sourceBlobDigest: sha256:494de936987888f911e0a7ffa9928d26e37e2babf10e73091dfe27b2187734d7
+        sourceRevisionDigest: sha256:f2ea4d2b25b5ec58c8e5426028728f1c20a7bbea105679e6e0b452d37fe3e18f
+        sourceBlobDigest: sha256:a0e6eecb2e29484d1407a8a6ea72ceec83b3c921d52872eddf62e79fc62721b7
         tags:
             - latest
-            - speakeasy-sdk-regen-1748540328
+            - speakeasy-sdk-regen-1748542564
             - 0.0.1
 targets:
     midday:
         source: Midday API
         sourceNamespace: midday-api
-        sourceRevisionDigest: sha256:3154f23e76599f16be162ed9779576123e1d2f4a55479268d7b3159e835bb2ca
-        sourceBlobDigest: sha256:494de936987888f911e0a7ffa9928d26e37e2babf10e73091dfe27b2187734d7
+        sourceRevisionDigest: sha256:f2ea4d2b25b5ec58c8e5426028728f1c20a7bbea105679e6e0b452d37fe3e18f
+        sourceBlobDigest: sha256:a0e6eecb2e29484d1407a8a6ea72ceec83b3c921d52872eddf62e79fc62721b7
         codeSamplesNamespace: midday-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:81622f369aec8a6899f3d0417ac30d320c331380346ea6c72f4923468cf0ea90
+        codeSamplesRevisionDigest: sha256:72d109d7bb76c2318526818c4d0cc0af097f992bf48f8ea8369d3e0bdc13dd4b
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

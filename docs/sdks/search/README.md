@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [getV1Search](#getv1search) - Search
+* [search](#search) - Search
 
-## getV1Search
+## search
 
 Search across all data, invoices, documents, customers, transactions, and more.
 
@@ -21,7 +21,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.search.getV1Search({
+  const result = await midday.search.search({
     searchTerm: "Acme",
     language: "en",
   });
@@ -39,7 +39,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { searchGetV1Search } from "@midday/sdk/funcs/searchGetV1Search.js";
+import { searchSearch } from "@midday/sdk/funcs/searchSearch.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -48,7 +48,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await searchGetV1Search(midday, {
+  const res = await searchSearch(midday, {
     searchTerm: "Acme",
     language: "en",
   });
@@ -70,14 +70,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1SearchRequest](../../models/operations/getv1searchrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.SearchRequest](../../models/operations/searchrequest.md)                                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1SearchResponse[]](../../models/.md)\>**
+**Promise\<[operations.SearchResponse[]](../../models/.md)\>**
 
 ### Errors
 

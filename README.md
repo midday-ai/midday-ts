@@ -36,25 +36,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/midday-ai/midday-ts
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/midday-ai/midday-ts
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/midday-ai/midday-ts
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add https://github.com/midday-ai/midday-ts zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -167,7 +167,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.getV1Transactions({
+  const result = await midday.transactions.list({
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",
@@ -242,7 +242,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.getV1Transactions({
+  const result = await midday.transactions.list({
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",
@@ -305,95 +305,101 @@ run();
 
 ### [bankAccounts](docs/sdks/bankaccounts/README.md)
 
-* [getV1BankAccounts](docs/sdks/bankaccounts/README.md#getv1bankaccounts) - List all bank accounts
-* [postV1BankAccounts](docs/sdks/bankaccounts/README.md#postv1bankaccounts) - Create a bank account
-* [getV1BankAccountsId](docs/sdks/bankaccounts/README.md#getv1bankaccountsid) - Retrieve a bank account
-* [patchV1BankAccountsId](docs/sdks/bankaccounts/README.md#patchv1bankaccountsid) - Update a bank account
-* [deleteV1BankAccountsId](docs/sdks/bankaccounts/README.md#deletev1bankaccountsid) - Delete a bank account
+* [list](docs/sdks/bankaccounts/README.md#list) - List all bank accounts
+* [create](docs/sdks/bankaccounts/README.md#create) - Create a bank account
+* [get](docs/sdks/bankaccounts/README.md#get) - Retrieve a bank account
+* [update](docs/sdks/bankaccounts/README.md#update) - Update a bank account
+* [delete](docs/sdks/bankaccounts/README.md#delete) - Delete a bank account
 
 ### [customers](docs/sdks/customers/README.md)
 
-* [getV1Customers](docs/sdks/customers/README.md#getv1customers) - List all customers
-* [postV1Customers](docs/sdks/customers/README.md#postv1customers) - Create customer
-* [getV1CustomersId](docs/sdks/customers/README.md#getv1customersid) - Retrieve a customer
-* [patchV1CustomersId](docs/sdks/customers/README.md#patchv1customersid) - Update a customer
-* [deleteV1CustomersId](docs/sdks/customers/README.md#deletev1customersid) - Delete a customer
+* [list](docs/sdks/customers/README.md#list) - List all customers
+* [create](docs/sdks/customers/README.md#create) - Create customer
+* [get](docs/sdks/customers/README.md#get) - Retrieve a customer
+* [update](docs/sdks/customers/README.md#update) - Update a customer
+* [delete](docs/sdks/customers/README.md#delete) - Delete a customer
 
 ### [documents](docs/sdks/documents/README.md)
 
-* [getV1Documents](docs/sdks/documents/README.md#getv1documents) - List all documents
-* [getV1DocumentsId](docs/sdks/documents/README.md#getv1documentsid) - Retrieve a document
-* [deleteV1DocumentsId](docs/sdks/documents/README.md#deletev1documentsid) - Delete a document
+* [list](docs/sdks/documents/README.md#list) - List all documents
+* [get](docs/sdks/documents/README.md#get) - Retrieve a document
+* [delete](docs/sdks/documents/README.md#delete) - Delete a document
 
 ### [inbox](docs/sdks/inbox/README.md)
 
-* [getV1Inbox](docs/sdks/inbox/README.md#getv1inbox) - List all inbox items
-* [getV1InboxId](docs/sdks/inbox/README.md#getv1inboxid) - Retrieve a inbox item
-* [deleteV1InboxId](docs/sdks/inbox/README.md#deletev1inboxid) - Delete a inbox item
-* [patchV1InboxId](docs/sdks/inbox/README.md#patchv1inboxid) - Update a inbox item
+* [list](docs/sdks/inbox/README.md#list) - List all inbox items
+* [get](docs/sdks/inbox/README.md#get) - Retrieve a inbox item
+* [delete](docs/sdks/inbox/README.md#delete) - Delete a inbox item
+* [update](docs/sdks/inbox/README.md#update) - Update a inbox item
 
 ### [invoices](docs/sdks/invoices/README.md)
 
-* [getV1Invoices](docs/sdks/invoices/README.md#getv1invoices) - List all invoices
-* [getV1InvoicesPaymentStatus](docs/sdks/invoices/README.md#getv1invoicespaymentstatus) - Payment status
-* [getV1InvoicesSummary](docs/sdks/invoices/README.md#getv1invoicessummary) - Invoice summary
-* [getV1InvoicesId](docs/sdks/invoices/README.md#getv1invoicesid) - Retrieve a invoice
-* [deleteV1InvoicesId](docs/sdks/invoices/README.md#deletev1invoicesid) - Delete a invoice
+* [list](docs/sdks/invoices/README.md#list) - List all invoices
+* [getInvoicesPaymentStatus](docs/sdks/invoices/README.md#getinvoicespaymentstatus) - Payment status
+* [summary](docs/sdks/invoices/README.md#summary) - Invoice summary
+* [get](docs/sdks/invoices/README.md#get) - Retrieve a invoice
+* [delete](docs/sdks/invoices/README.md#delete) - Delete a invoice
 
 ### [metrics](docs/sdks/metrics/README.md)
 
-* [getV1MetricsRevenue](docs/sdks/metrics/README.md#getv1metricsrevenue) - Revenue metrics
-* [getV1MetricsProfit](docs/sdks/metrics/README.md#getv1metricsprofit) - Profit metrics
-* [getV1MetricsBurnRate](docs/sdks/metrics/README.md#getv1metricsburnrate) - Burn rate metrics
-* [getV1MetricsRunway](docs/sdks/metrics/README.md#getv1metricsrunway) - Runway metrics
-* [getV1MetricsExpenses](docs/sdks/metrics/README.md#getv1metricsexpenses) - Expense metrics
-* [getV1MetricsSpending](docs/sdks/metrics/README.md#getv1metricsspending) - Spending metrics
+* [revenue](docs/sdks/metrics/README.md#revenue) - Revenue metrics
+* [profit](docs/sdks/metrics/README.md#profit) - Profit metrics
+* [burnRate](docs/sdks/metrics/README.md#burnrate) - Burn rate metrics
+* [runway](docs/sdks/metrics/README.md#runway) - Runway metrics
+* [expenses](docs/sdks/metrics/README.md#expenses) - Expense metrics
+* [spending](docs/sdks/metrics/README.md#spending) - Spending metrics
 
 
 ### [search](docs/sdks/search/README.md)
 
-* [getV1Search](docs/sdks/search/README.md#getv1search) - Search
+* [search](docs/sdks/search/README.md#search) - Search
 
 ### [tags](docs/sdks/tags/README.md)
 
-* [getV1Tags](docs/sdks/tags/README.md#getv1tags) - List all tags
-* [postV1Tags](docs/sdks/tags/README.md#postv1tags) - Create a new tag
-* [getV1TagsId](docs/sdks/tags/README.md#getv1tagsid) - Retrieve a tag
-* [patchV1TagsId](docs/sdks/tags/README.md#patchv1tagsid) - Update a tag
-* [deleteV1TagsId](docs/sdks/tags/README.md#deletev1tagsid) - Delete a tag
+* [list](docs/sdks/tags/README.md#list) - List all tags
+* [create](docs/sdks/tags/README.md#create) - Create a new tag
+* [get](docs/sdks/tags/README.md#get) - Retrieve a tag
+* [update](docs/sdks/tags/README.md#update) - Update a tag
+* [delete](docs/sdks/tags/README.md#delete) - Delete a tag
 
 ### [teams](docs/sdks/teams/README.md)
 
-* [getV1Teams](docs/sdks/teams/README.md#getv1teams) - List all teams
-* [getV1TeamsId](docs/sdks/teams/README.md#getv1teamsid) - Retrieve a team
-* [patchV1TeamsId](docs/sdks/teams/README.md#patchv1teamsid) - Update a team
-* [getV1TeamsIdMembers](docs/sdks/teams/README.md#getv1teamsidmembers) - List all team members
+* [list](docs/sdks/teams/README.md#list) - List all teams
+* [get](docs/sdks/teams/README.md#get) - Retrieve a team
+* [update](docs/sdks/teams/README.md#update) - Update a team
+* [members](docs/sdks/teams/README.md#members) - List all team members
 
 ### [tracker](docs/sdks/tracker/README.md)
 
-* [getV1TrackerProjects](docs/sdks/tracker/README.md#getv1trackerprojects) - List all tracker projects
-* [postV1TrackerProjects](docs/sdks/tracker/README.md#postv1trackerprojects) - Create a tracker project
-* [patchV1TrackerProjectsId](docs/sdks/tracker/README.md#patchv1trackerprojectsid) - Update a tracker project
-* [getV1TrackerProjectsId](docs/sdks/tracker/README.md#getv1trackerprojectsid) - Retrieve a tracker project
-* [deleteV1TrackerProjectsId](docs/sdks/tracker/README.md#deletev1trackerprojectsid) - Delete a tracker project
-* [getV1TrackerEntries](docs/sdks/tracker/README.md#getv1trackerentries) - List all tracker entries
-* [deleteV1TrackerEntriesId](docs/sdks/tracker/README.md#deletev1trackerentriesid) - Delete a tracker entry
+* [delete](docs/sdks/tracker/README.md#delete) - Delete a tracker entry
+
+### [trackerEntries](docs/sdks/trackerentries/README.md)
+
+* [list](docs/sdks/trackerentries/README.md#list) - List all tracker entries
+
+### [trackerProjects](docs/sdks/trackerprojects/README.md)
+
+* [list](docs/sdks/trackerprojects/README.md#list) - List all tracker projects
+* [create](docs/sdks/trackerprojects/README.md#create) - Create a tracker project
+* [update](docs/sdks/trackerprojects/README.md#update) - Update a tracker project
+* [get](docs/sdks/trackerprojects/README.md#get) - Retrieve a tracker project
+* [delete](docs/sdks/trackerprojects/README.md#delete) - Delete a tracker project
 
 ### [transactions](docs/sdks/transactions/README.md)
 
-* [getV1Transactions](docs/sdks/transactions/README.md#getv1transactions) - List all transactions
-* [postV1Transactions](docs/sdks/transactions/README.md#postv1transactions) - Create a transaction
-* [getV1TransactionsId](docs/sdks/transactions/README.md#getv1transactionsid) - Retrieve a transaction
-* [patchV1TransactionsId](docs/sdks/transactions/README.md#patchv1transactionsid) - Update a transaction
-* [deleteV1TransactionsId](docs/sdks/transactions/README.md#deletev1transactionsid) - Delete a transaction
-* [patchV1TransactionsBulk](docs/sdks/transactions/README.md#patchv1transactionsbulk) - Bulk update transactions
-* [postV1TransactionsBulk](docs/sdks/transactions/README.md#postv1transactionsbulk) - Bulk create transactions
-* [deleteV1TransactionsBulk](docs/sdks/transactions/README.md#deletev1transactionsbulk) - Bulk delete transactions
+* [list](docs/sdks/transactions/README.md#list) - List all transactions
+* [create](docs/sdks/transactions/README.md#create) - Create a transaction
+* [get](docs/sdks/transactions/README.md#get) - Retrieve a transaction
+* [update](docs/sdks/transactions/README.md#update) - Update a transaction
+* [delete](docs/sdks/transactions/README.md#delete) - Delete a transaction
+* [updateMany](docs/sdks/transactions/README.md#updatemany) - Bulk update transactions
+* [createMany](docs/sdks/transactions/README.md#createmany) - Bulk create transactions
+* [deleteMany](docs/sdks/transactions/README.md#deletemany) - Bulk delete transactions
 
 ### [users](docs/sdks/users/README.md)
 
-* [getV1UsersMe](docs/sdks/users/README.md#getv1usersme) - Retrieve the current user
-* [patchV1UsersMe](docs/sdks/users/README.md#patchv1usersme) - Update the current user
+* [get](docs/sdks/users/README.md#get) - Retrieve the current user
+* [update](docs/sdks/users/README.md#update) - Update the current user
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -413,61 +419,61 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`bankAccountsDeleteV1BankAccountsId`](docs/sdks/bankaccounts/README.md#deletev1bankaccountsid) - Delete a bank account
-- [`bankAccountsGetV1BankAccounts`](docs/sdks/bankaccounts/README.md#getv1bankaccounts) - List all bank accounts
-- [`bankAccountsGetV1BankAccountsId`](docs/sdks/bankaccounts/README.md#getv1bankaccountsid) - Retrieve a bank account
-- [`bankAccountsPatchV1BankAccountsId`](docs/sdks/bankaccounts/README.md#patchv1bankaccountsid) - Update a bank account
-- [`bankAccountsPostV1BankAccounts`](docs/sdks/bankaccounts/README.md#postv1bankaccounts) - Create a bank account
-- [`customersDeleteV1CustomersId`](docs/sdks/customers/README.md#deletev1customersid) - Delete a customer
-- [`customersGetV1Customers`](docs/sdks/customers/README.md#getv1customers) - List all customers
-- [`customersGetV1CustomersId`](docs/sdks/customers/README.md#getv1customersid) - Retrieve a customer
-- [`customersPatchV1CustomersId`](docs/sdks/customers/README.md#patchv1customersid) - Update a customer
-- [`customersPostV1Customers`](docs/sdks/customers/README.md#postv1customers) - Create customer
-- [`documentsDeleteV1DocumentsId`](docs/sdks/documents/README.md#deletev1documentsid) - Delete a document
-- [`documentsGetV1Documents`](docs/sdks/documents/README.md#getv1documents) - List all documents
-- [`documentsGetV1DocumentsId`](docs/sdks/documents/README.md#getv1documentsid) - Retrieve a document
-- [`inboxDeleteV1InboxId`](docs/sdks/inbox/README.md#deletev1inboxid) - Delete a inbox item
-- [`inboxGetV1Inbox`](docs/sdks/inbox/README.md#getv1inbox) - List all inbox items
-- [`inboxGetV1InboxId`](docs/sdks/inbox/README.md#getv1inboxid) - Retrieve a inbox item
-- [`inboxPatchV1InboxId`](docs/sdks/inbox/README.md#patchv1inboxid) - Update a inbox item
-- [`invoicesDeleteV1InvoicesId`](docs/sdks/invoices/README.md#deletev1invoicesid) - Delete a invoice
-- [`invoicesGetV1Invoices`](docs/sdks/invoices/README.md#getv1invoices) - List all invoices
-- [`invoicesGetV1InvoicesId`](docs/sdks/invoices/README.md#getv1invoicesid) - Retrieve a invoice
-- [`invoicesGetV1InvoicesPaymentStatus`](docs/sdks/invoices/README.md#getv1invoicespaymentstatus) - Payment status
-- [`invoicesGetV1InvoicesSummary`](docs/sdks/invoices/README.md#getv1invoicessummary) - Invoice summary
-- [`metricsGetV1MetricsBurnRate`](docs/sdks/metrics/README.md#getv1metricsburnrate) - Burn rate metrics
-- [`metricsGetV1MetricsExpenses`](docs/sdks/metrics/README.md#getv1metricsexpenses) - Expense metrics
-- [`metricsGetV1MetricsProfit`](docs/sdks/metrics/README.md#getv1metricsprofit) - Profit metrics
-- [`metricsGetV1MetricsRevenue`](docs/sdks/metrics/README.md#getv1metricsrevenue) - Revenue metrics
-- [`metricsGetV1MetricsRunway`](docs/sdks/metrics/README.md#getv1metricsrunway) - Runway metrics
-- [`metricsGetV1MetricsSpending`](docs/sdks/metrics/README.md#getv1metricsspending) - Spending metrics
-- [`searchGetV1Search`](docs/sdks/search/README.md#getv1search) - Search
-- [`tagsDeleteV1TagsId`](docs/sdks/tags/README.md#deletev1tagsid) - Delete a tag
-- [`tagsGetV1Tags`](docs/sdks/tags/README.md#getv1tags) - List all tags
-- [`tagsGetV1TagsId`](docs/sdks/tags/README.md#getv1tagsid) - Retrieve a tag
-- [`tagsPatchV1TagsId`](docs/sdks/tags/README.md#patchv1tagsid) - Update a tag
-- [`tagsPostV1Tags`](docs/sdks/tags/README.md#postv1tags) - Create a new tag
-- [`teamsGetV1Teams`](docs/sdks/teams/README.md#getv1teams) - List all teams
-- [`teamsGetV1TeamsId`](docs/sdks/teams/README.md#getv1teamsid) - Retrieve a team
-- [`teamsGetV1TeamsIdMembers`](docs/sdks/teams/README.md#getv1teamsidmembers) - List all team members
-- [`teamsPatchV1TeamsId`](docs/sdks/teams/README.md#patchv1teamsid) - Update a team
-- [`trackerDeleteV1TrackerEntriesId`](docs/sdks/tracker/README.md#deletev1trackerentriesid) - Delete a tracker entry
-- [`trackerDeleteV1TrackerProjectsId`](docs/sdks/tracker/README.md#deletev1trackerprojectsid) - Delete a tracker project
-- [`trackerGetV1TrackerEntries`](docs/sdks/tracker/README.md#getv1trackerentries) - List all tracker entries
-- [`trackerGetV1TrackerProjects`](docs/sdks/tracker/README.md#getv1trackerprojects) - List all tracker projects
-- [`trackerGetV1TrackerProjectsId`](docs/sdks/tracker/README.md#getv1trackerprojectsid) - Retrieve a tracker project
-- [`trackerPatchV1TrackerProjectsId`](docs/sdks/tracker/README.md#patchv1trackerprojectsid) - Update a tracker project
-- [`trackerPostV1TrackerProjects`](docs/sdks/tracker/README.md#postv1trackerprojects) - Create a tracker project
-- [`transactionsDeleteV1TransactionsBulk`](docs/sdks/transactions/README.md#deletev1transactionsbulk) - Bulk delete transactions
-- [`transactionsDeleteV1TransactionsId`](docs/sdks/transactions/README.md#deletev1transactionsid) - Delete a transaction
-- [`transactionsGetV1Transactions`](docs/sdks/transactions/README.md#getv1transactions) - List all transactions
-- [`transactionsGetV1TransactionsId`](docs/sdks/transactions/README.md#getv1transactionsid) - Retrieve a transaction
-- [`transactionsPatchV1TransactionsBulk`](docs/sdks/transactions/README.md#patchv1transactionsbulk) - Bulk update transactions
-- [`transactionsPatchV1TransactionsId`](docs/sdks/transactions/README.md#patchv1transactionsid) - Update a transaction
-- [`transactionsPostV1Transactions`](docs/sdks/transactions/README.md#postv1transactions) - Create a transaction
-- [`transactionsPostV1TransactionsBulk`](docs/sdks/transactions/README.md#postv1transactionsbulk) - Bulk create transactions
-- [`usersGetV1UsersMe`](docs/sdks/users/README.md#getv1usersme) - Retrieve the current user
-- [`usersPatchV1UsersMe`](docs/sdks/users/README.md#patchv1usersme) - Update the current user
+- [`bankAccountsCreate`](docs/sdks/bankaccounts/README.md#create) - Create a bank account
+- [`bankAccountsDelete`](docs/sdks/bankaccounts/README.md#delete) - Delete a bank account
+- [`bankAccountsGet`](docs/sdks/bankaccounts/README.md#get) - Retrieve a bank account
+- [`bankAccountsList`](docs/sdks/bankaccounts/README.md#list) - List all bank accounts
+- [`bankAccountsUpdate`](docs/sdks/bankaccounts/README.md#update) - Update a bank account
+- [`customersCreate`](docs/sdks/customers/README.md#create) - Create customer
+- [`customersDelete`](docs/sdks/customers/README.md#delete) - Delete a customer
+- [`customersGet`](docs/sdks/customers/README.md#get) - Retrieve a customer
+- [`customersList`](docs/sdks/customers/README.md#list) - List all customers
+- [`customersUpdate`](docs/sdks/customers/README.md#update) - Update a customer
+- [`documentsDelete`](docs/sdks/documents/README.md#delete) - Delete a document
+- [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
+- [`documentsList`](docs/sdks/documents/README.md#list) - List all documents
+- [`inboxDelete`](docs/sdks/inbox/README.md#delete) - Delete a inbox item
+- [`inboxGet`](docs/sdks/inbox/README.md#get) - Retrieve a inbox item
+- [`inboxList`](docs/sdks/inbox/README.md#list) - List all inbox items
+- [`inboxUpdate`](docs/sdks/inbox/README.md#update) - Update a inbox item
+- [`invoicesDelete`](docs/sdks/invoices/README.md#delete) - Delete a invoice
+- [`invoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve a invoice
+- [`invoicesGetInvoicesPaymentStatus`](docs/sdks/invoices/README.md#getinvoicespaymentstatus) - Payment status
+- [`invoicesList`](docs/sdks/invoices/README.md#list) - List all invoices
+- [`invoicesSummary`](docs/sdks/invoices/README.md#summary) - Invoice summary
+- [`metricsBurnRate`](docs/sdks/metrics/README.md#burnrate) - Burn rate metrics
+- [`metricsExpenses`](docs/sdks/metrics/README.md#expenses) - Expense metrics
+- [`metricsProfit`](docs/sdks/metrics/README.md#profit) - Profit metrics
+- [`metricsRevenue`](docs/sdks/metrics/README.md#revenue) - Revenue metrics
+- [`metricsRunway`](docs/sdks/metrics/README.md#runway) - Runway metrics
+- [`metricsSpending`](docs/sdks/metrics/README.md#spending) - Spending metrics
+- [`searchSearch`](docs/sdks/search/README.md#search) - Search
+- [`tagsCreate`](docs/sdks/tags/README.md#create) - Create a new tag
+- [`tagsDelete`](docs/sdks/tags/README.md#delete) - Delete a tag
+- [`tagsGet`](docs/sdks/tags/README.md#get) - Retrieve a tag
+- [`tagsList`](docs/sdks/tags/README.md#list) - List all tags
+- [`tagsUpdate`](docs/sdks/tags/README.md#update) - Update a tag
+- [`teamsGet`](docs/sdks/teams/README.md#get) - Retrieve a team
+- [`teamsList`](docs/sdks/teams/README.md#list) - List all teams
+- [`teamsMembers`](docs/sdks/teams/README.md#members) - List all team members
+- [`teamsUpdate`](docs/sdks/teams/README.md#update) - Update a team
+- [`trackerDelete`](docs/sdks/tracker/README.md#delete) - Delete a tracker entry
+- [`trackerEntriesList`](docs/sdks/trackerentries/README.md#list) - List all tracker entries
+- [`trackerProjectsCreate`](docs/sdks/trackerprojects/README.md#create) - Create a tracker project
+- [`trackerProjectsDelete`](docs/sdks/trackerprojects/README.md#delete) - Delete a tracker project
+- [`trackerProjectsGet`](docs/sdks/trackerprojects/README.md#get) - Retrieve a tracker project
+- [`trackerProjectsList`](docs/sdks/trackerprojects/README.md#list) - List all tracker projects
+- [`trackerProjectsUpdate`](docs/sdks/trackerprojects/README.md#update) - Update a tracker project
+- [`transactionsCreate`](docs/sdks/transactions/README.md#create) - Create a transaction
+- [`transactionsCreateMany`](docs/sdks/transactions/README.md#createmany) - Bulk create transactions
+- [`transactionsDelete`](docs/sdks/transactions/README.md#delete) - Delete a transaction
+- [`transactionsDeleteMany`](docs/sdks/transactions/README.md#deletemany) - Bulk delete transactions
+- [`transactionsGet`](docs/sdks/transactions/README.md#get) - Retrieve a transaction
+- [`transactionsList`](docs/sdks/transactions/README.md#list) - List all transactions
+- [`transactionsUpdate`](docs/sdks/transactions/README.md#update) - Update a transaction
+- [`transactionsUpdateMany`](docs/sdks/transactions/README.md#updatemany) - Bulk update transactions
+- [`usersGet`](docs/sdks/users/README.md#get) - Retrieve the current user
+- [`usersUpdate`](docs/sdks/users/README.md#update) - Update the current user
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -486,7 +492,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.getV1Transactions({
+  const result = await midday.transactions.list({
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",
@@ -570,7 +576,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.getV1Transactions({
+  const result = await midday.transactions.list({
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",
@@ -645,7 +651,7 @@ const midday = new Midday({
 async function run() {
   let result;
   try {
-    result = await midday.transactions.getV1Transactions({
+    result = await midday.transactions.list({
       cursor: "eyJpZCI6IjEyMyJ9",
       sort: [
         "date",
@@ -751,7 +757,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.getV1Transactions({
+  const result = await midday.transactions.list({
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",

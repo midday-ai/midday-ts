@@ -5,14 +5,14 @@
 
 ### Available Operations
 
-* [getV1MetricsRevenue](#getv1metricsrevenue) - Revenue metrics
-* [getV1MetricsProfit](#getv1metricsprofit) - Profit metrics
-* [getV1MetricsBurnRate](#getv1metricsburnrate) - Burn rate metrics
-* [getV1MetricsRunway](#getv1metricsrunway) - Runway metrics
-* [getV1MetricsExpenses](#getv1metricsexpenses) - Expense metrics
-* [getV1MetricsSpending](#getv1metricsspending) - Spending metrics
+* [revenue](#revenue) - Revenue metrics
+* [profit](#profit) - Profit metrics
+* [burnRate](#burnrate) - Burn rate metrics
+* [runway](#runway) - Runway metrics
+* [expenses](#expenses) - Expense metrics
+* [spending](#spending) - Spending metrics
 
-## getV1MetricsRevenue
+## revenue
 
 Revenue metrics for the authenticated team.
 
@@ -26,7 +26,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.metrics.getV1MetricsRevenue({
+  const result = await midday.metrics.revenue({
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -45,7 +45,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsRevenue } from "@midday/sdk/funcs/metricsGetV1MetricsRevenue.js";
+import { metricsRevenue } from "@midday/sdk/funcs/metricsRevenue.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -54,7 +54,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await metricsGetV1MetricsRevenue(midday, {
+  const res = await metricsRevenue(midday, {
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -77,7 +77,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1MetricsRevenueRequest](../../models/operations/getv1metricsrevenuerequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetRevenueMetricsRequest](../../models/operations/getrevenuemetricsrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -92,7 +92,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1MetricsProfit
+## profit
 
 Profit metrics for the authenticated team.
 
@@ -106,7 +106,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.metrics.getV1MetricsProfit({
+  const result = await midday.metrics.profit({
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -125,7 +125,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsProfit } from "@midday/sdk/funcs/metricsGetV1MetricsProfit.js";
+import { metricsProfit } from "@midday/sdk/funcs/metricsProfit.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -134,7 +134,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await metricsGetV1MetricsProfit(midday, {
+  const res = await metricsProfit(midday, {
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -157,7 +157,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1MetricsProfitRequest](../../models/operations/getv1metricsprofitrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetProfitMetricsRequest](../../models/operations/getprofitmetricsrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -172,7 +172,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1MetricsBurnRate
+## burnRate
 
 Burn rate metrics for the authenticated team.
 
@@ -186,7 +186,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.metrics.getV1MetricsBurnRate({
+  const result = await midday.metrics.burnRate({
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -205,7 +205,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsBurnRate } from "@midday/sdk/funcs/metricsGetV1MetricsBurnRate.js";
+import { metricsBurnRate } from "@midday/sdk/funcs/metricsBurnRate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -214,7 +214,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await metricsGetV1MetricsBurnRate(midday, {
+  const res = await metricsBurnRate(midday, {
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -237,7 +237,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1MetricsBurnRateRequest](../../models/operations/getv1metricsburnraterequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetBurnRateMetricsRequest](../../models/operations/getburnratemetricsrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -252,7 +252,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1MetricsRunway
+## runway
 
 Runway metrics for the authenticated team.
 
@@ -266,7 +266,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.metrics.getV1MetricsRunway({
+  const result = await midday.metrics.runway({
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -285,7 +285,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsRunway } from "@midday/sdk/funcs/metricsGetV1MetricsRunway.js";
+import { metricsRunway } from "@midday/sdk/funcs/metricsRunway.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -294,7 +294,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await metricsGetV1MetricsRunway(midday, {
+  const res = await metricsRunway(midday, {
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -317,7 +317,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1MetricsRunwayRequest](../../models/operations/getv1metricsrunwayrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetRunwayMetricsRequest](../../models/operations/getrunwaymetricsrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -332,7 +332,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1MetricsExpenses
+## expenses
 
 Expense metrics for the authenticated team.
 
@@ -346,7 +346,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.metrics.getV1MetricsExpenses({
+  const result = await midday.metrics.expenses({
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -365,7 +365,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsExpenses } from "@midday/sdk/funcs/metricsGetV1MetricsExpenses.js";
+import { metricsExpenses } from "@midday/sdk/funcs/metricsExpenses.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -374,7 +374,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await metricsGetV1MetricsExpenses(midday, {
+  const res = await metricsExpenses(midday, {
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -397,7 +397,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1MetricsExpensesRequest](../../models/operations/getv1metricsexpensesrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetExpensesMetricsRequest](../../models/operations/getexpensesmetricsrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -412,7 +412,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1MetricsSpending
+## spending
 
 Spending metrics for the authenticated team.
 
@@ -426,7 +426,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.metrics.getV1MetricsSpending({
+  const result = await midday.metrics.spending({
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -445,7 +445,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsSpending } from "@midday/sdk/funcs/metricsGetV1MetricsSpending.js";
+import { metricsSpending } from "@midday/sdk/funcs/metricsSpending.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -454,7 +454,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await metricsGetV1MetricsSpending(midday, {
+  const res = await metricsSpending(midday, {
     from: "2023-01-01",
     to: "2023-12-31",
     currency: "USD",
@@ -477,7 +477,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1MetricsSpendingRequest](../../models/operations/getv1metricsspendingrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetSpendingMetricsRequest](../../models/operations/getspendingmetricsrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

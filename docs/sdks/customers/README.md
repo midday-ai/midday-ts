@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [getV1Customers](#getv1customers) - List all customers
-* [postV1Customers](#postv1customers) - Create customer
-* [getV1CustomersId](#getv1customersid) - Retrieve a customer
-* [patchV1CustomersId](#patchv1customersid) - Update a customer
-* [deleteV1CustomersId](#deletev1customersid) - Delete a customer
+* [list](#list) - List all customers
+* [create](#create) - Create customer
+* [get](#get) - Retrieve a customer
+* [update](#update) - Update a customer
+* [delete](#delete) - Delete a customer
 
-## getV1Customers
+## list
 
 Retrieve a list of customers for the authenticated team.
 
@@ -25,7 +25,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.customers.getV1Customers({
+  const result = await midday.customers.list({
     q: "acme",
     sort: [
       "name",
@@ -48,7 +48,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { customersGetV1Customers } from "@midday/sdk/funcs/customersGetV1Customers.js";
+import { customersList } from "@midday/sdk/funcs/customersList.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -57,7 +57,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await customersGetV1Customers(midday, {
+  const res = await customersList(midday, {
     q: "acme",
     sort: [
       "name",
@@ -84,14 +84,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CustomersRequest](../../models/operations/getv1customersrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListCustomersRequest](../../models/operations/listcustomersrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1CustomersResponse](../../models/operations/getv1customersresponse.md)\>**
+**Promise\<[operations.ListCustomersResponse](../../models/operations/listcustomersresponse.md)\>**
 
 ### Errors
 
@@ -99,7 +99,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## postV1Customers
+## create
 
 Create a new customer for the authenticated team.
 
@@ -113,7 +113,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.customers.postV1Customers({
+  const result = await midday.customers.create({
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     name: "Acme Corporation",
     email: "contact@acme.com",
@@ -154,7 +154,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { customersPostV1Customers } from "@midday/sdk/funcs/customersPostV1Customers.js";
+import { customersCreate } from "@midday/sdk/funcs/customersCreate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -163,7 +163,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await customersPostV1Customers(midday, {
+  const res = await customersCreate(midday, {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     name: "Acme Corporation",
     email: "contact@acme.com",
@@ -208,14 +208,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostV1CustomersRequest](../../models/operations/postv1customersrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateCustomerRequest](../../models/operations/createcustomerrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostV1CustomersResponse](../../models/operations/postv1customersresponse.md)\>**
+**Promise\<[operations.CreateCustomerResponse](../../models/operations/createcustomerresponse.md)\>**
 
 ### Errors
 
@@ -223,7 +223,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1CustomersId
+## get
 
 Retrieve a customer by ID for the authenticated team.
 
@@ -237,7 +237,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.customers.getV1CustomersId({
+  const result = await midday.customers.get({
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
   });
 
@@ -254,7 +254,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { customersGetV1CustomersId } from "@midday/sdk/funcs/customersGetV1CustomersId.js";
+import { customersGet } from "@midday/sdk/funcs/customersGet.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -263,7 +263,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await customersGetV1CustomersId(midday, {
+  const res = await customersGet(midday, {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
   });
 
@@ -284,14 +284,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CustomersIdRequest](../../models/operations/getv1customersidrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetCustomerByIdRequest](../../models/operations/getcustomerbyidrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1CustomersIdResponse](../../models/operations/getv1customersidresponse.md)\>**
+**Promise\<[operations.GetCustomerByIdResponse](../../models/operations/getcustomerbyidresponse.md)\>**
 
 ### Errors
 
@@ -299,7 +299,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## patchV1CustomersId
+## update
 
 Update a customer by ID for the authenticated team.
 
@@ -313,7 +313,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.customers.patchV1CustomersId({
+  const result = await midday.customers.update({
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     requestBody: {
       id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
@@ -357,7 +357,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { customersPatchV1CustomersId } from "@midday/sdk/funcs/customersPatchV1CustomersId.js";
+import { customersUpdate } from "@midday/sdk/funcs/customersUpdate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -366,7 +366,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await customersPatchV1CustomersId(midday, {
+  const res = await customersUpdate(midday, {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     requestBody: {
       id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
@@ -414,14 +414,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PatchV1CustomersIdRequest](../../models/operations/patchv1customersidrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateCustomerRequest](../../models/operations/updatecustomerrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PatchV1CustomersIdResponse](../../models/operations/patchv1customersidresponse.md)\>**
+**Promise\<[operations.UpdateCustomerResponse](../../models/operations/updatecustomerresponse.md)\>**
 
 ### Errors
 
@@ -429,7 +429,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## deleteV1CustomersId
+## delete
 
 Delete a customer by ID for the authenticated team.
 
@@ -443,7 +443,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.customers.deleteV1CustomersId({
+  const result = await midday.customers.delete({
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
   });
 
@@ -460,7 +460,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday/sdk/core.js";
-import { customersDeleteV1CustomersId } from "@midday/sdk/funcs/customersDeleteV1CustomersId.js";
+import { customersDelete } from "@midday/sdk/funcs/customersDelete.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -469,7 +469,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await customersDeleteV1CustomersId(midday, {
+  const res = await customersDelete(midday, {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
   });
 
@@ -490,14 +490,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteV1CustomersIdRequest](../../models/operations/deletev1customersidrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeleteCustomerRequest](../../models/operations/deletecustomerrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.DeleteV1CustomersIdResponse](../../models/operations/deletev1customersidresponse.md)\>**
+**Promise\<[operations.DeleteCustomerResponse](../../models/operations/deletecustomerresponse.md)\>**
 
 ### Errors
 

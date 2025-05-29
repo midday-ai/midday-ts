@@ -1,6 +1,6 @@
 {
   "name": "@midday/sdk",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Speakeasy",
   "type": "module",
   "bin": {
@@ -22,6 +22,10 @@
     }
   },
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/midday-ai/midday-ts.git"
+  },
   "scripts": {
     "lint": "eslint --cache --max-warnings=0 src",
     "build:mcp": "bun src/mcp-server/build.mts",

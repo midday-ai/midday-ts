@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [getV1Documents](#getv1documents) - List all documents
-* [getV1DocumentsId](#getv1documentsid) - Retrieve a document
-* [deleteV1DocumentsId](#deletev1documentsid) - Delete a document
+* [list](#list) - List all documents
+* [get](#get) - Retrieve a document
+* [delete](#delete) - Delete a document
 
-## getV1Documents
+## list
 
 Retrieve a list of documents for the authenticated team.
 
@@ -23,7 +23,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.documents.getV1Documents({
+  const result = await midday.documents.list({
     cursor: "20",
     pageSize: 20,
     q: "invoice",
@@ -46,7 +46,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { documentsGetV1Documents } from "@midday-ai/sdk/funcs/documentsGetV1Documents.js";
+import { documentsList } from "@midday-ai/sdk/funcs/documentsList.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -55,7 +55,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await documentsGetV1Documents(midday, {
+  const res = await documentsList(midday, {
     cursor: "20",
     pageSize: 20,
     q: "invoice",
@@ -82,14 +82,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1DocumentsRequest](../../models/operations/getv1documentsrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListDocumentsRequest](../../models/operations/listdocumentsrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1DocumentsResponse](../../models/operations/getv1documentsresponse.md)\>**
+**Promise\<[operations.ListDocumentsResponse](../../models/operations/listdocumentsresponse.md)\>**
 
 ### Errors
 
@@ -97,7 +97,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1DocumentsId
+## get
 
 Retrieve a document by its unique identifier for the authenticated team.
 
@@ -111,7 +111,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.documents.getV1DocumentsId({
+  const result = await midday.documents.get({
     id: "<id>",
   });
 
@@ -128,7 +128,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { documentsGetV1DocumentsId } from "@midday-ai/sdk/funcs/documentsGetV1DocumentsId.js";
+import { documentsGet } from "@midday-ai/sdk/funcs/documentsGet.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -137,7 +137,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await documentsGetV1DocumentsId(midday, {
+  const res = await documentsGet(midday, {
     id: "<id>",
   });
 
@@ -158,14 +158,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1DocumentsIdRequest](../../models/operations/getv1documentsidrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetDocumentByIdRequest](../../models/operations/getdocumentbyidrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1DocumentsIdResponse](../../models/operations/getv1documentsidresponse.md)\>**
+**Promise\<[operations.GetDocumentByIdResponse](../../models/operations/getdocumentbyidresponse.md)\>**
 
 ### Errors
 
@@ -173,7 +173,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## deleteV1DocumentsId
+## delete
 
 Delete a document by its unique identifier for the authenticated team.
 
@@ -187,7 +187,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.documents.deleteV1DocumentsId({
+  const result = await midday.documents.delete({
     id: "<id>",
   });
 
@@ -204,7 +204,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { documentsDeleteV1DocumentsId } from "@midday-ai/sdk/funcs/documentsDeleteV1DocumentsId.js";
+import { documentsDelete } from "@midday-ai/sdk/funcs/documentsDelete.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -213,7 +213,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await documentsDeleteV1DocumentsId(midday, {
+  const res = await documentsDelete(midday, {
     id: "<id>",
   });
 
@@ -234,14 +234,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteV1DocumentsIdRequest](../../models/operations/deletev1documentsidrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeleteDocumentRequest](../../models/operations/deletedocumentrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.DeleteV1DocumentsIdResponse](../../models/operations/deletev1documentsidresponse.md)\>**
+**Promise\<[operations.DeleteDocumentResponse](../../models/operations/deletedocumentresponse.md)\>**
 
 ### Errors
 

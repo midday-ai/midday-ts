@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsGetV1Transactions } from "@midday-ai/sdk/funcs/transactionsGetV1Transactions.js";
+import { transactionsList } from "@midday-ai/sdk/funcs/transactionsList.js";
 import { SDKValidationError } from "@midday-ai/sdk/models/errors/sdkvalidationerror.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
@@ -30,7 +30,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsGetV1Transactions(midday, {
+  const res = await transactionsList(midday, {
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",

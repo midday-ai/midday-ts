@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [getV1Teams](#getv1teams) - List all teams
-* [getV1TeamsId](#getv1teamsid) - Retrieve a team
-* [patchV1TeamsId](#patchv1teamsid) - Update a team
-* [getV1TeamsIdMembers](#getv1teamsidmembers) - List all team members
+* [list](#list) - List all teams
+* [get](#get) - Retrieve a team
+* [update](#update) - Update a team
+* [members](#members) - List all team members
 
-## getV1Teams
+## list
 
 Retrieve a list of teams for the authenticated user.
 
@@ -24,7 +24,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.teams.getV1Teams();
+  const result = await midday.teams.list();
 
   // Handle the result
   console.log(result);
@@ -39,7 +39,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { teamsGetV1Teams } from "@midday-ai/sdk/funcs/teamsGetV1Teams.js";
+import { teamsList } from "@midday-ai/sdk/funcs/teamsList.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -48,7 +48,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await teamsGetV1Teams(midday);
+  const res = await teamsList(midday);
 
   if (!res.ok) {
     throw res.error;
@@ -73,7 +73,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetV1TeamsResponse](../../models/operations/getv1teamsresponse.md)\>**
+**Promise\<[operations.ListTeamsResponse](../../models/operations/listteamsresponse.md)\>**
 
 ### Errors
 
@@ -81,7 +81,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1TeamsId
+## get
 
 Retrieve a team by its ID for the authenticated team.
 
@@ -95,7 +95,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.teams.getV1TeamsId({
+  const result = await midday.teams.get({
     id: "123e4567-e89b-12d3-a456-426614174000",
   });
 
@@ -112,7 +112,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { teamsGetV1TeamsId } from "@midday-ai/sdk/funcs/teamsGetV1TeamsId.js";
+import { teamsGet } from "@midday-ai/sdk/funcs/teamsGet.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -121,7 +121,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await teamsGetV1TeamsId(midday, {
+  const res = await teamsGet(midday, {
     id: "123e4567-e89b-12d3-a456-426614174000",
   });
 
@@ -142,14 +142,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1TeamsIdRequest](../../models/operations/getv1teamsidrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetTeamByIdRequest](../../models/operations/getteambyidrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1TeamsIdResponse](../../models/operations/getv1teamsidresponse.md)\>**
+**Promise\<[operations.GetTeamByIdResponse](../../models/operations/getteambyidresponse.md)\>**
 
 ### Errors
 
@@ -157,7 +157,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## patchV1TeamsId
+## update
 
 Update a team for the authenticated workspace. If there’s no change, returns it as it is.
 
@@ -171,7 +171,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.teams.patchV1TeamsId({
+  const result = await midday.teams.update({
     id: "123e4567-e89b-12d3-a456-426614174000",
     requestBody: {
       name: "Acme Corporation",
@@ -194,7 +194,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { teamsPatchV1TeamsId } from "@midday-ai/sdk/funcs/teamsPatchV1TeamsId.js";
+import { teamsUpdate } from "@midday-ai/sdk/funcs/teamsUpdate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -203,7 +203,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await teamsPatchV1TeamsId(midday, {
+  const res = await teamsUpdate(midday, {
     id: "123e4567-e89b-12d3-a456-426614174000",
     requestBody: {
       name: "Acme Corporation",
@@ -230,14 +230,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PatchV1TeamsIdRequest](../../models/operations/patchv1teamsidrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateTeamByIdRequest](../../models/operations/updateteambyidrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PatchV1TeamsIdResponse](../../models/operations/patchv1teamsidresponse.md)\>**
+**Promise\<[operations.UpdateTeamByIdResponse](../../models/operations/updateteambyidresponse.md)\>**
 
 ### Errors
 
@@ -245,7 +245,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1TeamsIdMembers
+## members
 
 List all team members for the authenticated team.
 
@@ -259,7 +259,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.teams.getV1TeamsIdMembers({
+  const result = await midday.teams.members({
     id: "123e4567-e89b-12d3-a456-426614174000",
   });
 
@@ -276,7 +276,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { teamsGetV1TeamsIdMembers } from "@midday-ai/sdk/funcs/teamsGetV1TeamsIdMembers.js";
+import { teamsMembers } from "@midday-ai/sdk/funcs/teamsMembers.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -285,7 +285,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await teamsGetV1TeamsIdMembers(midday, {
+  const res = await teamsMembers(midday, {
     id: "123e4567-e89b-12d3-a456-426614174000",
   });
 
@@ -306,14 +306,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1TeamsIdMembersRequest](../../models/operations/getv1teamsidmembersrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListTeamMembersRequest](../../models/operations/listteammembersrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1TeamsIdMembersResponse](../../models/operations/getv1teamsidmembersresponse.md)\>**
+**Promise\<[operations.ListTeamMembersResponse](../../models/operations/listteammembersresponse.md)\>**
 
 ### Errors
 

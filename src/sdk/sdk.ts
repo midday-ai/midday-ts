@@ -13,6 +13,8 @@ import { Search } from "./search.js";
 import { Tags } from "./tags.js";
 import { Teams } from "./teams.js";
 import { Tracker } from "./tracker.js";
+import { TrackerEntries } from "./trackerentries.js";
+import { TrackerProjects } from "./trackerprojects.js";
 import { Transactions } from "./transactions.js";
 import { Users } from "./users.js";
 
@@ -70,6 +72,16 @@ export class Midday extends ClientSDK {
   private _metrics?: Metrics;
   get metrics(): Metrics {
     return (this._metrics ??= new Metrics(this._options));
+  }
+
+  private _trackerProjects?: TrackerProjects;
+  get trackerProjects(): TrackerProjects {
+    return (this._trackerProjects ??= new TrackerProjects(this._options));
+  }
+
+  private _trackerEntries?: TrackerEntries;
+  get trackerEntries(): TrackerEntries {
+    return (this._trackerEntries ??= new TrackerEntries(this._options));
   }
 
   private _tracker?: Tracker;

@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [getV1UsersMe](#getv1usersme) - Retrieve the current user
-* [patchV1UsersMe](#patchv1usersme) - Update the current user
+* [get](#get) - Retrieve the current user
+* [update](#update) - Update the current user
 
-## getV1UsersMe
+## get
 
 Retrieve the current user for the authenticated team.
 
@@ -22,7 +22,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.users.getV1UsersMe();
+  const result = await midday.users.get();
 
   // Handle the result
   console.log(result);
@@ -37,7 +37,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { usersGetV1UsersMe } from "@midday-ai/sdk/funcs/usersGetV1UsersMe.js";
+import { usersGet } from "@midday-ai/sdk/funcs/usersGet.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -46,7 +46,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await usersGetV1UsersMe(midday);
+  const res = await usersGet(midday);
 
   if (!res.ok) {
     throw res.error;
@@ -71,7 +71,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetV1UsersMeResponse](../../models/operations/getv1usersmeresponse.md)\>**
+**Promise\<[operations.GetCurrentUserResponse](../../models/operations/getcurrentuserresponse.md)\>**
 
 ### Errors
 
@@ -79,7 +79,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## patchV1UsersMe
+## update
 
 Update the current user for the authenticated team.
 
@@ -93,7 +93,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.users.patchV1UsersMe({
+  const result = await midday.users.update({
     fullName: "Jane Doe",
     teamId: "team-abc123",
     email: "jane.doe@acme.com",
@@ -118,7 +118,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { usersPatchV1UsersMe } from "@midday-ai/sdk/funcs/usersPatchV1UsersMe.js";
+import { usersUpdate } from "@midday-ai/sdk/funcs/usersUpdate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -127,7 +127,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await usersPatchV1UsersMe(midday, {
+  const res = await usersUpdate(midday, {
     fullName: "Jane Doe",
     teamId: "team-abc123",
     email: "jane.doe@acme.com",
@@ -156,14 +156,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PatchV1UsersMeRequest](../../models/operations/patchv1usersmerequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateCurrentUserRequest](../../models/operations/updatecurrentuserrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PatchV1UsersMeResponse](../../models/operations/patchv1usersmeresponse.md)\>**
+**Promise\<[operations.UpdateCurrentUserResponse](../../models/operations/updatecurrentuserresponse.md)\>**
 
 ### Errors
 

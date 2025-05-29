@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [getV1Tags](#getv1tags) - List all tags
-* [postV1Tags](#postv1tags) - Create a new tag
-* [getV1TagsId](#getv1tagsid) - Retrieve a tag
-* [patchV1TagsId](#patchv1tagsid) - Update a tag
-* [deleteV1TagsId](#deletev1tagsid) - Delete a tag
+* [list](#list) - List all tags
+* [create](#create) - Create a new tag
+* [get](#get) - Retrieve a tag
+* [update](#update) - Update a tag
+* [delete](#delete) - Delete a tag
 
-## getV1Tags
+## list
 
 Retrieve a list of tags for the authenticated team.
 
@@ -25,7 +25,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.tags.getV1Tags();
+  const result = await midday.tags.list();
 
   // Handle the result
   console.log(result);
@@ -40,7 +40,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { tagsGetV1Tags } from "@midday-ai/sdk/funcs/tagsGetV1Tags.js";
+import { tagsList } from "@midday-ai/sdk/funcs/tagsList.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -49,7 +49,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await tagsGetV1Tags(midday);
+  const res = await tagsList(midday);
 
   if (!res.ok) {
     throw res.error;
@@ -82,7 +82,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## postV1Tags
+## create
 
 Create a new tag for the authenticated team.
 
@@ -96,7 +96,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.tags.postV1Tags({
+  const result = await midday.tags.create({
     name: "Important",
   });
 
@@ -113,7 +113,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { tagsPostV1Tags } from "@midday-ai/sdk/funcs/tagsPostV1Tags.js";
+import { tagsCreate } from "@midday-ai/sdk/funcs/tagsCreate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -122,7 +122,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await tagsPostV1Tags(midday, {
+  const res = await tagsCreate(midday, {
     name: "Important",
   });
 
@@ -158,7 +158,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1TagsId
+## get
 
 Retrieve a tag by ID for the authenticated team.
 
@@ -172,7 +172,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.tags.getV1TagsId({
+  const result = await midday.tags.get({
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
   });
 
@@ -189,7 +189,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { tagsGetV1TagsId } from "@midday-ai/sdk/funcs/tagsGetV1TagsId.js";
+import { tagsGet } from "@midday-ai/sdk/funcs/tagsGet.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -198,7 +198,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await tagsGetV1TagsId(midday, {
+  const res = await tagsGet(midday, {
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
   });
 
@@ -219,7 +219,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1TagsIdRequest](../../models/operations/getv1tagsidrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetTagByIdRequest](../../models/operations/gettagbyidrequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -234,7 +234,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## patchV1TagsId
+## update
 
 Update a tag by ID for the authenticated team.
 
@@ -248,7 +248,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.tags.patchV1TagsId({
+  const result = await midday.tags.update({
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
     requestBody: {
       name: "Urgent",
@@ -268,7 +268,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { tagsPatchV1TagsId } from "@midday-ai/sdk/funcs/tagsPatchV1TagsId.js";
+import { tagsUpdate } from "@midday-ai/sdk/funcs/tagsUpdate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -277,7 +277,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await tagsPatchV1TagsId(midday, {
+  const res = await tagsUpdate(midday, {
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
     requestBody: {
       name: "Urgent",
@@ -301,7 +301,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PatchV1TagsIdRequest](../../models/operations/patchv1tagsidrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateTagRequest](../../models/operations/updatetagrequest.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -316,7 +316,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## deleteV1TagsId
+## delete
 
 Delete a tag by ID for the authenticated team.
 
@@ -330,7 +330,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  await midday.tags.deleteV1TagsId({
+  await midday.tags.delete({
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
   });
 
@@ -346,7 +346,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { tagsDeleteV1TagsId } from "@midday-ai/sdk/funcs/tagsDeleteV1TagsId.js";
+import { tagsDelete } from "@midday-ai/sdk/funcs/tagsDelete.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -355,7 +355,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await tagsDeleteV1TagsId(midday, {
+  const res = await tagsDelete(midday, {
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
   });
 
@@ -375,7 +375,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteV1TagsIdRequest](../../models/operations/deletev1tagsidrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeleteTagRequest](../../models/operations/deletetagrequest.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

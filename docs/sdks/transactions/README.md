@@ -5,16 +5,16 @@
 
 ### Available Operations
 
-* [getV1Transactions](#getv1transactions) - List all transactions
-* [postV1Transactions](#postv1transactions) - Create a transaction
-* [getV1TransactionsId](#getv1transactionsid) - Retrieve a transaction
-* [patchV1TransactionsId](#patchv1transactionsid) - Update a transaction
-* [deleteV1TransactionsId](#deletev1transactionsid) - Delete a transaction
-* [patchV1TransactionsBulk](#patchv1transactionsbulk) - Bulk update transactions
-* [postV1TransactionsBulk](#postv1transactionsbulk) - Bulk create transactions
-* [deleteV1TransactionsBulk](#deletev1transactionsbulk) - Bulk delete transactions
+* [list](#list) - List all transactions
+* [create](#create) - Create a transaction
+* [get](#get) - Retrieve a transaction
+* [update](#update) - Update a transaction
+* [delete](#delete) - Delete a transaction
+* [updateMany](#updatemany) - Bulk update transactions
+* [createMany](#createmany) - Bulk create transactions
+* [deleteMany](#deletemany) - Bulk delete transactions
 
-## getV1Transactions
+## list
 
 Retrieve a list of transactions for the authenticated team.
 
@@ -28,7 +28,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.getV1Transactions({
+  const result = await midday.transactions.list({
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",
@@ -87,7 +87,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsGetV1Transactions } from "@midday-ai/sdk/funcs/transactionsGetV1Transactions.js";
+import { transactionsList } from "@midday-ai/sdk/funcs/transactionsList.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -96,7 +96,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsGetV1Transactions(midday, {
+  const res = await transactionsList(midday, {
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",
@@ -159,14 +159,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1TransactionsRequest](../../models/operations/getv1transactionsrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListTransactionsRequest](../../models/operations/listtransactionsrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1TransactionsResponse](../../models/operations/getv1transactionsresponse.md)\>**
+**Promise\<[operations.ListTransactionsResponse](../../models/operations/listtransactionsresponse.md)\>**
 
 ### Errors
 
@@ -174,7 +174,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## postV1Transactions
+## create
 
 Create a transaction
 
@@ -188,7 +188,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.postV1Transactions();
+  const result = await midday.transactions.create();
 
   // Handle the result
   console.log(result);
@@ -203,7 +203,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsPostV1Transactions } from "@midday-ai/sdk/funcs/transactionsPostV1Transactions.js";
+import { transactionsCreate } from "@midday-ai/sdk/funcs/transactionsCreate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -212,7 +212,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsPostV1Transactions(midday);
+  const res = await transactionsCreate(midday);
 
   if (!res.ok) {
     throw res.error;
@@ -231,7 +231,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostV1TransactionsRequest](../../models/operations/postv1transactionsrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateTransactionRequest](../../models/operations/createtransactionrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -246,7 +246,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV1TransactionsId
+## get
 
 Retrieve a transaction by its ID for the authenticated team.
 
@@ -260,8 +260,8 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.getV1TransactionsId({
-    id: "ce861801-120b-49a4-a5a7-09559f21a513",
+  const result = await midday.transactions.get({
+    id: "391723c9-de99-4039-b8e2-4fa5bbdf9480",
   });
 
   // Handle the result
@@ -277,7 +277,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsGetV1TransactionsId } from "@midday-ai/sdk/funcs/transactionsGetV1TransactionsId.js";
+import { transactionsGet } from "@midday-ai/sdk/funcs/transactionsGet.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -286,8 +286,8 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsGetV1TransactionsId(midday, {
-    id: "ce861801-120b-49a4-a5a7-09559f21a513",
+  const res = await transactionsGet(midday, {
+    id: "391723c9-de99-4039-b8e2-4fa5bbdf9480",
   });
 
   if (!res.ok) {
@@ -307,7 +307,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1TransactionsIdRequest](../../models/operations/getv1transactionsidrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetTransactionByIdRequest](../../models/operations/gettransactionbyidrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -322,7 +322,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## patchV1TransactionsId
+## update
 
 Update a transaction for the authenticated team. If there's no change, returns it as it is.
 
@@ -336,8 +336,8 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.patchV1TransactionsId({
-    id: "3e23a76e-9765-4857-98e7-6aa23026b68a",
+  const result = await midday.transactions.update({
+    id: "f0c1d0ef-5679-4c1b-9698-2c64e97e8c1d",
   });
 
   // Handle the result
@@ -353,7 +353,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsPatchV1TransactionsId } from "@midday-ai/sdk/funcs/transactionsPatchV1TransactionsId.js";
+import { transactionsUpdate } from "@midday-ai/sdk/funcs/transactionsUpdate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -362,8 +362,8 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsPatchV1TransactionsId(midday, {
-    id: "3e23a76e-9765-4857-98e7-6aa23026b68a",
+  const res = await transactionsUpdate(midday, {
+    id: "f0c1d0ef-5679-4c1b-9698-2c64e97e8c1d",
   });
 
   if (!res.ok) {
@@ -383,7 +383,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PatchV1TransactionsIdRequest](../../models/operations/patchv1transactionsidrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateTransactionRequest](../../models/operations/updatetransactionrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -398,7 +398,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## deleteV1TransactionsId
+## delete
 
 Delete a transaction for the authenticated team. Only manually created transactions can be deleted via this endpoint or the form. Transactions inserted by bank connections cannot be deleted, but can be excluded by updating the status.
 
@@ -412,8 +412,8 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.deleteV1TransactionsId({
-    id: "43827877-53bb-4c82-bbff-54cb45455899",
+  const result = await midday.transactions.delete({
+    id: "92766ee2-a2bc-44aa-97af-6891695fc321",
   });
 
   // Handle the result
@@ -429,7 +429,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsDeleteV1TransactionsId } from "@midday-ai/sdk/funcs/transactionsDeleteV1TransactionsId.js";
+import { transactionsDelete } from "@midday-ai/sdk/funcs/transactionsDelete.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -438,8 +438,8 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsDeleteV1TransactionsId(midday, {
-    id: "43827877-53bb-4c82-bbff-54cb45455899",
+  const res = await transactionsDelete(midday, {
+    id: "92766ee2-a2bc-44aa-97af-6891695fc321",
   });
 
   if (!res.ok) {
@@ -459,14 +459,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteV1TransactionsIdRequest](../../models/operations/deletev1transactionsidrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeleteTransactionRequest](../../models/operations/deletetransactionrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.DeleteV1TransactionsIdResponse](../../models/operations/deletev1transactionsidresponse.md)\>**
+**Promise\<[operations.DeleteTransactionResponse](../../models/operations/deletetransactionresponse.md)\>**
 
 ### Errors
 
@@ -474,7 +474,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## patchV1TransactionsBulk
+## updateMany
 
 Bulk update transactions for the authenticated team. If there's no change, returns it as it is.
 
@@ -488,7 +488,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.patchV1TransactionsBulk();
+  const result = await midday.transactions.updateMany();
 
   // Handle the result
   console.log(result);
@@ -503,7 +503,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsPatchV1TransactionsBulk } from "@midday-ai/sdk/funcs/transactionsPatchV1TransactionsBulk.js";
+import { transactionsUpdateMany } from "@midday-ai/sdk/funcs/transactionsUpdateMany.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -512,7 +512,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsPatchV1TransactionsBulk(midday);
+  const res = await transactionsUpdateMany(midday);
 
   if (!res.ok) {
     throw res.error;
@@ -531,14 +531,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PatchV1TransactionsBulkRequest](../../models/operations/patchv1transactionsbulkrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateTransactionsRequest](../../models/operations/updatetransactionsrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PatchV1TransactionsBulkResponse](../../models/operations/patchv1transactionsbulkresponse.md)\>**
+**Promise\<[operations.UpdateTransactionsResponse](../../models/operations/updatetransactionsresponse.md)\>**
 
 ### Errors
 
@@ -546,7 +546,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## postV1TransactionsBulk
+## createMany
 
 Bulk create transactions for the authenticated team.
 
@@ -560,7 +560,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.postV1TransactionsBulk();
+  const result = await midday.transactions.createMany();
 
   // Handle the result
   console.log(result);
@@ -575,7 +575,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsPostV1TransactionsBulk } from "@midday-ai/sdk/funcs/transactionsPostV1TransactionsBulk.js";
+import { transactionsCreateMany } from "@midday-ai/sdk/funcs/transactionsCreateMany.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -584,7 +584,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsPostV1TransactionsBulk(midday);
+  const res = await transactionsCreateMany(midday);
 
   if (!res.ok) {
     throw res.error;
@@ -618,7 +618,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## deleteV1TransactionsBulk
+## deleteMany
 
 Bulk delete transactions for the authenticated team. Only manually created transactions can be deleted via this endpoint or the form. Transactions inserted by bank connections cannot be deleted, but can be excluded by updating the status.
 
@@ -632,7 +632,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.deleteV1TransactionsBulk();
+  const result = await midday.transactions.deleteMany();
 
   // Handle the result
   console.log(result);
@@ -647,7 +647,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsDeleteV1TransactionsBulk } from "@midday-ai/sdk/funcs/transactionsDeleteV1TransactionsBulk.js";
+import { transactionsDeleteMany } from "@midday-ai/sdk/funcs/transactionsDeleteMany.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -656,7 +656,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsDeleteV1TransactionsBulk(midday);
+  const res = await transactionsDeleteMany(midday);
 
   if (!res.ok) {
     throw res.error;
@@ -682,7 +682,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.DeleteV1TransactionsBulkResponse[]](../../models/.md)\>**
+**Promise\<[operations.DeleteTransactionsResponse[]](../../models/.md)\>**
 
 ### Errors
 

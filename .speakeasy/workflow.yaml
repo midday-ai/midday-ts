@@ -10,6 +10,9 @@ targets:
     midday:
         target: typescript
         source: Midday API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/midday/midday/midday-api-typescript-code-samples

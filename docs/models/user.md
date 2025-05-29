@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { User } from "@midday/sdk";
+import { User } from "@midday-ai/sdk";
 
 let value: User = {
   id: "f1e2d3c4-b5a6-7890-abcd-1234567890ef",

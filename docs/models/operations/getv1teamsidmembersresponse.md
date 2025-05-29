@@ -5,7 +5,7 @@ Team members
 ## Example Usage
 
 ```typescript
-import { GetV1TeamsIdMembersResponse } from "@midday/sdk/models/operations";
+import { GetV1TeamsIdMembersResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TeamsIdMembersResponse = {
   data: [

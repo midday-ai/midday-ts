@@ -14,7 +14,7 @@ Search across all data, invoices, documents, customers, transactions, and more.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -38,8 +38,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { searchGetV1Search } from "@midday/sdk/funcs/searchGetV1Search.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { searchGetV1Search } from "@midday-ai/sdk/funcs/searchGetV1Search.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

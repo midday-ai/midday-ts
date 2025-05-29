@@ -5,7 +5,7 @@ Retrieve a list of customers for the authenticated team.
 ## Example Usage
 
 ```typescript
-import { GetV1CustomersResponse } from "@midday/sdk/models/operations";
+import { GetV1CustomersResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1CustomersResponse = {
   meta: {

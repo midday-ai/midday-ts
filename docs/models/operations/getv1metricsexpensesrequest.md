@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1MetricsExpensesRequest } from "@midday/sdk/models/operations";
+import { GetV1MetricsExpensesRequest } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1MetricsExpensesRequest = {
   from: "2023-01-01",

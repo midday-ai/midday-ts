@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { DeleteV1TagsIdRequest } from "@midday/sdk/models/operations";
+import { DeleteV1TagsIdRequest } from "@midday-ai/sdk/models/operations";
 
 let value: DeleteV1TagsIdRequest = {
   id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",

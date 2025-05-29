@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PatchV1InboxIdRequestBody } from "@midday/sdk/models/operations";
+import { PatchV1InboxIdRequestBody } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1InboxIdRequestBody = {
   status: "archived",

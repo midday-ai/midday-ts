@@ -5,7 +5,7 @@ Tracker entry deleted successfully.
 ## Example Usage
 
 ```typescript
-import { DeleteV1TrackerEntriesIdResponse } from "@midday/sdk/models/operations";
+import { DeleteV1TrackerEntriesIdResponse } from "@midday-ai/sdk/models/operations";
 
 let value: DeleteV1TrackerEntriesIdResponse = {
   id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",

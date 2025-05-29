@@ -5,7 +5,7 @@ User information for the person who created this tracker entry
 ## Example Usage
 
 ```typescript
-import { User } from "@midday/sdk/models/operations";
+import { User } from "@midday-ai/sdk/models/operations";
 
 let value: User = {
   id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",

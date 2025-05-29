@@ -5,7 +5,7 @@ Schema for creating a new bank account.
 ## Example Usage
 
 ```typescript
-import { PostV1BankAccountsRequest } from "@midday/sdk/models/operations";
+import { PostV1BankAccountsRequest } from "@midday-ai/sdk/models/operations";
 
 let value: PostV1BankAccountsRequest = {
   name: "Checking Account",

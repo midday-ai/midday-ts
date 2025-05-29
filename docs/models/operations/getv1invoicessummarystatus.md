@@ -5,7 +5,7 @@ Filter summary by invoice status
 ## Example Usage
 
 ```typescript
-import { GetV1InvoicesSummaryStatus } from "@midday/sdk/models/operations";
+import { GetV1InvoicesSummaryStatus } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InvoicesSummaryStatus = "paid";
 ```

@@ -18,7 +18,7 @@ Retrieve a list of customers for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -47,8 +47,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { customersGetV1Customers } from "@midday/sdk/funcs/customersGetV1Customers.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { customersGetV1Customers } from "@midday-ai/sdk/funcs/customersGetV1Customers.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -106,7 +106,7 @@ Create a new customer for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -153,8 +153,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { customersPostV1Customers } from "@midday/sdk/funcs/customersPostV1Customers.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { customersPostV1Customers } from "@midday-ai/sdk/funcs/customersPostV1Customers.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -230,7 +230,7 @@ Retrieve a customer by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -253,8 +253,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { customersGetV1CustomersId } from "@midday/sdk/funcs/customersGetV1CustomersId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { customersGetV1CustomersId } from "@midday-ai/sdk/funcs/customersGetV1CustomersId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -306,7 +306,7 @@ Update a customer by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -356,8 +356,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { customersPatchV1CustomersId } from "@midday/sdk/funcs/customersPatchV1CustomersId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { customersPatchV1CustomersId } from "@midday-ai/sdk/funcs/customersPatchV1CustomersId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -436,7 +436,7 @@ Delete a customer by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -459,8 +459,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { customersDeleteV1CustomersId } from "@midday/sdk/funcs/customersDeleteV1CustomersId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { customersDeleteV1CustomersId } from "@midday-ai/sdk/funcs/customersDeleteV1CustomersId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

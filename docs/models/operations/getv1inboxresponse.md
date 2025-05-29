@@ -5,7 +5,7 @@ Retrieve a list of inbox items for the authenticated team.
 ## Example Usage
 
 ```typescript
-import { GetV1InboxResponse } from "@midday/sdk/models/operations";
+import { GetV1InboxResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InboxResponse = {
   meta: {

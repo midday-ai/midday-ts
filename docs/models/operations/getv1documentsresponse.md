@@ -5,7 +5,7 @@ Response containing a list of documents and pagination metadata.
 ## Example Usage
 
 ```typescript
-import { GetV1DocumentsResponse } from "@midday/sdk/models/operations";
+import { GetV1DocumentsResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1DocumentsResponse = {
   meta: {

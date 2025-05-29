@@ -5,7 +5,7 @@ Retrieve a list of transactions for the authenticated team.
 ## Example Usage
 
 ```typescript
-import { GetV1TransactionsResponse } from "@midday/sdk/models/operations";
+import { GetV1TransactionsResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TransactionsResponse = {
   meta: {

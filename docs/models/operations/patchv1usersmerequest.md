@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PatchV1UsersMeRequest } from "@midday/sdk/models/operations";
+import { PatchV1UsersMeRequest } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1UsersMeRequest = {
   fullName: "Jane Doe",

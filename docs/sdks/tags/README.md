@@ -18,7 +18,7 @@ Retrieve a list of tags for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -39,8 +39,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { tagsGetV1Tags } from "@midday/sdk/funcs/tagsGetV1Tags.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { tagsGetV1Tags } from "@midday-ai/sdk/funcs/tagsGetV1Tags.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -89,7 +89,7 @@ Create a new tag for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -112,8 +112,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { tagsPostV1Tags } from "@midday/sdk/funcs/tagsPostV1Tags.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { tagsPostV1Tags } from "@midday-ai/sdk/funcs/tagsPostV1Tags.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -165,7 +165,7 @@ Retrieve a tag by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -188,8 +188,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { tagsGetV1TagsId } from "@midday/sdk/funcs/tagsGetV1TagsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { tagsGetV1TagsId } from "@midday-ai/sdk/funcs/tagsGetV1TagsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -241,7 +241,7 @@ Update a tag by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -267,8 +267,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { tagsPatchV1TagsId } from "@midday/sdk/funcs/tagsPatchV1TagsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { tagsPatchV1TagsId } from "@midday-ai/sdk/funcs/tagsPatchV1TagsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -323,7 +323,7 @@ Delete a tag by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -345,8 +345,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { tagsDeleteV1TagsId } from "@midday/sdk/funcs/tagsDeleteV1TagsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { tagsDeleteV1TagsId } from "@midday-ai/sdk/funcs/tagsDeleteV1TagsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

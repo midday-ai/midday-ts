@@ -5,7 +5,7 @@ A single document object response.
 ## Example Usage
 
 ```typescript
-import { GetV1DocumentsData } from "@midday/sdk/models/operations";
+import { GetV1DocumentsData } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1DocumentsData = {
   id: "doc_1234567890abcdef",

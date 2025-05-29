@@ -5,7 +5,7 @@ Metadata about the tracker entries response including totals and date range
 ## Example Usage
 
 ```typescript
-import { GetV1TrackerEntriesMeta } from "@midday/sdk/models/operations";
+import { GetV1TrackerEntriesMeta } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TrackerEntriesMeta = {
   totalDuration: 86400,

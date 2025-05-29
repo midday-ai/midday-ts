@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1MetricsBurnRateRequest } from "@midday/sdk/models/operations";
+import { GetV1MetricsBurnRateRequest } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1MetricsBurnRateRequest = {
   from: "2023-01-01",

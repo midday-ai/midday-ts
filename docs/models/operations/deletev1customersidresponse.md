@@ -5,7 +5,7 @@ Customer deleted
 ## Example Usage
 
 ```typescript
-import { DeleteV1CustomersIdResponse } from "@midday/sdk/models/operations";
+import { DeleteV1CustomersIdResponse } from "@midday-ai/sdk/models/operations";
 
 let value: DeleteV1CustomersIdResponse = {
   id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",

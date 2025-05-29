@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1InvoicesRequest } from "@midday/sdk/models/operations";
+import { GetV1InvoicesRequest } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InvoicesRequest = {
   cursor: "25",

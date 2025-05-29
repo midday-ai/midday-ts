@@ -5,7 +5,7 @@ Type of metric
 ## Example Usage
 
 ```typescript
-import { RevenueMetaType } from "@midday/sdk";
+import { RevenueMetaType } from "@midday-ai/sdk";
 
 let value: RevenueMetaType = "revenue";
 ```

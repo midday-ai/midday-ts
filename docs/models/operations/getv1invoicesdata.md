@@ -5,7 +5,7 @@ Invoice object
 ## Example Usage
 
 ```typescript
-import { GetV1InvoicesData } from "@midday/sdk/models/operations";
+import { GetV1InvoicesData } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InvoicesData = {
   id: "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a",

@@ -1,5 +1,5 @@
 {
-  "name": "@midday/sdk",
+  "name": "@midday-ai/sdk",
   "version": "0.0.1",
   "author": "Speakeasy",
   "type": "module",
@@ -8,7 +8,7 @@
   },
   "tshy": {
     "sourceDialects": [
-      "@midday/sdk/source"
+      "@midday-ai/sdk/source"
     ],
     "exports": {
       ".": "./src/index.ts",
@@ -56,7 +56,7 @@
   "exports": {
     ".": {
       "import": {
-        "@midday/sdk/source": "./src/index.ts",
+        "@midday-ai/sdk/source": "./src/index.ts",
         "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
       },
@@ -68,7 +68,7 @@
     "./package.json": "./package.json",
     "./types": {
       "import": {
-        "@midday/sdk/source": "./src/types/index.ts",
+        "@midday-ai/sdk/source": "./src/types/index.ts",
         "types": "./dist/esm/types/index.d.ts",
         "default": "./dist/esm/types/index.js"
       },
@@ -79,7 +79,7 @@
     },
     "./models/errors": {
       "import": {
-        "@midday/sdk/source": "./src/models/errors/index.ts",
+        "@midday-ai/sdk/source": "./src/models/errors/index.ts",
         "types": "./dist/esm/models/errors/index.d.ts",
         "default": "./dist/esm/models/errors/index.js"
       },
@@ -90,7 +90,7 @@
     },
     "./models": {
       "import": {
-        "@midday/sdk/source": "./src/models/index.ts",
+        "@midday-ai/sdk/source": "./src/models/index.ts",
         "types": "./dist/esm/models/index.d.ts",
         "default": "./dist/esm/models/index.js"
       },
@@ -101,7 +101,7 @@
     },
     "./models/operations": {
       "import": {
-        "@midday/sdk/source": "./src/models/operations/index.ts",
+        "@midday-ai/sdk/source": "./src/models/operations/index.ts",
         "types": "./dist/esm/models/operations/index.d.ts",
         "default": "./dist/esm/models/operations/index.js"
       },
@@ -112,7 +112,7 @@
     },
     "./*.js": {
       "import": {
-        "@midday/sdk/source": "./src/*.ts",
+        "@midday-ai/sdk/source": "./src/*.ts",
         "types": "./dist/esm/*.d.ts",
         "default": "./dist/esm/*.js"
       },
@@ -123,7 +123,7 @@
     },
     "./*": {
       "import": {
-        "@midday/sdk/source": "./src/*.ts",
+        "@midday-ai/sdk/source": "./src/*.ts",
         "types": "./dist/esm/*.d.ts",
         "default": "./dist/esm/*.js"
       },

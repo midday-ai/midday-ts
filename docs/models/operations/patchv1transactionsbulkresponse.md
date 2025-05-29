@@ -5,7 +5,7 @@ Transactions updated
 ## Example Usage
 
 ```typescript
-import { PatchV1TransactionsBulkResponse } from "@midday/sdk/models/operations";
+import { PatchV1TransactionsBulkResponse } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1TransactionsBulkResponse = {
   meta: {

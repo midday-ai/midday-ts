@@ -5,7 +5,7 @@ User's preferred date format. Available options: 'dd/MM/yyyy', 'MM/dd/yyyy', 'yy
 ## Example Usage
 
 ```typescript
-import { PatchV1UsersMeDateFormatResponse } from "@midday/sdk/models/operations";
+import { PatchV1UsersMeDateFormatResponse } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1UsersMeDateFormatResponse = "yyyy-MM-dd";
 ```

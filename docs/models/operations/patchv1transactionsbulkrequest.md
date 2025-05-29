@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PatchV1TransactionsBulkRequest } from "@midday/sdk/models/operations";
+import { PatchV1TransactionsBulkRequest } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1TransactionsBulkRequest = {
   ids: [

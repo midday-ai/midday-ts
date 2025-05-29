@@ -50,7 +50,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: dual
   outputModelSuffix: output
-  packageName: '@midday/sdk'
+  packageName: '@midday-ai/sdk'
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true

@@ -5,7 +5,7 @@ Pagination metadata for the transactions response
 ## Example Usage
 
 ```typescript
-import { GetV1TransactionsMeta } from "@midday/sdk/models/operations";
+import { GetV1TransactionsMeta } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TransactionsMeta = {
   cursor: "eyJpZCI6IjQ1NiJ9",

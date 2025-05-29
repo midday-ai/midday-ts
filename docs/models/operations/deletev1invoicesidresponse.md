@@ -5,7 +5,7 @@ Delete a invoice by its unique identifier for the authenticated team.
 ## Example Usage
 
 ```typescript
-import { DeleteV1InvoicesIdResponse } from "@midday/sdk/models/operations";
+import { DeleteV1InvoicesIdResponse } from "@midday-ai/sdk/models/operations";
 
 let value: DeleteV1InvoicesIdResponse = {
   id: "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a",

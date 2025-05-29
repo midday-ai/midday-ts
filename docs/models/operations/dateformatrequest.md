@@ -5,7 +5,7 @@ User's preferred date format. Available options: 'dd/MM/yyyy', 'MM/dd/yyyy', 'yy
 ## Example Usage
 
 ```typescript
-import { DateFormatRequest } from "@midday/sdk/models/operations";
+import { DateFormatRequest } from "@midday-ai/sdk/models/operations";
 
 let value: DateFormatRequest = "yyyy-MM-dd";
 ```

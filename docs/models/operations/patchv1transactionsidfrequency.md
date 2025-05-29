@@ -5,7 +5,7 @@ Recurring frequency of the transaction.
 ## Example Usage
 
 ```typescript
-import { PatchV1TransactionsIdFrequency } from "@midday/sdk/models/operations";
+import { PatchV1TransactionsIdFrequency } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1TransactionsIdFrequency = "annually";
 ```

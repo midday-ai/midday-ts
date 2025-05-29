@@ -5,7 +5,7 @@ Type of the bank account.
 ## Example Usage
 
 ```typescript
-import { PatchV1BankAccountsIdType } from "@midday/sdk/models/operations";
+import { PatchV1BankAccountsIdType } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1BankAccountsIdType = "depository";
 ```

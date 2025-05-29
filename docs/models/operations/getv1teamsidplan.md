@@ -5,7 +5,7 @@ Current subscription plan of the team
 ## Example Usage
 
 ```typescript
-import { GetV1TeamsIdPlan } from "@midday/sdk/models/operations";
+import { GetV1TeamsIdPlan } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TeamsIdPlan = "pro";
 ```

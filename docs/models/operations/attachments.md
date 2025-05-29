@@ -5,7 +5,7 @@ Filter transactions based on attachment presence. 'include' returns only transac
 ## Example Usage
 
 ```typescript
-import { Attachments } from "@midday/sdk/models/operations";
+import { Attachments } from "@midday-ai/sdk/models/operations";
 
 let value: Attachments = "include";
 ```

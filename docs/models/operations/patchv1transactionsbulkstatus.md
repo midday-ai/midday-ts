@@ -5,7 +5,7 @@ Status to set for the transactions.
 ## Example Usage
 
 ```typescript
-import { PatchV1TransactionsBulkStatus } from "@midday/sdk/models/operations";
+import { PatchV1TransactionsBulkStatus } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1TransactionsBulkStatus = "posted";
 ```

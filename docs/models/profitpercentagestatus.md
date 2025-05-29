@@ -5,7 +5,7 @@ Status of the change
 ## Example Usage
 
 ```typescript
-import { ProfitPercentageStatus } from "@midday/sdk";
+import { ProfitPercentageStatus } from "@midday-ai/sdk";
 
 let value: ProfitPercentageStatus = "positive";
 ```

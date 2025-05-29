@@ -5,7 +5,7 @@ Customer information associated with the project
 ## Example Usage
 
 ```typescript
-import { GetV1TrackerEntriesCustomer } from "@midday/sdk/models/operations";
+import { GetV1TrackerEntriesCustomer } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TrackerEntriesCustomer = {
   id: "customer-1234",

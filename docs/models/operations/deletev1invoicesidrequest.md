@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { DeleteV1InvoicesIdRequest } from "@midday/sdk/models/operations";
+import { DeleteV1InvoicesIdRequest } from "@midday-ai/sdk/models/operations";
 
 let value: DeleteV1InvoicesIdRequest = {
   id: "<id>",

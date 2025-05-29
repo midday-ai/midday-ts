@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetBurnRateResponseSchema } from "@midday/sdk";
+import { GetBurnRateResponseSchema } from "@midday-ai/sdk";
 
 let value: GetBurnRateResponseSchema = {
   date: "2024-01-01",

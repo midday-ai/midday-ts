@@ -5,7 +5,7 @@ Payment status for the authenticated team.
 ## Example Usage
 
 ```typescript
-import { GetV1InvoicesPaymentStatusResponse } from "@midday/sdk/models/operations";
+import { GetV1InvoicesPaymentStatusResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InvoicesPaymentStatusResponse = {
   score: 85,

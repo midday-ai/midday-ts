@@ -5,7 +5,7 @@ Current status of the project
 ## Example Usage
 
 ```typescript
-import { PostV1TrackerProjectsStatus } from "@midday/sdk/models/operations";
+import { PostV1TrackerProjectsStatus } from "@midday-ai/sdk/models/operations";
 
 let value: PostV1TrackerProjectsStatus = "in_progress";
 ```

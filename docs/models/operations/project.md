@@ -5,7 +5,7 @@ Project information associated with this tracker entry
 ## Example Usage
 
 ```typescript
-import { Project } from "@midday/sdk/models/operations";
+import { Project } from "@midday-ai/sdk/models/operations";
 
 let value: Project = {
   id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",

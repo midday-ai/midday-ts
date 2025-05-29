@@ -19,7 +19,7 @@ Revenue metrics for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -44,8 +44,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsRevenue } from "@midday/sdk/funcs/metricsGetV1MetricsRevenue.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { metricsGetV1MetricsRevenue } from "@midday-ai/sdk/funcs/metricsGetV1MetricsRevenue.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -99,7 +99,7 @@ Profit metrics for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -124,8 +124,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsProfit } from "@midday/sdk/funcs/metricsGetV1MetricsProfit.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { metricsGetV1MetricsProfit } from "@midday-ai/sdk/funcs/metricsGetV1MetricsProfit.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -179,7 +179,7 @@ Burn rate metrics for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -204,8 +204,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsBurnRate } from "@midday/sdk/funcs/metricsGetV1MetricsBurnRate.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { metricsGetV1MetricsBurnRate } from "@midday-ai/sdk/funcs/metricsGetV1MetricsBurnRate.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -259,7 +259,7 @@ Runway metrics for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -284,8 +284,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsRunway } from "@midday/sdk/funcs/metricsGetV1MetricsRunway.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { metricsGetV1MetricsRunway } from "@midday-ai/sdk/funcs/metricsGetV1MetricsRunway.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -339,7 +339,7 @@ Expense metrics for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -364,8 +364,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsExpenses } from "@midday/sdk/funcs/metricsGetV1MetricsExpenses.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { metricsGetV1MetricsExpenses } from "@midday-ai/sdk/funcs/metricsGetV1MetricsExpenses.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -419,7 +419,7 @@ Spending metrics for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -444,8 +444,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { metricsGetV1MetricsSpending } from "@midday/sdk/funcs/metricsGetV1MetricsSpending.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { metricsGetV1MetricsSpending } from "@midday-ai/sdk/funcs/metricsGetV1MetricsSpending.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

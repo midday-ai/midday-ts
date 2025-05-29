@@ -5,7 +5,7 @@ Role of the team member. 'owner' has full permissions, 'member' has limited perm
 ## Example Usage
 
 ```typescript
-import { Role } from "@midday/sdk/models/operations";
+import { Role } from "@midday-ai/sdk/models/operations";
 
 let value: Role = "owner";
 ```

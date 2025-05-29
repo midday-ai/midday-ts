@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Summary } from "@midday/sdk";
+import { Summary } from "@midday-ai/sdk";
 
 let value: Summary = {
   averageExpense: 121054.86,

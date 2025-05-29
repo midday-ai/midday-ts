@@ -5,7 +5,7 @@ Document deleted successfully
 ## Example Usage
 
 ```typescript
-import { DeleteV1DocumentsIdResponse } from "@midday/sdk/models/operations";
+import { DeleteV1DocumentsIdResponse } from "@midday-ai/sdk/models/operations";
 
 let value: DeleteV1DocumentsIdResponse = {
   id: "<id>",

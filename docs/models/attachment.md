@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Attachment } from "@midday/sdk";
+import { Attachment } from "@midday-ai/sdk";
 
 let value: Attachment = {
   id: "a43dc3a5-6925-4d91-ac9c-4c1a34bdb388",

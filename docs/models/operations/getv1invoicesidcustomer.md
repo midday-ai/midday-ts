@@ -5,7 +5,7 @@ Customer details
 ## Example Usage
 
 ```typescript
-import { GetV1InvoicesIdCustomer } from "@midday/sdk/models/operations";
+import { GetV1InvoicesIdCustomer } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InvoicesIdCustomer = {
   id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",

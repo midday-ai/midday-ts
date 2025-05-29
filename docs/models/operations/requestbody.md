@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { RequestBody } from "@midday/sdk/models/operations";
+import { RequestBody } from "@midday-ai/sdk/models/operations";
 
 let value: RequestBody = {
   name: "<value>",

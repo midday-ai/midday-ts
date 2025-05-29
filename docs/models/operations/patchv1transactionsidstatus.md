@@ -5,7 +5,7 @@ Status of the transaction.
 ## Example Usage
 
 ```typescript
-import { PatchV1TransactionsIdStatus } from "@midday/sdk/models/operations";
+import { PatchV1TransactionsIdStatus } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1TransactionsIdStatus = "completed";
 ```

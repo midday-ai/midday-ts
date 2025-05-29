@@ -5,7 +5,7 @@ Current status of the invoice
 ## Example Usage
 
 ```typescript
-import { GetV1InvoicesIdStatus } from "@midday/sdk/models/operations";
+import { GetV1InvoicesIdStatus } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InvoicesIdStatus = "paid";
 ```

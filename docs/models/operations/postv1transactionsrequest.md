@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1TransactionsRequest } from "@midday/sdk/models/operations";
+import { PostV1TransactionsRequest } from "@midday-ai/sdk/models/operations";
 
 let value: PostV1TransactionsRequest = {
   name: "<value>",

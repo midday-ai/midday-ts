@@ -5,7 +5,7 @@ Tracker project deleted successfully.
 ## Example Usage
 
 ```typescript
-import { DeleteV1TrackerProjectsIdResponse } from "@midday/sdk/models/operations";
+import { DeleteV1TrackerProjectsIdResponse } from "@midday-ai/sdk/models/operations";
 
 let value: DeleteV1TrackerProjectsIdResponse = {
   id: "b7e6c8e2-1f2a-4c3b-9e2d-1a2b3c4d5e6f",

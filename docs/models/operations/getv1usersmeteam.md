@@ -5,7 +5,7 @@ Team information that the user belongs to
 ## Example Usage
 
 ```typescript
-import { GetV1UsersMeTeam } from "@midday/sdk/models/operations";
+import { GetV1UsersMeTeam } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1UsersMeTeam = {
   id: "123e4567-e89b-12d3-a456-426614174000",

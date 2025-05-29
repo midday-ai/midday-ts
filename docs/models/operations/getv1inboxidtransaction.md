@@ -5,7 +5,7 @@ Matched transaction for this inbox item, if any
 ## Example Usage
 
 ```typescript
-import { GetV1InboxIdTransaction } from "@midday/sdk/models/operations";
+import { GetV1InboxIdTransaction } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InboxIdTransaction = {
   id: "a1b2c3d4-5678-4e7a-9c1a-2b7c1e24c2a4",

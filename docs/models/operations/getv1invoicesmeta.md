@@ -5,7 +5,7 @@ Pagination metadata
 ## Example Usage
 
 ```typescript
-import { GetV1InvoicesMeta } from "@midday/sdk/models/operations";
+import { GetV1InvoicesMeta } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InvoicesMeta = {
   cursor: "25",

@@ -5,7 +5,7 @@ Metadata about the document.
 ## Example Usage
 
 ```typescript
-import { GetV1DocumentsMetadata } from "@midday/sdk/models/operations";
+import { GetV1DocumentsMetadata } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1DocumentsMetadata = {
   size: 204800,

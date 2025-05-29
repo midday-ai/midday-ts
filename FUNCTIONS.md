@@ -19,9 +19,9 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsGetV1Transactions } from "@midday/sdk/funcs/transactionsGetV1Transactions.js";
-import { SDKValidationError } from "@midday/sdk/models/errors/sdkvalidationerror.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsGetV1Transactions } from "@midday-ai/sdk/funcs/transactionsGetV1Transactions.js";
+import { SDKValidationError } from "@midday-ai/sdk/models/errors/sdkvalidationerror.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

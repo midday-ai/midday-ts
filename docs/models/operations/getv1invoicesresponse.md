@@ -5,7 +5,7 @@ Response containing a list of invoices and pagination metadata
 ## Example Usage
 
 ```typescript
-import { GetV1InvoicesResponse } from "@midday/sdk/models/operations";
+import { GetV1InvoicesResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1InvoicesResponse = {
   meta: {

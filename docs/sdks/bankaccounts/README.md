@@ -18,7 +18,7 @@ Retrieve a list of bank accounts for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -39,8 +39,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { bankAccountsGetV1BankAccounts } from "@midday/sdk/funcs/bankAccountsGetV1BankAccounts.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { bankAccountsGetV1BankAccounts } from "@midday-ai/sdk/funcs/bankAccountsGetV1BankAccounts.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -90,7 +90,7 @@ Create a new bank account for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -115,8 +115,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { bankAccountsPostV1BankAccounts } from "@midday/sdk/funcs/bankAccountsPostV1BankAccounts.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { bankAccountsPostV1BankAccounts } from "@midday-ai/sdk/funcs/bankAccountsPostV1BankAccounts.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -170,7 +170,7 @@ Retrieve a bank account by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -193,8 +193,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { bankAccountsGetV1BankAccountsId } from "@midday/sdk/funcs/bankAccountsGetV1BankAccountsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { bankAccountsGetV1BankAccountsId } from "@midday-ai/sdk/funcs/bankAccountsGetV1BankAccountsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -246,7 +246,7 @@ Update a bank account by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -276,8 +276,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { bankAccountsPatchV1BankAccountsId } from "@midday/sdk/funcs/bankAccountsPatchV1BankAccountsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { bankAccountsPatchV1BankAccountsId } from "@midday-ai/sdk/funcs/bankAccountsPatchV1BankAccountsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -336,7 +336,7 @@ Delete a bank account by ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -359,8 +359,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { bankAccountsDeleteV1BankAccountsId } from "@midday/sdk/funcs/bankAccountsDeleteV1BankAccountsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { bankAccountsDeleteV1BankAccountsId } from "@midday-ai/sdk/funcs/bankAccountsDeleteV1BankAccountsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

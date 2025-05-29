@@ -5,7 +5,7 @@ Pagination metadata for the documents list.
 ## Example Usage
 
 ```typescript
-import { GetV1DocumentsMeta } from "@midday/sdk/models/operations";
+import { GetV1DocumentsMeta } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1DocumentsMeta = {
   cursor: "20",

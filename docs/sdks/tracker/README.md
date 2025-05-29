@@ -20,7 +20,7 @@ List all tracker projects for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -60,8 +60,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { trackerGetV1TrackerProjects } from "@midday/sdk/funcs/trackerGetV1TrackerProjects.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { trackerGetV1TrackerProjects } from "@midday-ai/sdk/funcs/trackerGetV1TrackerProjects.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -130,7 +130,7 @@ Create a tracker project for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -153,8 +153,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { trackerPostV1TrackerProjects } from "@midday/sdk/funcs/trackerPostV1TrackerProjects.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { trackerPostV1TrackerProjects } from "@midday-ai/sdk/funcs/trackerPostV1TrackerProjects.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -206,7 +206,7 @@ Update a tracker project for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -248,8 +248,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { trackerPatchV1TrackerProjectsId } from "@midday/sdk/funcs/trackerPatchV1TrackerProjectsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { trackerPatchV1TrackerProjectsId } from "@midday-ai/sdk/funcs/trackerPatchV1TrackerProjectsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -320,7 +320,7 @@ Retrieve a tracker project for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -343,8 +343,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { trackerGetV1TrackerProjectsId } from "@midday/sdk/funcs/trackerGetV1TrackerProjectsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { trackerGetV1TrackerProjectsId } from "@midday-ai/sdk/funcs/trackerGetV1TrackerProjectsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -396,7 +396,7 @@ Delete a tracker project for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -419,8 +419,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { trackerDeleteV1TrackerProjectsId } from "@midday/sdk/funcs/trackerDeleteV1TrackerProjectsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { trackerDeleteV1TrackerProjectsId } from "@midday-ai/sdk/funcs/trackerDeleteV1TrackerProjectsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -472,7 +472,7 @@ List all tracker entries for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -497,8 +497,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { trackerGetV1TrackerEntries } from "@midday/sdk/funcs/trackerGetV1TrackerEntries.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { trackerGetV1TrackerEntries } from "@midday-ai/sdk/funcs/trackerGetV1TrackerEntries.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -552,7 +552,7 @@ Delete a tracker entry for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -575,8 +575,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { trackerDeleteV1TrackerEntriesId } from "@midday/sdk/funcs/trackerDeleteV1TrackerEntriesId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { trackerDeleteV1TrackerEntriesId } from "@midday-ai/sdk/funcs/trackerDeleteV1TrackerEntriesId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

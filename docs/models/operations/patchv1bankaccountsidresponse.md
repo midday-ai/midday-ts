@@ -5,7 +5,7 @@ A single bank account object response.
 ## Example Usage
 
 ```typescript
-import { PatchV1BankAccountsIdResponse } from "@midday/sdk/models/operations";
+import { PatchV1BankAccountsIdResponse } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1BankAccountsIdResponse = {
   id: "b7e6c2a0-1f2d-4c3b-9a8e-123456789abc",

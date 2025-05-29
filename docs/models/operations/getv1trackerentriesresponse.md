@@ -5,7 +5,7 @@ List all tracker entries for the authenticated team.
 ## Example Usage
 
 ```typescript
-import { GetV1TrackerEntriesResponse } from "@midday/sdk/models/operations";
+import { GetV1TrackerEntriesResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TrackerEntriesResponse = {
   meta: {

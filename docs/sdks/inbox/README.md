@@ -17,7 +17,7 @@ Retrieve a list of inbox items for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -38,8 +38,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { inboxGetV1Inbox } from "@midday/sdk/funcs/inboxGetV1Inbox.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { inboxGetV1Inbox } from "@midday-ai/sdk/funcs/inboxGetV1Inbox.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -89,7 +89,7 @@ Retrieve a inbox item by its unique identifier for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -112,8 +112,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { inboxGetV1InboxId } from "@midday/sdk/funcs/inboxGetV1InboxId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { inboxGetV1InboxId } from "@midday-ai/sdk/funcs/inboxGetV1InboxId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -165,7 +165,7 @@ Delete a inbox item by its unique identifier for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -188,8 +188,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { inboxDeleteV1InboxId } from "@midday/sdk/funcs/inboxDeleteV1InboxId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { inboxDeleteV1InboxId } from "@midday-ai/sdk/funcs/inboxDeleteV1InboxId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -241,7 +241,7 @@ Update fields of an inbox item by its unique identifier for the authenticated te
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -267,8 +267,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { inboxPatchV1InboxId } from "@midday/sdk/funcs/inboxPatchV1InboxId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { inboxPatchV1InboxId } from "@midday-ai/sdk/funcs/inboxPatchV1InboxId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PatchV1TrackerProjectsIdTag } from "@midday/sdk/models/operations";
+import { PatchV1TrackerProjectsIdTag } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1TrackerProjectsIdTag = {
   id: "f1e2d3c4-b5a6-7890-1234-567890abcdef",

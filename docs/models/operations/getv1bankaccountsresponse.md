@@ -5,7 +5,7 @@ Response containing a list of bank accounts.
 ## Example Usage
 
 ```typescript
-import { GetV1BankAccountsResponse } from "@midday/sdk/models/operations";
+import { GetV1BankAccountsResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1BankAccountsResponse = {
   data: [

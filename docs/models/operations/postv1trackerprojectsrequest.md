@@ -5,7 +5,7 @@ Tracker project to create
 ## Example Usage
 
 ```typescript
-import { PostV1TrackerProjectsRequest } from "@midday/sdk/models/operations";
+import { PostV1TrackerProjectsRequest } from "@midday-ai/sdk/models/operations";
 
 let value: PostV1TrackerProjectsRequest = {
   name: "Website Redesign",

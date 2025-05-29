@@ -5,7 +5,7 @@ Transaction type to filter by. 'income' for money received, 'expense' for money 
 ## Example Usage
 
 ```typescript
-import { GetV1TransactionsType } from "@midday/sdk/models/operations";
+import { GetV1TransactionsType } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TransactionsType = "expense";
 ```

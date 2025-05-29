@@ -5,7 +5,7 @@ Team details
 ## Example Usage
 
 ```typescript
-import { GetV1TeamsIdResponse } from "@midday/sdk/models/operations";
+import { GetV1TeamsIdResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TeamsIdResponse = {
   id: "123e4567-e89b-12d3-a456-426614174000",

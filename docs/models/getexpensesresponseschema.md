@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetExpensesResponseSchema } from "@midday/sdk";
+import { GetExpensesResponseSchema } from "@midday-ai/sdk";
 
 let value: GetExpensesResponseSchema = {
   summary: {

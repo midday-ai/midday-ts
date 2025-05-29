@@ -21,7 +21,7 @@ Retrieve a list of transactions for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -86,8 +86,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsGetV1Transactions } from "@midday/sdk/funcs/transactionsGetV1Transactions.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsGetV1Transactions } from "@midday-ai/sdk/funcs/transactionsGetV1Transactions.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -181,7 +181,7 @@ Create a transaction
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -202,8 +202,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsPostV1Transactions } from "@midday/sdk/funcs/transactionsPostV1Transactions.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsPostV1Transactions } from "@midday-ai/sdk/funcs/transactionsPostV1Transactions.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -253,7 +253,7 @@ Retrieve a transaction by its ID for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -276,8 +276,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsGetV1TransactionsId } from "@midday/sdk/funcs/transactionsGetV1TransactionsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsGetV1TransactionsId } from "@midday-ai/sdk/funcs/transactionsGetV1TransactionsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -329,7 +329,7 @@ Update a transaction for the authenticated team. If there's no change, returns i
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -352,8 +352,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsPatchV1TransactionsId } from "@midday/sdk/funcs/transactionsPatchV1TransactionsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsPatchV1TransactionsId } from "@midday-ai/sdk/funcs/transactionsPatchV1TransactionsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -405,7 +405,7 @@ Delete a transaction for the authenticated team. Only manually created transacti
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -428,8 +428,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsDeleteV1TransactionsId } from "@midday/sdk/funcs/transactionsDeleteV1TransactionsId.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsDeleteV1TransactionsId } from "@midday-ai/sdk/funcs/transactionsDeleteV1TransactionsId.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -481,7 +481,7 @@ Bulk update transactions for the authenticated team. If there's no change, retur
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -502,8 +502,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsPatchV1TransactionsBulk } from "@midday/sdk/funcs/transactionsPatchV1TransactionsBulk.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsPatchV1TransactionsBulk } from "@midday-ai/sdk/funcs/transactionsPatchV1TransactionsBulk.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -553,7 +553,7 @@ Bulk create transactions for the authenticated team.
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -574,8 +574,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsPostV1TransactionsBulk } from "@midday/sdk/funcs/transactionsPostV1TransactionsBulk.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsPostV1TransactionsBulk } from "@midday-ai/sdk/funcs/transactionsPostV1TransactionsBulk.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -625,7 +625,7 @@ Bulk delete transactions for the authenticated team. Only manually created trans
 ### Example Usage
 
 ```typescript
-import { Midday } from "@midday/sdk";
+import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
@@ -646,8 +646,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { MiddayCore } from "@midday/sdk/core.js";
-import { transactionsDeleteV1TransactionsBulk } from "@midday/sdk/funcs/transactionsDeleteV1TransactionsBulk.js";
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsDeleteV1TransactionsBulk } from "@midday-ai/sdk/funcs/transactionsDeleteV1TransactionsBulk.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

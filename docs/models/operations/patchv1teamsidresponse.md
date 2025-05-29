@@ -5,7 +5,7 @@ Team updated
 ## Example Usage
 
 ```typescript
-import { PatchV1TeamsIdResponse } from "@midday/sdk/models/operations";
+import { PatchV1TeamsIdResponse } from "@midday-ai/sdk/models/operations";
 
 let value: PatchV1TeamsIdResponse = {
   id: "123e4567-e89b-12d3-a456-426614174000",

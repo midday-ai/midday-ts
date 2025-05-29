@@ -5,7 +5,7 @@ Pagination metadata for the customers response
 ## Example Usage
 
 ```typescript
-import { GetV1CustomersMeta } from "@midday/sdk/models/operations";
+import { GetV1CustomersMeta } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1CustomersMeta = {
   cursor: "eyJpZCI6IjQ1NiJ9",

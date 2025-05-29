@@ -5,7 +5,7 @@ Retrieve a list of teams for the authenticated user.
 ## Example Usage
 
 ```typescript
-import { GetV1TeamsResponse } from "@midday/sdk/models/operations";
+import { GetV1TeamsResponse } from "@midday-ai/sdk/models/operations";
 
 let value: GetV1TeamsResponse = {
   data: [

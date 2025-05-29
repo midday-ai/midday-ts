@@ -1,15 +1,18 @@
-# midday-ts
+<div align="center">
+  <h3>Midday TypeScript SDK</h3>
+  <a href="https://speakeasyapi.dev/"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
+  </a>
+</div>
 
-<!-- Start Summary [summary] -->
-## Summary
+<br/>
 
-
-<!-- End Summary [summary] -->
+Learn more about the Midday TypeScript SDK in the [official documentation](https://docs.midday.ai/sdks/typescript/overview).
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [midday-ts](#midday-ts)
   * [SDK Installation](#sdk-installation)
   * [Requirements](#requirements)
   * [SDK Example Usage](#sdk-example-usage)

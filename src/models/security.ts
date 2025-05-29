@@ -3,12 +3,13 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 export type Security = {
-  bearerAuth?: string | undefined;
+  bearer?: string | undefined;
 };
 
 /** @internal */
@@ -17,12 +18,16 @@ export const Security$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bearerAuth: z.string().optional(),
+  Bearer: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "Bearer": "bearer",
+  });
 });
 
 /** @internal */
 export type Security$Outbound = {
-  bearerAuth?: string | undefined;
+  Bearer?: string | undefined;
 };
 
 /** @internal */
@@ -31,7 +36,11 @@ export const Security$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Security
 > = z.object({
-  bearerAuth: z.string().optional(),
+  bearer: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    bearer: "Bearer",
+  });
 });
 
 /**

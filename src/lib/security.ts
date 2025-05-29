@@ -243,8 +243,8 @@ export function resolveGlobalSecurity(
     [
       {
         fieldName: "Authorization",
-        type: "apiKey:header",
-        value: security?.bearerAuth ?? env().MIDDAY_BEARER_AUTH,
+        type: "http:bearer",
+        value: security?.bearer ?? env().MIDDAY_BEARER,
       },
     ],
   );

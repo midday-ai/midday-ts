@@ -7,13 +7,13 @@ import { dlv } from "./dlv.js";
 import * as z from "zod";
 
 export interface Env {
-  MIDDAY_BEARER_AUTH?: string | undefined;
+  MIDDAY_BEARER?: string | undefined;
 
   MIDDAY_DEBUG?: boolean | undefined;
 }
 
 export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z.object({
-  MIDDAY_BEARER_AUTH: z.string().optional(),
+  MIDDAY_BEARER: z.string().optional(),
 
   MIDDAY_DEBUG: z.coerce.boolean().optional(),
 });

@@ -1,0 +1,36 @@
+speakeasyVersion: 1.552.0
+sources:
+    Midday API:
+        sourceNamespace: midday-api
+        sourceRevisionDigest: sha256:eb2fd72968e5c82cb6d6381669148cd5a50edcc9649bf187a70176d562d088a0
+        sourceBlobDigest: sha256:ba67928c68db3d54b02e02d637c6fa63ec12e58b436c7250defe98f07a2a1a6a
+        tags:
+            - latest
+            - 0.0.1
+targets:
+    midday:
+        source: Midday API
+        sourceNamespace: midday-api
+        sourceRevisionDigest: sha256:eb2fd72968e5c82cb6d6381669148cd5a50edcc9649bf187a70176d562d088a0
+        sourceBlobDigest: sha256:ba67928c68db3d54b02e02d637c6fa63ec12e58b436c7250defe98f07a2a1a6a
+        codeSamplesNamespace: midday-api-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:a4db85156eb33d3523047ad9b1b0a5530eed935c4eead6fdfb030146a9267677
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Midday API:
+            inputs:
+                - location: https://api.midday.ai/openapi
+            registry:
+                location: registry.speakeasyapi.dev/midday/midday/midday-api
+    targets:
+        midday:
+            target: typescript
+            source: Midday API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/midday/midday/midday-api-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

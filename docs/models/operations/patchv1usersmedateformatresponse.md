@@ -1,0 +1,17 @@
+# PatchV1UsersMeDateFormatResponse
+
+User's preferred date format. Available options: 'dd/MM/yyyy', 'MM/dd/yyyy', 'yyyy-MM-dd', 'dd.MM.yyyy'
+
+## Example Usage
+
+```typescript
+import { PatchV1UsersMeDateFormatResponse } from "@midday/sdk/models/operations";
+
+let value: PatchV1UsersMeDateFormatResponse = "yyyy-MM-dd";
+```
+
+## Values
+
+```typescript
+"dd/MM/yyyy" | "MM/dd/yyyy" | "yyyy-MM-dd" | "dd.MM.yyyy"
+```

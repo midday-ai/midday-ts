@@ -1,0 +1,21 @@
+# PatchV1TransactionsIdRequestBody
+
+## Example Usage
+
+```typescript
+import { PatchV1TransactionsIdRequestBody } from "@midday/sdk/models/operations";
+
+let value: PatchV1TransactionsIdRequestBody = {};
+```
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `categorySlug`                                                                                         | *string*                                                                                               | :heavy_minus_sign:                                                                                     | Category slug for the transaction.                                                                     |
+| `status`                                                                                               | [operations.PatchV1TransactionsIdStatus](../../models/operations/patchv1transactionsidstatus.md)       | :heavy_minus_sign:                                                                                     | Status of the transaction.                                                                             |
+| `internal`                                                                                             | *boolean*                                                                                              | :heavy_minus_sign:                                                                                     | Whether the transaction is internal.                                                                   |
+| `recurring`                                                                                            | *boolean*                                                                                              | :heavy_minus_sign:                                                                                     | Whether the transaction is recurring.                                                                  |
+| `frequency`                                                                                            | [operations.PatchV1TransactionsIdFrequency](../../models/operations/patchv1transactionsidfrequency.md) | :heavy_minus_sign:                                                                                     | Recurring frequency of the transaction.                                                                |
+| `note`                                                                                                 | *string*                                                                                               | :heavy_minus_sign:                                                                                     | Note for the transaction.                                                                              |
+| `assignedId`                                                                                           | *string*                                                                                               | :heavy_minus_sign:                                                                                     | Assigned user ID for the transaction.                                                                  |

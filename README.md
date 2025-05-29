@@ -92,7 +92,7 @@ Add the following server definition to your `claude_desktop_config.json` file:
         "-y", "--package", "@midday-ai/sdk",
         "--",
         "mcp", "start",
-        "--bearer", "..."
+        "--api-token", "..."
       ]
     }
   }
@@ -115,7 +115,7 @@ Create a `.cursor/mcp.json` file in your project root with the following content
         "-y", "--package", "@midday-ai/sdk",
         "--",
         "mcp", "start",
-        "--bearer", "..."
+        "--api-token", "..."
       ]
     }
   }
@@ -170,7 +170,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -236,16 +236,16 @@ run();
 
 This SDK supports the following security scheme globally:
 
-| Name     | Type | Scheme      | Environment Variable |
-| -------- | ---- | ----------- | -------------------- |
-| `bearer` | http | HTTP Bearer | `MIDDAY_BEARER`      |
+| Name    | Type | Scheme      | Environment Variable |
+| ------- | ---- | ----------- | -------------------- |
+| `token` | http | HTTP Bearer | `MIDDAY_TOKEN`       |
 
-To authenticate with the API the `bearer` parameter must be set when initializing the SDK client instance. For example:
+To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -495,7 +495,7 @@ To change the default retry strategy for a single API call, simply provide a ret
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -579,7 +579,7 @@ const midday = new Midday({
     },
     retryConnectionErrors: false,
   },
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -652,7 +652,7 @@ import { Midday } from "@midday-ai/sdk";
 import { SDKValidationError } from "@midday-ai/sdk/models/errors";
 
 const midday = new Midday({
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -760,7 +760,7 @@ import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   serverURL: "https://api.midday.ai",
-  bearer: "MIDDAY_API_KEY",
+  token: "MIDDAY_API_KEY",
 });
 
 async function run() {

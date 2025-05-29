@@ -74,16 +74,16 @@ export function createMCPServer(deps: {
   allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
-  bearer?: SDKOptions["bearer"] | undefined;
+  token?: SDKOptions["token"] | undefined;
   serverIdx?: SDKOptions["serverIdx"] | undefined;
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.2.0",
+    version: "0.2.1",
   });
 
   const client = new MiddayCore({
-    bearer: deps.bearer,
+    token: deps.token,
     serverURL: deps.serverURL,
     serverIdx: deps.serverIdx,
   });

@@ -7,7 +7,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.getV1Transactions({
+  const result = await midday.transactions.list({
     cursor: "eyJpZCI6IjEyMyJ9",
     sort: [
       "date",

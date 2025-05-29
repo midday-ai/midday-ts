@@ -12,13 +12,13 @@ import { Params, pathToFunc } from "./url.js";
  */
 export const ServerList = [
   /**
-   * Production server
+   * Production API
    */
   "https://api.midday.ai",
 ] as const;
 
 export type SDKOptions = {
-  bearerAuth?: string | (() => Promise<string>) | undefined;
+  bearer?: string | (() => Promise<string>) | undefined;
 
   httpClient?: HTTPClient;
   /**
@@ -61,7 +61,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "0.0.1",
-  sdkVersion: "0.1.0",
+  sdkVersion: "0.2.0",
   genVersion: "2.616.1",
-  userAgent: "speakeasy-sdk/typescript 0.1.0 2.616.1 0.0.1 @midday-ai/sdk",
+  userAgent: "speakeasy-sdk/typescript 0.2.0 2.616.1 0.0.1 @midday-ai/sdk",
 } as const;

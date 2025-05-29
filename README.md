@@ -12,6 +12,12 @@
 
 Learn more about the Midday TypeScript SDK in the [official documentation](https://docs.midday.ai/sdks/typescript/overview).
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Midday API: Midday is a platform for Invoicing, Time tracking, File reconciliation, Storage, Financial Overview & your own Assistant.
+<!-- End Summary [summary] -->
+
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
@@ -86,7 +92,7 @@ Add the following server definition to your `claude_desktop_config.json` file:
         "-y", "--package", "@midday-ai/sdk",
         "--",
         "mcp", "start",
-        "--bearer-auth", "..."
+        "--bearer", "..."
       ]
     }
   }
@@ -109,7 +115,7 @@ Create a `.cursor/mcp.json` file in your project root with the following content
         "-y", "--package", "@midday-ai/sdk",
         "--",
         "mcp", "start",
-        "--bearer-auth", "..."
+        "--bearer", "..."
       ]
     }
   }
@@ -164,7 +170,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
+  bearer: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -230,16 +236,16 @@ run();
 
 This SDK supports the following security scheme globally:
 
-| Name         | Type   | Scheme  | Environment Variable |
-| ------------ | ------ | ------- | -------------------- |
-| `bearerAuth` | apiKey | API key | `MIDDAY_BEARER_AUTH` |
+| Name     | Type | Scheme      | Environment Variable |
+| -------- | ---- | ----------- | -------------------- |
+| `bearer` | http | HTTP Bearer | `MIDDAY_BEARER`      |
 
-To authenticate with the API the `bearerAuth` parameter must be set when initializing the SDK client instance. For example:
+To authenticate with the API the `bearer` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
+  bearer: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -489,7 +495,7 @@ To change the default retry strategy for a single API call, simply provide a ret
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
+  bearer: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -573,7 +579,7 @@ const midday = new Midday({
     },
     retryConnectionErrors: false,
   },
-  bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
+  bearer: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -646,7 +652,7 @@ import { Midday } from "@midday-ai/sdk";
 import { SDKValidationError } from "@midday-ai/sdk/models/errors";
 
 const midday = new Midday({
-  bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
+  bearer: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -754,7 +760,7 @@ import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   serverURL: "https://api.midday.ai",
-  bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
+  bearer: "MIDDAY_API_KEY",
 });
 
 async function run() {

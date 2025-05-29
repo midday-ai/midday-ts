@@ -17,7 +17,7 @@ Delete a tracker entry for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
+  bearer: "MIDDAY_API_KEY",
 });
 
 async function run() {
@@ -43,7 +43,7 @@ import { trackerDelete } from "@midday-ai/sdk/funcs/trackerDelete.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  bearerAuth: process.env["MIDDAY_BEARER_AUTH"] ?? "",
+  bearer: "MIDDAY_API_KEY",
 });
 
 async function run() {

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: e52c11068ffdfeb17cbae82f04d7ca20
+  docChecksum: 74cf8ffc74b31f65b6a990cfedf6b063
   docVersion: 0.0.1
   speakeasyVersion: 1.554.0
   generationVersion: 2.616.1
-  releaseVersion: 0.1.0
-  configChecksum: 808963922ffeaeecadd0b418ca0ef774
+  releaseVersion: 0.2.0
+  configChecksum: fc418cc5546e0dbb2bbbb619204d589c
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true
@@ -20,6 +20,7 @@ features:
     enumUnions: 0.1.0
     enums: 2.82.1
     envVarSecurityUsage: 0.1.2
+    examples: 2.81.5
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0

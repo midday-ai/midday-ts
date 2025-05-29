@@ -49,9 +49,9 @@ export const startCommand = buildCommand({
           },
         }
         : {}),
-      "bearer-auth": {
+      bearer: {
         kind: "parsed",
-        brief: "Sets the bearerAuth auth field for the API",
+        brief: "Sets the bearer auth field for the API",
         optional: true,
         parse: (value) => {
           return z.string().parse(value);

@@ -10,6 +10,7 @@ let value: UpdateTeamByIdRequestBody = {
   email: "team@acme.com",
   logoUrl: "https://cdn.midday.ai/logos/acme-corp.png",
   baseCurrency: "USD",
+  countryCode: "US",
 };
 ```
 
@@ -21,3 +22,4 @@ let value: UpdateTeamByIdRequestBody = {
 | `email`                                                                | *string*                                                               | :heavy_minus_sign:                                                     | Primary contact email address for the team                             | team@acme.com                                                          |
 | `logoUrl`                                                              | *string*                                                               | :heavy_minus_sign:                                                     | URL to the team's logo image. Must be hosted on midday.ai domain       | https://cdn.midday.ai/logos/acme-corp.png                              |
 | `baseCurrency`                                                         | *string*                                                               | :heavy_minus_sign:                                                     | Base currency for the team in ISO 4217 format (3-letter currency code) | USD                                                                    |
+| `countryCode`                                                          | *string*                                                               | :heavy_minus_sign:                                                     | Country code for the team                                              | US                                                                     |

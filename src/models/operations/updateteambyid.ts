@@ -26,6 +26,10 @@ export type UpdateTeamByIdRequestBody = {
    * Base currency for the team in ISO 4217 format (3-letter currency code)
    */
   baseCurrency?: string | undefined;
+  /**
+   * Country code for the team
+   */
+  countryCode?: string | undefined;
 };
 
 export type UpdateTeamByIdRequest = {
@@ -78,6 +82,7 @@ export const UpdateTeamByIdRequestBody$inboundSchema: z.ZodType<
   email: z.string().optional(),
   logoUrl: z.string().optional(),
   baseCurrency: z.string().optional(),
+  countryCode: z.string().optional(),
 });
 
 /** @internal */
@@ -86,6 +91,7 @@ export type UpdateTeamByIdRequestBody$Outbound = {
   email?: string | undefined;
   logoUrl?: string | undefined;
   baseCurrency?: string | undefined;
+  countryCode?: string | undefined;
 };
 
 /** @internal */
@@ -98,6 +104,7 @@ export const UpdateTeamByIdRequestBody$outboundSchema: z.ZodType<
   email: z.string().optional(),
   logoUrl: z.string().optional(),
   baseCurrency: z.string().optional(),
+  countryCode: z.string().optional(),
 });
 
 /**

@@ -19,7 +19,10 @@ export const UpdateInboxItemStatus = {
 export type UpdateInboxItemStatus = ClosedEnum<typeof UpdateInboxItemStatus>;
 
 export type UpdateInboxItemRequestBody = {
-  status: UpdateInboxItemStatus;
+  status?: UpdateInboxItemStatus | undefined;
+  displayName?: string | undefined;
+  currency?: string | undefined;
+  amount?: number | undefined;
 };
 
 export type UpdateInboxItemRequest = {
@@ -138,12 +141,18 @@ export const UpdateInboxItemRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: UpdateInboxItemStatus$inboundSchema,
+  status: UpdateInboxItemStatus$inboundSchema.optional(),
+  displayName: z.string().optional(),
+  currency: z.string().optional(),
+  amount: z.number().optional(),
 });
 
 /** @internal */
 export type UpdateInboxItemRequestBody$Outbound = {
-  status: string;
+  status?: string | undefined;
+  displayName?: string | undefined;
+  currency?: string | undefined;
+  amount?: number | undefined;
 };
 
 /** @internal */
@@ -152,7 +161,10 @@ export const UpdateInboxItemRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateInboxItemRequestBody
 > = z.object({
-  status: UpdateInboxItemStatus$outboundSchema,
+  status: UpdateInboxItemStatus$outboundSchema.optional(),
+  displayName: z.string().optional(),
+  currency: z.string().optional(),
+  amount: z.number().optional(),
 });
 
 /**

@@ -45,7 +45,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -86,15 +85,12 @@ async function run() {
       "customer-uuid-2",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invoicesList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -135,7 +131,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.invoices.getInvoicesPaymentStatus();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -158,15 +153,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await invoicesGetInvoicesPaymentStatus(midday);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invoicesGetInvoicesPaymentStatus failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -208,7 +200,6 @@ async function run() {
     status: "paid",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -233,15 +224,12 @@ async function run() {
   const res = await invoicesSummary(midday, {
     status: "paid",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invoicesSummary failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -284,7 +272,6 @@ async function run() {
     id: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -309,15 +296,12 @@ async function run() {
   const res = await invoicesGet(midday, {
     id: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invoicesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -360,7 +344,6 @@ async function run() {
     id: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -385,15 +368,12 @@ async function run() {
   const res = await invoicesDelete(midday, {
     id: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invoicesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

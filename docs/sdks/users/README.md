@@ -24,7 +24,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.users.get();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -47,15 +46,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await usersGet(midday);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -105,7 +101,6 @@ async function run() {
     dateFormat: "yyyy-MM-dd",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -138,15 +133,12 @@ async function run() {
     timeFormat: 24,
     dateFormat: "yyyy-MM-dd",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

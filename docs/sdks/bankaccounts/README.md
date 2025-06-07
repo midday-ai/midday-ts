@@ -27,7 +27,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.bankAccounts.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -50,15 +49,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await bankAccountsList(midday, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bankAccountsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -103,7 +99,6 @@ async function run() {
     manual: false,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -130,15 +125,12 @@ async function run() {
     currency: "USD",
     manual: false,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bankAccountsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -181,7 +173,6 @@ async function run() {
     id: "b7e6c2a0-1f2d-4c3b-9a8e-123456789abc",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -206,15 +197,12 @@ async function run() {
   const res = await bankAccountsGet(midday, {
     id: "b7e6c2a0-1f2d-4c3b-9a8e-123456789abc",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bankAccountsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -264,7 +252,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -296,15 +283,12 @@ async function run() {
       type: "depository",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bankAccountsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -347,7 +331,6 @@ async function run() {
     id: "b7e6c2a0-1f2d-4c3b-9a8e-123456789abc",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -372,15 +355,12 @@ async function run() {
   const res = await bankAccountsDelete(midday, {
     id: "b7e6c2a0-1f2d-4c3b-9a8e-123456789abc",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("bankAccountsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -27,13 +27,7 @@ let value: TrackerProjectResponse = {
       name: "Design",
     },
   ],
-  users: [
-    {
-      id: "f1e2d3c4-b5a6-7890-abcd-1234567890ef",
-      fullName: "Jane Doe",
-      avatarUrl: "https://cdn.midday.ai/avatar.jpg",
-    },
-  ],
+  users: [],
 };
 ```
 

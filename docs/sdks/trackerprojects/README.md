@@ -46,7 +46,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -88,15 +87,12 @@ async function run() {
       "name",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("trackerProjectsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -137,9 +133,9 @@ const midday = new Midday({
 async function run() {
   const result = await midday.trackerProjects.create({
     name: "New Project",
+    billable: true,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -163,16 +159,14 @@ const midday = new MiddayCore({
 async function run() {
   const res = await trackerProjectsCreate(midday, {
     name: "New Project",
+    billable: true,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("trackerProjectsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -217,6 +211,7 @@ async function run() {
       name: "Website Redesign",
       description: "Complete redesign of the company website with modern UI/UX and improved performance",
       estimate: 120,
+      billable: true,
       rate: 75,
       currency: "USD",
       status: "in_progress",
@@ -234,7 +229,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -262,6 +256,7 @@ async function run() {
       name: "Website Redesign",
       description: "Complete redesign of the company website with modern UI/UX and improved performance",
       estimate: 120,
+      billable: true,
       rate: 75,
       currency: "USD",
       status: "in_progress",
@@ -278,15 +273,12 @@ async function run() {
       ],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("trackerProjectsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -329,7 +321,6 @@ async function run() {
     id: "b7e6c8e2-1f2a-4c3b-9e2d-1a2b3c4d5e6f",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -354,15 +345,12 @@ async function run() {
   const res = await trackerProjectsGet(midday, {
     id: "b7e6c8e2-1f2a-4c3b-9e2d-1a2b3c4d5e6f",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("trackerProjectsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -405,7 +393,6 @@ async function run() {
     id: "b7e6c8e2-1f2a-4c3b-9e2d-1a2b3c4d5e6f",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -430,15 +417,12 @@ async function run() {
   const res = await trackerProjectsDelete(midday, {
     id: "b7e6c8e2-1f2a-4c3b-9e2d-1a2b3c4d5e6f",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("trackerProjectsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

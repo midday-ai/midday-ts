@@ -57,6 +57,10 @@ export type ListCustomersData = {
    */
   email: string;
   /**
+   * Billing email address of the customer
+   */
+  billingEmail: string | null;
+  /**
    * Primary phone number of the customer
    */
   phone: string | null;
@@ -329,6 +333,7 @@ export const ListCustomersData$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   email: z.string(),
+  billingEmail: z.nullable(z.string()),
   phone: z.nullable(z.string()),
   website: z.nullable(z.string()),
   createdAt: z.string(),
@@ -353,6 +358,7 @@ export type ListCustomersData$Outbound = {
   id: string;
   name: string;
   email: string;
+  billingEmail: string | null;
   phone: string | null;
   website: string | null;
   createdAt: string;
@@ -381,6 +387,7 @@ export const ListCustomersData$outboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   email: z.string(),
+  billingEmail: z.nullable(z.string()),
   phone: z.nullable(z.string()),
   website: z.nullable(z.string()),
   createdAt: z.string(),

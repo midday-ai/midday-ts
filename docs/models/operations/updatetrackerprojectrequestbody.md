@@ -10,6 +10,7 @@ let value: UpdateTrackerProjectRequestBody = {
   description:
     "Complete redesign of the company website with modern UI/UX and improved performance",
   estimate: 120,
+  billable: true,
   rate: 75,
   currency: "USD",
   status: "in_progress",

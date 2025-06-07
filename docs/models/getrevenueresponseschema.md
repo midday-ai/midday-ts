@@ -18,7 +18,7 @@ let value: GetRevenueResponseSchema = {
   result: [
     {
       date: "2023-01-31",
-      precentage: {
+      percentage: {
         value: 25,
         status: "positive",
       },

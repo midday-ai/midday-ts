@@ -32,6 +32,10 @@ export type CreateCustomerRequest = {
    */
   email: string;
   /**
+   * Billing email address of the customer
+   */
+  billingEmail?: string | null | undefined;
+  /**
    * Country name where the customer is located
    */
   country?: string | null | undefined;
@@ -112,6 +116,10 @@ export type CreateCustomerResponse = {
    * Primary email address of the customer
    */
   email: string;
+  /**
+   * Billing email address of the customer
+   */
+  billingEmail: string | null;
   /**
    * Primary phone number of the customer
    */
@@ -248,6 +256,7 @@ export const CreateCustomerRequest$inboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string(),
   email: z.string(),
+  billingEmail: z.nullable(z.string()).optional(),
   country: z.nullable(z.string()).optional(),
   addressLine1: z.nullable(z.string()).optional(),
   addressLine2: z.nullable(z.string()).optional(),
@@ -269,6 +278,7 @@ export type CreateCustomerRequest$Outbound = {
   id?: string | undefined;
   name: string;
   email: string;
+  billingEmail?: string | null | undefined;
   country?: string | null | undefined;
   addressLine1?: string | null | undefined;
   addressLine2?: string | null | undefined;
@@ -293,6 +303,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string(),
   email: z.string(),
+  billingEmail: z.nullable(z.string()).optional(),
   country: z.nullable(z.string()).optional(),
   addressLine1: z.nullable(z.string()).optional(),
   addressLine2: z.nullable(z.string()).optional(),
@@ -406,6 +417,7 @@ export const CreateCustomerResponse$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   email: z.string(),
+  billingEmail: z.nullable(z.string()),
   phone: z.nullable(z.string()),
   website: z.nullable(z.string()),
   createdAt: z.string(),
@@ -430,6 +442,7 @@ export type CreateCustomerResponse$Outbound = {
   id: string;
   name: string;
   email: string;
+  billingEmail: string | null;
   phone: string | null;
   website: string | null;
   createdAt: string;
@@ -458,6 +471,7 @@ export const CreateCustomerResponse$outboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   email: z.string(),
+  billingEmail: z.nullable(z.string()),
   phone: z.nullable(z.string()),
   website: z.nullable(z.string()),
   createdAt: z.string(),

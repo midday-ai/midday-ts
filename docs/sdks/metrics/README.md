@@ -32,7 +32,6 @@ async function run() {
     currency: "USD",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -59,15 +58,12 @@ async function run() {
     to: "2023-12-31",
     currency: "USD",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("metricsRevenue failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -112,7 +108,6 @@ async function run() {
     currency: "USD",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -139,15 +134,12 @@ async function run() {
     to: "2023-12-31",
     currency: "USD",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("metricsProfit failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -192,7 +184,6 @@ async function run() {
     currency: "USD",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -219,15 +210,12 @@ async function run() {
     to: "2023-12-31",
     currency: "USD",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("metricsBurnRate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -272,7 +260,6 @@ async function run() {
     currency: "USD",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -299,15 +286,12 @@ async function run() {
     to: "2023-12-31",
     currency: "USD",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("metricsRunway failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -352,7 +336,6 @@ async function run() {
     currency: "USD",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -379,15 +362,12 @@ async function run() {
     to: "2023-12-31",
     currency: "USD",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("metricsExpenses failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -432,7 +412,6 @@ async function run() {
     currency: "USD",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -459,15 +438,12 @@ async function run() {
     to: "2023-12-31",
     currency: "USD",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("metricsSpending failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

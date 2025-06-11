@@ -30,7 +30,7 @@ export type RevenueResultItem = {
    * Date for the metric (ISO 8601)
    */
   date: string;
-  precentage: RevenuePercentage;
+  percentage: RevenuePercentage;
   current: RevenueCurrent;
   previous: RevenuePrevious;
 };
@@ -42,7 +42,7 @@ export const RevenueResultItem$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   date: z.string(),
-  precentage: RevenuePercentage$inboundSchema,
+  percentage: RevenuePercentage$inboundSchema,
   current: RevenueCurrent$inboundSchema,
   previous: RevenuePrevious$inboundSchema,
 });
@@ -50,7 +50,7 @@ export const RevenueResultItem$inboundSchema: z.ZodType<
 /** @internal */
 export type RevenueResultItem$Outbound = {
   date: string;
-  precentage: RevenuePercentage$Outbound;
+  percentage: RevenuePercentage$Outbound;
   current: RevenueCurrent$Outbound;
   previous: RevenuePrevious$Outbound;
 };
@@ -62,7 +62,7 @@ export const RevenueResultItem$outboundSchema: z.ZodType<
   RevenueResultItem
 > = z.object({
   date: z.string(),
-  precentage: RevenuePercentage$outboundSchema,
+  percentage: RevenuePercentage$outboundSchema,
   current: RevenueCurrent$outboundSchema,
   previous: RevenuePrevious$outboundSchema,
 });

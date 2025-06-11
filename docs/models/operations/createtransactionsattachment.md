@@ -7,10 +7,12 @@ import { CreateTransactionsAttachment } from "@midday-ai/sdk/models/operations";
 
 let value: CreateTransactionsAttachment = {
   path: [
-    "/usr/local/bin",
+    "/opt/lib",
+    "/private/var",
+    "/usr/X11R6",
   ],
   name: "<value>",
-  size: 4086.95,
+  size: 7284.97,
   type: "<value>",
 };
 ```

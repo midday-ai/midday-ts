@@ -18,6 +18,7 @@ let value: ListCustomersResponse = {
       id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
       name: "Acme Corporation",
       email: "contact@acme.com",
+      billingEmail: "finance@acme.com",
       phone: "+1-555-123-4567",
       website: "https://acme.com",
       createdAt: "2024-05-01T12:34:56.789Z",

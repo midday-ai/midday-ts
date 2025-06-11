@@ -27,7 +27,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.tags.list();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -50,15 +49,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await tagsList(midday);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tagsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -100,7 +96,6 @@ async function run() {
     name: "Important",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -125,15 +120,12 @@ async function run() {
   const res = await tagsCreate(midday, {
     name: "Important",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tagsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -176,7 +168,6 @@ async function run() {
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -201,15 +192,12 @@ async function run() {
   const res = await tagsGet(midday, {
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tagsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -255,7 +243,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -283,15 +270,12 @@ async function run() {
       name: "Urgent",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tagsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -358,14 +342,12 @@ async function run() {
   const res = await tagsDelete(midday, {
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("tagsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

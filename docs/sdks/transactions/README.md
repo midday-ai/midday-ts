@@ -74,7 +74,6 @@ async function run() {
     type: "expense",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -141,15 +140,12 @@ async function run() {
     ],
     type: "expense",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -190,7 +186,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.transactions.create();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -213,15 +208,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await transactionsCreate(midday);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -264,7 +256,6 @@ async function run() {
     id: "391723c9-de99-4039-b8e2-4fa5bbdf9480",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -289,15 +280,12 @@ async function run() {
   const res = await transactionsGet(midday, {
     id: "391723c9-de99-4039-b8e2-4fa5bbdf9480",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -340,7 +328,6 @@ async function run() {
     id: "f0c1d0ef-5679-4c1b-9698-2c64e97e8c1d",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -365,15 +352,12 @@ async function run() {
   const res = await transactionsUpdate(midday, {
     id: "f0c1d0ef-5679-4c1b-9698-2c64e97e8c1d",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -416,7 +400,6 @@ async function run() {
     id: "92766ee2-a2bc-44aa-97af-6891695fc321",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -441,15 +424,12 @@ async function run() {
   const res = await transactionsDelete(midday, {
     id: "92766ee2-a2bc-44aa-97af-6891695fc321",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -490,7 +470,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.transactions.updateMany();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -513,15 +492,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await transactionsUpdateMany(midday);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsUpdateMany failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -562,7 +538,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.transactions.createMany();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -585,15 +560,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await transactionsCreateMany(midday);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsCreateMany failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -634,7 +606,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.transactions.deleteMany();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -657,15 +628,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await transactionsDeleteMany(midday);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsDeleteMany failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

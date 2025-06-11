@@ -30,7 +30,7 @@ export type ProfitResultItem = {
    * Date for the metric (ISO 8601)
    */
   date: string;
-  precentage: ProfitPercentage;
+  percentage: ProfitPercentage;
   current: ProfitCurrent;
   previous: ProfitPrevious;
 };
@@ -42,7 +42,7 @@ export const ProfitResultItem$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   date: z.string(),
-  precentage: ProfitPercentage$inboundSchema,
+  percentage: ProfitPercentage$inboundSchema,
   current: ProfitCurrent$inboundSchema,
   previous: ProfitPrevious$inboundSchema,
 });
@@ -50,7 +50,7 @@ export const ProfitResultItem$inboundSchema: z.ZodType<
 /** @internal */
 export type ProfitResultItem$Outbound = {
   date: string;
-  precentage: ProfitPercentage$Outbound;
+  percentage: ProfitPercentage$Outbound;
   current: ProfitCurrent$Outbound;
   previous: ProfitPrevious$Outbound;
 };
@@ -62,7 +62,7 @@ export const ProfitResultItem$outboundSchema: z.ZodType<
   ProfitResultItem
 > = z.object({
   date: z.string(),
-  precentage: ProfitPercentage$outboundSchema,
+  percentage: ProfitPercentage$outboundSchema,
   current: ProfitCurrent$outboundSchema,
   previous: ProfitPrevious$outboundSchema,
 });

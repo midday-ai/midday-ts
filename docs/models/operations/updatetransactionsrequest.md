@@ -7,7 +7,7 @@ import { UpdateTransactionsRequest } from "@midday-ai/sdk/models/operations";
 
 let value: UpdateTransactionsRequest = {
   ids: [
-    "<value>",
+    "<value 1>",
   ],
 };
 ```

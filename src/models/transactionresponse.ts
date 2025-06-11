@@ -121,6 +121,10 @@ export type TransactionResponse = {
    */
   currency: string;
   /**
+   * Name of the counterparty
+   */
+  counterpartyName: string | null;
+  /**
    * Date and time of the transaction in ISO 8601 format
    */
   date: string;
@@ -470,6 +474,7 @@ export const TransactionResponse$inboundSchema: z.ZodType<
   name: z.string(),
   amount: z.number(),
   currency: z.string(),
+  counterpartyName: z.nullable(z.string()),
   date: z.string(),
   category: z.nullable(z.lazy(() => Category$inboundSchema)),
   status: z.string(),
@@ -490,6 +495,7 @@ export type TransactionResponse$Outbound = {
   name: string;
   amount: number;
   currency: string;
+  counterpartyName: string | null;
   date: string;
   category: Category$Outbound | null;
   status: string;
@@ -514,6 +520,7 @@ export const TransactionResponse$outboundSchema: z.ZodType<
   name: z.string(),
   amount: z.number(),
   currency: z.string(),
+  counterpartyName: z.nullable(z.string()),
   date: z.string(),
   category: z.nullable(z.lazy(() => Category$outboundSchema)),
   status: z.string(),

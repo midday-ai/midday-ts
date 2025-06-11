@@ -26,7 +26,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.teams.list();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -49,15 +48,12 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await teamsList(midday);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("teamsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -99,7 +95,6 @@ async function run() {
     id: "123e4567-e89b-12d3-a456-426614174000",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -124,15 +119,12 @@ async function run() {
   const res = await teamsGet(midday, {
     id: "123e4567-e89b-12d3-a456-426614174000",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("teamsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -178,10 +170,10 @@ async function run() {
       email: "team@acme.com",
       logoUrl: "https://cdn.midday.ai/logos/acme-corp.png",
       baseCurrency: "USD",
+      countryCode: "US",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -210,17 +202,15 @@ async function run() {
       email: "team@acme.com",
       logoUrl: "https://cdn.midday.ai/logos/acme-corp.png",
       baseCurrency: "USD",
+      countryCode: "US",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("teamsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -263,7 +253,6 @@ async function run() {
     id: "123e4567-e89b-12d3-a456-426614174000",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -288,15 +277,12 @@ async function run() {
   const res = await teamsMembers(midday, {
     id: "123e4567-e89b-12d3-a456-426614174000",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("teamsMembers failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

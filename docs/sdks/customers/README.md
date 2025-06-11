@@ -35,7 +35,6 @@ async function run() {
     pageSize: 20,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -66,15 +65,12 @@ async function run() {
     cursor: "eyJpZCI6IjEyMyJ9",
     pageSize: 20,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("customersList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -117,6 +113,7 @@ async function run() {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     name: "Acme Corporation",
     email: "contact@acme.com",
+    billingEmail: "finance@acme.com",
     country: "United States",
     addressLine1: "123 Main Street",
     addressLine2: "Suite 400",
@@ -141,7 +138,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -167,6 +163,7 @@ async function run() {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     name: "Acme Corporation",
     email: "contact@acme.com",
+    billingEmail: "finance@acme.com",
     country: "United States",
     addressLine1: "123 Main Street",
     addressLine2: "Suite 400",
@@ -190,15 +187,12 @@ async function run() {
       },
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("customersCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -241,7 +235,6 @@ async function run() {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -266,15 +259,12 @@ async function run() {
   const res = await customersGet(midday, {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("customersGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -319,6 +309,7 @@ async function run() {
       id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
       name: "Acme Corporation",
       email: "contact@acme.com",
+      billingEmail: "finance@acme.com",
       country: "United States",
       addressLine1: "123 Main Street",
       addressLine2: "Suite 400",
@@ -344,7 +335,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -372,6 +362,7 @@ async function run() {
       id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
       name: "Acme Corporation",
       email: "contact@acme.com",
+      billingEmail: "finance@acme.com",
       country: "United States",
       addressLine1: "123 Main Street",
       addressLine2: "Suite 400",
@@ -396,15 +387,12 @@ async function run() {
       ],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("customersUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -447,7 +435,6 @@ async function run() {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -472,15 +459,12 @@ async function run() {
   const res = await customersDelete(midday, {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("customersDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

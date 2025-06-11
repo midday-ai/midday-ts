@@ -53,7 +53,6 @@ async function run() {
     type: "expense",
   });
 
-  // Handle the result
   console.log(result);
 }
 

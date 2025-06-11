@@ -25,7 +25,6 @@ async function run() {
     id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -50,15 +49,12 @@ async function run() {
   const res = await trackerDelete(midday, {
     id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("trackerDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

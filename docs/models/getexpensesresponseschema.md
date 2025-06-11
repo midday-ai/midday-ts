@@ -14,15 +14,7 @@ let value: GetExpensesResponseSchema = {
     type: "expense",
     currency: "SEK",
   },
-  result: [
-    {
-      date: "2024-01-01 00:00:00",
-      value: 637898.68,
-      currency: "SEK",
-      recurring: 9467.76,
-      total: 647366.44,
-    },
-  ],
+  result: [],
 };
 ```
 

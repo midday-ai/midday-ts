@@ -20,8 +20,12 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
   sdkHooksConfigAccess: true
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 typescript:
-  version: 0.2.2
+  version: 0.2.3
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -30,6 +34,7 @@ typescript:
   author: Speakeasy
   baseErrorName: MiddayError
   clientServerStatusCodesAsErrors: true
+  constFieldsAlwaysOptional: true
   defaultErrorName: APIError
   enableCustomCodeRegions: false
   enableMCPServer: true

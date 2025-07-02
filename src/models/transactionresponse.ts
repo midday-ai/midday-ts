@@ -24,6 +24,14 @@ export type Category = {
    */
   color: string;
   /**
+   * Tax rate of the category
+   */
+  taxRate: number | null;
+  /**
+   * Tax type of the category
+   */
+  taxType: string | null;
+  /**
    * URL-friendly slug of the category
    */
   slug: string;
@@ -117,6 +125,18 @@ export type TransactionResponse = {
    */
   amount: number;
   /**
+   * Tax amount of the transaction
+   */
+  taxAmount: number | null;
+  /**
+   * Tax rate of the transaction
+   */
+  taxRate: number | null;
+  /**
+   * Tax type of the transaction
+   */
+  taxType: string | null;
+  /**
    * Currency code of the transaction in ISO 4217 format
    */
   currency: string;
@@ -183,6 +203,8 @@ export const Category$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   color: z.string(),
+  taxRate: z.nullable(z.number()),
+  taxType: z.nullable(z.string()),
   slug: z.string(),
 });
 
@@ -191,6 +213,8 @@ export type Category$Outbound = {
   id: string;
   name: string;
   color: string;
+  taxRate: number | null;
+  taxType: string | null;
   slug: string;
 };
 
@@ -203,6 +227,8 @@ export const Category$outboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   color: z.string(),
+  taxRate: z.nullable(z.number()),
+  taxType: z.nullable(z.string()),
   slug: z.string(),
 });
 
@@ -473,6 +499,9 @@ export const TransactionResponse$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   amount: z.number(),
+  taxAmount: z.nullable(z.number()),
+  taxRate: z.nullable(z.number()),
+  taxType: z.nullable(z.string()),
   currency: z.string(),
   counterpartyName: z.nullable(z.string()),
   date: z.string(),
@@ -494,6 +523,9 @@ export type TransactionResponse$Outbound = {
   id: string;
   name: string;
   amount: number;
+  taxAmount: number | null;
+  taxRate: number | null;
+  taxType: string | null;
   currency: string;
   counterpartyName: string | null;
   date: string;
@@ -519,6 +551,9 @@ export const TransactionResponse$outboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   amount: z.number(),
+  taxAmount: z.nullable(z.number()),
+  taxRate: z.nullable(z.number()),
+  taxType: z.nullable(z.string()),
   currency: z.string(),
   counterpartyName: z.nullable(z.string()),
   date: z.string(),

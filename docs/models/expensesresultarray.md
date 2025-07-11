@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ExpensesResultArray } from "@midday-ai/sdk";
+import { ExpensesResultArray } from "@midday-ai/sdk/models";
 
 let value: ExpensesResultArray = {
   date: "2024-01-01 00:00:00",

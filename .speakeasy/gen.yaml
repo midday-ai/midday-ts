@@ -25,7 +25,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.2.3
+  version: 0.3.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -43,6 +43,7 @@ typescript:
   envVarPrefix: MIDDAY
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
+  generateExamples: true
   imports:
     option: openapi
     paths:

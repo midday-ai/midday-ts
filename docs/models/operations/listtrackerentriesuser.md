@@ -1,13 +1,13 @@
-# User
+# ListTrackerEntriesUser
 
 User information for the person who created this tracker entry
 
 ## Example Usage
 
 ```typescript
-import { User } from "@midday-ai/sdk/models/operations";
+import { ListTrackerEntriesUser } from "@midday-ai/sdk/models/operations";
 
-let value: User = {
+let value: ListTrackerEntriesUser = {
   id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   fullName: "Jane Doe",
   avatarUrl: "https://cdn.midday.ai/avatar.jpg",

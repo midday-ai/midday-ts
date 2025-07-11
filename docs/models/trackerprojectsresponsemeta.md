@@ -5,7 +5,7 @@ Pagination metadata for the projects response
 ## Example Usage
 
 ```typescript
-import { TrackerProjectsResponseMeta } from "@midday-ai/sdk";
+import { TrackerProjectsResponseMeta } from "@midday-ai/sdk/models";
 
 let value: TrackerProjectsResponseMeta = {
   hasNextPage: true,

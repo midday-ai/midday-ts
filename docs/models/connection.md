@@ -5,7 +5,7 @@ Bank connection information associated with the account
 ## Example Usage
 
 ```typescript
-import { Connection } from "@midday-ai/sdk";
+import { Connection } from "@midday-ai/sdk/models";
 
 let value: Connection = {
   id: "a43dc3a5-6925-4d91-ac9c-4c1a34bdb388",

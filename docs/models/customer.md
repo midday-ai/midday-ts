@@ -5,7 +5,7 @@ Customer information associated with the project
 ## Example Usage
 
 ```typescript
-import { Customer } from "@midday-ai/sdk";
+import { Customer } from "@midday-ai/sdk/models";
 
 let value: Customer = {
   id: "a1b2c3d4-e5f6-7890-abcd-1234567890ef",

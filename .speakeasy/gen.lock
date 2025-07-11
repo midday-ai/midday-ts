@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: c898661b94ceb802c0d738d734350d25
+  docChecksum: a9e13c08561d7559f300b281d3506985
   docVersion: 0.0.1
-  speakeasyVersion: 1.574.1
-  generationVersion: 2.647.2
-  releaseVersion: 0.2.3
-  configChecksum: 3eb5bcf78cc1522e286bbb048bc473c9
+  speakeasyVersion: 1.581.0
+  generationVersion: 2.656.5
+  releaseVersion: 0.3.0
+  configChecksum: 38f03cb2ab9114ed9485f449588def6e
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true
@@ -14,13 +14,13 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.11
+    core: 3.21.14
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
     enums: 2.82.1
     envVarSecurityUsage: 0.1.2
-    examples: 2.81.5
+    examples: 2.82.1
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
@@ -60,6 +60,12 @@ generatedFiles:
   - docs/models/operations/createcustomerresponse.md
   - docs/models/operations/createcustomertagrequest.md
   - docs/models/operations/createcustomertagresponse.md
+  - docs/models/operations/createtrackerentrycustomer.md
+  - docs/models/operations/createtrackerentrydata.md
+  - docs/models/operations/createtrackerentryproject.md
+  - docs/models/operations/createtrackerentryrequest.md
+  - docs/models/operations/createtrackerentryresponse.md
+  - docs/models/operations/createtrackerentryuser.md
   - docs/models/operations/createtrackerprojectrequest.md
   - docs/models/operations/createtrackerprojectstatus.md
   - docs/models/operations/createtrackerprojecttag.md
@@ -153,15 +159,16 @@ generatedFiles:
   - docs/models/operations/listteamsresponse.md
   - docs/models/operations/listtrackerentriescustomer.md
   - docs/models/operations/listtrackerentriesmeta.md
+  - docs/models/operations/listtrackerentriesproject.md
   - docs/models/operations/listtrackerentriesrequest.md
   - docs/models/operations/listtrackerentriesresponse.md
+  - docs/models/operations/listtrackerentriesuser.md
   - docs/models/operations/listtrackerprojectsrequest.md
   - docs/models/operations/listtrackerprojectsstatus.md
   - docs/models/operations/listtransactionsmeta.md
   - docs/models/operations/listtransactionsrequest.md
   - docs/models/operations/listtransactionsresponse.md
   - docs/models/operations/listtransactionstype.md
-  - docs/models/operations/project.md
   - docs/models/operations/requestbody.md
   - docs/models/operations/result.md
   - docs/models/operations/role.md
@@ -191,6 +198,13 @@ generatedFiles:
   - docs/models/operations/updateteambyidrequest.md
   - docs/models/operations/updateteambyidrequestbody.md
   - docs/models/operations/updateteambyidresponse.md
+  - docs/models/operations/updatetrackerentrycustomer.md
+  - docs/models/operations/updatetrackerentrydata.md
+  - docs/models/operations/updatetrackerentryproject.md
+  - docs/models/operations/updatetrackerentryrequest.md
+  - docs/models/operations/updatetrackerentryrequestbody.md
+  - docs/models/operations/updatetrackerentryresponse.md
+  - docs/models/operations/updatetrackerentryuser.md
   - docs/models/operations/updatetrackerprojectrequest.md
   - docs/models/operations/updatetrackerprojectrequestbody.md
   - docs/models/operations/updatetrackerprojectstatus.md
@@ -204,7 +218,6 @@ generatedFiles:
   - docs/models/operations/updatetransactionsresponse.md
   - docs/models/operations/updatetransactionsstatus.md
   - docs/models/operations/updatetransactionstatus.md
-  - docs/models/operations/user.md
   - docs/models/profitcurrent.md
   - docs/models/profitmeta.md
   - docs/models/profitmetatype.md
@@ -244,12 +257,15 @@ generatedFiles:
   - docs/sdks/search/README.md
   - docs/sdks/tags/README.md
   - docs/sdks/teams/README.md
-  - docs/sdks/tracker/README.md
   - docs/sdks/trackerentries/README.md
   - docs/sdks/trackerprojects/README.md
   - docs/sdks/transactions/README.md
   - docs/sdks/users/README.md
   - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/package.json
+  - examples/transactionsList.example.ts
   - jsr.json
   - package.json
   - src/core.ts
@@ -291,8 +307,10 @@ generatedFiles:
   - src/funcs/teamsList.ts
   - src/funcs/teamsMembers.ts
   - src/funcs/teamsUpdate.ts
-  - src/funcs/trackerDelete.ts
+  - src/funcs/trackerEntriesCreate.ts
+  - src/funcs/trackerEntriesDelete.ts
   - src/funcs/trackerEntriesList.ts
+  - src/funcs/trackerEntriesUpdate.ts
   - src/funcs/trackerProjectsCreate.ts
   - src/funcs/trackerProjectsDelete.ts
   - src/funcs/trackerProjectsGet.ts
@@ -379,8 +397,10 @@ generatedFiles:
   - src/mcp-server/tools/teamsList.ts
   - src/mcp-server/tools/teamsMembers.ts
   - src/mcp-server/tools/teamsUpdate.ts
-  - src/mcp-server/tools/trackerDelete.ts
+  - src/mcp-server/tools/trackerEntriesCreate.ts
+  - src/mcp-server/tools/trackerEntriesDelete.ts
   - src/mcp-server/tools/trackerEntriesList.ts
+  - src/mcp-server/tools/trackerEntriesUpdate.ts
   - src/mcp-server/tools/trackerProjectsCreate.ts
   - src/mcp-server/tools/trackerProjectsDelete.ts
   - src/mcp-server/tools/trackerProjectsGet.ts
@@ -411,6 +431,7 @@ generatedFiles:
   - src/models/index.ts
   - src/models/operations/createbankaccount.ts
   - src/models/operations/createcustomer.ts
+  - src/models/operations/createtrackerentry.ts
   - src/models/operations/createtrackerproject.ts
   - src/models/operations/createtransaction.ts
   - src/models/operations/createtransactions.ts
@@ -460,6 +481,7 @@ generatedFiles:
   - src/models/operations/updateinboxitem.ts
   - src/models/operations/updatetag.ts
   - src/models/operations/updateteambyid.ts
+  - src/models/operations/updatetrackerentry.ts
   - src/models/operations/updatetrackerproject.ts
   - src/models/operations/updatetransaction.ts
   - src/models/operations/updatetransactions.ts
@@ -493,7 +515,6 @@ generatedFiles:
   - src/sdk/search.ts
   - src/sdk/tags.ts
   - src/sdk/teams.ts
-  - src/sdk/tracker.ts
   - src/sdk/trackerentries.ts
   - src/sdk/trackerprojects.ts
   - src/sdk/transactions.ts
@@ -1451,5 +1472,22 @@ examples:
       responses:
         "200":
           application/json: {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2"}
+  createTrackerEntry:
+    speakeasy-default-create-tracker-entry:
+      requestBody:
+        application/json: {"start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "dates": ["2024-04-15", "2024-04-16"], "assignedId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "projectId": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "description": "Worked on implementing user authentication feature", "duration": 28800}
+      responses:
+        "201":
+          application/json: {"data": [{"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-04-15T09:00:00.000Z", "duration": 28800, "start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "teamId": "team-1234", "description": "Worked on implementing user authentication feature", "rate": 75, "currency": "USD", "billed": false, "date": "2024-04-15", "user": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "fullName": "Jane Doe", "avatarUrl": "https://cdn.midday.ai/avatar.jpg"}, "project": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-03-01T10:00:00.000Z", "rate": 75, "currency": "USD", "status": "in_progress", "description": "Complete website redesign with modern UI/UX", "name": "Website Redesign Project", "billable": true, "estimate": 120, "customer": {"id": "customer-1234", "name": "Acme Corporation"}}}]}
+  updateTrackerEntry:
+    speakeasy-default-update-tracker-entry:
+      parameters:
+        path:
+          id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2"
+      requestBody:
+        application/json: {"start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "dates": ["2024-04-15", "2024-04-16"], "assignedId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "projectId": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "description": "Worked on implementing user authentication feature", "duration": 28800}
+      responses:
+        "200":
+          application/json: {"data": [{"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-04-15T09:00:00.000Z", "duration": 28800, "start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "teamId": "team-1234", "description": "Worked on implementing user authentication feature", "rate": 75, "currency": "USD", "billed": false, "date": "2024-04-15", "user": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "fullName": "Jane Doe", "avatarUrl": "https://cdn.midday.ai/avatar.jpg"}, "project": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-03-01T10:00:00.000Z", "rate": 75, "currency": "USD", "status": "in_progress", "description": "Complete website redesign with modern UI/UX", "name": "Website Redesign Project", "billable": true, "estimate": 120, "customer": {"id": "customer-1234", "name": "Acme Corporation"}}}]}
 examplesVersion: 1.0.2
 generatedTests: {}

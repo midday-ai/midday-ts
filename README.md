@@ -374,13 +374,12 @@ run();
 * [update](docs/sdks/teams/README.md#update) - Update a team
 * [members](docs/sdks/teams/README.md#members) - List all team members
 
-### [tracker](docs/sdks/tracker/README.md)
-
-* [delete](docs/sdks/tracker/README.md#delete) - Delete a tracker entry
-
 ### [trackerEntries](docs/sdks/trackerentries/README.md)
 
 * [list](docs/sdks/trackerentries/README.md#list) - List all tracker entries
+* [create](docs/sdks/trackerentries/README.md#create) - Create a tracker entry
+* [update](docs/sdks/trackerentries/README.md#update) - Update a tracker entry
+* [delete](docs/sdks/trackerentries/README.md#delete) - Delete a tracker entry
 
 ### [trackerProjects](docs/sdks/trackerprojects/README.md)
 
@@ -462,8 +461,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`teamsList`](docs/sdks/teams/README.md#list) - List all teams
 - [`teamsMembers`](docs/sdks/teams/README.md#members) - List all team members
 - [`teamsUpdate`](docs/sdks/teams/README.md#update) - Update a team
-- [`trackerDelete`](docs/sdks/tracker/README.md#delete) - Delete a tracker entry
+- [`trackerEntriesCreate`](docs/sdks/trackerentries/README.md#create) - Create a tracker entry
+- [`trackerEntriesDelete`](docs/sdks/trackerentries/README.md#delete) - Delete a tracker entry
 - [`trackerEntriesList`](docs/sdks/trackerentries/README.md#list) - List all tracker entries
+- [`trackerEntriesUpdate`](docs/sdks/trackerentries/README.md#update) - Update a tracker entry
 - [`trackerProjectsCreate`](docs/sdks/trackerprojects/README.md#create) - Create a tracker project
 - [`trackerProjectsDelete`](docs/sdks/trackerprojects/README.md#delete) - Delete a tracker project
 - [`trackerProjectsGet`](docs/sdks/trackerprojects/README.md#get) - Retrieve a tracker project

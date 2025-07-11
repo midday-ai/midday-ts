@@ -4,6 +4,7 @@
 
 export * from "./createbankaccount.js";
 export * from "./createcustomer.js";
+export * from "./createtrackerentry.js";
 export * from "./createtrackerproject.js";
 export * from "./createtransaction.js";
 export * from "./createtransactions.js";
@@ -52,6 +53,7 @@ export * from "./updatecustomer.js";
 export * from "./updateinboxitem.js";
 export * from "./updatetag.js";
 export * from "./updateteambyid.js";
+export * from "./updatetrackerentry.js";
 export * from "./updatetrackerproject.js";
 export * from "./updatetransaction.js";
 export * from "./updatetransactions.js";

@@ -12,7 +12,6 @@ import { Metrics } from "./metrics.js";
 import { Search } from "./search.js";
 import { Tags } from "./tags.js";
 import { Teams } from "./teams.js";
-import { Tracker } from "./tracker.js";
 import { TrackerEntries } from "./trackerentries.js";
 import { TrackerProjects } from "./trackerprojects.js";
 import { Transactions } from "./transactions.js";
@@ -82,10 +81,5 @@ export class Midday extends ClientSDK {
   private _trackerEntries?: TrackerEntries;
   get trackerEntries(): TrackerEntries {
     return (this._trackerEntries ??= new TrackerEntries(this._options));
-  }
-
-  private _tracker?: Tracker;
-  get tracker(): Tracker {
-    return (this._tracker ??= new Tracker(this._options));
   }
 }

@@ -7,6 +7,7 @@ import { UpdateInboxItemRequest } from "@midday-ai/sdk/models/operations";
 
 let value: UpdateInboxItemRequest = {
   id: "<id>",
+  requestBody: {},
 };
 ```
 

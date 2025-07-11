@@ -38,7 +38,7 @@ export type ListTrackerEntriesMeta = {
 /**
  * User information for the person who created this tracker entry
  */
-export type User = {
+export type ListTrackerEntriesUser = {
   /**
    * Unique identifier of the user
    */
@@ -70,7 +70,7 @@ export type ListTrackerEntriesCustomer = {
 /**
  * Project information associated with this tracker entry
  */
-export type Project = {
+export type ListTrackerEntriesProject = {
   /**
    * Unique identifier of the project
    */
@@ -82,11 +82,11 @@ export type Project = {
   /**
    * Default hourly rate for the project
    */
-  rate: number;
+  rate: number | null;
   /**
    * Currency code for the project rate in ISO 4217 format
    */
-  currency: string;
+  currency: string | null;
   /**
    * Current status of the project
    */
@@ -94,7 +94,7 @@ export type Project = {
   /**
    * Description of the project
    */
-  description: string;
+  description: string | null;
   /**
    * Name of the project
    */
@@ -102,15 +102,15 @@ export type Project = {
   /**
    * Whether the project is billable to the customer
    */
-  billable: boolean;
+  billable: boolean | null;
   /**
    * Estimated total hours for the project
    */
-  estimate: number;
+  estimate: number | null;
   /**
    * Customer information associated with the project
    */
-  customer: ListTrackerEntriesCustomer;
+  customer: ListTrackerEntriesCustomer | null;
 };
 
 export type Result = {
@@ -161,11 +161,11 @@ export type Result = {
   /**
    * User information for the person who created this tracker entry
    */
-  user: User;
+  user: ListTrackerEntriesUser;
   /**
    * Project information associated with this tracker entry
    */
-  project: Project;
+  project: ListTrackerEntriesProject;
 };
 
 /**
@@ -306,52 +306,62 @@ export function listTrackerEntriesMetaFromJSON(
 }
 
 /** @internal */
-export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    fullName: z.string(),
-    avatarUrl: z.string(),
-  });
+export const ListTrackerEntriesUser$inboundSchema: z.ZodType<
+  ListTrackerEntriesUser,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  fullName: z.string(),
+  avatarUrl: z.string(),
+});
 
 /** @internal */
-export type User$Outbound = {
+export type ListTrackerEntriesUser$Outbound = {
   id: string;
   fullName: string;
   avatarUrl: string;
 };
 
 /** @internal */
-export const User$outboundSchema: z.ZodType<User$Outbound, z.ZodTypeDef, User> =
-  z.object({
-    id: z.string(),
-    fullName: z.string(),
-    avatarUrl: z.string(),
-  });
+export const ListTrackerEntriesUser$outboundSchema: z.ZodType<
+  ListTrackerEntriesUser$Outbound,
+  z.ZodTypeDef,
+  ListTrackerEntriesUser
+> = z.object({
+  id: z.string(),
+  fullName: z.string(),
+  avatarUrl: z.string(),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace User$ {
-  /** @deprecated use `User$inboundSchema` instead. */
-  export const inboundSchema = User$inboundSchema;
-  /** @deprecated use `User$outboundSchema` instead. */
-  export const outboundSchema = User$outboundSchema;
-  /** @deprecated use `User$Outbound` instead. */
-  export type Outbound = User$Outbound;
+export namespace ListTrackerEntriesUser$ {
+  /** @deprecated use `ListTrackerEntriesUser$inboundSchema` instead. */
+  export const inboundSchema = ListTrackerEntriesUser$inboundSchema;
+  /** @deprecated use `ListTrackerEntriesUser$outboundSchema` instead. */
+  export const outboundSchema = ListTrackerEntriesUser$outboundSchema;
+  /** @deprecated use `ListTrackerEntriesUser$Outbound` instead. */
+  export type Outbound = ListTrackerEntriesUser$Outbound;
 }
 
-export function userToJSON(user: User): string {
-  return JSON.stringify(User$outboundSchema.parse(user));
+export function listTrackerEntriesUserToJSON(
+  listTrackerEntriesUser: ListTrackerEntriesUser,
+): string {
+  return JSON.stringify(
+    ListTrackerEntriesUser$outboundSchema.parse(listTrackerEntriesUser),
+  );
 }
 
-export function userFromJSON(
+export function listTrackerEntriesUserFromJSON(
   jsonString: string,
-): SafeParseResult<User, SDKValidationError> {
+): SafeParseResult<ListTrackerEntriesUser, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => User$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'User' from JSON`,
+    (x) => ListTrackerEntriesUser$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListTrackerEntriesUser' from JSON`,
   );
 }
 
@@ -413,76 +423,83 @@ export function listTrackerEntriesCustomerFromJSON(
 }
 
 /** @internal */
-export const Project$inboundSchema: z.ZodType<Project, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    createdAt: z.string(),
-    rate: z.number(),
-    currency: z.string(),
-    status: z.string(),
-    description: z.string(),
-    name: z.string(),
-    billable: z.boolean(),
-    estimate: z.number(),
-    customer: z.lazy(() => ListTrackerEntriesCustomer$inboundSchema),
-  });
-
-/** @internal */
-export type Project$Outbound = {
-  id: string;
-  createdAt: string;
-  rate: number;
-  currency: string;
-  status: string;
-  description: string;
-  name: string;
-  billable: boolean;
-  estimate: number;
-  customer: ListTrackerEntriesCustomer$Outbound;
-};
-
-/** @internal */
-export const Project$outboundSchema: z.ZodType<
-  Project$Outbound,
+export const ListTrackerEntriesProject$inboundSchema: z.ZodType<
+  ListTrackerEntriesProject,
   z.ZodTypeDef,
-  Project
+  unknown
 > = z.object({
   id: z.string(),
   createdAt: z.string(),
-  rate: z.number(),
-  currency: z.string(),
+  rate: z.nullable(z.number()),
+  currency: z.nullable(z.string()),
   status: z.string(),
-  description: z.string(),
+  description: z.nullable(z.string()),
   name: z.string(),
-  billable: z.boolean(),
-  estimate: z.number(),
-  customer: z.lazy(() => ListTrackerEntriesCustomer$outboundSchema),
+  billable: z.nullable(z.boolean()),
+  estimate: z.nullable(z.number()),
+  customer: z.nullable(z.lazy(() => ListTrackerEntriesCustomer$inboundSchema)),
+});
+
+/** @internal */
+export type ListTrackerEntriesProject$Outbound = {
+  id: string;
+  createdAt: string;
+  rate: number | null;
+  currency: string | null;
+  status: string;
+  description: string | null;
+  name: string;
+  billable: boolean | null;
+  estimate: number | null;
+  customer: ListTrackerEntriesCustomer$Outbound | null;
+};
+
+/** @internal */
+export const ListTrackerEntriesProject$outboundSchema: z.ZodType<
+  ListTrackerEntriesProject$Outbound,
+  z.ZodTypeDef,
+  ListTrackerEntriesProject
+> = z.object({
+  id: z.string(),
+  createdAt: z.string(),
+  rate: z.nullable(z.number()),
+  currency: z.nullable(z.string()),
+  status: z.string(),
+  description: z.nullable(z.string()),
+  name: z.string(),
+  billable: z.nullable(z.boolean()),
+  estimate: z.nullable(z.number()),
+  customer: z.nullable(z.lazy(() => ListTrackerEntriesCustomer$outboundSchema)),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Project$ {
-  /** @deprecated use `Project$inboundSchema` instead. */
-  export const inboundSchema = Project$inboundSchema;
-  /** @deprecated use `Project$outboundSchema` instead. */
-  export const outboundSchema = Project$outboundSchema;
-  /** @deprecated use `Project$Outbound` instead. */
-  export type Outbound = Project$Outbound;
+export namespace ListTrackerEntriesProject$ {
+  /** @deprecated use `ListTrackerEntriesProject$inboundSchema` instead. */
+  export const inboundSchema = ListTrackerEntriesProject$inboundSchema;
+  /** @deprecated use `ListTrackerEntriesProject$outboundSchema` instead. */
+  export const outboundSchema = ListTrackerEntriesProject$outboundSchema;
+  /** @deprecated use `ListTrackerEntriesProject$Outbound` instead. */
+  export type Outbound = ListTrackerEntriesProject$Outbound;
 }
 
-export function projectToJSON(project: Project): string {
-  return JSON.stringify(Project$outboundSchema.parse(project));
+export function listTrackerEntriesProjectToJSON(
+  listTrackerEntriesProject: ListTrackerEntriesProject,
+): string {
+  return JSON.stringify(
+    ListTrackerEntriesProject$outboundSchema.parse(listTrackerEntriesProject),
+  );
 }
 
-export function projectFromJSON(
+export function listTrackerEntriesProjectFromJSON(
   jsonString: string,
-): SafeParseResult<Project, SDKValidationError> {
+): SafeParseResult<ListTrackerEntriesProject, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Project$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Project' from JSON`,
+    (x) => ListTrackerEntriesProject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListTrackerEntriesProject' from JSON`,
   );
 }
 
@@ -500,8 +517,8 @@ export const Result$inboundSchema: z.ZodType<Result, z.ZodTypeDef, unknown> = z
     currency: z.nullable(z.string()),
     billed: z.boolean(),
     date: z.string(),
-    user: z.lazy(() => User$inboundSchema),
-    project: z.lazy(() => Project$inboundSchema),
+    user: z.lazy(() => ListTrackerEntriesUser$inboundSchema),
+    project: z.lazy(() => ListTrackerEntriesProject$inboundSchema),
   });
 
 /** @internal */
@@ -517,8 +534,8 @@ export type Result$Outbound = {
   currency: string | null;
   billed: boolean;
   date: string;
-  user: User$Outbound;
-  project: Project$Outbound;
+  user: ListTrackerEntriesUser$Outbound;
+  project: ListTrackerEntriesProject$Outbound;
 };
 
 /** @internal */
@@ -538,8 +555,8 @@ export const Result$outboundSchema: z.ZodType<
   currency: z.nullable(z.string()),
   billed: z.boolean(),
   date: z.string(),
-  user: z.lazy(() => User$outboundSchema),
-  project: z.lazy(() => Project$outboundSchema),
+  user: z.lazy(() => ListTrackerEntriesUser$outboundSchema),
+  project: z.lazy(() => ListTrackerEntriesProject$outboundSchema),
 });
 
 /**

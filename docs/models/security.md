@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Security } from "@midday-ai/sdk";
+import { Security } from "@midday-ai/sdk/models";
 
 let value: Security = {
   token: "MIDDAY_API_KEY",

@@ -5,7 +5,7 @@ Category information assigned to the transaction for organization
 ## Example Usage
 
 ```typescript
-import { Category } from "@midday-ai/sdk";
+import { Category } from "@midday-ai/sdk/models";
 
 let value: Category = {
   id: "office-supplies",

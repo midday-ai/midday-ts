@@ -1,13 +1,13 @@
-# Project
+# ListTrackerEntriesProject
 
 Project information associated with this tracker entry
 
 ## Example Usage
 
 ```typescript
-import { Project } from "@midday-ai/sdk/models/operations";
+import { ListTrackerEntriesProject } from "@midday-ai/sdk/models/operations";
 
-let value: Project = {
+let value: ListTrackerEntriesProject = {
   id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",
   createdAt: "2024-03-01T10:00:00.000Z",
   rate: 75,

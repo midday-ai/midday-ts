@@ -51,8 +51,10 @@ import { tool$teamsGet } from "./tools/teamsGet.js";
 import { tool$teamsList } from "./tools/teamsList.js";
 import { tool$teamsMembers } from "./tools/teamsMembers.js";
 import { tool$teamsUpdate } from "./tools/teamsUpdate.js";
-import { tool$trackerDelete } from "./tools/trackerDelete.js";
+import { tool$trackerEntriesCreate } from "./tools/trackerEntriesCreate.js";
+import { tool$trackerEntriesDelete } from "./tools/trackerEntriesDelete.js";
 import { tool$trackerEntriesList } from "./tools/trackerEntriesList.js";
+import { tool$trackerEntriesUpdate } from "./tools/trackerEntriesUpdate.js";
 import { tool$trackerProjectsCreate } from "./tools/trackerProjectsCreate.js";
 import { tool$trackerProjectsDelete } from "./tools/trackerProjectsDelete.js";
 import { tool$trackerProjectsGet } from "./tools/trackerProjectsGet.js";
@@ -79,7 +81,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.2.3",
+    version: "0.3.0",
   });
 
   const client = new MiddayCore({
@@ -163,7 +165,9 @@ export function createMCPServer(deps: {
   tool(tool$trackerProjectsGet);
   tool(tool$trackerProjectsDelete);
   tool(tool$trackerEntriesList);
-  tool(tool$trackerDelete);
+  tool(tool$trackerEntriesCreate);
+  tool(tool$trackerEntriesUpdate);
+  tool(tool$trackerEntriesDelete);
 
   return server;
 }

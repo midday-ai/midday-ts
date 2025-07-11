@@ -5,7 +5,7 @@ Bank account information associated with the transaction
 ## Example Usage
 
 ```typescript
-import { Account } from "@midday-ai/sdk";
+import { Account } from "@midday-ai/sdk/models";
 
 let value: Account = {
   id: "a43dc3a5-6925-4d91-ac9c-4c1a34bdb388",

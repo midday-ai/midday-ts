@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { TagsResponse } from "@midday-ai/sdk";
+import { TagsResponse } from "@midday-ai/sdk/models";
 
 let value: TagsResponse = {
   data: [

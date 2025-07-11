@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { RevenueMeta } from "@midday-ai/sdk";
+import { RevenueMeta } from "@midday-ai/sdk/models";
 
 let value: RevenueMeta = {
   type: "revenue",

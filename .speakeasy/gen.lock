@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: a9e13c08561d7559f300b281d3506985
+  docChecksum: 42337b26a64d24021958fc5893bfc6ec
   docVersion: 0.0.1
-  speakeasyVersion: 1.581.0
-  generationVersion: 2.656.5
-  releaseVersion: 0.3.0
-  configChecksum: 38f03cb2ab9114ed9485f449588def6e
+  speakeasyVersion: 1.587.1
+  generationVersion: 2.662.0
+  releaseVersion: 0.3.1
+  configChecksum: 924dca9a755093c1ac3721db7fe3f94c
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.14
+    core: 3.21.15
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -60,6 +60,12 @@ generatedFiles:
   - docs/models/operations/createcustomerresponse.md
   - docs/models/operations/createcustomertagrequest.md
   - docs/models/operations/createcustomertagresponse.md
+  - docs/models/operations/createtrackerentriesbulkcustomer.md
+  - docs/models/operations/createtrackerentriesbulkdata.md
+  - docs/models/operations/createtrackerentriesbulkproject.md
+  - docs/models/operations/createtrackerentriesbulkrequest.md
+  - docs/models/operations/createtrackerentriesbulkresponse.md
+  - docs/models/operations/createtrackerentriesbulkuser.md
   - docs/models/operations/createtrackerentrycustomer.md
   - docs/models/operations/createtrackerentrydata.md
   - docs/models/operations/createtrackerentryproject.md
@@ -72,6 +78,7 @@ generatedFiles:
   - docs/models/operations/createtransactionattachment.md
   - docs/models/operations/createtransactionrequest.md
   - docs/models/operations/createtransactionsattachment.md
+  - docs/models/operations/currententry.md
   - docs/models/operations/dateformatrequest.md
   - docs/models/operations/deletebankaccountrequest.md
   - docs/models/operations/deletebankaccountresponse.md
@@ -92,9 +99,16 @@ generatedFiles:
   - docs/models/operations/deletetransactionrequest.md
   - docs/models/operations/deletetransactionresponse.md
   - docs/models/operations/deletetransactionsresponse.md
+  - docs/models/operations/entry.md
   - docs/models/operations/getbankaccountbyidrequest.md
   - docs/models/operations/getbankaccountbyidresponse.md
   - docs/models/operations/getburnratemetricsrequest.md
+  - docs/models/operations/getcurrenttimercustomer.md
+  - docs/models/operations/getcurrenttimerdata.md
+  - docs/models/operations/getcurrenttimerproject.md
+  - docs/models/operations/getcurrenttimerrequest.md
+  - docs/models/operations/getcurrenttimerresponse.md
+  - docs/models/operations/getcurrenttimeruser.md
   - docs/models/operations/getcurrentuserdateformat.md
   - docs/models/operations/getcurrentuserresponse.md
   - docs/models/operations/getcurrentuserteam.md
@@ -124,6 +138,9 @@ generatedFiles:
   - docs/models/operations/getteambyidplan.md
   - docs/models/operations/getteambyidrequest.md
   - docs/models/operations/getteambyidresponse.md
+  - docs/models/operations/gettimerstatusdata.md
+  - docs/models/operations/gettimerstatusrequest.md
+  - docs/models/operations/gettimerstatusresponse.md
   - docs/models/operations/gettrackerprojectbyidrequest.md
   - docs/models/operations/gettransactionbyidrequest.md
   - docs/models/operations/listbankaccountsdata.md
@@ -174,6 +191,19 @@ generatedFiles:
   - docs/models/operations/role.md
   - docs/models/operations/searchrequest.md
   - docs/models/operations/searchresponse.md
+  - docs/models/operations/starttimercustomer.md
+  - docs/models/operations/starttimerdata.md
+  - docs/models/operations/starttimerproject.md
+  - docs/models/operations/starttimerrequest.md
+  - docs/models/operations/starttimerresponse.md
+  - docs/models/operations/starttimeruser.md
+  - docs/models/operations/stoptimercustomer.md
+  - docs/models/operations/stoptimerdata.md
+  - docs/models/operations/stoptimerproject.md
+  - docs/models/operations/stoptimerrequest.md
+  - docs/models/operations/stoptimerresponse.md
+  - docs/models/operations/stoptimeruser.md
+  - docs/models/operations/trackerproject.md
   - docs/models/operations/updatebankaccountrequest.md
   - docs/models/operations/updatebankaccountrequestbody.md
   - docs/models/operations/updatebankaccountresponse.md
@@ -259,6 +289,7 @@ generatedFiles:
   - docs/sdks/teams/README.md
   - docs/sdks/trackerentries/README.md
   - docs/sdks/trackerprojects/README.md
+  - docs/sdks/trackertimer/README.md
   - docs/sdks/transactions/README.md
   - docs/sdks/users/README.md
   - eslint.config.mjs
@@ -308,6 +339,7 @@ generatedFiles:
   - src/funcs/teamsMembers.ts
   - src/funcs/teamsUpdate.ts
   - src/funcs/trackerEntriesCreate.ts
+  - src/funcs/trackerEntriesCreateBulk.ts
   - src/funcs/trackerEntriesDelete.ts
   - src/funcs/trackerEntriesList.ts
   - src/funcs/trackerEntriesUpdate.ts
@@ -316,6 +348,10 @@ generatedFiles:
   - src/funcs/trackerProjectsGet.ts
   - src/funcs/trackerProjectsList.ts
   - src/funcs/trackerProjectsUpdate.ts
+  - src/funcs/trackerTimerGetCurrentTimer.ts
+  - src/funcs/trackerTimerGetTimerStatus.ts
+  - src/funcs/trackerTimerStartTimer.ts
+  - src/funcs/trackerTimerStopTimer.ts
   - src/funcs/transactionsCreate.ts
   - src/funcs/transactionsCreateMany.ts
   - src/funcs/transactionsDelete.ts
@@ -398,6 +434,7 @@ generatedFiles:
   - src/mcp-server/tools/teamsMembers.ts
   - src/mcp-server/tools/teamsUpdate.ts
   - src/mcp-server/tools/trackerEntriesCreate.ts
+  - src/mcp-server/tools/trackerEntriesCreateBulk.ts
   - src/mcp-server/tools/trackerEntriesDelete.ts
   - src/mcp-server/tools/trackerEntriesList.ts
   - src/mcp-server/tools/trackerEntriesUpdate.ts
@@ -406,6 +443,10 @@ generatedFiles:
   - src/mcp-server/tools/trackerProjectsGet.ts
   - src/mcp-server/tools/trackerProjectsList.ts
   - src/mcp-server/tools/trackerProjectsUpdate.ts
+  - src/mcp-server/tools/trackerTimerGetCurrentTimer.ts
+  - src/mcp-server/tools/trackerTimerGetTimerStatus.ts
+  - src/mcp-server/tools/trackerTimerStartTimer.ts
+  - src/mcp-server/tools/trackerTimerStopTimer.ts
   - src/mcp-server/tools/transactionsCreate.ts
   - src/mcp-server/tools/transactionsCreateMany.ts
   - src/mcp-server/tools/transactionsDelete.ts
@@ -431,6 +472,7 @@ generatedFiles:
   - src/models/index.ts
   - src/models/operations/createbankaccount.ts
   - src/models/operations/createcustomer.ts
+  - src/models/operations/createtrackerentriesbulk.ts
   - src/models/operations/createtrackerentry.ts
   - src/models/operations/createtrackerproject.ts
   - src/models/operations/createtransaction.ts
@@ -447,6 +489,7 @@ generatedFiles:
   - src/models/operations/deletetransactions.ts
   - src/models/operations/getbankaccountbyid.ts
   - src/models/operations/getburnratemetrics.ts
+  - src/models/operations/getcurrenttimer.ts
   - src/models/operations/getcurrentuser.ts
   - src/models/operations/getcustomerbyid.ts
   - src/models/operations/getdocumentbyid.ts
@@ -461,6 +504,7 @@ generatedFiles:
   - src/models/operations/getspendingmetrics.ts
   - src/models/operations/gettagbyid.ts
   - src/models/operations/getteambyid.ts
+  - src/models/operations/gettimerstatus.ts
   - src/models/operations/gettrackerprojectbyid.ts
   - src/models/operations/gettransactionbyid.ts
   - src/models/operations/index.ts
@@ -475,6 +519,8 @@ generatedFiles:
   - src/models/operations/listtrackerprojects.ts
   - src/models/operations/listtransactions.ts
   - src/models/operations/search.ts
+  - src/models/operations/starttimer.ts
+  - src/models/operations/stoptimer.ts
   - src/models/operations/updatebankaccount.ts
   - src/models/operations/updatecurrentuser.ts
   - src/models/operations/updatecustomer.ts
@@ -517,6 +563,7 @@ generatedFiles:
   - src/sdk/teams.ts
   - src/sdk/trackerentries.ts
   - src/sdk/trackerprojects.ts
+  - src/sdk/trackertimer.ts
   - src/sdk/transactions.ts
   - src/sdk/users.ts
   - src/types/async.ts
@@ -1100,14 +1147,14 @@ examples:
     speakeasy-default-get-current-user:
       responses:
         "200":
-          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "fullName": "Jane Doe", "email": "jane.doe@acme.com", "avatarUrl": "https://cdn.midday.ai/avatars/jane-doe.jpg", "locale": "en-US", "weekStartsOnMonday": true, "timezone": "America/New_York", "timeFormat": 24, "dateFormat": "yyyy-MM-dd", "team": {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "Acme Corporation", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "plan": "pro"}}
+          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "fullName": "Jane Doe", "email": "jane.doe@acme.com", "avatarUrl": "https://cdn.midday.ai/avatars/jane-doe.jpg", "locale": "en-US", "weekStartsOnMonday": true, "timezone": "America/New_York", "timezoneAutoSync": true, "timeFormat": 24, "dateFormat": "yyyy-MM-dd", "team": {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "Acme Corporation", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "plan": "pro"}}
   updateCurrentUser:
     speakeasy-default-update-current-user:
       requestBody:
-        application/json: {"fullName": "Jane Doe", "teamId": "team-abc123", "email": "jane.doe@acme.com", "avatarUrl": "https://cdn.midday.ai/avatars/jane-doe.jpg", "locale": "en-US", "weekStartsOnMonday": true, "timezone": "America/New_York", "timeFormat": 24, "dateFormat": "yyyy-MM-dd"}
+        application/json: {"fullName": "Jane Doe", "teamId": "team-abc123", "email": "jane.doe@acme.com", "avatarUrl": "https://cdn.midday.ai/avatars/jane-doe.jpg", "locale": "en-US", "weekStartsOnMonday": true, "timezone": "America/New_York", "timezoneAutoSync": true, "timeFormat": 24, "dateFormat": "yyyy-MM-dd"}
       responses:
         "200":
-          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "fullName": "Jane Doe", "email": "jane.doe@acme.com", "avatarUrl": "https://cdn.midday.ai/avatars/jane-doe.jpg", "locale": "en-US", "weekStartsOnMonday": true, "timezone": "America/New_York", "timeFormat": 24, "dateFormat": "yyyy-MM-dd", "team": {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "Acme Corporation", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "plan": "pro"}}
+          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "fullName": "Jane Doe", "email": "jane.doe@acme.com", "avatarUrl": "https://cdn.midday.ai/avatars/jane-doe.jpg", "locale": "en-US", "weekStartsOnMonday": true, "timezone": "America/New_York", "timezoneAutoSync": true, "timeFormat": 24, "dateFormat": "yyyy-MM-dd", "team": {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "Acme Corporation", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "plan": "pro"}}
   listCustomers:
     speakeasy-default-list-customers:
       parameters:
@@ -1489,5 +1536,42 @@ examples:
       responses:
         "200":
           application/json: {"data": [{"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-04-15T09:00:00.000Z", "duration": 28800, "start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "teamId": "team-1234", "description": "Worked on implementing user authentication feature", "rate": 75, "currency": "USD", "billed": false, "date": "2024-04-15", "user": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "fullName": "Jane Doe", "avatarUrl": "https://cdn.midday.ai/avatar.jpg"}, "project": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-03-01T10:00:00.000Z", "rate": 75, "currency": "USD", "status": "in_progress", "description": "Complete website redesign with modern UI/UX", "name": "Website Redesign Project", "billable": true, "estimate": 120, "customer": {"id": "customer-1234", "name": "Acme Corporation"}}}]}
+  createTrackerEntriesBulk:
+    speakeasy-default-create-tracker-entries-bulk:
+      requestBody:
+        application/json: {"entries": [{"start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "dates": ["2024-04-15"], "assignedId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "projectId": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "description": "Working on authentication feature", "duration": 28800}, {"start": "2024-04-16T09:00:00.000Z", "stop": "2024-04-16T17:00:00.000Z", "dates": ["2024-04-16"], "assignedId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "projectId": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "description": "Working on dashboard feature", "duration": 28800}]}
+      responses:
+        "201":
+          application/json: {"data": []}
+  startTimer:
+    speakeasy-default-start-timer:
+      requestBody:
+        application/json: {"projectId": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "assignedId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "description": "Working on implementing timer feature", "start": "2024-04-15T09:00:00.000Z", "continueFromEntry": "c4d5e6f7-2a3b-4c5d-8e9f-3a4b5c6d7e8f"}
+      responses:
+        "201":
+          application/json: {"data": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-04-15T09:00:00.000Z", "duration": -1, "start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "teamId": "team-1234", "description": "Worked on implementing user authentication feature", "rate": 75, "currency": "USD", "billed": false, "date": "2024-04-15", "user": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "fullName": "Jane Doe", "avatarUrl": "https://cdn.midday.ai/avatar.jpg"}, "project": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-03-01T10:00:00.000Z", "rate": 75, "currency": "USD", "status": "in_progress", "description": "Complete website redesign with modern UI/UX", "name": "Website Redesign Project", "billable": true, "estimate": 120, "customer": {"id": "customer-1234", "name": "Acme Corporation"}}}}
+  stopTimer:
+    speakeasy-default-stop-timer:
+      requestBody:
+        application/json: {"entryId": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "assignedId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "stop": "2024-04-15T17:00:00.000Z"}
+      responses:
+        "200":
+          application/json: {"data": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-04-15T09:00:00.000Z", "duration": -1, "start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "teamId": "team-1234", "description": "Worked on implementing user authentication feature", "rate": 75, "currency": "USD", "billed": false, "date": "2024-04-15", "user": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "fullName": "Jane Doe", "avatarUrl": "https://cdn.midday.ai/avatar.jpg"}, "project": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-03-01T10:00:00.000Z", "rate": 75, "currency": "USD", "status": "in_progress", "description": "Complete website redesign with modern UI/UX", "name": "Website Redesign Project", "billable": true, "estimate": 120, "customer": {"id": "customer-1234", "name": "Acme Corporation"}}}}
+  getCurrentTimer:
+    speakeasy-default-get-current-timer:
+      parameters:
+        query:
+          assignedId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      responses:
+        "200":
+          application/json: {"data": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-04-15T09:00:00.000Z", "duration": -1, "start": "2024-04-15T09:00:00.000Z", "stop": "2024-04-15T17:00:00.000Z", "teamId": "team-1234", "description": "Worked on implementing user authentication feature", "rate": 75, "currency": "USD", "billed": false, "date": "2024-04-15", "user": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "fullName": "Jane Doe", "avatarUrl": "https://cdn.midday.ai/avatar.jpg"}, "project": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-03-01T10:00:00.000Z", "rate": 75, "currency": "USD", "status": "in_progress", "description": "Complete website redesign with modern UI/UX", "name": "Website Redesign Project", "billable": true, "estimate": 120, "customer": {"id": "customer-1234", "name": "Acme Corporation"}}}}
+  getTimerStatus:
+    speakeasy-default-get-timer-status:
+      parameters:
+        query:
+          assignedId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      responses:
+        "200":
+          application/json: {"data": {"isRunning": true, "currentEntry": {"id": "a26a5a54-1e28-4c83-b854-2821b87e4a97", "start": "<value>", "description": "brr debit greedy lasting because offset outset generously", "projectId": "f2d14591-a762-4edc-b444-ff2f1ff3b4b8", "trackerProject": {"id": "2cabaa5d-6000-419b-b904-099b57ddc208", "name": "<value>"}}, "elapsedTime": 1800}}
 examplesVersion: 1.0.2
 generatedTests: {}

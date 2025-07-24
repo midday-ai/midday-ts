@@ -79,6 +79,10 @@ export type GetCurrentUserResponse = {
    */
   timezone: string | null;
   /**
+   * Whether to automatically sync timezone with browser timezone
+   */
+  timezoneAutoSync: boolean | null;
+  /**
    * User's preferred time format: 12 for 12-hour format, 24 for 24-hour format
    */
   timeFormat: number | null;
@@ -189,6 +193,7 @@ export const GetCurrentUserResponse$inboundSchema: z.ZodType<
   locale: z.nullable(z.string()),
   weekStartsOnMonday: z.nullable(z.boolean()),
   timezone: z.nullable(z.string()),
+  timezoneAutoSync: z.nullable(z.boolean()),
   timeFormat: z.nullable(z.number()),
   dateFormat: z.nullable(GetCurrentUserDateFormat$inboundSchema),
   team: z.nullable(z.lazy(() => GetCurrentUserTeam$inboundSchema)),
@@ -203,6 +208,7 @@ export type GetCurrentUserResponse$Outbound = {
   locale: string | null;
   weekStartsOnMonday: boolean | null;
   timezone: string | null;
+  timezoneAutoSync: boolean | null;
   timeFormat: number | null;
   dateFormat: string | null;
   team: GetCurrentUserTeam$Outbound | null;
@@ -221,6 +227,7 @@ export const GetCurrentUserResponse$outboundSchema: z.ZodType<
   locale: z.nullable(z.string()),
   weekStartsOnMonday: z.nullable(z.boolean()),
   timezone: z.nullable(z.string()),
+  timezoneAutoSync: z.nullable(z.boolean()),
   timeFormat: z.nullable(z.number()),
   dateFormat: z.nullable(GetCurrentUserDateFormat$outboundSchema),
   team: z.nullable(z.lazy(() => GetCurrentUserTeam$outboundSchema)),

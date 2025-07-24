@@ -52,6 +52,7 @@ import { tool$teamsList } from "./tools/teamsList.js";
 import { tool$teamsMembers } from "./tools/teamsMembers.js";
 import { tool$teamsUpdate } from "./tools/teamsUpdate.js";
 import { tool$trackerEntriesCreate } from "./tools/trackerEntriesCreate.js";
+import { tool$trackerEntriesCreateBulk } from "./tools/trackerEntriesCreateBulk.js";
 import { tool$trackerEntriesDelete } from "./tools/trackerEntriesDelete.js";
 import { tool$trackerEntriesList } from "./tools/trackerEntriesList.js";
 import { tool$trackerEntriesUpdate } from "./tools/trackerEntriesUpdate.js";
@@ -60,6 +61,10 @@ import { tool$trackerProjectsDelete } from "./tools/trackerProjectsDelete.js";
 import { tool$trackerProjectsGet } from "./tools/trackerProjectsGet.js";
 import { tool$trackerProjectsList } from "./tools/trackerProjectsList.js";
 import { tool$trackerProjectsUpdate } from "./tools/trackerProjectsUpdate.js";
+import { tool$trackerTimerGetCurrentTimer } from "./tools/trackerTimerGetCurrentTimer.js";
+import { tool$trackerTimerGetTimerStatus } from "./tools/trackerTimerGetTimerStatus.js";
+import { tool$trackerTimerStartTimer } from "./tools/trackerTimerStartTimer.js";
+import { tool$trackerTimerStopTimer } from "./tools/trackerTimerStopTimer.js";
 import { tool$transactionsCreate } from "./tools/transactionsCreate.js";
 import { tool$transactionsCreateMany } from "./tools/transactionsCreateMany.js";
 import { tool$transactionsDelete } from "./tools/transactionsDelete.js";
@@ -81,7 +86,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.3.0",
+    version: "0.3.1",
   });
 
   const client = new MiddayCore({
@@ -166,8 +171,13 @@ export function createMCPServer(deps: {
   tool(tool$trackerProjectsDelete);
   tool(tool$trackerEntriesList);
   tool(tool$trackerEntriesCreate);
+  tool(tool$trackerEntriesCreateBulk);
   tool(tool$trackerEntriesUpdate);
   tool(tool$trackerEntriesDelete);
+  tool(tool$trackerTimerStartTimer);
+  tool(tool$trackerTimerStopTimer);
+  tool(tool$trackerTimerGetCurrentTimer);
+  tool(tool$trackerTimerGetTimerStatus);
 
   return server;
 }

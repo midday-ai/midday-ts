@@ -97,6 +97,7 @@ async function run() {
     locale: "en-US",
     weekStartsOnMonday: true,
     timezone: "America/New_York",
+    timezoneAutoSync: true,
     timeFormat: 24,
     dateFormat: "yyyy-MM-dd",
   });
@@ -130,6 +131,7 @@ async function run() {
     locale: "en-US",
     weekStartsOnMonday: true,
     timezone: "America/New_York",
+    timezoneAutoSync: true,
     timeFormat: 24,
     dateFormat: "yyyy-MM-dd",
   });

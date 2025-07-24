@@ -378,6 +378,7 @@ run();
 
 * [list](docs/sdks/trackerentries/README.md#list) - List all tracker entries
 * [create](docs/sdks/trackerentries/README.md#create) - Create a tracker entry
+* [createBulk](docs/sdks/trackerentries/README.md#createbulk) - Create multiple tracker entries
 * [update](docs/sdks/trackerentries/README.md#update) - Update a tracker entry
 * [delete](docs/sdks/trackerentries/README.md#delete) - Delete a tracker entry
 
@@ -388,6 +389,13 @@ run();
 * [update](docs/sdks/trackerprojects/README.md#update) - Update a tracker project
 * [get](docs/sdks/trackerprojects/README.md#get) - Retrieve a tracker project
 * [delete](docs/sdks/trackerprojects/README.md#delete) - Delete a tracker project
+
+### [trackerTimer](docs/sdks/trackertimer/README.md)
+
+* [startTimer](docs/sdks/trackertimer/README.md#starttimer) - Start a timer
+* [stopTimer](docs/sdks/trackertimer/README.md#stoptimer) - Stop a timer
+* [getCurrentTimer](docs/sdks/trackertimer/README.md#getcurrenttimer) - Get current timer
+* [getTimerStatus](docs/sdks/trackertimer/README.md#gettimerstatus) - Get timer status
 
 ### [transactions](docs/sdks/transactions/README.md)
 
@@ -462,6 +470,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`teamsMembers`](docs/sdks/teams/README.md#members) - List all team members
 - [`teamsUpdate`](docs/sdks/teams/README.md#update) - Update a team
 - [`trackerEntriesCreate`](docs/sdks/trackerentries/README.md#create) - Create a tracker entry
+- [`trackerEntriesCreateBulk`](docs/sdks/trackerentries/README.md#createbulk) - Create multiple tracker entries
 - [`trackerEntriesDelete`](docs/sdks/trackerentries/README.md#delete) - Delete a tracker entry
 - [`trackerEntriesList`](docs/sdks/trackerentries/README.md#list) - List all tracker entries
 - [`trackerEntriesUpdate`](docs/sdks/trackerentries/README.md#update) - Update a tracker entry
@@ -470,6 +479,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`trackerProjectsGet`](docs/sdks/trackerprojects/README.md#get) - Retrieve a tracker project
 - [`trackerProjectsList`](docs/sdks/trackerprojects/README.md#list) - List all tracker projects
 - [`trackerProjectsUpdate`](docs/sdks/trackerprojects/README.md#update) - Update a tracker project
+- [`trackerTimerGetCurrentTimer`](docs/sdks/trackertimer/README.md#getcurrenttimer) - Get current timer
+- [`trackerTimerGetTimerStatus`](docs/sdks/trackertimer/README.md#gettimerstatus) - Get timer status
+- [`trackerTimerStartTimer`](docs/sdks/trackertimer/README.md#starttimer) - Start a timer
+- [`trackerTimerStopTimer`](docs/sdks/trackertimer/README.md#stoptimer) - Stop a timer
 - [`transactionsCreate`](docs/sdks/transactions/README.md#create) - Create a transaction
 - [`transactionsCreateMany`](docs/sdks/transactions/README.md#createmany) - Bulk create transactions
 - [`transactionsDelete`](docs/sdks/transactions/README.md#delete) - Delete a transaction

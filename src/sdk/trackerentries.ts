@@ -3,6 +3,7 @@
  */
 
 import { trackerEntriesCreate } from "../funcs/trackerEntriesCreate.js";
+import { trackerEntriesCreateBulk } from "../funcs/trackerEntriesCreateBulk.js";
 import { trackerEntriesDelete } from "../funcs/trackerEntriesDelete.js";
 import { trackerEntriesList } from "../funcs/trackerEntriesList.js";
 import { trackerEntriesUpdate } from "../funcs/trackerEntriesUpdate.js";
@@ -39,6 +40,23 @@ export class TrackerEntries extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.CreateTrackerEntryResponse> {
     return unwrapAsync(trackerEntriesCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create multiple tracker entries
+   *
+   * @remarks
+   * Create multiple tracker entries in a single request for efficient data migration.
+   */
+  async createBulk(
+    request?: operations.CreateTrackerEntriesBulkRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.CreateTrackerEntriesBulkResponse> {
+    return unwrapAsync(trackerEntriesCreateBulk(
       this,
       request,
       options,

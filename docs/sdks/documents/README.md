@@ -15,6 +15,7 @@ Retrieve a list of documents for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listDocuments" method="get" path="/documents" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -99,6 +100,7 @@ Retrieve a document by its unique identifier for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getDocumentById" method="get" path="/documents/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -171,6 +173,7 @@ Delete a document by its unique identifier for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteDocument" method="delete" path="/documents/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

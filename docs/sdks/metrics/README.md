@@ -18,6 +18,7 @@ Revenue metrics for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getRevenueMetrics" method="get" path="/metrics/revenue" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -94,6 +95,7 @@ Profit metrics for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getProfitMetrics" method="get" path="/metrics/profit" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -170,6 +172,7 @@ Burn rate metrics for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getBurnRateMetrics" method="get" path="/metrics/burn-rate" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -246,6 +249,7 @@ Runway metrics for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getRunwayMetrics" method="get" path="/metrics/runway" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -322,6 +326,7 @@ Expense metrics for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getExpensesMetrics" method="get" path="/metrics/expenses" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -398,6 +403,7 @@ Spending metrics for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getSpendingMetrics" method="get" path="/metrics/spending" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

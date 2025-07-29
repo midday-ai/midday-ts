@@ -13,6 +13,7 @@ Search across all data, invoices, documents, customers, transactions, and more.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search" method="get" path="/search" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

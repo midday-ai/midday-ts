@@ -14,6 +14,7 @@ Retrieve the current user for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getCurrentUser" method="get" path="/users/me" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -81,6 +82,7 @@ Update the current user for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateCurrentUser" method="patch" path="/users/me" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

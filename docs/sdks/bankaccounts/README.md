@@ -17,6 +17,7 @@ Retrieve a list of bank accounts for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listBankAccounts" method="get" path="/bank-accounts" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -85,6 +86,7 @@ Create a new bank account for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createBankAccount" method="post" path="/bank-accounts" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -161,6 +163,7 @@ Retrieve a bank account by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getBankAccountById" method="get" path="/bank-accounts/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -233,6 +236,7 @@ Update a bank account by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateBankAccount" method="patch" path="/bank-accounts/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -319,6 +323,7 @@ Delete a bank account by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteBankAccount" method="delete" path="/bank-accounts/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

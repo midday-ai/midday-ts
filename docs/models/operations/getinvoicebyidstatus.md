@@ -13,5 +13,5 @@ let value: GetInvoiceByIdStatus = "paid";
 ## Values
 
 ```typescript
-"draft" | "overdue" | "paid" | "unpaid" | "canceled"
+"draft" | "overdue" | "paid" | "unpaid" | "canceled" | "scheduled"
 ```

@@ -16,6 +16,7 @@ Start a new timer or continue from a paused entry.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="startTimer" method="post" path="/tracker-entries/timer/start" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -96,6 +97,7 @@ Stop the current running timer or a specific timer entry.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="stopTimer" method="post" path="/tracker-entries/timer/stop" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -172,6 +174,7 @@ Get the currently running timer for the authenticated user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getCurrentTimer" method="get" path="/tracker-entries/timer/current" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -244,6 +247,7 @@ Get timer status including elapsed time for the authenticated user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getTimerStatus" method="get" path="/tracker-entries/timer/status" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

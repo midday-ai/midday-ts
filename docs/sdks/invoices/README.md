@@ -17,6 +17,7 @@ Retrieve a list of invoices for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listInvoices" method="get" path="/invoices" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -121,6 +122,7 @@ Get payment status for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_/invoices/payment-status" method="get" path="/invoices/payment-status" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -188,6 +190,7 @@ Get summary of invoices for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getInvoiceSummary" method="get" path="/invoices/summary" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -260,6 +263,7 @@ Retrieve a invoice by its unique identifier for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getInvoiceById" method="get" path="/invoices/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -332,6 +336,7 @@ Delete an invoice by its unique identifier for the authenticated team. Only invo
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteInvoice" method="delete" path="/invoices/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

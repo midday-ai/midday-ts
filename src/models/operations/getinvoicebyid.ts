@@ -21,6 +21,7 @@ export const GetInvoiceByIdStatus = {
   Paid: "paid",
   Unpaid: "unpaid",
   Canceled: "canceled",
+  Scheduled: "scheduled",
 } as const;
 /**
  * Current status of the invoice

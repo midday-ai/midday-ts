@@ -20,6 +20,7 @@ Retrieve a list of transactions for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listTransactions" method="get" path="/transactions" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -176,6 +177,7 @@ Create a transaction
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createTransaction" method="post" path="/transactions" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -244,6 +246,7 @@ Retrieve a transaction by its ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getTransactionById" method="get" path="/transactions/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -316,6 +319,7 @@ Update a transaction for the authenticated team. If there's no change, returns i
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateTransaction" method="patch" path="/transactions/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -388,6 +392,7 @@ Delete a transaction for the authenticated team. Only manually created transacti
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteTransaction" method="delete" path="/transactions/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -460,6 +465,7 @@ Bulk update transactions for the authenticated team. If there's no change, retur
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateTransactions" method="patch" path="/transactions/bulk" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -528,6 +534,7 @@ Bulk create transactions for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createTransactions" method="post" path="/transactions/bulk" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -596,6 +603,7 @@ Bulk delete transactions for the authenticated team. Only manually created trans
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteTransactions" method="delete" path="/transactions/bulk" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

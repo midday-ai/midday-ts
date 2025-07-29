@@ -17,6 +17,7 @@ List all tracker projects for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listTrackerProjects" method="get" path="/tracker-projects" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -123,6 +124,7 @@ Create a tracker project for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createTrackerProject" method="post" path="/tracker-projects" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -197,6 +199,7 @@ Update a tracker project for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateTrackerProject" method="patch" path="/tracker-projects/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -309,6 +312,7 @@ Retrieve a tracker project for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getTrackerProjectById" method="get" path="/tracker-projects/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -381,6 +385,7 @@ Delete a tracker project for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteTrackerProject" method="delete" path="/tracker-projects/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

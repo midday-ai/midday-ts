@@ -17,6 +17,7 @@ Retrieve a list of customers for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listCustomers" method="get" path="/customers" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -101,6 +102,7 @@ Create a new customer for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createCustomer" method="post" path="/customers" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -223,6 +225,7 @@ Retrieve a customer by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getCustomerById" method="get" path="/customers/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -295,6 +298,7 @@ Update a customer by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateCustomer" method="patch" path="/customers/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -423,6 +427,7 @@ Delete a customer by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteCustomer" method="delete" path="/customers/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

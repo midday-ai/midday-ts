@@ -17,6 +17,7 @@ List all tracker entries for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listTrackerEntries" method="get" path="/tracker-entries" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -93,6 +94,7 @@ Create a tracker entry for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createTrackerEntry" method="post" path="/tracker-entries" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -183,6 +185,7 @@ Create multiple tracker entries in a single request for efficient data migration
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createTrackerEntriesBulk" method="post" path="/tracker-entries/bulk" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -301,6 +304,7 @@ Update a tracker entry for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateTrackerEntry" method="patch" path="/tracker-entries/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -397,6 +401,7 @@ Delete a tracker entry for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteTrackerEntry" method="delete" path="/tracker-entries/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

@@ -16,6 +16,7 @@ Retrieve a list of inbox items for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listInboxItems" method="get" path="/inbox" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -84,6 +85,7 @@ Retrieve a inbox item by its unique identifier for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getInboxItemById" method="get" path="/inbox/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -156,6 +158,7 @@ Delete a inbox item by its unique identifier for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteInboxItem" method="delete" path="/inbox/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -228,6 +231,7 @@ Update fields of an inbox item by its unique identifier for the authenticated te
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateInboxItem" method="patch" path="/inbox/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

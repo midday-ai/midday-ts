@@ -17,6 +17,7 @@ Retrieve a list of tags for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listTags" method="get" path="/tags" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -84,6 +85,7 @@ Create a new tag for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createTag" method="post" path="/tags" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -156,6 +158,7 @@ Retrieve a tag by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getTagById" method="get" path="/tags/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -228,6 +231,7 @@ Update a tag by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateTag" method="patch" path="/tags/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -306,6 +310,7 @@ Delete a tag by ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteTag" method="delete" path="/tags/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

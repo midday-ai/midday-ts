@@ -16,6 +16,7 @@ Retrieve a list of teams for the authenticated user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listTeams" method="get" path="/teams" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -83,6 +84,7 @@ Retrieve a team by its ID for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getTeamById" method="get" path="/teams/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -155,6 +157,7 @@ Update a team for the authenticated workspace. If there’s no change, returns i
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateTeamById" method="patch" path="/teams/{id}" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -241,6 +244,7 @@ List all team members for the authenticated team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listTeamMembers" method="get" path="/teams/{id}/members" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 

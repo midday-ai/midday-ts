@@ -92,6 +92,7 @@ Add the following server definition to your `claude_desktop_config.json` file:
         "-y", "--package", "@midday-ai/sdk",
         "--",
         "mcp", "start",
+        "--oauth2", "...",
         "--api-token", "..."
       ]
     }
@@ -115,6 +116,7 @@ Create a `.cursor/mcp.json` file in your project root with the following content
         "-y", "--package", "@midday-ai/sdk",
         "--",
         "mcp", "start",
+        "--oauth2", "...",
         "--api-token", "..."
       ]
     }
@@ -170,54 +172,19 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
-  const result = await midday.transactions.list({
-    cursor: "eyJpZCI6IjEyMyJ9",
-    sort: [
-      "date",
-      "desc",
-    ],
-    pageSize: 50,
-    q: "office supplies",
-    categories: [
-      "office-supplies",
-      "travel",
-    ],
-    tags: [
-      "tag-1",
-      "tag-2",
-    ],
-    start: "2024-04-01T00:00:00.000Z",
-    end: "2024-04-30T23:59:59.999Z",
-    accounts: [
-      "account-1",
-      "account-2",
-    ],
-    assignees: [
-      "user-1",
-      "user-2",
-    ],
-    statuses: [
-      "pending",
-      "completed",
-    ],
-    recurring: [
-      "monthly",
-      "annually",
-    ],
-    attachments: "include",
-    amountRange: [
-      100,
-      1000,
-    ],
-    amount: [
-      "150.75",
-      "299.99",
-    ],
-    type: "expense",
+  const result = await midday.oAuth.getOAuthAuthorization({
+    responseType: "code",
+    clientId: "mid_client_abcdef123456789",
+    redirectUri: "https://myapp.com/callback",
+    scope: "transactions.read invoices.read",
+    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
+    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
   });
 
   console.log(result);
@@ -233,65 +200,31 @@ run();
 
 ### Per-Client Security Schemes
 
-This SDK supports the following security scheme globally:
+This SDK supports the following security schemes globally:
 
-| Name    | Type | Scheme      | Environment Variable |
-| ------- | ---- | ----------- | -------------------- |
-| `token` | http | HTTP Bearer | `MIDDAY_TOKEN`       |
+| Name     | Type   | Scheme      | Environment Variable |
+| -------- | ------ | ----------- | -------------------- |
+| `oauth2` | apiKey | API key     | `MIDDAY_OAUTH2`      |
+| `token`  | http   | HTTP Bearer | `MIDDAY_TOKEN`       |
 
-To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
+You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
-  const result = await midday.transactions.list({
-    cursor: "eyJpZCI6IjEyMyJ9",
-    sort: [
-      "date",
-      "desc",
-    ],
-    pageSize: 50,
-    q: "office supplies",
-    categories: [
-      "office-supplies",
-      "travel",
-    ],
-    tags: [
-      "tag-1",
-      "tag-2",
-    ],
-    start: "2024-04-01T00:00:00.000Z",
-    end: "2024-04-30T23:59:59.999Z",
-    accounts: [
-      "account-1",
-      "account-2",
-    ],
-    assignees: [
-      "user-1",
-      "user-2",
-    ],
-    statuses: [
-      "pending",
-      "completed",
-    ],
-    recurring: [
-      "monthly",
-      "annually",
-    ],
-    attachments: "include",
-    amountRange: [
-      100,
-      1000,
-    ],
-    amount: [
-      "150.75",
-      "299.99",
-    ],
-    type: "expense",
+  const result = await midday.oAuth.getOAuthAuthorization({
+    responseType: "code",
+    clientId: "mid_client_abcdef123456789",
+    redirectUri: "https://myapp.com/callback",
+    scope: "transactions.read invoices.read",
+    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
+    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
   });
 
   console.log(result);
@@ -354,6 +287,13 @@ run();
 * [expenses](docs/sdks/metrics/README.md#expenses) - Expense metrics
 * [spending](docs/sdks/metrics/README.md#spending) - Spending metrics
 
+
+### [oAuth](docs/sdks/oauth/README.md)
+
+* [getOAuthAuthorization](docs/sdks/oauth/README.md#getoauthauthorization) - OAuth Authorization Endpoint
+* [postOAuthAuthorization](docs/sdks/oauth/README.md#postoauthauthorization) - OAuth Authorization Decision
+* [postOAuthToken](docs/sdks/oauth/README.md#postoauthtoken) - OAuth Token Exchange
+* [postOAuthRevoke](docs/sdks/oauth/README.md#postoauthrevoke) - OAuth Token Revocation
 
 ### [search](docs/sdks/search/README.md)
 
@@ -459,6 +399,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`metricsRevenue`](docs/sdks/metrics/README.md#revenue) - Revenue metrics
 - [`metricsRunway`](docs/sdks/metrics/README.md#runway) - Runway metrics
 - [`metricsSpending`](docs/sdks/metrics/README.md#spending) - Spending metrics
+- [`oAuthGetOAuthAuthorization`](docs/sdks/oauth/README.md#getoauthauthorization) - OAuth Authorization Endpoint
+- [`oAuthPostOAuthAuthorization`](docs/sdks/oauth/README.md#postoauthauthorization) - OAuth Authorization Decision
+- [`oAuthPostOAuthRevoke`](docs/sdks/oauth/README.md#postoauthrevoke) - OAuth Token Revocation
+- [`oAuthPostOAuthToken`](docs/sdks/oauth/README.md#postoauthtoken) - OAuth Token Exchange
 - [`searchSearch`](docs/sdks/search/README.md#search) - Search
 - [`tagsCreate`](docs/sdks/tags/README.md#create) - Create a new tag
 - [`tagsDelete`](docs/sdks/tags/README.md#delete) - Delete a tag
@@ -507,54 +451,19 @@ To change the default retry strategy for a single API call, simply provide a ret
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
-  const result = await midday.transactions.list({
-    cursor: "eyJpZCI6IjEyMyJ9",
-    sort: [
-      "date",
-      "desc",
-    ],
-    pageSize: 50,
-    q: "office supplies",
-    categories: [
-      "office-supplies",
-      "travel",
-    ],
-    tags: [
-      "tag-1",
-      "tag-2",
-    ],
-    start: "2024-04-01T00:00:00.000Z",
-    end: "2024-04-30T23:59:59.999Z",
-    accounts: [
-      "account-1",
-      "account-2",
-    ],
-    assignees: [
-      "user-1",
-      "user-2",
-    ],
-    statuses: [
-      "pending",
-      "completed",
-    ],
-    recurring: [
-      "monthly",
-      "annually",
-    ],
-    attachments: "include",
-    amountRange: [
-      100,
-      1000,
-    ],
-    amount: [
-      "150.75",
-      "299.99",
-    ],
-    type: "expense",
+  const result = await midday.oAuth.getOAuthAuthorization({
+    responseType: "code",
+    clientId: "mid_client_abcdef123456789",
+    redirectUri: "https://myapp.com/callback",
+    scope: "transactions.read invoices.read",
+    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
+    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
   }, {
     retries: {
       strategy: "backoff",
@@ -590,54 +499,19 @@ const midday = new Midday({
     },
     retryConnectionErrors: false,
   },
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
-  const result = await midday.transactions.list({
-    cursor: "eyJpZCI6IjEyMyJ9",
-    sort: [
-      "date",
-      "desc",
-    ],
-    pageSize: 50,
-    q: "office supplies",
-    categories: [
-      "office-supplies",
-      "travel",
-    ],
-    tags: [
-      "tag-1",
-      "tag-2",
-    ],
-    start: "2024-04-01T00:00:00.000Z",
-    end: "2024-04-30T23:59:59.999Z",
-    accounts: [
-      "account-1",
-      "account-2",
-    ],
-    assignees: [
-      "user-1",
-      "user-2",
-    ],
-    statuses: [
-      "pending",
-      "completed",
-    ],
-    recurring: [
-      "monthly",
-      "annually",
-    ],
-    attachments: "include",
-    amountRange: [
-      100,
-      1000,
-    ],
-    amount: [
-      "150.75",
-      "299.99",
-    ],
-    type: "expense",
+  const result = await midday.oAuth.getOAuthAuthorization({
+    responseType: "code",
+    clientId: "mid_client_abcdef123456789",
+    redirectUri: "https://myapp.com/callback",
+    scope: "transactions.read invoices.read",
+    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
+    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
   });
 
   console.log(result);
@@ -653,13 +527,14 @@ run();
 
 [`MiddayError`](./src/models/errors/middayerror.ts) is the base class for all HTTP error responses. It has the following properties:
 
-| Property            | Type       | Description                                            |
-| ------------------- | ---------- | ------------------------------------------------------ |
-| `error.message`     | `string`   | Error message                                          |
-| `error.statusCode`  | `number`   | HTTP response status code eg `404`                     |
-| `error.headers`     | `Headers`  | HTTP response headers                                  |
-| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned. |
-| `error.rawResponse` | `Response` | Raw HTTP response                                      |
+| Property            | Type       | Description                                                                             |
+| ------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `error.message`     | `string`   | Error message                                                                           |
+| `error.statusCode`  | `number`   | HTTP response status code eg `404`                                                      |
+| `error.headers`     | `Headers`  | HTTP response headers                                                                   |
+| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned.                                  |
+| `error.rawResponse` | `Response` | Raw HTTP response                                                                       |
+| `error.data$`       |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
 ```typescript
@@ -667,64 +542,38 @@ import { Midday } from "@midday-ai/sdk";
 import * as errors from "@midday-ai/sdk/models/errors";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
   try {
-    const result = await midday.transactions.list({
-      cursor: "eyJpZCI6IjEyMyJ9",
-      sort: [
-        "date",
-        "desc",
-      ],
-      pageSize: 50,
-      q: "office supplies",
-      categories: [
-        "office-supplies",
-        "travel",
-      ],
-      tags: [
-        "tag-1",
-        "tag-2",
-      ],
-      start: "2024-04-01T00:00:00.000Z",
-      end: "2024-04-30T23:59:59.999Z",
-      accounts: [
-        "account-1",
-        "account-2",
-      ],
-      assignees: [
-        "user-1",
-        "user-2",
-      ],
-      statuses: [
-        "pending",
-        "completed",
-      ],
-      recurring: [
-        "monthly",
-        "annually",
-      ],
-      attachments: "include",
-      amountRange: [
-        100,
-        1000,
-      ],
-      amount: [
-        "150.75",
-        "299.99",
-      ],
-      type: "expense",
+    const result = await midday.oAuth.getOAuthAuthorization({
+      responseType: "code",
+      clientId: "mid_client_abcdef123456789",
+      redirectUri: "https://myapp.com/callback",
+      scope: "transactions.read invoices.read",
+      state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
+      codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
     });
 
     console.log(result);
   } catch (error) {
+    // The base class for HTTP error responses
     if (error instanceof errors.MiddayError) {
       console.log(error.message);
       console.log(error.statusCode);
       console.log(error.body);
       console.log(error.headers);
+
+      // Depending on the method different errors may be thrown
+      if (error instanceof errors.GetOAuthAuthorizationBadRequestError) {
+        console.log(error.data$.error); // string
+        console.log(error.data$.errorDescription); // string
+        console.log(error.data$.errorUri); // string
+        console.log(error.data$.state); // string
+      }
     }
   }
 }
@@ -737,7 +586,7 @@ run();
 **Primary error:**
 * [`MiddayError`](./src/models/errors/middayerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (6)</summary>
+<details><summary>Less common errors (10)</summary>
 
 <br />
 
@@ -750,9 +599,15 @@ run();
 
 
 **Inherit from [`MiddayError`](./src/models/errors/middayerror.ts)**:
+* [`GetOAuthAuthorizationBadRequestError`](./src/models/errors/getoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 66 methods.*
+* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 66 methods.*
+* [`PostOAuthTokenBadRequestError`](./src/models/errors/postoauthtokenbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 66 methods.*
+* [`UnauthorizedError`](./src/models/errors/unauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 66 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -766,54 +621,19 @@ import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
   serverURL: "https://api.midday.ai",
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
-  const result = await midday.transactions.list({
-    cursor: "eyJpZCI6IjEyMyJ9",
-    sort: [
-      "date",
-      "desc",
-    ],
-    pageSize: 50,
-    q: "office supplies",
-    categories: [
-      "office-supplies",
-      "travel",
-    ],
-    tags: [
-      "tag-1",
-      "tag-2",
-    ],
-    start: "2024-04-01T00:00:00.000Z",
-    end: "2024-04-30T23:59:59.999Z",
-    accounts: [
-      "account-1",
-      "account-2",
-    ],
-    assignees: [
-      "user-1",
-      "user-2",
-    ],
-    statuses: [
-      "pending",
-      "completed",
-    ],
-    recurring: [
-      "monthly",
-      "annually",
-    ],
-    attachments: "include",
-    amountRange: [
-      100,
-      1000,
-    ],
-    amount: [
-      "150.75",
-      "299.99",
-    ],
-    type: "expense",
+  const result = await midday.oAuth.getOAuthAuthorization({
+    responseType: "code",
+    clientId: "mid_client_abcdef123456789",
+    redirectUri: "https://myapp.com/callback",
+    scope: "transactions.read invoices.read",
+    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
+    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
   });
 
   console.log(result);

@@ -20,65 +20,30 @@ specific category of applications.
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { transactionsList } from "@midday-ai/sdk/funcs/transactionsList.js";
+import { oAuthGetOAuthAuthorization } from "@midday-ai/sdk/funcs/oAuthGetOAuthAuthorization.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
-  const res = await transactionsList(midday, {
-    cursor: "eyJpZCI6IjEyMyJ9",
-    sort: [
-      "date",
-      "desc",
-    ],
-    pageSize: 50,
-    q: "office supplies",
-    categories: [
-      "office-supplies",
-      "travel",
-    ],
-    tags: [
-      "tag-1",
-      "tag-2",
-    ],
-    start: "2024-04-01T00:00:00.000Z",
-    end: "2024-04-30T23:59:59.999Z",
-    accounts: [
-      "account-1",
-      "account-2",
-    ],
-    assignees: [
-      "user-1",
-      "user-2",
-    ],
-    statuses: [
-      "pending",
-      "completed",
-    ],
-    recurring: [
-      "monthly",
-      "annually",
-    ],
-    attachments: "include",
-    amountRange: [
-      100,
-      1000,
-    ],
-    amount: [
-      "150.75",
-      "299.99",
-    ],
-    type: "expense",
+  const res = await oAuthGetOAuthAuthorization(midday, {
+    responseType: "code",
+    clientId: "mid_client_abcdef123456789",
+    redirectUri: "https://myapp.com/callback",
+    scope: "transactions.read invoices.read",
+    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
+    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("transactionsList failed:", res.error);
+    console.log("oAuthGetOAuthAuthorization failed:", res.error);
   }
 }
 

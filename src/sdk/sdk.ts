@@ -9,6 +9,7 @@ import { Documents } from "./documents.js";
 import { Inbox } from "./inbox.js";
 import { Invoices } from "./invoices.js";
 import { Metrics } from "./metrics.js";
+import { OAuth } from "./oauth.js";
 import { Search } from "./search.js";
 import { Tags } from "./tags.js";
 import { Teams } from "./teams.js";
@@ -19,6 +20,11 @@ import { Transactions } from "./transactions.js";
 import { Users } from "./users.js";
 
 export class Midday extends ClientSDK {
+  private _oAuth?: OAuth;
+  get oAuth(): OAuth {
+    return (this._oAuth ??= new OAuth(this._options));
+  }
+
   private _transactions?: Transactions;
   get transactions(): Transactions {
     return (this._transactions ??= new Transactions(this._options));

@@ -3,6 +3,9 @@
  */
 
 export * from "./apierror.js";
+export * from "./getoauthauthorization.js";
 export * from "./httpclienterrors.js";
+export * from "./postoauthauthorization.js";
+export * from "./postoauthtoken.js";
 export * from "./responsevalidationerror.js";
 export * from "./sdkvalidationerror.js";

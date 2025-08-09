@@ -19,7 +19,9 @@ Retrieve the current user for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -42,7 +44,9 @@ import { usersGet } from "@midday-ai/sdk/funcs/usersGet.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -87,7 +91,9 @@ Update the current user for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -121,7 +127,9 @@ import { usersUpdate } from "@midday-ai/sdk/funcs/usersUpdate.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {

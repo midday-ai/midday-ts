@@ -3,54 +3,19 @@
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
-  const result = await midday.transactions.list({
-    cursor: "eyJpZCI6IjEyMyJ9",
-    sort: [
-      "date",
-      "desc",
-    ],
-    pageSize: 50,
-    q: "office supplies",
-    categories: [
-      "office-supplies",
-      "travel",
-    ],
-    tags: [
-      "tag-1",
-      "tag-2",
-    ],
-    start: "2024-04-01T00:00:00.000Z",
-    end: "2024-04-30T23:59:59.999Z",
-    accounts: [
-      "account-1",
-      "account-2",
-    ],
-    assignees: [
-      "user-1",
-      "user-2",
-    ],
-    statuses: [
-      "pending",
-      "completed",
-    ],
-    recurring: [
-      "monthly",
-      "annually",
-    ],
-    attachments: "include",
-    amountRange: [
-      100,
-      1000,
-    ],
-    amount: [
-      "150.75",
-      "299.99",
-    ],
-    type: "expense",
+  const result = await midday.oAuth.getOAuthAuthorization({
+    responseType: "code",
+    clientId: "mid_client_abcdef123456789",
+    redirectUri: "https://myapp.com/callback",
+    scope: "transactions.read invoices.read",
+    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
+    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
   });
 
   console.log(result);

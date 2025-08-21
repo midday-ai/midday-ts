@@ -17,6 +17,7 @@ interface StartCommandFlags {
   readonly transport: "stdio" | "sse";
   readonly port: number;
   readonly tool?: string[];
+  readonly oauth2?: string | undefined;
   readonly "api-token"?: string | undefined;
   readonly "server-url"?: string;
   readonly "server-index"?: SDKOptions["serverIdx"];
@@ -47,7 +48,7 @@ async function startStdio(flags: StartCommandFlags) {
   const server = createMCPServer({
     logger,
     allowedTools: flags.tool,
-    ...{ token: flags["api-token"] ?? "" },
+    security: { oauth2: flags.oauth2 ?? "", token: flags["api-token"] ?? "" },
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });
@@ -67,7 +68,7 @@ async function startSSE(flags: StartCommandFlags) {
   const mcpServer = createMCPServer({
     logger,
     allowedTools: flags.tool,
-    ...{ token: flags["api-token"] ?? "" },
+    security: { oauth2: flags.oauth2 ?? "", token: flags["api-token"] ?? "" },
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });

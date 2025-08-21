@@ -84,7 +84,10 @@ type SecurityInputOAuth2 = {
 type SecurityInputOAuth2ClientCredentials = {
   type: "oauth2:client_credentials";
   value:
-    | { clientID?: string | undefined; clientSecret?: string | undefined }
+    | {
+      clientID?: string | undefined;
+      clientSecret?: string | undefined;
+    }
     | null
     | string
     | undefined;
@@ -240,6 +243,13 @@ export function resolveGlobalSecurity(
   security: Partial<models.Security> | null | undefined,
 ): SecurityState | null {
   return resolveSecurity(
+    [
+      {
+        fieldName: "Authorization",
+        type: "apiKey:header",
+        value: security?.oauth2 ?? env().MIDDAY_OAUTH2,
+      },
+    ],
     [
       {
         fieldName: "Authorization",

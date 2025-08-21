@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: 0acaf98c31c73eb8699b14cdb70c2f93
+  docChecksum: aa27a87f5e97917d07b0aa2208ccc366
   docVersion: 0.0.1
-  speakeasyVersion: 1.592.1
-  generationVersion: 2.667.0
-  releaseVersion: 0.3.2
-  configChecksum: 7539baef24edbeecc5f62a4075404e5c
+  speakeasyVersion: 1.606.0
+  generationVersion: 2.686.7
+  releaseVersion: 0.4.0
+  configChecksum: e602757e1cb6718fab64ab24e625dade
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true
@@ -14,16 +14,15 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.16
+    core: 3.21.20
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
     enums: 2.82.1
     envVarSecurityUsage: 0.1.2
-    examples: 2.82.1
+    examples: 2.82.3
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
-    globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.5
     mcpServer: 0.9.3
     nameOverrides: 2.81.2
@@ -31,6 +30,7 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.3.0
+    unions: 2.85.11
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -47,6 +47,10 @@ generatedFiles:
   - docs/models/connection.md
   - docs/models/createtag.md
   - docs/models/customer.md
+  - docs/models/errors/getoauthauthorizationbadrequesterror.md
+  - docs/models/errors/postoauthauthorizationbadrequesterror.md
+  - docs/models/errors/postoauthtokenbadrequesterror.md
+  - docs/models/errors/unauthorizederror.md
   - docs/models/expensesresultarray.md
   - docs/models/getburnrateresponseschema.md
   - docs/models/getexpensesresponseschema.md
@@ -54,6 +58,7 @@ generatedFiles:
   - docs/models/getprofitresponseschema.md
   - docs/models/getrevenueresponseschema.md
   - docs/models/operations/attachments.md
+  - docs/models/operations/authorizationcode.md
   - docs/models/operations/createbankaccountrequest.md
   - docs/models/operations/createbankaccountresponse.md
   - docs/models/operations/createcustomerrequest.md
@@ -80,6 +85,7 @@ generatedFiles:
   - docs/models/operations/createtransactionsattachment.md
   - docs/models/operations/currententry.md
   - docs/models/operations/dateformatrequest.md
+  - docs/models/operations/decision.md
   - docs/models/operations/deletebankaccountrequest.md
   - docs/models/operations/deletebankaccountresponse.md
   - docs/models/operations/deletecustomerrequest.md
@@ -130,6 +136,9 @@ generatedFiles:
   - docs/models/operations/getinvoicesummaryrequest.md
   - docs/models/operations/getinvoicesummaryresponse.md
   - docs/models/operations/getinvoicesummarystatus.md
+  - docs/models/operations/getoauthauthorizationrequest.md
+  - docs/models/operations/getoauthauthorizationresponse.md
+  - docs/models/operations/getoauthauthorizationstatus.md
   - docs/models/operations/getprofitmetricsrequest.md
   - docs/models/operations/getrevenuemetricsrequest.md
   - docs/models/operations/getrunwaymetricsrequest.md
@@ -143,6 +152,8 @@ generatedFiles:
   - docs/models/operations/gettimerstatusresponse.md
   - docs/models/operations/gettrackerprojectbyidrequest.md
   - docs/models/operations/gettransactionbyidrequest.md
+  - docs/models/operations/granttypeauthorizationcode.md
+  - docs/models/operations/granttyperefreshtoken.md
   - docs/models/operations/listbankaccountsdata.md
   - docs/models/operations/listbankaccountsrequest.md
   - docs/models/operations/listbankaccountsresponse.md
@@ -186,9 +197,18 @@ generatedFiles:
   - docs/models/operations/listtransactionsrequest.md
   - docs/models/operations/listtransactionsresponse.md
   - docs/models/operations/listtransactionstype.md
+  - docs/models/operations/postoauthauthorizationrequest.md
+  - docs/models/operations/postoauthauthorizationresponse.md
+  - docs/models/operations/postoauthrevokerequest.md
+  - docs/models/operations/postoauthrevokeresponse.md
+  - docs/models/operations/postoauthtokenrequest.md
+  - docs/models/operations/postoauthtokenresponse.md
+  - docs/models/operations/refreshtoken.md
   - docs/models/operations/requestbody.md
+  - docs/models/operations/responsetype.md
   - docs/models/operations/result.md
   - docs/models/operations/role.md
+  - docs/models/operations/scope.md
   - docs/models/operations/searchrequest.md
   - docs/models/operations/searchresponse.md
   - docs/models/operations/starttimercustomer.md
@@ -203,6 +223,8 @@ generatedFiles:
   - docs/models/operations/stoptimerrequest.md
   - docs/models/operations/stoptimerresponse.md
   - docs/models/operations/stoptimeruser.md
+  - docs/models/operations/tokentype.md
+  - docs/models/operations/tokentypehint.md
   - docs/models/operations/trackerproject.md
   - docs/models/operations/updatebankaccountrequest.md
   - docs/models/operations/updatebankaccountrequestbody.md
@@ -284,6 +306,7 @@ generatedFiles:
   - docs/sdks/invoices/README.md
   - docs/sdks/metrics/README.md
   - docs/sdks/midday/README.md
+  - docs/sdks/oauth/README.md
   - docs/sdks/search/README.md
   - docs/sdks/tags/README.md
   - docs/sdks/teams/README.md
@@ -295,8 +318,8 @@ generatedFiles:
   - eslint.config.mjs
   - examples/.env.template
   - examples/README.md
+  - examples/oAuthGetOAuthAuthorization.example.ts
   - examples/package.json
-  - examples/transactionsList.example.ts
   - jsr.json
   - package.json
   - src/core.ts
@@ -328,6 +351,10 @@ generatedFiles:
   - src/funcs/metricsRevenue.ts
   - src/funcs/metricsRunway.ts
   - src/funcs/metricsSpending.ts
+  - src/funcs/oAuthGetOAuthAuthorization.ts
+  - src/funcs/oAuthPostOAuthAuthorization.ts
+  - src/funcs/oAuthPostOAuthRevoke.ts
+  - src/funcs/oAuthPostOAuthToken.ts
   - src/funcs/searchSearch.ts
   - src/funcs/tagsCreate.ts
   - src/funcs/tagsDelete.ts
@@ -423,6 +450,10 @@ generatedFiles:
   - src/mcp-server/tools/metricsRevenue.ts
   - src/mcp-server/tools/metricsRunway.ts
   - src/mcp-server/tools/metricsSpending.ts
+  - src/mcp-server/tools/oAuthGetOAuthAuthorization.ts
+  - src/mcp-server/tools/oAuthPostOAuthAuthorization.ts
+  - src/mcp-server/tools/oAuthPostOAuthRevoke.ts
+  - src/mcp-server/tools/oAuthPostOAuthToken.ts
   - src/mcp-server/tools/searchSearch.ts
   - src/mcp-server/tools/tagsCreate.ts
   - src/mcp-server/tools/tagsDelete.ts
@@ -459,9 +490,12 @@ generatedFiles:
   - src/mcp-server/tools/usersUpdate.ts
   - src/models/createtag.ts
   - src/models/errors/apierror.ts
+  - src/models/errors/getoauthauthorization.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
   - src/models/errors/middayerror.ts
+  - src/models/errors/postoauthauthorization.ts
+  - src/models/errors/postoauthtoken.ts
   - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/expensesresultarray.ts
@@ -498,6 +532,7 @@ generatedFiles:
   - src/models/operations/getinvoicebyid.ts
   - src/models/operations/getinvoicespaymentstatus.ts
   - src/models/operations/getinvoicesummary.ts
+  - src/models/operations/getoauthauthorization.ts
   - src/models/operations/getprofitmetrics.ts
   - src/models/operations/getrevenuemetrics.ts
   - src/models/operations/getrunwaymetrics.ts
@@ -518,6 +553,9 @@ generatedFiles:
   - src/models/operations/listtrackerentries.ts
   - src/models/operations/listtrackerprojects.ts
   - src/models/operations/listtransactions.ts
+  - src/models/operations/postoauthauthorization.ts
+  - src/models/operations/postoauthrevoke.ts
+  - src/models/operations/postoauthtoken.ts
   - src/models/operations/search.ts
   - src/models/operations/starttimer.ts
   - src/models/operations/stoptimer.ts
@@ -557,6 +595,7 @@ generatedFiles:
   - src/sdk/index.ts
   - src/sdk/invoices.ts
   - src/sdk/metrics.ts
+  - src/sdk/oauth.ts
   - src/sdk/sdk.ts
   - src/sdk/search.ts
   - src/sdk/tags.ts
@@ -1573,5 +1612,55 @@ examples:
       responses:
         "200":
           application/json: {"data": {"isRunning": true, "currentEntry": {"id": "a26a5a54-1e28-4c83-b854-2821b87e4a97", "start": "<value>", "description": "brr debit greedy lasting because offset outset generously", "projectId": "f2d14591-a762-4edc-b444-ff2f1ff3b4b8", "trackerProject": {"id": "2cabaa5d-6000-419b-b904-099b57ddc208", "name": "<value>"}}, "elapsedTime": 1800}}
+  getOAuthAuthorization:
+    speakeasy-default-get-O-auth-authorization:
+      parameters:
+        query:
+          response_type: "code"
+          client_id: "mid_client_abcdef123456789"
+          redirect_uri: "https://myapp.com/callback"
+          scope: "transactions.read invoices.read"
+          state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy"
+          code_challenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM"
+      responses:
+        "200":
+          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "My Raycast Extension", "description": "A Raycast extension for managing transactions", "overview": "This application provides advanced transaction management features including:\n- Real-time sync\n- Advanced filtering", "developerName": "Acme Corp", "logoUrl": "https://example.com/logo.png", "website": "https://myapp.com", "installUrl": "https://myapp.com/install", "screenshots": ["https://example.com/screenshot1.png", "https://example.com/screenshot2.png"], "clientId": "mid_client_abcdef123456789", "scopes": ["transactions.read", "invoices.read"], "redirectUri": "https://myapp.com/callback", "state": "abc123xyz789_secure-random-state-value-with-sufficient-entropy", "status": "approved"}
+        "400":
+          application/json: {"error": "invalid_request", "error_description": "The request is missing a required parameter", "error_uri": "https://docs.midday.ai/errors/invalid_request", "state": "abc123xyz789_secure-random-state-value-with-sufficient-entropy"}
+  postOAuthAuthorization:
+    speakeasy-default-post-O-auth-authorization:
+      requestBody:
+        application/json: {"client_id": "mid_client_abcdef123456789", "decision": "allow", "scopes": ["transactions.read", "invoices.read"], "redirect_uri": "https://myapp.com/callback", "state": "abc123xyz789_secure-random-state-value-with-sufficient-entropy", "code_challenge": "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM", "teamId": "123e4567-e89b-12d3-a456-426614174000"}
+      responses:
+        "200":
+          application/json: {"redirect_url": "https://trained-outset.info"}
+        "400":
+          application/json: {"redirect_url": "https://young-ferret.name/"}
+        "401":
+          application/json: {"redirect_url": "https://impressive-giant.info"}
+  postOAuthToken:
+    speakeasy-default-post-O-auth-token:
+      requestBody:
+        application/json: {"grant_type": "refresh_token", "refresh_token": "mid_rt_abcdef123456789", "client_id": "mid_client_abcdef123456789", "client_secret": "mid_secret_abcdef123456789", "scope": "transactions.read invoices.read"}
+        application/x-www-form-urlencoded: {"grant_type": "refresh_token", "refresh_token": "mid_rt_abcdef123456789", "client_id": "mid_client_abcdef123456789", "client_secret": "mid_secret_abcdef123456789", "scope": "transactions.read invoices.read"}
+      responses:
+        "200":
+          application/json: {"access_token": "mid_access_token_abcdef123456789", "token_type": "Bearer", "expires_in": 3600, "refresh_token": "mid_refresh_token_abcdef123456789", "scope": "transactions.read invoices.read"}
+        "400":
+          application/json: {"error": "invalid_request", "error_description": "The request is missing a required parameter", "error_uri": "https://docs.midday.ai/errors/invalid_request", "state": "abc123xyz789_secure-random-state-value-with-sufficient-entropy"}
+  postOAuthRevoke:
+    speakeasy-default-post-O-auth-revoke:
+      requestBody:
+        application/json: {"token": "mid_access_token_abcdef123456789", "token_type_hint": "access_token", "client_id": "mid_client_abcdef123456789", "client_secret": "mid_secret_abcdef123456789"}
+        application/x-www-form-urlencoded: {"token": "mid_access_token_abcdef123456789", "token_type_hint": "access_token", "client_id": "mid_client_abcdef123456789", "client_secret": "mid_secret_abcdef123456789"}
+      responses:
+        "200":
+          application/json: {"success": true}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## SDK Changes Detected:
+  * `midday.oAuth.getOAuthAuthorization()`: **Added**
+  * `midday.oAuth.postOAuthAuthorization()`: **Added**
+  * `midday.oAuth.postOAuthToken()`: **Added**
+  * `midday.oAuth.postOAuthRevoke()`: **Added**

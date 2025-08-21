@@ -41,6 +41,10 @@ import { tool$metricsProfit } from "./tools/metricsProfit.js";
 import { tool$metricsRevenue } from "./tools/metricsRevenue.js";
 import { tool$metricsRunway } from "./tools/metricsRunway.js";
 import { tool$metricsSpending } from "./tools/metricsSpending.js";
+import { tool$oAuthGetOAuthAuthorization } from "./tools/oAuthGetOAuthAuthorization.js";
+import { tool$oAuthPostOAuthAuthorization } from "./tools/oAuthPostOAuthAuthorization.js";
+import { tool$oAuthPostOAuthRevoke } from "./tools/oAuthPostOAuthRevoke.js";
+import { tool$oAuthPostOAuthToken } from "./tools/oAuthPostOAuthToken.js";
 import { tool$searchSearch } from "./tools/searchSearch.js";
 import { tool$tagsCreate } from "./tools/tagsCreate.js";
 import { tool$tagsDelete } from "./tools/tagsDelete.js";
@@ -81,16 +85,16 @@ export function createMCPServer(deps: {
   allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
-  token?: SDKOptions["token"] | undefined;
+  security?: SDKOptions["security"] | undefined;
   serverIdx?: SDKOptions["serverIdx"] | undefined;
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.3.2",
+    version: "0.4.0",
   });
 
   const client = new MiddayCore({
-    token: deps.token,
+    security: deps.security,
     serverURL: deps.serverURL,
     serverIdx: deps.serverIdx,
   });
@@ -116,6 +120,10 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
+  tool(tool$oAuthGetOAuthAuthorization);
+  tool(tool$oAuthPostOAuthAuthorization);
+  tool(tool$oAuthPostOAuthToken);
+  tool(tool$oAuthPostOAuthRevoke);
   tool(tool$transactionsList);
   tool(tool$transactionsCreate);
   tool(tool$transactionsGet);

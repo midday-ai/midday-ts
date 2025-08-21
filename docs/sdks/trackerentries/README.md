@@ -22,7 +22,9 @@ List all tracker entries for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -49,7 +51,9 @@ import { trackerEntriesList } from "@midday-ai/sdk/funcs/trackerEntriesList.js";
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -99,7 +103,9 @@ Create a tracker entry for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -133,7 +139,9 @@ import { trackerEntriesCreate } from "@midday-ai/sdk/funcs/trackerEntriesCreate.
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -190,7 +198,9 @@ Create multiple tracker entries in a single request for efficient data migration
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -238,7 +248,9 @@ import { trackerEntriesCreateBulk } from "@midday-ai/sdk/funcs/trackerEntriesCre
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -309,7 +321,9 @@ Update a tracker entry for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -346,7 +360,9 @@ import { trackerEntriesUpdate } from "@midday-ai/sdk/funcs/trackerEntriesUpdate.
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -406,7 +422,9 @@ Delete a tracker entry for the authenticated team.
 import { Midday } from "@midday-ai/sdk";
 
 const midday = new Midday({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {
@@ -431,7 +449,9 @@ import { trackerEntriesDelete } from "@midday-ai/sdk/funcs/trackerEntriesDelete.
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const midday = new MiddayCore({
-  token: "MIDDAY_API_KEY",
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
 });
 
 async function run() {

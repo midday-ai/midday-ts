@@ -32,7 +32,7 @@ export const Scope = {
   InboxWrite: "inbox.write",
   InvoicesRead: "invoices.read",
   InvoicesWrite: "invoices.write",
-  MetricsRead: "metrics.read",
+  ReportsRead: "reports.read",
   SearchRead: "search.read",
   TagsRead: "tags.read",
   TagsWrite: "tags.write",
@@ -46,6 +46,8 @@ export const Scope = {
   TransactionsWrite: "transactions.write",
   UsersRead: "users.read",
   UsersWrite: "users.write",
+  NotificationsRead: "notifications.read",
+  NotificationsWrite: "notifications.write",
   ApisAll: "apis.all",
   ApisRead: "apis.read",
 } as const;

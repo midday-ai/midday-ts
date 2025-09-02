@@ -34,9 +34,9 @@ export type RefreshToken = {
    */
   clientId: string;
   /**
-   * Client secret of the OAuth application
+   * Client secret of the OAuth application (required for confidential clients)
    */
-  clientSecret: string;
+  clientSecret?: string | undefined;
   /**
    * Space-separated list of requested scopes (optional)
    */
@@ -74,11 +74,11 @@ export type AuthorizationCode = {
    */
   clientId: string;
   /**
-   * Client secret of the OAuth application
+   * Client secret of the OAuth application (required for confidential clients)
    */
-  clientSecret: string;
+  clientSecret?: string | undefined;
   /**
-   * Code verifier for PKCE
+   * Code verifier for PKCE (required for public clients using PKCE)
    */
   codeVerifier?: string | undefined;
 };
@@ -152,7 +152,7 @@ export const RefreshToken$inboundSchema: z.ZodType<
   grant_type: GrantTypeRefreshToken$inboundSchema,
   refresh_token: z.string(),
   client_id: z.string(),
-  client_secret: z.string(),
+  client_secret: z.string().optional(),
   scope: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -168,7 +168,7 @@ export type RefreshToken$Outbound = {
   grant_type: string;
   refresh_token: string;
   client_id: string;
-  client_secret: string;
+  client_secret?: string | undefined;
   scope?: string | undefined;
 };
 
@@ -181,7 +181,7 @@ export const RefreshToken$outboundSchema: z.ZodType<
   grantType: GrantTypeRefreshToken$outboundSchema,
   refreshToken: z.string(),
   clientId: z.string(),
-  clientSecret: z.string(),
+  clientSecret: z.string().optional(),
   scope: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -250,7 +250,7 @@ export const AuthorizationCode$inboundSchema: z.ZodType<
   code: z.string(),
   redirect_uri: z.string(),
   client_id: z.string(),
-  client_secret: z.string(),
+  client_secret: z.string().optional(),
   code_verifier: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -268,7 +268,7 @@ export type AuthorizationCode$Outbound = {
   code: string;
   redirect_uri: string;
   client_id: string;
-  client_secret: string;
+  client_secret?: string | undefined;
   code_verifier?: string | undefined;
 };
 
@@ -282,7 +282,7 @@ export const AuthorizationCode$outboundSchema: z.ZodType<
   code: z.string(),
   redirectUri: z.string(),
   clientId: z.string(),
-  clientSecret: z.string(),
+  clientSecret: z.string().optional(),
   codeVerifier: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

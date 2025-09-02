@@ -15,6 +15,9 @@ export const UpdateInboxItemStatus = {
   Processing: "processing",
   Done: "done",
   Pending: "pending",
+  Deleted: "deleted",
+  Analyzing: "analyzing",
+  SuggestedMatch: "suggested_match",
 } as const;
 export type UpdateInboxItemStatus = ClosedEnum<typeof UpdateInboxItemStatus>;
 

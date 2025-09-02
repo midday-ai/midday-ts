@@ -35,9 +35,9 @@ export type PostOAuthRevokeRequest = {
    */
   clientId: string;
   /**
-   * Client secret of the OAuth application
+   * Client secret of the OAuth application (required for confidential clients)
    */
-  clientSecret: string;
+  clientSecret?: string | undefined;
 };
 
 /**
@@ -77,7 +77,7 @@ export const PostOAuthRevokeRequest$inboundSchema: z.ZodType<
   token: z.string(),
   token_type_hint: TokenTypeHint$inboundSchema.optional(),
   client_id: z.string(),
-  client_secret: z.string(),
+  client_secret: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "token_type_hint": "tokenTypeHint",
@@ -91,7 +91,7 @@ export type PostOAuthRevokeRequest$Outbound = {
   token: string;
   token_type_hint?: string | undefined;
   client_id: string;
-  client_secret: string;
+  client_secret?: string | undefined;
 };
 
 /** @internal */
@@ -103,7 +103,7 @@ export const PostOAuthRevokeRequest$outboundSchema: z.ZodType<
   token: z.string(),
   tokenTypeHint: TokenTypeHint$outboundSchema.optional(),
   clientId: z.string(),
-  clientSecret: z.string(),
+  clientSecret: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     tokenTypeHint: "token_type_hint",

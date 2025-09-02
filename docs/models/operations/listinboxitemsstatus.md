@@ -5,11 +5,11 @@
 ```typescript
 import { ListInboxItemsStatus } from "@midday-ai/sdk/models/operations";
 
-let value: ListInboxItemsStatus = "pending";
+let value: ListInboxItemsStatus = "suggested_match";
 ```
 
 ## Values
 
 ```typescript
-"done" | "pending"
+"done" | "pending" | "suggested_match"
 ```

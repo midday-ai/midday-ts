@@ -11,6 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export const ListInboxItemsStatus = {
   Done: "done",
   Pending: "pending",
+  SuggestedMatch: "suggested_match",
 } as const;
 export type ListInboxItemsStatus = ClosedEnum<typeof ListInboxItemsStatus>;
 

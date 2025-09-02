@@ -35,16 +35,19 @@ import { tool$invoicesGet } from "./tools/invoicesGet.js";
 import { tool$invoicesGetInvoicesPaymentStatus } from "./tools/invoicesGetInvoicesPaymentStatus.js";
 import { tool$invoicesList } from "./tools/invoicesList.js";
 import { tool$invoicesSummary } from "./tools/invoicesSummary.js";
-import { tool$metricsBurnRate } from "./tools/metricsBurnRate.js";
-import { tool$metricsExpenses } from "./tools/metricsExpenses.js";
-import { tool$metricsProfit } from "./tools/metricsProfit.js";
-import { tool$metricsRevenue } from "./tools/metricsRevenue.js";
-import { tool$metricsRunway } from "./tools/metricsRunway.js";
-import { tool$metricsSpending } from "./tools/metricsSpending.js";
+import { tool$notificationsList } from "./tools/notificationsList.js";
+import { tool$notificationsUpdateAllStatus } from "./tools/notificationsUpdateAllStatus.js";
+import { tool$notificationsUpdateStatus } from "./tools/notificationsUpdateStatus.js";
 import { tool$oAuthGetOAuthAuthorization } from "./tools/oAuthGetOAuthAuthorization.js";
 import { tool$oAuthPostOAuthAuthorization } from "./tools/oAuthPostOAuthAuthorization.js";
 import { tool$oAuthPostOAuthRevoke } from "./tools/oAuthPostOAuthRevoke.js";
 import { tool$oAuthPostOAuthToken } from "./tools/oAuthPostOAuthToken.js";
+import { tool$reportsBurnRate } from "./tools/reportsBurnRate.js";
+import { tool$reportsExpenses } from "./tools/reportsExpenses.js";
+import { tool$reportsProfit } from "./tools/reportsProfit.js";
+import { tool$reportsRevenue } from "./tools/reportsRevenue.js";
+import { tool$reportsRunway } from "./tools/reportsRunway.js";
+import { tool$reportsSpending } from "./tools/reportsSpending.js";
 import { tool$searchSearch } from "./tools/searchSearch.js";
 import { tool$tagsCreate } from "./tools/tagsCreate.js";
 import { tool$tagsDelete } from "./tools/tagsDelete.js";
@@ -90,7 +93,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.4.0",
+    version: "0.4.1",
   });
 
   const client = new MiddayCore({
@@ -124,6 +127,9 @@ export function createMCPServer(deps: {
   tool(tool$oAuthPostOAuthAuthorization);
   tool(tool$oAuthPostOAuthToken);
   tool(tool$oAuthPostOAuthRevoke);
+  tool(tool$notificationsList);
+  tool(tool$notificationsUpdateStatus);
+  tool(tool$notificationsUpdateAllStatus);
   tool(tool$transactionsList);
   tool(tool$transactionsCreate);
   tool(tool$transactionsGet);
@@ -166,12 +172,12 @@ export function createMCPServer(deps: {
   tool(tool$invoicesGet);
   tool(tool$invoicesDelete);
   tool(tool$searchSearch);
-  tool(tool$metricsRevenue);
-  tool(tool$metricsProfit);
-  tool(tool$metricsBurnRate);
-  tool(tool$metricsRunway);
-  tool(tool$metricsExpenses);
-  tool(tool$metricsSpending);
+  tool(tool$reportsRevenue);
+  tool(tool$reportsProfit);
+  tool(tool$reportsBurnRate);
+  tool(tool$reportsRunway);
+  tool(tool$reportsExpenses);
+  tool(tool$reportsSpending);
   tool(tool$trackerProjectsList);
   tool(tool$trackerProjectsCreate);
   tool(tool$trackerProjectsUpdate);

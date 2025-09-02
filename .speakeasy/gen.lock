@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: aa27a87f5e97917d07b0aa2208ccc366
+  docChecksum: a4670324b1926b60a03d3345af8d21c2
   docVersion: 0.0.1
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 0.4.0
-  configChecksum: e602757e1cb6718fab64ab24e625dade
+  speakeasyVersion: 1.607.0
+  generationVersion: 2.690.1
+  releaseVersion: 0.4.1
+  configChecksum: c36a31b1774efde7031309902060fabb
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.20
+    core: 3.21.21
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -57,6 +57,11 @@ generatedFiles:
   - docs/models/getexpensesresponseschemameta.md
   - docs/models/getprofitresponseschema.md
   - docs/models/getrevenueresponseschema.md
+  - docs/models/notificationresponseschema.md
+  - docs/models/notificationschema.md
+  - docs/models/notificationschemastatus.md
+  - docs/models/notificationsresponseschema.md
+  - docs/models/notificationsresponseschemameta.md
   - docs/models/operations/attachments.md
   - docs/models/operations/authorizationcode.md
   - docs/models/operations/createbankaccountrequest.md
@@ -108,7 +113,7 @@ generatedFiles:
   - docs/models/operations/entry.md
   - docs/models/operations/getbankaccountbyidrequest.md
   - docs/models/operations/getbankaccountbyidresponse.md
-  - docs/models/operations/getburnratemetricsrequest.md
+  - docs/models/operations/getburnratereportsrequest.md
   - docs/models/operations/getcurrenttimercustomer.md
   - docs/models/operations/getcurrenttimerdata.md
   - docs/models/operations/getcurrenttimerproject.md
@@ -124,7 +129,7 @@ generatedFiles:
   - docs/models/operations/getdocumentbyidmetadata.md
   - docs/models/operations/getdocumentbyidrequest.md
   - docs/models/operations/getdocumentbyidresponse.md
-  - docs/models/operations/getexpensesmetricsrequest.md
+  - docs/models/operations/getexpensesreportsrequest.md
   - docs/models/operations/getinboxitembyidrequest.md
   - docs/models/operations/getinboxitembyidresponse.md
   - docs/models/operations/getinboxitembyidtransaction.md
@@ -139,10 +144,10 @@ generatedFiles:
   - docs/models/operations/getoauthauthorizationrequest.md
   - docs/models/operations/getoauthauthorizationresponse.md
   - docs/models/operations/getoauthauthorizationstatus.md
-  - docs/models/operations/getprofitmetricsrequest.md
-  - docs/models/operations/getrevenuemetricsrequest.md
-  - docs/models/operations/getrunwaymetricsrequest.md
-  - docs/models/operations/getspendingmetricsrequest.md
+  - docs/models/operations/getprofitreportsrequest.md
+  - docs/models/operations/getrevenuereportsrequest.md
+  - docs/models/operations/getrunwayreportsrequest.md
+  - docs/models/operations/getspendingreportsrequest.md
   - docs/models/operations/gettagbyidrequest.md
   - docs/models/operations/getteambyidplan.md
   - docs/models/operations/getteambyidrequest.md
@@ -179,6 +184,9 @@ generatedFiles:
   - docs/models/operations/listinvoicesrequest.md
   - docs/models/operations/listinvoicesresponse.md
   - docs/models/operations/listinvoicesstatus.md
+  - docs/models/operations/listnotificationsrequest.md
+  - docs/models/operations/listnotificationsstatusenum1.md
+  - docs/models/operations/listnotificationsstatusenum2.md
   - docs/models/operations/listteammembersdata.md
   - docs/models/operations/listteammembersrequest.md
   - docs/models/operations/listteammembersresponse.md
@@ -217,6 +225,7 @@ generatedFiles:
   - docs/models/operations/starttimerrequest.md
   - docs/models/operations/starttimerresponse.md
   - docs/models/operations/starttimeruser.md
+  - docs/models/operations/status.md
   - docs/models/operations/stoptimercustomer.md
   - docs/models/operations/stoptimerdata.md
   - docs/models/operations/stoptimerproject.md
@@ -244,6 +253,9 @@ generatedFiles:
   - docs/models/operations/updateinboxitemresponse.md
   - docs/models/operations/updateinboxitemstatus.md
   - docs/models/operations/updateinboxitemtransaction.md
+  - docs/models/operations/updatenotificationstatusrequest.md
+  - docs/models/operations/updatenotificationstatusrequestbody.md
+  - docs/models/operations/updatenotificationstatusstatus.md
   - docs/models/operations/updatetagrequest.md
   - docs/models/operations/updatetagrequestbody.md
   - docs/models/operations/updateteambyidplan.md
@@ -287,6 +299,7 @@ generatedFiles:
   - docs/models/revenueresultitem.md
   - docs/models/revenuesummary.md
   - docs/models/security.md
+  - docs/models/source.md
   - docs/models/spendingresultarray.md
   - docs/models/summary.md
   - docs/models/tagresponse.md
@@ -298,15 +311,19 @@ generatedFiles:
   - docs/models/trackerprojectsresponsemeta.md
   - docs/models/transactionresponse.md
   - docs/models/transactionresponsetag.md
+  - docs/models/updateallnotificationsstatusresponseschema.md
+  - docs/models/updateallnotificationsstatusschema.md
+  - docs/models/updateallnotificationsstatusschemastatus.md
   - docs/models/user.md
   - docs/sdks/bankaccounts/README.md
   - docs/sdks/customers/README.md
   - docs/sdks/documents/README.md
   - docs/sdks/inbox/README.md
   - docs/sdks/invoices/README.md
-  - docs/sdks/metrics/README.md
   - docs/sdks/midday/README.md
+  - docs/sdks/notifications/README.md
   - docs/sdks/oauth/README.md
+  - docs/sdks/reports/README.md
   - docs/sdks/search/README.md
   - docs/sdks/tags/README.md
   - docs/sdks/teams/README.md
@@ -345,16 +362,19 @@ generatedFiles:
   - src/funcs/invoicesGetInvoicesPaymentStatus.ts
   - src/funcs/invoicesList.ts
   - src/funcs/invoicesSummary.ts
-  - src/funcs/metricsBurnRate.ts
-  - src/funcs/metricsExpenses.ts
-  - src/funcs/metricsProfit.ts
-  - src/funcs/metricsRevenue.ts
-  - src/funcs/metricsRunway.ts
-  - src/funcs/metricsSpending.ts
+  - src/funcs/notificationsList.ts
+  - src/funcs/notificationsUpdateAllStatus.ts
+  - src/funcs/notificationsUpdateStatus.ts
   - src/funcs/oAuthGetOAuthAuthorization.ts
   - src/funcs/oAuthPostOAuthAuthorization.ts
   - src/funcs/oAuthPostOAuthRevoke.ts
   - src/funcs/oAuthPostOAuthToken.ts
+  - src/funcs/reportsBurnRate.ts
+  - src/funcs/reportsExpenses.ts
+  - src/funcs/reportsProfit.ts
+  - src/funcs/reportsRevenue.ts
+  - src/funcs/reportsRunway.ts
+  - src/funcs/reportsSpending.ts
   - src/funcs/searchSearch.ts
   - src/funcs/tagsCreate.ts
   - src/funcs/tagsDelete.ts
@@ -444,16 +464,19 @@ generatedFiles:
   - src/mcp-server/tools/invoicesGetInvoicesPaymentStatus.ts
   - src/mcp-server/tools/invoicesList.ts
   - src/mcp-server/tools/invoicesSummary.ts
-  - src/mcp-server/tools/metricsBurnRate.ts
-  - src/mcp-server/tools/metricsExpenses.ts
-  - src/mcp-server/tools/metricsProfit.ts
-  - src/mcp-server/tools/metricsRevenue.ts
-  - src/mcp-server/tools/metricsRunway.ts
-  - src/mcp-server/tools/metricsSpending.ts
+  - src/mcp-server/tools/notificationsList.ts
+  - src/mcp-server/tools/notificationsUpdateAllStatus.ts
+  - src/mcp-server/tools/notificationsUpdateStatus.ts
   - src/mcp-server/tools/oAuthGetOAuthAuthorization.ts
   - src/mcp-server/tools/oAuthPostOAuthAuthorization.ts
   - src/mcp-server/tools/oAuthPostOAuthRevoke.ts
   - src/mcp-server/tools/oAuthPostOAuthToken.ts
+  - src/mcp-server/tools/reportsBurnRate.ts
+  - src/mcp-server/tools/reportsExpenses.ts
+  - src/mcp-server/tools/reportsProfit.ts
+  - src/mcp-server/tools/reportsRevenue.ts
+  - src/mcp-server/tools/reportsRunway.ts
+  - src/mcp-server/tools/reportsSpending.ts
   - src/mcp-server/tools/searchSearch.ts
   - src/mcp-server/tools/tagsCreate.ts
   - src/mcp-server/tools/tagsDelete.ts
@@ -504,6 +527,9 @@ generatedFiles:
   - src/models/getprofitresponseschema.ts
   - src/models/getrevenueresponseschema.ts
   - src/models/index.ts
+  - src/models/notificationresponseschema.ts
+  - src/models/notificationschema.ts
+  - src/models/notificationsresponseschema.ts
   - src/models/operations/createbankaccount.ts
   - src/models/operations/createcustomer.ts
   - src/models/operations/createtrackerentriesbulk.ts
@@ -522,21 +548,21 @@ generatedFiles:
   - src/models/operations/deletetransaction.ts
   - src/models/operations/deletetransactions.ts
   - src/models/operations/getbankaccountbyid.ts
-  - src/models/operations/getburnratemetrics.ts
+  - src/models/operations/getburnratereports.ts
   - src/models/operations/getcurrenttimer.ts
   - src/models/operations/getcurrentuser.ts
   - src/models/operations/getcustomerbyid.ts
   - src/models/operations/getdocumentbyid.ts
-  - src/models/operations/getexpensesmetrics.ts
+  - src/models/operations/getexpensesreports.ts
   - src/models/operations/getinboxitembyid.ts
   - src/models/operations/getinvoicebyid.ts
   - src/models/operations/getinvoicespaymentstatus.ts
   - src/models/operations/getinvoicesummary.ts
   - src/models/operations/getoauthauthorization.ts
-  - src/models/operations/getprofitmetrics.ts
-  - src/models/operations/getrevenuemetrics.ts
-  - src/models/operations/getrunwaymetrics.ts
-  - src/models/operations/getspendingmetrics.ts
+  - src/models/operations/getprofitreports.ts
+  - src/models/operations/getrevenuereports.ts
+  - src/models/operations/getrunwayreports.ts
+  - src/models/operations/getspendingreports.ts
   - src/models/operations/gettagbyid.ts
   - src/models/operations/getteambyid.ts
   - src/models/operations/gettimerstatus.ts
@@ -548,6 +574,7 @@ generatedFiles:
   - src/models/operations/listdocuments.ts
   - src/models/operations/listinboxitems.ts
   - src/models/operations/listinvoices.ts
+  - src/models/operations/listnotifications.ts
   - src/models/operations/listteammembers.ts
   - src/models/operations/listteams.ts
   - src/models/operations/listtrackerentries.ts
@@ -563,6 +590,7 @@ generatedFiles:
   - src/models/operations/updatecurrentuser.ts
   - src/models/operations/updatecustomer.ts
   - src/models/operations/updateinboxitem.ts
+  - src/models/operations/updatenotificationstatus.ts
   - src/models/operations/updatetag.ts
   - src/models/operations/updateteambyid.ts
   - src/models/operations/updatetrackerentry.ts
@@ -588,14 +616,17 @@ generatedFiles:
   - src/models/trackerprojectresponse.ts
   - src/models/trackerprojectsresponse.ts
   - src/models/transactionresponse.ts
+  - src/models/updateallnotificationsstatusresponseschema.ts
+  - src/models/updateallnotificationsstatusschema.ts
   - src/sdk/bankaccounts.ts
   - src/sdk/customers.ts
   - src/sdk/documents.ts
   - src/sdk/inbox.ts
   - src/sdk/index.ts
   - src/sdk/invoices.ts
-  - src/sdk/metrics.ts
+  - src/sdk/notifications.ts
   - src/sdk/oauth.ts
+  - src/sdk/reports.ts
   - src/sdk/sdk.ts
   - src/sdk/search.ts
   - src/sdk/tags.ts
@@ -1656,11 +1687,96 @@ examples:
       responses:
         "200":
           application/json: {"success": true}
+  listNotifications:
+    speakeasy-default-list-notifications:
+      parameters:
+        query:
+          cursor: "20"
+          pageSize: 20
+          status: ["unread", "read"]
+          userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          priority: 5
+          maxPriority: 3
+      responses:
+        "200":
+          application/json: {"data": [], "meta": {"cursor": "40", "hasPreviousPage": true, "hasNextPage": false}}
+  updateNotificationStatus:
+    speakeasy-default-update-notification-status:
+      parameters:
+        path:
+          notificationId: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2"
+      requestBody:
+        application/json: {"status": "read"}
+      responses:
+        "200":
+          application/json: {"data": {"id": "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2", "createdAt": "2024-04-15T09:00:00.000Z", "teamId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "userId": "c2d3e4f5-a6b7-8901-bcde-f23456789012", "type": "transactions_created", "priority": 3, "source": "system", "status": "unread", "metadata": {"transactionCount": 5, "dateRange": {"from": "2024-04-01", "to": "2024-04-15"}}, "lastUsedAt": "2024-04-15T11:00:00.000Z"}}
+  updateAllNotificationsStatus:
+    speakeasy-default-update-all-notifications-status:
+      requestBody:
+        application/json: {"status": "read"}
+      responses:
+        "200":
+          application/json: {"data": []}
+  getRevenueReports:
+    speakeasy-default-get-revenue-reports:
+      parameters:
+        query:
+          from: "2023-01-01"
+          to: "2023-12-31"
+          currency: "USD"
+      responses:
+        "200":
+          application/json: {"summary": {"currentTotal": 10000, "prevTotal": 8000, "currency": "USD"}, "meta": {"type": "revenue", "currency": "USD"}, "result": []}
+  getProfitReports:
+    speakeasy-default-get-profit-reports:
+      parameters:
+        query:
+          from: "2023-01-01"
+          to: "2023-12-31"
+          currency: "USD"
+      responses:
+        "200":
+          application/json: {"summary": {"currentTotal": 10000, "prevTotal": 8000, "currency": "USD"}, "meta": {"type": "profit", "currency": "USD"}, "result": [{"date": "2023-01-31", "percentage": {"value": 25, "status": "positive"}, "current": {"date": "2023-01-31", "value": 1000, "currency": "USD"}, "previous": {"date": "2022-01-31", "value": 800, "currency": "USD"}}]}
+  getBurnRateReports:
+    speakeasy-default-get-burn-rate-reports:
+      parameters:
+        query:
+          from: "2023-01-01"
+          to: "2023-12-31"
+          currency: "USD"
+      responses:
+        "200":
+          application/json: [{"date": "2024-01-01", "value": 647366.44, "currency": "SEK"}]
+  getRunwayReports:
+    speakeasy-default-get-runway-reports:
+      parameters:
+        query:
+          from: "2023-01-01"
+          to: "2023-12-31"
+          currency: "USD"
+      responses:
+        "200":
+          application/json: 12
+  getExpensesReports:
+    speakeasy-default-get-expenses-reports:
+      parameters:
+        query:
+          from: "2023-01-01"
+          to: "2023-12-31"
+          currency: "USD"
+      responses:
+        "200":
+          application/json: {"summary": {"averageExpense": 121054.86, "currency": "SEK"}, "meta": {"type": "expense", "currency": "SEK"}, "result": [{"date": "2024-01-01 00:00:00", "value": 637898.68, "currency": "SEK", "recurring": 9467.76, "total": 647366.44}]}
+  getSpendingReports:
+    speakeasy-default-get-spending-reports:
+      parameters:
+        query:
+          from: "2023-01-01"
+          to: "2023-12-31"
+          currency: "USD"
+      responses:
+        "200":
+          application/json: [{"name": "Taxes", "slug": "taxes", "amount": -1256445, "currency": "SEK", "color": "#8492A6", "percentage": 44}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## SDK Changes Detected:
-  * `midday.oAuth.getOAuthAuthorization()`: **Added**
-  * `midday.oAuth.postOAuthAuthorization()`: **Added**
-  * `midday.oAuth.postOAuthToken()`: **Added**
-  * `midday.oAuth.postOAuthRevoke()`: **Added**
+releaseNotes: "## Typescript SDK Changes Detected:\n* `midday.notifications.list()`: **Added**\n* `midday.notifications.updateStatus()`: **Added**\n* `midday.notifications.updateAllStatus()`: **Added**\n* `midday.reports.revenue()`: **Added**\n* `midday.reports.profit()`: **Added**\n* `midday.reports.burnRate()`: **Added**\n* `midday.reports.runway()`: **Added**\n* `midday.reports.expenses()`: **Added**\n* `midday.reports.spending()`: **Added**\n* `midday.metrics.revenue()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.profit()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.burnRate()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.runway()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.expenses()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.spending()`: **Deleted** **Breaking** :warning:\n* `midday.oAuth.postOAuthToken()`: \n  *  `request.[class].clientSecret` **Changed**\n* `midday.oAuth.postOAuthRevoke()`: \n  *  `request.clientSecret` **Changed**\n* `midday.inbox.list()`: \n  *  `request.status` **Changed**\n"

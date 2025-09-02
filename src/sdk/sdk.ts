@@ -8,8 +8,9 @@ import { Customers } from "./customers.js";
 import { Documents } from "./documents.js";
 import { Inbox } from "./inbox.js";
 import { Invoices } from "./invoices.js";
-import { Metrics } from "./metrics.js";
+import { Notifications } from "./notifications.js";
 import { OAuth } from "./oauth.js";
+import { Reports } from "./reports.js";
 import { Search } from "./search.js";
 import { Tags } from "./tags.js";
 import { Teams } from "./teams.js";
@@ -23,6 +24,11 @@ export class Midday extends ClientSDK {
   private _oAuth?: OAuth;
   get oAuth(): OAuth {
     return (this._oAuth ??= new OAuth(this._options));
+  }
+
+  private _notifications?: Notifications;
+  get notifications(): Notifications {
+    return (this._notifications ??= new Notifications(this._options));
   }
 
   private _transactions?: Transactions;
@@ -75,9 +81,9 @@ export class Midday extends ClientSDK {
     return (this._search ??= new Search(this._options));
   }
 
-  private _metrics?: Metrics;
-  get metrics(): Metrics {
-    return (this._metrics ??= new Metrics(this._options));
+  private _reports?: Reports;
+  get reports(): Reports {
+    return (this._reports ??= new Reports(this._options));
   }
 
   private _trackerProjects?: TrackerProjects;

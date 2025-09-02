@@ -278,15 +278,12 @@ run();
 * [get](docs/sdks/invoices/README.md#get) - Retrieve a invoice
 * [delete](docs/sdks/invoices/README.md#delete) - Delete a invoice
 
-### [metrics](docs/sdks/metrics/README.md)
 
-* [revenue](docs/sdks/metrics/README.md#revenue) - Revenue metrics
-* [profit](docs/sdks/metrics/README.md#profit) - Profit metrics
-* [burnRate](docs/sdks/metrics/README.md#burnrate) - Burn rate metrics
-* [runway](docs/sdks/metrics/README.md#runway) - Runway metrics
-* [expenses](docs/sdks/metrics/README.md#expenses) - Expense metrics
-* [spending](docs/sdks/metrics/README.md#spending) - Spending metrics
+### [notifications](docs/sdks/notifications/README.md)
 
+* [list](docs/sdks/notifications/README.md#list) - List all notifications
+* [updateStatus](docs/sdks/notifications/README.md#updatestatus) - Update notification status
+* [updateAllStatus](docs/sdks/notifications/README.md#updateallstatus) - Update status of all notifications
 
 ### [oAuth](docs/sdks/oauth/README.md)
 
@@ -294,6 +291,15 @@ run();
 * [postOAuthAuthorization](docs/sdks/oauth/README.md#postoauthauthorization) - OAuth Authorization Decision
 * [postOAuthToken](docs/sdks/oauth/README.md#postoauthtoken) - OAuth Token Exchange
 * [postOAuthRevoke](docs/sdks/oauth/README.md#postoauthrevoke) - OAuth Token Revocation
+
+### [reports](docs/sdks/reports/README.md)
+
+* [revenue](docs/sdks/reports/README.md#revenue) - Revenue reports
+* [profit](docs/sdks/reports/README.md#profit) - Profit reports
+* [burnRate](docs/sdks/reports/README.md#burnrate) - Burn rate reports
+* [runway](docs/sdks/reports/README.md#runway) - Runway reports
+* [expenses](docs/sdks/reports/README.md#expenses) - Expense reports
+* [spending](docs/sdks/reports/README.md#spending) - Spending reports
 
 ### [search](docs/sdks/search/README.md)
 
@@ -393,16 +399,19 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`invoicesGetInvoicesPaymentStatus`](docs/sdks/invoices/README.md#getinvoicespaymentstatus) - Payment status
 - [`invoicesList`](docs/sdks/invoices/README.md#list) - List all invoices
 - [`invoicesSummary`](docs/sdks/invoices/README.md#summary) - Invoice summary
-- [`metricsBurnRate`](docs/sdks/metrics/README.md#burnrate) - Burn rate metrics
-- [`metricsExpenses`](docs/sdks/metrics/README.md#expenses) - Expense metrics
-- [`metricsProfit`](docs/sdks/metrics/README.md#profit) - Profit metrics
-- [`metricsRevenue`](docs/sdks/metrics/README.md#revenue) - Revenue metrics
-- [`metricsRunway`](docs/sdks/metrics/README.md#runway) - Runway metrics
-- [`metricsSpending`](docs/sdks/metrics/README.md#spending) - Spending metrics
+- [`notificationsList`](docs/sdks/notifications/README.md#list) - List all notifications
+- [`notificationsUpdateAllStatus`](docs/sdks/notifications/README.md#updateallstatus) - Update status of all notifications
+- [`notificationsUpdateStatus`](docs/sdks/notifications/README.md#updatestatus) - Update notification status
 - [`oAuthGetOAuthAuthorization`](docs/sdks/oauth/README.md#getoauthauthorization) - OAuth Authorization Endpoint
 - [`oAuthPostOAuthAuthorization`](docs/sdks/oauth/README.md#postoauthauthorization) - OAuth Authorization Decision
 - [`oAuthPostOAuthRevoke`](docs/sdks/oauth/README.md#postoauthrevoke) - OAuth Token Revocation
 - [`oAuthPostOAuthToken`](docs/sdks/oauth/README.md#postoauthtoken) - OAuth Token Exchange
+- [`reportsBurnRate`](docs/sdks/reports/README.md#burnrate) - Burn rate reports
+- [`reportsExpenses`](docs/sdks/reports/README.md#expenses) - Expense reports
+- [`reportsProfit`](docs/sdks/reports/README.md#profit) - Profit reports
+- [`reportsRevenue`](docs/sdks/reports/README.md#revenue) - Revenue reports
+- [`reportsRunway`](docs/sdks/reports/README.md#runway) - Runway reports
+- [`reportsSpending`](docs/sdks/reports/README.md#spending) - Spending reports
 - [`searchSearch`](docs/sdks/search/README.md#search) - Search
 - [`tagsCreate`](docs/sdks/tags/README.md#create) - Create a new tag
 - [`tagsDelete`](docs/sdks/tags/README.md#delete) - Delete a tag
@@ -599,10 +608,10 @@ run();
 
 
 **Inherit from [`MiddayError`](./src/models/errors/middayerror.ts)**:
-* [`GetOAuthAuthorizationBadRequestError`](./src/models/errors/getoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 66 methods.*
-* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 66 methods.*
-* [`PostOAuthTokenBadRequestError`](./src/models/errors/postoauthtokenbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 66 methods.*
-* [`UnauthorizedError`](./src/models/errors/unauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 66 methods.*
+* [`GetOAuthAuthorizationBadRequestError`](./src/models/errors/getoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 69 methods.*
+* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 69 methods.*
+* [`PostOAuthTokenBadRequestError`](./src/models/errors/postoauthtokenbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 69 methods.*
+* [`UnauthorizedError`](./src/models/errors/unauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 69 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

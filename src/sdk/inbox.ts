@@ -4,6 +4,7 @@
 
 import { inboxDelete } from "../funcs/inboxDelete.js";
 import { inboxGet } from "../funcs/inboxGet.js";
+import { inboxGetPreSignedUrl } from "../funcs/inboxGetPreSignedUrl.js";
 import { inboxList } from "../funcs/inboxList.js";
 import { inboxUpdate } from "../funcs/inboxUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -73,6 +74,23 @@ export class Inbox extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.UpdateInboxItemResponse> {
     return unwrapAsync(inboxUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Generate pre-signed URL for inbox attachment
+   *
+   * @remarks
+   * Generate a pre-signed URL for accessing an inbox attachment. The URL is valid for 60 seconds and allows secure temporary access to the attachment file.
+   */
+  async getPreSignedUrl(
+    request: operations.GetInboxPreSignedUrlRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetInboxPreSignedUrlResponse> {
+    return unwrapAsync(inboxGetPreSignedUrl(
       this,
       request,
       options,

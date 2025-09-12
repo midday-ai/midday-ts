@@ -8,6 +8,7 @@
 * [list](#list) - List all documents
 * [get](#get) - Retrieve a document
 * [delete](#delete) - Delete a document
+* [getPreSignedUrl](#getpresignedurl) - Generate pre-signed URL for document
 
 ## list
 
@@ -251,3 +252,85 @@ run();
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## getPreSignedUrl
+
+Generate a pre-signed URL for accessing a document. The URL is valid for 60 seconds and allows secure temporary access to the document file.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getDocumentPreSignedUrl" method="post" path="/documents/{id}/presigned-url" -->
+```typescript
+import { Midday } from "@midday-ai/sdk";
+
+const midday = new Midday({
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
+});
+
+async function run() {
+  const result = await midday.documents.getPreSignedUrl({
+    id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
+    download: true,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { documentsGetPreSignedUrl } from "@midday-ai/sdk/funcs/documentsGetPreSignedUrl.js";
+
+// Use `MiddayCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const midday = new MiddayCore({
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
+});
+
+async function run() {
+  const res = await documentsGetPreSignedUrl(midday, {
+    id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
+    download: true,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("documentsGetPreSignedUrl failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetDocumentPreSignedUrlRequest](../../models/operations/getdocumentpresignedurlrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetDocumentPreSignedUrlResponse](../../models/operations/getdocumentpresignedurlresponse.md)\>**
+
+### Errors
+
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| errors.GetDocumentPreSignedUrlBadRequestError     | 400                                               | application/json                                  |
+| errors.GetDocumentPreSignedUrlNotFoundError       | 404                                               | application/json                                  |
+| errors.GetDocumentPreSignedUrlInternalServerError | 500                                               | application/json                                  |
+| errors.APIError                                   | 4XX, 5XX                                          | \*/\*                                             |

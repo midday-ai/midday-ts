@@ -71,9 +71,9 @@ export type GetInvoiceByIdResponse = {
    */
   issueDate: string;
   /**
-   * Invoice number as shown to the customer
+   * Invoice number as shown to the customer (auto-generated if not provided)
    */
-  invoiceNumber: string;
+  invoiceNumber?: string | undefined;
   /**
    * Total amount of the invoice
    */
@@ -138,6 +138,14 @@ export type GetInvoiceByIdResponse = {
    * Timestamp when the invoice was last updated (ISO 8601)
    */
   updatedAt: string;
+  /**
+   * URL to download the invoice PDF, or null if not generated
+   */
+  pdfUrl: string | null;
+  /**
+   * URL to preview the invoice in the browser, or null if not generated
+   */
+  previewUrl: string | null;
 };
 
 /** @internal */
@@ -288,7 +296,7 @@ export const GetInvoiceByIdResponse$inboundSchema: z.ZodType<
   status: GetInvoiceByIdStatus$inboundSchema,
   dueDate: z.string(),
   issueDate: z.string(),
-  invoiceNumber: z.string(),
+  invoiceNumber: z.string().optional(),
   amount: z.number(),
   currency: z.string(),
   customer: z.lazy(() => GetInvoiceByIdCustomer$inboundSchema),
@@ -305,6 +313,8 @@ export const GetInvoiceByIdResponse$inboundSchema: z.ZodType<
   sentAt: z.nullable(z.string()),
   createdAt: z.string(),
   updatedAt: z.string(),
+  pdfUrl: z.nullable(z.string()),
+  previewUrl: z.nullable(z.string()),
 });
 
 /** @internal */
@@ -313,7 +323,7 @@ export type GetInvoiceByIdResponse$Outbound = {
   status: string;
   dueDate: string;
   issueDate: string;
-  invoiceNumber: string;
+  invoiceNumber?: string | undefined;
   amount: number;
   currency: string;
   customer: GetInvoiceByIdCustomer$Outbound;
@@ -330,6 +340,8 @@ export type GetInvoiceByIdResponse$Outbound = {
   sentAt: string | null;
   createdAt: string;
   updatedAt: string;
+  pdfUrl: string | null;
+  previewUrl: string | null;
 };
 
 /** @internal */
@@ -342,7 +354,7 @@ export const GetInvoiceByIdResponse$outboundSchema: z.ZodType<
   status: GetInvoiceByIdStatus$outboundSchema,
   dueDate: z.string(),
   issueDate: z.string(),
-  invoiceNumber: z.string(),
+  invoiceNumber: z.string().optional(),
   amount: z.number(),
   currency: z.string(),
   customer: z.lazy(() => GetInvoiceByIdCustomer$outboundSchema),
@@ -359,6 +371,8 @@ export const GetInvoiceByIdResponse$outboundSchema: z.ZodType<
   sentAt: z.nullable(z.string()),
   createdAt: z.string(),
   updatedAt: z.string(),
+  pdfUrl: z.nullable(z.string()),
+  previewUrl: z.nullable(z.string()),
 });
 
 /**

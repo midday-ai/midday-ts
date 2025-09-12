@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: a4670324b1926b60a03d3345af8d21c2
+  docChecksum: c0efa11ea29b4c54c086646d2d1d52ae
   docVersion: 0.0.1
-  speakeasyVersion: 1.607.0
-  generationVersion: 2.690.1
-  releaseVersion: 0.4.1
-  configChecksum: c36a31b1774efde7031309902060fabb
+  speakeasyVersion: 1.615.2
+  generationVersion: 2.698.4
+  releaseVersion: 0.4.2
+  configChecksum: 670f0e362254598835dfcc8c410ad6b7
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true
@@ -14,14 +14,14 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.21
+    core: 3.21.22
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
     enums: 2.82.1
     envVarSecurityUsage: 0.1.2
     examples: 2.82.3
-    globalSecurity: 2.82.13
+    globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.5
     mcpServer: 0.9.3
@@ -47,7 +47,20 @@ generatedFiles:
   - docs/models/connection.md
   - docs/models/createtag.md
   - docs/models/customer.md
+  - docs/models/errors/conflicterror.md
+  - docs/models/errors/createinvoicebadrequesterror.md
+  - docs/models/errors/createinvoiceinternalservererror.md
+  - docs/models/errors/createinvoicenotfounderror.md
+  - docs/models/errors/getdocumentpresignedurlbadrequesterror.md
+  - docs/models/errors/getdocumentpresignedurlinternalservererror.md
+  - docs/models/errors/getdocumentpresignedurlnotfounderror.md
+  - docs/models/errors/getinboxpresignedurlbadrequesterror.md
+  - docs/models/errors/getinboxpresignedurlinternalservererror.md
+  - docs/models/errors/getinboxpresignedurlnotfounderror.md
   - docs/models/errors/getoauthauthorizationbadrequesterror.md
+  - docs/models/errors/gettransactionattachmentpresignedurlbadrequesterror.md
+  - docs/models/errors/gettransactionattachmentpresignedurlinternalservererror.md
+  - docs/models/errors/gettransactionattachmentpresignedurlnotfounderror.md
   - docs/models/errors/postoauthauthorizationbadrequesterror.md
   - docs/models/errors/postoauthtokenbadrequesterror.md
   - docs/models/errors/unauthorizederror.md
@@ -64,12 +77,16 @@ generatedFiles:
   - docs/models/notificationsresponseschemameta.md
   - docs/models/operations/attachments.md
   - docs/models/operations/authorizationcode.md
+  - docs/models/operations/bottomblock.md
   - docs/models/operations/createbankaccountrequest.md
   - docs/models/operations/createbankaccountresponse.md
   - docs/models/operations/createcustomerrequest.md
   - docs/models/operations/createcustomerresponse.md
   - docs/models/operations/createcustomertagrequest.md
   - docs/models/operations/createcustomertagresponse.md
+  - docs/models/operations/createinvoicerequest.md
+  - docs/models/operations/createinvoiceresponse.md
+  - docs/models/operations/createinvoicestatus.md
   - docs/models/operations/createtrackerentriesbulkcustomer.md
   - docs/models/operations/createtrackerentriesbulkdata.md
   - docs/models/operations/createtrackerentriesbulkproject.md
@@ -110,7 +127,9 @@ generatedFiles:
   - docs/models/operations/deletetransactionrequest.md
   - docs/models/operations/deletetransactionresponse.md
   - docs/models/operations/deletetransactionsresponse.md
+  - docs/models/operations/deliverytype.md
   - docs/models/operations/entry.md
+  - docs/models/operations/fromdetails.md
   - docs/models/operations/getbankaccountbyidrequest.md
   - docs/models/operations/getbankaccountbyidresponse.md
   - docs/models/operations/getburnratereportsrequest.md
@@ -129,10 +148,14 @@ generatedFiles:
   - docs/models/operations/getdocumentbyidmetadata.md
   - docs/models/operations/getdocumentbyidrequest.md
   - docs/models/operations/getdocumentbyidresponse.md
+  - docs/models/operations/getdocumentpresignedurlrequest.md
+  - docs/models/operations/getdocumentpresignedurlresponse.md
   - docs/models/operations/getexpensesreportsrequest.md
   - docs/models/operations/getinboxitembyidrequest.md
   - docs/models/operations/getinboxitembyidresponse.md
   - docs/models/operations/getinboxitembyidtransaction.md
+  - docs/models/operations/getinboxpresignedurlrequest.md
+  - docs/models/operations/getinboxpresignedurlresponse.md
   - docs/models/operations/getinvoicebyidcustomer.md
   - docs/models/operations/getinvoicebyidrequest.md
   - docs/models/operations/getinvoicebyidresponse.md
@@ -156,9 +179,12 @@ generatedFiles:
   - docs/models/operations/gettimerstatusrequest.md
   - docs/models/operations/gettimerstatusresponse.md
   - docs/models/operations/gettrackerprojectbyidrequest.md
+  - docs/models/operations/gettransactionattachmentpresignedurlrequest.md
+  - docs/models/operations/gettransactionattachmentpresignedurlresponse.md
   - docs/models/operations/gettransactionbyidrequest.md
   - docs/models/operations/granttypeauthorizationcode.md
   - docs/models/operations/granttyperefreshtoken.md
+  - docs/models/operations/lineitem.md
   - docs/models/operations/listbankaccountsdata.md
   - docs/models/operations/listbankaccountsrequest.md
   - docs/models/operations/listbankaccountsresponse.md
@@ -205,6 +231,9 @@ generatedFiles:
   - docs/models/operations/listtransactionsrequest.md
   - docs/models/operations/listtransactionsresponse.md
   - docs/models/operations/listtransactionstype.md
+  - docs/models/operations/name.md
+  - docs/models/operations/notedetails.md
+  - docs/models/operations/paymentdetails.md
   - docs/models/operations/postoauthauthorizationrequest.md
   - docs/models/operations/postoauthauthorizationresponse.md
   - docs/models/operations/postoauthrevokerequest.md
@@ -219,6 +248,7 @@ generatedFiles:
   - docs/models/operations/scope.md
   - docs/models/operations/searchrequest.md
   - docs/models/operations/searchresponse.md
+  - docs/models/operations/size.md
   - docs/models/operations/starttimercustomer.md
   - docs/models/operations/starttimerdata.md
   - docs/models/operations/starttimerproject.md
@@ -232,8 +262,13 @@ generatedFiles:
   - docs/models/operations/stoptimerrequest.md
   - docs/models/operations/stoptimerresponse.md
   - docs/models/operations/stoptimeruser.md
+  - docs/models/operations/template.md
+  - docs/models/operations/templatedeliverytype.md
+  - docs/models/operations/templatefromdetails.md
+  - docs/models/operations/templatepaymentdetails.md
   - docs/models/operations/tokentype.md
   - docs/models/operations/tokentypehint.md
+  - docs/models/operations/topblock.md
   - docs/models/operations/trackerproject.md
   - docs/models/operations/updatebankaccountrequest.md
   - docs/models/operations/updatebankaccountrequestbody.md
@@ -253,6 +288,12 @@ generatedFiles:
   - docs/models/operations/updateinboxitemresponse.md
   - docs/models/operations/updateinboxitemstatus.md
   - docs/models/operations/updateinboxitemtransaction.md
+  - docs/models/operations/updateinvoicecustomer.md
+  - docs/models/operations/updateinvoicerequest.md
+  - docs/models/operations/updateinvoicerequestbody.md
+  - docs/models/operations/updateinvoiceresponse.md
+  - docs/models/operations/updateinvoicestatusrequest.md
+  - docs/models/operations/updateinvoicestatusresponse.md
   - docs/models/operations/updatenotificationstatusrequest.md
   - docs/models/operations/updatenotificationstatusrequestbody.md
   - docs/models/operations/updatenotificationstatusstatus.md
@@ -352,16 +393,20 @@ generatedFiles:
   - src/funcs/customersUpdate.ts
   - src/funcs/documentsDelete.ts
   - src/funcs/documentsGet.ts
+  - src/funcs/documentsGetPreSignedUrl.ts
   - src/funcs/documentsList.ts
   - src/funcs/inboxDelete.ts
   - src/funcs/inboxGet.ts
+  - src/funcs/inboxGetPreSignedUrl.ts
   - src/funcs/inboxList.ts
   - src/funcs/inboxUpdate.ts
+  - src/funcs/invoicesCreate.ts
   - src/funcs/invoicesDelete.ts
   - src/funcs/invoicesGet.ts
   - src/funcs/invoicesGetInvoicesPaymentStatus.ts
   - src/funcs/invoicesList.ts
   - src/funcs/invoicesSummary.ts
+  - src/funcs/invoicesUpdate.ts
   - src/funcs/notificationsList.ts
   - src/funcs/notificationsUpdateAllStatus.ts
   - src/funcs/notificationsUpdateStatus.ts
@@ -404,6 +449,7 @@ generatedFiles:
   - src/funcs/transactionsDelete.ts
   - src/funcs/transactionsDeleteMany.ts
   - src/funcs/transactionsGet.ts
+  - src/funcs/transactionsGetAttachmentPreSignedUrl.ts
   - src/funcs/transactionsList.ts
   - src/funcs/transactionsUpdate.ts
   - src/funcs/transactionsUpdateMany.ts
@@ -454,16 +500,20 @@ generatedFiles:
   - src/mcp-server/tools/customersUpdate.ts
   - src/mcp-server/tools/documentsDelete.ts
   - src/mcp-server/tools/documentsGet.ts
+  - src/mcp-server/tools/documentsGetPreSignedUrl.ts
   - src/mcp-server/tools/documentsList.ts
   - src/mcp-server/tools/inboxDelete.ts
   - src/mcp-server/tools/inboxGet.ts
+  - src/mcp-server/tools/inboxGetPreSignedUrl.ts
   - src/mcp-server/tools/inboxList.ts
   - src/mcp-server/tools/inboxUpdate.ts
+  - src/mcp-server/tools/invoicesCreate.ts
   - src/mcp-server/tools/invoicesDelete.ts
   - src/mcp-server/tools/invoicesGet.ts
   - src/mcp-server/tools/invoicesGetInvoicesPaymentStatus.ts
   - src/mcp-server/tools/invoicesList.ts
   - src/mcp-server/tools/invoicesSummary.ts
+  - src/mcp-server/tools/invoicesUpdate.ts
   - src/mcp-server/tools/notificationsList.ts
   - src/mcp-server/tools/notificationsUpdateAllStatus.ts
   - src/mcp-server/tools/notificationsUpdateStatus.ts
@@ -506,6 +556,7 @@ generatedFiles:
   - src/mcp-server/tools/transactionsDelete.ts
   - src/mcp-server/tools/transactionsDeleteMany.ts
   - src/mcp-server/tools/transactionsGet.ts
+  - src/mcp-server/tools/transactionsGetAttachmentPreSignedUrl.ts
   - src/mcp-server/tools/transactionsList.ts
   - src/mcp-server/tools/transactionsUpdate.ts
   - src/mcp-server/tools/transactionsUpdateMany.ts
@@ -513,7 +564,11 @@ generatedFiles:
   - src/mcp-server/tools/usersUpdate.ts
   - src/models/createtag.ts
   - src/models/errors/apierror.ts
+  - src/models/errors/createinvoice.ts
+  - src/models/errors/getdocumentpresignedurl.ts
+  - src/models/errors/getinboxpresignedurl.ts
   - src/models/errors/getoauthauthorization.ts
+  - src/models/errors/gettransactionattachmentpresignedurl.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
   - src/models/errors/middayerror.ts
@@ -532,6 +587,7 @@ generatedFiles:
   - src/models/notificationsresponseschema.ts
   - src/models/operations/createbankaccount.ts
   - src/models/operations/createcustomer.ts
+  - src/models/operations/createinvoice.ts
   - src/models/operations/createtrackerentriesbulk.ts
   - src/models/operations/createtrackerentry.ts
   - src/models/operations/createtrackerproject.ts
@@ -553,8 +609,10 @@ generatedFiles:
   - src/models/operations/getcurrentuser.ts
   - src/models/operations/getcustomerbyid.ts
   - src/models/operations/getdocumentbyid.ts
+  - src/models/operations/getdocumentpresignedurl.ts
   - src/models/operations/getexpensesreports.ts
   - src/models/operations/getinboxitembyid.ts
+  - src/models/operations/getinboxpresignedurl.ts
   - src/models/operations/getinvoicebyid.ts
   - src/models/operations/getinvoicespaymentstatus.ts
   - src/models/operations/getinvoicesummary.ts
@@ -567,6 +625,7 @@ generatedFiles:
   - src/models/operations/getteambyid.ts
   - src/models/operations/gettimerstatus.ts
   - src/models/operations/gettrackerprojectbyid.ts
+  - src/models/operations/gettransactionattachmentpresignedurl.ts
   - src/models/operations/gettransactionbyid.ts
   - src/models/operations/index.ts
   - src/models/operations/listbankaccounts.ts
@@ -590,6 +649,7 @@ generatedFiles:
   - src/models/operations/updatecurrentuser.ts
   - src/models/operations/updatecustomer.ts
   - src/models/operations/updateinboxitem.ts
+  - src/models/operations/updateinvoice.ts
   - src/models/operations/updatenotificationstatus.ts
   - src/models/operations/updatetag.ts
   - src/models/operations/updateteambyid.ts
@@ -1435,7 +1495,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"id": "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a", "status": "paid", "dueDate": "2024-06-30T23:59:59.000Z", "issueDate": "2024-06-01T00:00:00.000Z", "invoiceNumber": "INV-2024-001", "amount": 1500.75, "currency": "USD", "customer": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "Acme Corporation", "website": "https://acme.com", "email": "info@acme.com"}, "paidAt": "2024-06-15T12:00:00.000Z", "reminderSentAt": "2024-06-10T09:00:00.000Z", "note": "Thank you for your business.", "vat": 120, "tax": 80, "discount": 50, "subtotal": 1400, "viewedAt": "2024-06-05T14:30:00.000Z", "customerName": "Acme Corporation", "sentTo": "billing@acme.com", "sentAt": "2024-06-02T08:00:00.000Z", "createdAt": "2024-06-01T07:00:00.000Z", "updatedAt": "2024-06-15T10:00:00.000Z"}
+          application/json: {"id": "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a", "status": "paid", "dueDate": "2024-06-30T23:59:59.000Z", "issueDate": "2024-06-01T00:00:00.000Z", "invoiceNumber": "INV-2024-001", "amount": 1500.75, "currency": "USD", "customer": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "Acme Corporation", "website": "https://acme.com", "email": "info@acme.com"}, "paidAt": "2024-06-15T12:00:00.000Z", "reminderSentAt": "2024-06-10T09:00:00.000Z", "note": "Thank you for your business.", "vat": 120, "tax": 80, "discount": 50, "subtotal": 1400, "viewedAt": "2024-06-05T14:30:00.000Z", "customerName": "Acme Corporation", "sentTo": "billing@acme.com", "sentAt": "2024-06-02T08:00:00.000Z", "createdAt": "2024-06-01T07:00:00.000Z", "updatedAt": "2024-06-15T10:00:00.000Z", "pdfUrl": "https://app.midday.ai/api/download/invoice?token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImM1NTEwNDA3LTkyMmQtNDllZC05MjZiLTE2NzhkNTQ4ZmQ5MCJ9.12X3Wb5UJ5I6yZ5l6-6U8TxIPqnySKUb0NMwSL4p44s", "previewUrl": "https://app.midday.ai/i/eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjBiNWM2MmIxLTgxMjYtNDdhMS1iNjNmLWM0NjhlM2Y5MTgzNiJ9.jvwUP4PXVUWyKZAgav5SV7wjAaf8biDXMDEYHLGA5qE"}
   deleteInvoice:
     speakeasy-default-delete-invoice:
       parameters:
@@ -1777,6 +1837,80 @@ examples:
       responses:
         "200":
           application/json: [{"name": "Taxes", "slug": "taxes", "amount": -1256445, "currency": "SEK", "color": "#8492A6", "percentage": 44}]
+  getTransactionAttachmentPreSignedUrl:
+    speakeasy-default-get-transaction-attachment-pre-signed-url:
+      parameters:
+        path:
+          transactionId: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4"
+          attachmentId: "a43dc3a5-6925-4d91-ac9c-4c1a34bdb388"
+        query:
+          download: true
+      responses:
+        "200":
+          application/json: {"url": "https://service.midday.ai/storage/v1/object/sign/vault/transactions/receipt.pdf?token=abc123&expires=1640995200", "expiresAt": "2024-04-15T10:01:00.000Z", "fileName": "receipt.pdf"}
+        "400":
+          application/json: {"error": "<value>"}
+        "404":
+          application/json: {"error": "<value>"}
+        "500":
+          application/json: {"error": "<value>"}
+  getDocumentPreSignedUrl:
+    speakeasy-default-get-document-pre-signed-url:
+      parameters:
+        path:
+          id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4"
+        query:
+          download: true
+      responses:
+        "200":
+          application/json: {"url": "https://service.midday.ai/storage/v1/object/sign/vault/documents/2024/invoice.pdf?token=abc123&expires=1640995200", "expiresAt": "2024-04-15T10:01:00.000Z", "fileName": "invoice-april-2024.pdf"}
+        "400":
+          application/json: {"error": "<value>"}
+        "404":
+          application/json: {"error": "<value>"}
+        "500":
+          application/json: {"error": "<value>"}
+  getInboxPreSignedUrl:
+    speakeasy-default-get-inbox-pre-signed-url:
+      parameters:
+        path:
+          id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4"
+        query:
+          download: true
+      responses:
+        "200":
+          application/json: {"url": "https://service.midday.ai/storage/v1/object/sign/vault/inbox/document.pdf?token=abc123&expires=1640995200", "expiresAt": "2024-04-15T10:01:00.000Z", "fileName": "invoice.pdf"}
+        "400":
+          application/json: {"error": "<value>"}
+        "404":
+          application/json: {"error": "<value>"}
+        "500":
+          application/json: {"error": "<value>"}
+  createInvoice:
+    speakeasy-default-create-invoice:
+      requestBody:
+        application/json: {"template": {"customerLabel": "Bill To", "title": "Invoice", "fromLabel": "From", "invoiceNoLabel": "Invoice #", "issueDateLabel": "Issue Date", "dueDateLabel": "Due Date", "descriptionLabel": "Description", "priceLabel": "Rate", "quantityLabel": "Qty", "totalLabel": "Amount", "totalSummaryLabel": "Total", "vatLabel": "VAT", "taxLabel": "Sales Tax", "discountLabel": "Discount", "timezone": "America/Los_Angeles", "paymentLabel": "Payment Information", "noteLabel": "Notes", "logoUrl": "https://example.com/logo.png", "currency": "USD", "dateFormat": "MM/dd/yyyy", "includeVat": false, "includeTax": true, "includeDiscount": false, "includeDecimals": true, "includePdf": true, "sendCopy": true, "includeUnits": true, "includeQr": false, "taxRate": 8.5, "vatRate": 0, "size": "letter", "deliveryType": "create", "locale": "en-US", "paymentDetails": {}, "fromDetails": {}}, "fromDetails": {}, "customerId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "paymentDetails": {}, "noteDetails": {}, "dueDate": "2024-07-15T23:59:59.000Z", "issueDate": "2024-06-15T00:00:00.000Z", "invoiceNumber": "INV-2024-001", "logoUrl": "https://example.com/logo.png", "tax": 85, "topBlock": {}, "bottomBlock": {}, "amount": 1085, "lineItems": [{"quantity": 40, "price": 75, "tax": 8.5, "name": {}}, {"quantity": 20, "price": 50, "tax": 8.5, "name": {}}], "deliveryType": "create", "scheduledAt": "2024-07-01T09:00:00.000Z"}
+      responses:
+        "201":
+          application/json: {"id": "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a", "status": "draft", "createdAt": "2024-06-01T07:00:00.000Z", "updatedAt": "2024-06-01T07:00:00.000Z", "pdfUrl": "https://app.midday.ai/api/download/invoice?token=eyJ...", "previewUrl": "https://app.midday.ai/i/eyJ..."}
+        "400":
+          application/json: {"message": "scheduledAt is required for scheduled delivery"}
+        "404":
+          application/json: {"message": "Customer not found"}
+        "409":
+          application/json: {"message": "Invoice number 'INV-2024-001' is already used. Please provide a different invoice number or omit it to auto-generate one."}
+        "500":
+          application/json: {"message": "Failed to create invoice"}
+  updateInvoice:
+    speakeasy-default-update-invoice:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"status": "paid", "paidAt": "2024-06-15T12:00:00.000Z", "internalNote": "Payment received via bank transfer"}
+      responses:
+        "200":
+          application/json: {"id": "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a", "status": "paid", "dueDate": "2024-06-30T23:59:59.000Z", "issueDate": "2024-06-01T00:00:00.000Z", "invoiceNumber": "INV-2024-001", "amount": 1500.75, "currency": "USD", "customer": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "Acme Corporation", "website": "https://acme.com", "email": "info@acme.com"}, "paidAt": "2024-06-15T12:00:00.000Z", "reminderSentAt": "2024-06-10T09:00:00.000Z", "note": "Thank you for your business.", "vat": 120, "tax": 80, "discount": 50, "subtotal": 1400, "viewedAt": "2024-06-05T14:30:00.000Z", "customerName": "Acme Corporation", "sentTo": "billing@acme.com", "sentAt": "2024-06-02T08:00:00.000Z", "createdAt": "2024-06-01T07:00:00.000Z", "updatedAt": "2024-06-15T10:00:00.000Z", "pdfUrl": "https://app.midday.ai/api/download/invoice?token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImM1NTEwNDA3LTkyMmQtNDllZC05MjZiLTE2NzhkNTQ4ZmQ5MCJ9.12X3Wb5UJ5I6yZ5l6-6U8TxIPqnySKUb0NMwSL4p44s", "previewUrl": "https://app.midday.ai/i/eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjBiNWM2MmIxLTgxMjYtNDdhMS1iNjNmLWM0NjhlM2Y5MTgzNiJ9.jvwUP4PXVUWyKZAgav5SV7wjAaf8biDXMDEYHLGA5qE"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `midday.notifications.list()`: **Added**\n* `midday.notifications.updateStatus()`: **Added**\n* `midday.notifications.updateAllStatus()`: **Added**\n* `midday.reports.revenue()`: **Added**\n* `midday.reports.profit()`: **Added**\n* `midday.reports.burnRate()`: **Added**\n* `midday.reports.runway()`: **Added**\n* `midday.reports.expenses()`: **Added**\n* `midday.reports.spending()`: **Added**\n* `midday.metrics.revenue()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.profit()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.burnRate()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.runway()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.expenses()`: **Deleted** **Breaking** :warning:\n* `midday.metrics.spending()`: **Deleted** **Breaking** :warning:\n* `midday.oAuth.postOAuthToken()`: \n  *  `request.[class].clientSecret` **Changed**\n* `midday.oAuth.postOAuthRevoke()`: \n  *  `request.clientSecret` **Changed**\n* `midday.inbox.list()`: \n  *  `request.status` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes Detected:\n* `midday.transactions.getAttachmentPreSignedUrl()`: **Added**\n* `midday.documents.getPreSignedUrl()`: **Added**\n* `midday.inbox.getPreSignedUrl()`: **Added**\n* `midday.invoices.create()`: **Added**\n* `midday.invoices.update()`: **Added**\n* `midday.invoices.list()`:  `response.data.[]` **Changed**\n* `midday.invoices.get()`:  `response` **Changed**\n* `midday.search.search()`: \n  *  `request.relevanceThreshold` **Changed**\n* `midday.trackerEntries.create()`: \n  *  `request.assignedId` **Changed**\n* `midday.trackerEntries.createBulk()`: \n  *  `request.entries.[].assignedId` **Changed**\n* `midday.trackerEntries.update()`: \n  *  `request.requestBody.assignedId` **Changed**\n"

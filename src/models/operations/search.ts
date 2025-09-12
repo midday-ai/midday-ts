@@ -13,7 +13,7 @@ export type SearchRequest = {
   language?: string | undefined;
   limit?: number | undefined;
   itemsPerTableLimit?: number | undefined;
-  relevanceThreshold?: number | undefined;
+  relevanceThreshold?: number | null | undefined;
 };
 
 export type SearchResponse = {
@@ -49,7 +49,7 @@ export const SearchRequest$inboundSchema: z.ZodType<
   language: z.string().optional(),
   limit: z.number().default(30),
   itemsPerTableLimit: z.number().default(5),
-  relevanceThreshold: z.number().default(0.01),
+  relevanceThreshold: z.nullable(z.number().default(0.01)),
 });
 
 /** @internal */
@@ -58,7 +58,7 @@ export type SearchRequest$Outbound = {
   language?: string | undefined;
   limit: number;
   itemsPerTableLimit: number;
-  relevanceThreshold: number;
+  relevanceThreshold: number | null;
 };
 
 /** @internal */
@@ -71,7 +71,7 @@ export const SearchRequest$outboundSchema: z.ZodType<
   language: z.string().optional(),
   limit: z.number().default(30),
   itemsPerTableLimit: z.number().default(5),
-  relevanceThreshold: z.number().default(0.01),
+  relevanceThreshold: z.nullable(z.number().default(0.01)),
 });
 
 /**

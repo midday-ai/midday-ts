@@ -7,6 +7,7 @@ import { transactionsCreateMany } from "../funcs/transactionsCreateMany.js";
 import { transactionsDelete } from "../funcs/transactionsDelete.js";
 import { transactionsDeleteMany } from "../funcs/transactionsDeleteMany.js";
 import { transactionsGet } from "../funcs/transactionsGet.js";
+import { transactionsGetAttachmentPreSignedUrl } from "../funcs/transactionsGetAttachmentPreSignedUrl.js";
 import { transactionsList } from "../funcs/transactionsList.js";
 import { transactionsUpdate } from "../funcs/transactionsUpdate.js";
 import { transactionsUpdateMany } from "../funcs/transactionsUpdateMany.js";
@@ -95,6 +96,23 @@ export class Transactions extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeleteTransactionResponse> {
     return unwrapAsync(transactionsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Generate pre-signed URL for transaction attachment
+   *
+   * @remarks
+   * Generate a pre-signed URL for accessing a transaction attachment. The URL is valid for 60 seconds and allows secure temporary access to the attachment file.
+   */
+  async getAttachmentPreSignedUrl(
+    request: operations.GetTransactionAttachmentPreSignedUrlRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetTransactionAttachmentPreSignedUrlResponse> {
+    return unwrapAsync(transactionsGetAttachmentPreSignedUrl(
       this,
       request,
       options,

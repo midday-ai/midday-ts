@@ -10,6 +10,7 @@
 * [get](#get) - Retrieve a transaction
 * [update](#update) - Update a transaction
 * [delete](#delete) - Delete a transaction
+* [getAttachmentPreSignedUrl](#getattachmentpresignedurl) - Generate pre-signed URL for transaction attachment
 * [updateMany](#updatemany) - Bulk update transactions
 * [createMany](#createmany) - Bulk create transactions
 * [deleteMany](#deletemany) - Bulk delete transactions
@@ -478,6 +479,90 @@ run();
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## getAttachmentPreSignedUrl
+
+Generate a pre-signed URL for accessing a transaction attachment. The URL is valid for 60 seconds and allows secure temporary access to the attachment file.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getTransactionAttachmentPreSignedUrl" method="post" path="/transactions/{transactionId}/attachments/{attachmentId}/presigned-url" -->
+```typescript
+import { Midday } from "@midday-ai/sdk";
+
+const midday = new Midday({
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
+});
+
+async function run() {
+  const result = await midday.transactions.getAttachmentPreSignedUrl({
+    transactionId: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
+    attachmentId: "a43dc3a5-6925-4d91-ac9c-4c1a34bdb388",
+    download: true,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MiddayCore } from "@midday-ai/sdk/core.js";
+import { transactionsGetAttachmentPreSignedUrl } from "@midday-ai/sdk/funcs/transactionsGetAttachmentPreSignedUrl.js";
+
+// Use `MiddayCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const midday = new MiddayCore({
+  security: {
+    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
+  },
+});
+
+async function run() {
+  const res = await transactionsGetAttachmentPreSignedUrl(midday, {
+    transactionId: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
+    attachmentId: "a43dc3a5-6925-4d91-ac9c-4c1a34bdb388",
+    download: true,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("transactionsGetAttachmentPreSignedUrl failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetTransactionAttachmentPreSignedUrlRequest](../../models/operations/gettransactionattachmentpresignedurlrequest.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetTransactionAttachmentPreSignedUrlResponse](../../models/operations/gettransactionattachmentpresignedurlresponse.md)\>**
+
+### Errors
+
+| Error Type                                                     | Status Code                                                    | Content Type                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| errors.GetTransactionAttachmentPreSignedUrlBadRequestError     | 400                                                            | application/json                                               |
+| errors.GetTransactionAttachmentPreSignedUrlNotFoundError       | 404                                                            | application/json                                               |
+| errors.GetTransactionAttachmentPreSignedUrlInternalServerError | 500                                                            | application/json                                               |
+| errors.APIError                                                | 4XX, 5XX                                                       | \*/\*                                                          |
 
 ## updateMany
 

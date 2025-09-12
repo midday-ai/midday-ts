@@ -4,6 +4,7 @@
 
 import { documentsDelete } from "../funcs/documentsDelete.js";
 import { documentsGet } from "../funcs/documentsGet.js";
+import { documentsGetPreSignedUrl } from "../funcs/documentsGetPreSignedUrl.js";
 import { documentsList } from "../funcs/documentsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -55,6 +56,23 @@ export class Documents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeleteDocumentResponse> {
     return unwrapAsync(documentsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Generate pre-signed URL for document
+   *
+   * @remarks
+   * Generate a pre-signed URL for accessing a document. The URL is valid for 60 seconds and allows secure temporary access to the document file.
+   */
+  async getPreSignedUrl(
+    request: operations.GetDocumentPreSignedUrlRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetDocumentPreSignedUrlResponse> {
+    return unwrapAsync(documentsGetPreSignedUrl(
       this,
       request,
       options,

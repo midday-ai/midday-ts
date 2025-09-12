@@ -20,7 +20,7 @@ const midday = new Midday({
 });
 
 async function main() {
-  const result = await midday.getOAuthAuthorization({
+  const result = await midday.oAuth.getOAuthAuthorization({
     responseType: "code",
     clientId: "mid_client_abcdef123456789",
     redirectUri: "https://myapp.com/callback",

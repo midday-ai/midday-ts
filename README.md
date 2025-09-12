@@ -262,6 +262,7 @@ run();
 * [list](docs/sdks/documents/README.md#list) - List all documents
 * [get](docs/sdks/documents/README.md#get) - Retrieve a document
 * [delete](docs/sdks/documents/README.md#delete) - Delete a document
+* [getPreSignedUrl](docs/sdks/documents/README.md#getpresignedurl) - Generate pre-signed URL for document
 
 ### [inbox](docs/sdks/inbox/README.md)
 
@@ -269,13 +270,16 @@ run();
 * [get](docs/sdks/inbox/README.md#get) - Retrieve a inbox item
 * [delete](docs/sdks/inbox/README.md#delete) - Delete a inbox item
 * [update](docs/sdks/inbox/README.md#update) - Update a inbox item
+* [getPreSignedUrl](docs/sdks/inbox/README.md#getpresignedurl) - Generate pre-signed URL for inbox attachment
 
 ### [invoices](docs/sdks/invoices/README.md)
 
 * [list](docs/sdks/invoices/README.md#list) - List all invoices
+* [create](docs/sdks/invoices/README.md#create) - Create an invoice
 * [getInvoicesPaymentStatus](docs/sdks/invoices/README.md#getinvoicespaymentstatus) - Payment status
 * [summary](docs/sdks/invoices/README.md#summary) - Invoice summary
 * [get](docs/sdks/invoices/README.md#get) - Retrieve a invoice
+* [update](docs/sdks/invoices/README.md#update) - Update an invoice
 * [delete](docs/sdks/invoices/README.md#delete) - Delete a invoice
 
 
@@ -350,6 +354,7 @@ run();
 * [get](docs/sdks/transactions/README.md#get) - Retrieve a transaction
 * [update](docs/sdks/transactions/README.md#update) - Update a transaction
 * [delete](docs/sdks/transactions/README.md#delete) - Delete a transaction
+* [getAttachmentPreSignedUrl](docs/sdks/transactions/README.md#getattachmentpresignedurl) - Generate pre-signed URL for transaction attachment
 * [updateMany](docs/sdks/transactions/README.md#updatemany) - Bulk update transactions
 * [createMany](docs/sdks/transactions/README.md#createmany) - Bulk create transactions
 * [deleteMany](docs/sdks/transactions/README.md#deletemany) - Bulk delete transactions
@@ -389,16 +394,20 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`customersUpdate`](docs/sdks/customers/README.md#update) - Update a customer
 - [`documentsDelete`](docs/sdks/documents/README.md#delete) - Delete a document
 - [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
+- [`documentsGetPreSignedUrl`](docs/sdks/documents/README.md#getpresignedurl) - Generate pre-signed URL for document
 - [`documentsList`](docs/sdks/documents/README.md#list) - List all documents
 - [`inboxDelete`](docs/sdks/inbox/README.md#delete) - Delete a inbox item
 - [`inboxGet`](docs/sdks/inbox/README.md#get) - Retrieve a inbox item
+- [`inboxGetPreSignedUrl`](docs/sdks/inbox/README.md#getpresignedurl) - Generate pre-signed URL for inbox attachment
 - [`inboxList`](docs/sdks/inbox/README.md#list) - List all inbox items
 - [`inboxUpdate`](docs/sdks/inbox/README.md#update) - Update a inbox item
+- [`invoicesCreate`](docs/sdks/invoices/README.md#create) - Create an invoice
 - [`invoicesDelete`](docs/sdks/invoices/README.md#delete) - Delete a invoice
 - [`invoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve a invoice
 - [`invoicesGetInvoicesPaymentStatus`](docs/sdks/invoices/README.md#getinvoicespaymentstatus) - Payment status
 - [`invoicesList`](docs/sdks/invoices/README.md#list) - List all invoices
 - [`invoicesSummary`](docs/sdks/invoices/README.md#summary) - Invoice summary
+- [`invoicesUpdate`](docs/sdks/invoices/README.md#update) - Update an invoice
 - [`notificationsList`](docs/sdks/notifications/README.md#list) - List all notifications
 - [`notificationsUpdateAllStatus`](docs/sdks/notifications/README.md#updateallstatus) - Update status of all notifications
 - [`notificationsUpdateStatus`](docs/sdks/notifications/README.md#updatestatus) - Update notification status
@@ -441,6 +450,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`transactionsDelete`](docs/sdks/transactions/README.md#delete) - Delete a transaction
 - [`transactionsDeleteMany`](docs/sdks/transactions/README.md#deletemany) - Bulk delete transactions
 - [`transactionsGet`](docs/sdks/transactions/README.md#get) - Retrieve a transaction
+- [`transactionsGetAttachmentPreSignedUrl`](docs/sdks/transactions/README.md#getattachmentpresignedurl) - Generate pre-signed URL for transaction attachment
 - [`transactionsList`](docs/sdks/transactions/README.md#list) - List all transactions
 - [`transactionsUpdate`](docs/sdks/transactions/README.md#update) - Update a transaction
 - [`transactionsUpdateMany`](docs/sdks/transactions/README.md#updatemany) - Bulk update transactions
@@ -595,7 +605,7 @@ run();
 **Primary error:**
 * [`MiddayError`](./src/models/errors/middayerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (10)</summary>
+<details><summary>Less common errors (23)</summary>
 
 <br />
 
@@ -608,10 +618,23 @@ run();
 
 
 **Inherit from [`MiddayError`](./src/models/errors/middayerror.ts)**:
-* [`GetOAuthAuthorizationBadRequestError`](./src/models/errors/getoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 69 methods.*
-* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 69 methods.*
-* [`PostOAuthTokenBadRequestError`](./src/models/errors/postoauthtokenbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 69 methods.*
-* [`UnauthorizedError`](./src/models/errors/unauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 69 methods.*
+* [`GetOAuthAuthorizationBadRequestError`](./src/models/errors/getoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
+* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
+* [`PostOAuthTokenBadRequestError`](./src/models/errors/postoauthtokenbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
+* [`GetTransactionAttachmentPreSignedUrlBadRequestError`](./src/models/errors/gettransactionattachmentpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 74 methods.*
+* [`GetDocumentPreSignedUrlBadRequestError`](./src/models/errors/getdocumentpresignedurlbadrequesterror.ts): Bad request - Document file path not available. Status code `400`. Applicable to 1 of 74 methods.*
+* [`GetInboxPreSignedUrlBadRequestError`](./src/models/errors/getinboxpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 74 methods.*
+* [`CreateInvoiceBadRequestError`](./src/models/errors/createinvoicebadrequesterror.ts): Bad request. Invalid input data or validation errors. Status code `400`. Applicable to 1 of 74 methods.*
+* [`UnauthorizedError`](./src/models/errors/unauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 74 methods.*
+* [`GetTransactionAttachmentPreSignedUrlNotFoundError`](./src/models/errors/gettransactionattachmentpresignedurlnotfounderror.ts): Transaction or attachment not found. Status code `404`. Applicable to 1 of 74 methods.*
+* [`GetDocumentPreSignedUrlNotFoundError`](./src/models/errors/getdocumentpresignedurlnotfounderror.ts): Document not found. Status code `404`. Applicable to 1 of 74 methods.*
+* [`GetInboxPreSignedUrlNotFoundError`](./src/models/errors/getinboxpresignedurlnotfounderror.ts): Inbox item not found. Status code `404`. Applicable to 1 of 74 methods.*
+* [`CreateInvoiceNotFoundError`](./src/models/errors/createinvoicenotfounderror.ts): Customer not found. Status code `404`. Applicable to 1 of 74 methods.*
+* [`ConflictError`](./src/models/errors/conflicterror.ts): Conflict. Invoice number already exists. Status code `409`. Applicable to 1 of 74 methods.*
+* [`GetTransactionAttachmentPreSignedUrlInternalServerError`](./src/models/errors/gettransactionattachmentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
+* [`GetDocumentPreSignedUrlInternalServerError`](./src/models/errors/getdocumentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
+* [`GetInboxPreSignedUrlInternalServerError`](./src/models/errors/getinboxpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
+* [`CreateInvoiceInternalServerError`](./src/models/errors/createinvoiceinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 74 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

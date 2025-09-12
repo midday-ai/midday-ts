@@ -21,9 +21,9 @@ export type CreateTrackerEntryRequest = {
    */
   dates: Array<string>;
   /**
-   * Unique identifier of the user assigned to this tracker entry
+   * Unique identifier of the user assigned to this tracker entry. If not provided, will use the authenticated user
    */
-  assignedId: string | null;
+  assignedId?: string | null | undefined;
   /**
    * Unique identifier of the project associated with this tracker entry
    */
@@ -190,7 +190,7 @@ export const CreateTrackerEntryRequest$inboundSchema: z.ZodType<
   start: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   stop: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   dates: z.array(z.string()),
-  assignedId: z.nullable(z.string()),
+  assignedId: z.nullable(z.string()).optional(),
   projectId: z.string(),
   description: z.nullable(z.string()).optional(),
   duration: z.number(),
@@ -201,7 +201,7 @@ export type CreateTrackerEntryRequest$Outbound = {
   start: string;
   stop: string;
   dates: Array<string>;
-  assignedId: string | null;
+  assignedId?: string | null | undefined;
   projectId: string;
   description?: string | null | undefined;
   duration: number;
@@ -216,7 +216,7 @@ export const CreateTrackerEntryRequest$outboundSchema: z.ZodType<
   start: z.date().transform(v => v.toISOString()),
   stop: z.date().transform(v => v.toISOString()),
   dates: z.array(z.string()),
-  assignedId: z.nullable(z.string()),
+  assignedId: z.nullable(z.string()).optional(),
   projectId: z.string(),
   description: z.nullable(z.string()).optional(),
   duration: z.number(),

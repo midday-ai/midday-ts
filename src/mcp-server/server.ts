@@ -25,16 +25,20 @@ import { tool$customersList } from "./tools/customersList.js";
 import { tool$customersUpdate } from "./tools/customersUpdate.js";
 import { tool$documentsDelete } from "./tools/documentsDelete.js";
 import { tool$documentsGet } from "./tools/documentsGet.js";
+import { tool$documentsGetPreSignedUrl } from "./tools/documentsGetPreSignedUrl.js";
 import { tool$documentsList } from "./tools/documentsList.js";
 import { tool$inboxDelete } from "./tools/inboxDelete.js";
 import { tool$inboxGet } from "./tools/inboxGet.js";
+import { tool$inboxGetPreSignedUrl } from "./tools/inboxGetPreSignedUrl.js";
 import { tool$inboxList } from "./tools/inboxList.js";
 import { tool$inboxUpdate } from "./tools/inboxUpdate.js";
+import { tool$invoicesCreate } from "./tools/invoicesCreate.js";
 import { tool$invoicesDelete } from "./tools/invoicesDelete.js";
 import { tool$invoicesGet } from "./tools/invoicesGet.js";
 import { tool$invoicesGetInvoicesPaymentStatus } from "./tools/invoicesGetInvoicesPaymentStatus.js";
 import { tool$invoicesList } from "./tools/invoicesList.js";
 import { tool$invoicesSummary } from "./tools/invoicesSummary.js";
+import { tool$invoicesUpdate } from "./tools/invoicesUpdate.js";
 import { tool$notificationsList } from "./tools/notificationsList.js";
 import { tool$notificationsUpdateAllStatus } from "./tools/notificationsUpdateAllStatus.js";
 import { tool$notificationsUpdateStatus } from "./tools/notificationsUpdateStatus.js";
@@ -77,6 +81,7 @@ import { tool$transactionsCreateMany } from "./tools/transactionsCreateMany.js";
 import { tool$transactionsDelete } from "./tools/transactionsDelete.js";
 import { tool$transactionsDeleteMany } from "./tools/transactionsDeleteMany.js";
 import { tool$transactionsGet } from "./tools/transactionsGet.js";
+import { tool$transactionsGetAttachmentPreSignedUrl } from "./tools/transactionsGetAttachmentPreSignedUrl.js";
 import { tool$transactionsList } from "./tools/transactionsList.js";
 import { tool$transactionsUpdate } from "./tools/transactionsUpdate.js";
 import { tool$transactionsUpdateMany } from "./tools/transactionsUpdateMany.js";
@@ -93,7 +98,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.4.1",
+    version: "0.4.2",
   });
 
   const client = new MiddayCore({
@@ -135,6 +140,7 @@ export function createMCPServer(deps: {
   tool(tool$transactionsGet);
   tool(tool$transactionsUpdate);
   tool(tool$transactionsDelete);
+  tool(tool$transactionsGetAttachmentPreSignedUrl);
   tool(tool$transactionsUpdateMany);
   tool(tool$transactionsCreateMany);
   tool(tool$transactionsDeleteMany);
@@ -162,14 +168,18 @@ export function createMCPServer(deps: {
   tool(tool$documentsList);
   tool(tool$documentsGet);
   tool(tool$documentsDelete);
+  tool(tool$documentsGetPreSignedUrl);
   tool(tool$inboxList);
   tool(tool$inboxGet);
   tool(tool$inboxDelete);
   tool(tool$inboxUpdate);
+  tool(tool$inboxGetPreSignedUrl);
   tool(tool$invoicesList);
+  tool(tool$invoicesCreate);
   tool(tool$invoicesGetInvoicesPaymentStatus);
   tool(tool$invoicesSummary);
   tool(tool$invoicesGet);
+  tool(tool$invoicesUpdate);
   tool(tool$invoicesDelete);
   tool(tool$searchSearch);
   tool(tool$reportsRevenue);

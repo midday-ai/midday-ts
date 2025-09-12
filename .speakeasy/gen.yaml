@@ -19,13 +19,14 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.4.1
+  version: 0.4.2
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -60,6 +61,7 @@ typescript:
   outputModelSuffix: output
   packageName: '@midday-ai/sdk'
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2
   usageSDKInitImports: []
   useIndexModules: true

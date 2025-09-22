@@ -9,6 +9,7 @@ export * from "./getinboxpresignedurl.js";
 export * from "./getoauthauthorization.js";
 export * from "./gettransactionattachmentpresignedurl.js";
 export * from "./httpclienterrors.js";
+export * from "./middayerror.js";
 export * from "./postoauthauthorization.js";
 export * from "./postoauthtoken.js";
 export * from "./responsevalidationerror.js";

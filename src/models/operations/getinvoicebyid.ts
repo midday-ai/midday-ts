@@ -85,7 +85,7 @@ export type GetInvoiceByIdResponse = {
   /**
    * Customer details
    */
-  customer: GetInvoiceByIdCustomer;
+  customer: GetInvoiceByIdCustomer | null;
   /**
    * Timestamp when the invoice was paid (ISO 8601), or null if unpaid
    */
@@ -299,7 +299,7 @@ export const GetInvoiceByIdResponse$inboundSchema: z.ZodType<
   invoiceNumber: z.string().optional(),
   amount: z.number(),
   currency: z.string(),
-  customer: z.lazy(() => GetInvoiceByIdCustomer$inboundSchema),
+  customer: z.nullable(z.lazy(() => GetInvoiceByIdCustomer$inboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
   note: z.nullable(z.string()),
@@ -326,7 +326,7 @@ export type GetInvoiceByIdResponse$Outbound = {
   invoiceNumber?: string | undefined;
   amount: number;
   currency: string;
-  customer: GetInvoiceByIdCustomer$Outbound;
+  customer: GetInvoiceByIdCustomer$Outbound | null;
   paidAt: string | null;
   reminderSentAt: string | null;
   note: string | null;
@@ -357,7 +357,7 @@ export const GetInvoiceByIdResponse$outboundSchema: z.ZodType<
   invoiceNumber: z.string().optional(),
   amount: z.number(),
   currency: z.string(),
-  customer: z.lazy(() => GetInvoiceByIdCustomer$outboundSchema),
+  customer: z.nullable(z.lazy(() => GetInvoiceByIdCustomer$outboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
   note: z.nullable(z.string()),

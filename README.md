@@ -721,7 +721,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new Midday({ httpClient });
+const sdk = new Midday({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 

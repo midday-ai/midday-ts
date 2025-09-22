@@ -124,7 +124,7 @@ export type UpdateInvoiceResponse = {
   /**
    * Customer details
    */
-  customer: UpdateInvoiceCustomer;
+  customer: UpdateInvoiceCustomer | null;
   /**
    * Timestamp when the invoice was paid (ISO 8601), or null if unpaid
    */
@@ -432,7 +432,7 @@ export const UpdateInvoiceResponse$inboundSchema: z.ZodType<
   invoiceNumber: z.string().optional(),
   amount: z.number(),
   currency: z.string(),
-  customer: z.lazy(() => UpdateInvoiceCustomer$inboundSchema),
+  customer: z.nullable(z.lazy(() => UpdateInvoiceCustomer$inboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
   note: z.nullable(z.string()),
@@ -459,7 +459,7 @@ export type UpdateInvoiceResponse$Outbound = {
   invoiceNumber?: string | undefined;
   amount: number;
   currency: string;
-  customer: UpdateInvoiceCustomer$Outbound;
+  customer: UpdateInvoiceCustomer$Outbound | null;
   paidAt: string | null;
   reminderSentAt: string | null;
   note: string | null;
@@ -490,7 +490,7 @@ export const UpdateInvoiceResponse$outboundSchema: z.ZodType<
   invoiceNumber: z.string().optional(),
   amount: z.number(),
   currency: z.string(),
-  customer: z.lazy(() => UpdateInvoiceCustomer$outboundSchema),
+  customer: z.nullable(z.lazy(() => UpdateInvoiceCustomer$outboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
   note: z.nullable(z.string()),

@@ -110,7 +110,7 @@ export type ListInvoicesData = {
   /**
    * Customer details
    */
-  customer: ListInvoicesCustomer;
+  customer: ListInvoicesCustomer | null;
   /**
    * Timestamp when the invoice was paid (ISO 8601), or null if unpaid
    */
@@ -419,7 +419,7 @@ export const ListInvoicesData$inboundSchema: z.ZodType<
   invoiceNumber: z.string().optional(),
   amount: z.number(),
   currency: z.string(),
-  customer: z.lazy(() => ListInvoicesCustomer$inboundSchema),
+  customer: z.nullable(z.lazy(() => ListInvoicesCustomer$inboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
   note: z.nullable(z.string()),
@@ -446,7 +446,7 @@ export type ListInvoicesData$Outbound = {
   invoiceNumber?: string | undefined;
   amount: number;
   currency: string;
-  customer: ListInvoicesCustomer$Outbound;
+  customer: ListInvoicesCustomer$Outbound | null;
   paidAt: string | null;
   reminderSentAt: string | null;
   note: string | null;
@@ -477,7 +477,7 @@ export const ListInvoicesData$outboundSchema: z.ZodType<
   invoiceNumber: z.string().optional(),
   amount: z.number(),
   currency: z.string(),
-  customer: z.lazy(() => ListInvoicesCustomer$outboundSchema),
+  customer: z.nullable(z.lazy(() => ListInvoicesCustomer$outboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
   note: z.nullable(z.string()),

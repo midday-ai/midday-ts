@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: c0efa11ea29b4c54c086646d2d1d52ae
+  docChecksum: 49d8fbad1903be3af29a4e7718e2888e
   docVersion: 0.0.1
-  speakeasyVersion: 1.615.2
-  generationVersion: 2.698.4
-  releaseVersion: 0.4.2
-  configChecksum: 670f0e362254598835dfcc8c410ad6b7
+  speakeasyVersion: 1.622.1
+  generationVersion: 2.709.0
+  releaseVersion: 0.5.0
+  configChecksum: cde065a6a4c8ec44eca0c747dba18d4a
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true
@@ -14,11 +14,11 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.22
+    core: 3.21.23
     defaultEnabledRetries: 0.1.0
-    devContainers: 2.90.0
+    devContainers: 2.90.1
     enumUnions: 0.1.0
-    enums: 2.82.1
+    enums: 2.83.0
     envVarSecurityUsage: 0.1.2
     examples: 2.82.3
     globalSecurity: 2.82.14
@@ -1495,7 +1495,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"id": "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a", "status": "paid", "dueDate": "2024-06-30T23:59:59.000Z", "issueDate": "2024-06-01T00:00:00.000Z", "invoiceNumber": "INV-2024-001", "amount": 1500.75, "currency": "USD", "customer": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "Acme Corporation", "website": "https://acme.com", "email": "info@acme.com"}, "paidAt": "2024-06-15T12:00:00.000Z", "reminderSentAt": "2024-06-10T09:00:00.000Z", "note": "Thank you for your business.", "vat": 120, "tax": 80, "discount": 50, "subtotal": 1400, "viewedAt": "2024-06-05T14:30:00.000Z", "customerName": "Acme Corporation", "sentTo": "billing@acme.com", "sentAt": "2024-06-02T08:00:00.000Z", "createdAt": "2024-06-01T07:00:00.000Z", "updatedAt": "2024-06-15T10:00:00.000Z", "pdfUrl": "https://app.midday.ai/api/download/invoice?token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImM1NTEwNDA3LTkyMmQtNDllZC05MjZiLTE2NzhkNTQ4ZmQ5MCJ9.12X3Wb5UJ5I6yZ5l6-6U8TxIPqnySKUb0NMwSL4p44s", "previewUrl": "https://app.midday.ai/i/eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjBiNWM2MmIxLTgxMjYtNDdhMS1iNjNmLWM0NjhlM2Y5MTgzNiJ9.jvwUP4PXVUWyKZAgav5SV7wjAaf8biDXMDEYHLGA5qE"}
+          application/json: {"id": "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a", "status": "paid", "dueDate": "2024-06-30T23:59:59.000Z", "issueDate": "2024-06-01T00:00:00.000Z", "invoiceNumber": "INV-2024-001", "amount": 1500.75, "currency": "USD", "customer": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "Acme Corporation", "website": "https://acme.com", "email": "info@acme.com"}, "paidAt": "2024-06-15T12:00:00.000Z", "reminderSentAt": "2024-06-10T09:00:00.000Z", "note": "Thank you for your business.", "vat": 120, "tax": 80, "discount": 50, "subtotal": 1400, "viewedAt": "2024-06-05T14:30:00.000Z", "customerName": "Acme Corporation", "sentTo": "billing@acme.com", "sentAt": "2024-06-02T08:00:00.000Z", "createdAt": "2024-06-01T07:00:00.000Z", "updatedAt": "2024-06-15T10:00:00.000Z", "pdfUrl": "https://app.midday.ai/api/download/invoice?token=eef58951-1682-4062-b010-425866032390", "previewUrl": "https://app.midday.ai/i/eef58951-1682-4062-b010-425866032390"}
   deleteInvoice:
     speakeasy-default-delete-invoice:
       parameters:
@@ -1910,7 +1910,11 @@ examples:
         application/json: {"status": "paid", "paidAt": "2024-06-15T12:00:00.000Z", "internalNote": "Payment received via bank transfer"}
       responses:
         "200":
-          application/json: {"id": "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a", "status": "paid", "dueDate": "2024-06-30T23:59:59.000Z", "issueDate": "2024-06-01T00:00:00.000Z", "invoiceNumber": "INV-2024-001", "amount": 1500.75, "currency": "USD", "customer": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "Acme Corporation", "website": "https://acme.com", "email": "info@acme.com"}, "paidAt": "2024-06-15T12:00:00.000Z", "reminderSentAt": "2024-06-10T09:00:00.000Z", "note": "Thank you for your business.", "vat": 120, "tax": 80, "discount": 50, "subtotal": 1400, "viewedAt": "2024-06-05T14:30:00.000Z", "customerName": "Acme Corporation", "sentTo": "billing@acme.com", "sentAt": "2024-06-02T08:00:00.000Z", "createdAt": "2024-06-01T07:00:00.000Z", "updatedAt": "2024-06-15T10:00:00.000Z", "pdfUrl": "https://app.midday.ai/api/download/invoice?token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImM1NTEwNDA3LTkyMmQtNDllZC05MjZiLTE2NzhkNTQ4ZmQ5MCJ9.12X3Wb5UJ5I6yZ5l6-6U8TxIPqnySKUb0NMwSL4p44s", "previewUrl": "https://app.midday.ai/i/eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjBiNWM2MmIxLTgxMjYtNDdhMS1iNjNmLWM0NjhlM2Y5MTgzNiJ9.jvwUP4PXVUWyKZAgav5SV7wjAaf8biDXMDEYHLGA5qE"}
+          application/json: {"id": "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a", "status": "paid", "dueDate": "2024-06-30T23:59:59.000Z", "issueDate": "2024-06-01T00:00:00.000Z", "invoiceNumber": "INV-2024-001", "amount": 1500.75, "currency": "USD", "customer": {"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "Acme Corporation", "website": "https://acme.com", "email": "info@acme.com"}, "paidAt": "2024-06-15T12:00:00.000Z", "reminderSentAt": "2024-06-10T09:00:00.000Z", "note": "Thank you for your business.", "vat": 120, "tax": 80, "discount": 50, "subtotal": 1400, "viewedAt": "2024-06-05T14:30:00.000Z", "customerName": "Acme Corporation", "sentTo": "billing@acme.com", "sentAt": "2024-06-02T08:00:00.000Z", "createdAt": "2024-06-01T07:00:00.000Z", "updatedAt": "2024-06-15T10:00:00.000Z", "pdfUrl": "https://app.midday.ai/api/download/invoice?token=eef58951-1682-4062-b010-425866032390", "previewUrl": "https://app.midday.ai/i/eef58951-1682-4062-b010-425866032390"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `midday.transactions.getAttachmentPreSignedUrl()`: **Added**\n* `midday.documents.getPreSignedUrl()`: **Added**\n* `midday.inbox.getPreSignedUrl()`: **Added**\n* `midday.invoices.create()`: **Added**\n* `midday.invoices.update()`: **Added**\n* `midday.invoices.list()`:  `response.data.[]` **Changed**\n* `midday.invoices.get()`:  `response` **Changed**\n* `midday.search.search()`: \n  *  `request.relevanceThreshold` **Changed**\n* `midday.trackerEntries.create()`: \n  *  `request.assignedId` **Changed**\n* `midday.trackerEntries.createBulk()`: \n  *  `request.entries.[].assignedId` **Changed**\n* `midday.trackerEntries.update()`: \n  *  `request.requestBody.assignedId` **Changed**\n"
+releaseNotes: |
+  ## Typescript SDK Changes Detected:
+  * `midday.invoices.list()`:  `response.data.[].customer` **Changed** **Breaking** :warning:
+  * `midday.invoices.get()`:  `response.customer` **Changed** **Breaking** :warning:
+  * `midday.invoices.update()`:  `response.customer` **Changed** **Breaking** :warning:

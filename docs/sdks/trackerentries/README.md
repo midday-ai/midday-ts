@@ -1,5 +1,4 @@
 # TrackerEntries
-(*trackerEntries*)
 
 ## Overview
 

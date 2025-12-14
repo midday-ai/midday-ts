@@ -91,6 +91,7 @@ async function $do(
   const query = encodeFormQuery({
     "currency": payload.currency,
     "from": payload.from,
+    "revenueType": payload.revenueType,
     "to": payload.to,
   });
 
@@ -105,7 +106,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "getRevenueReports",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

@@ -36,7 +36,7 @@ export function tagsCreate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.TagsResponse,
+    models.TagResponse,
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -61,7 +61,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.TagsResponse,
+      models.TagResponse,
       | MiddayError
       | ResponseValidationError
       | ConnectionError
@@ -101,7 +101,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "createTag",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -139,7 +139,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.TagsResponse,
+    models.TagResponse,
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -149,7 +149,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.TagsResponse$inboundSchema),
+    M.json(201, models.TagResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

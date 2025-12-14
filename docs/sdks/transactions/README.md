@@ -1,5 +1,4 @@
 # Transactions
-(*transactions*)
 
 ## Overview
 
@@ -76,6 +75,7 @@ async function run() {
       "299.99",
     ],
     type: "expense",
+    manual: "include",
   });
 
   console.log(result);
@@ -145,6 +145,7 @@ async function run() {
       "299.99",
     ],
     type: "expense",
+    manual: "include",
   });
   if (res.ok) {
     const { value: result } = res;

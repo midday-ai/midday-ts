@@ -1,5 +1,4 @@
 # Inbox
-(*inbox*)
 
 ## Overview
 

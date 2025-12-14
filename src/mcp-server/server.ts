@@ -27,6 +27,9 @@ import { tool$documentsDelete } from "./tools/documentsDelete.js";
 import { tool$documentsGet } from "./tools/documentsGet.js";
 import { tool$documentsGetPreSignedUrl } from "./tools/documentsGetPreSignedUrl.js";
 import { tool$documentsList } from "./tools/documentsList.js";
+import { tool$filesDownloadFile } from "./tools/filesDownloadFile.js";
+import { tool$filesDownloadInvoice } from "./tools/filesDownloadInvoice.js";
+import { tool$filesProxy } from "./tools/filesProxy.js";
 import { tool$inboxDelete } from "./tools/inboxDelete.js";
 import { tool$inboxGet } from "./tools/inboxGet.js";
 import { tool$inboxGetPreSignedUrl } from "./tools/inboxGetPreSignedUrl.js";
@@ -87,6 +90,7 @@ import { tool$transactionsUpdate } from "./tools/transactionsUpdate.js";
 import { tool$transactionsUpdateMany } from "./tools/transactionsUpdateMany.js";
 import { tool$usersGet } from "./tools/usersGet.js";
 import { tool$usersUpdate } from "./tools/usersUpdate.js";
+import { tool$webhooksInboxWebhook } from "./tools/webhooksInboxWebhook.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -98,7 +102,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.5.0",
+    version: "0.6.0",
   });
 
   const client = new MiddayCore({
@@ -132,6 +136,10 @@ export function createMCPServer(deps: {
   tool(tool$oAuthPostOAuthAuthorization);
   tool(tool$oAuthPostOAuthToken);
   tool(tool$oAuthPostOAuthRevoke);
+  tool(tool$webhooksInboxWebhook);
+  tool(tool$filesProxy);
+  tool(tool$filesDownloadFile);
+  tool(tool$filesDownloadInvoice);
   tool(tool$notificationsList);
   tool(tool$notificationsUpdateStatus);
   tool(tool$notificationsUpdateAllStatus);

@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { BankAccounts } from "./bankaccounts.js";
 import { Customers } from "./customers.js";
 import { Documents } from "./documents.js";
+import { Files } from "./files.js";
 import { Inbox } from "./inbox.js";
 import { Invoices } from "./invoices.js";
 import { Notifications } from "./notifications.js";
@@ -19,11 +20,22 @@ import { TrackerProjects } from "./trackerprojects.js";
 import { TrackerTimer } from "./trackertimer.js";
 import { Transactions } from "./transactions.js";
 import { Users } from "./users.js";
+import { Webhooks } from "./webhooks.js";
 
 export class Midday extends ClientSDK {
   private _oAuth?: OAuth;
   get oAuth(): OAuth {
     return (this._oAuth ??= new OAuth(this._options));
+  }
+
+  private _webhooks?: Webhooks;
+  get webhooks(): Webhooks {
+    return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _files?: Files;
+  get files(): Files {
+    return (this._files ??= new Files(this._options));
   }
 
   private _notifications?: Notifications;

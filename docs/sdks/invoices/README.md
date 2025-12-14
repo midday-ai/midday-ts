@@ -1,5 +1,4 @@
 # Invoices
-(*invoices*)
 
 ## Overview
 
@@ -421,7 +420,10 @@ const midday = new Midday({
 
 async function run() {
   const result = await midday.invoices.summary({
-    status: "paid",
+    statuses: [
+      "draft",
+      "unpaid",
+    ],
   });
 
   console.log(result);
@@ -448,7 +450,10 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await invoicesSummary(midday, {
-    status: "paid",
+    statuses: [
+      "draft",
+      "unpaid",
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -472,7 +477,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetInvoiceSummaryResponse[]](../../models/.md)\>**
+**Promise\<[operations.GetInvoiceSummaryResponse](../../models/operations/getinvoicesummaryresponse.md)\>**
 
 ### Errors
 

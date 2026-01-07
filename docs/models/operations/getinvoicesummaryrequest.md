@@ -6,12 +6,15 @@
 import { GetInvoiceSummaryRequest } from "@midday-ai/sdk/models/operations";
 
 let value: GetInvoiceSummaryRequest = {
-  status: "paid",
+  statuses: [
+    "draft",
+    "unpaid",
+  ],
 };
 ```
 
 ## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `status`                                                                                 | [operations.GetInvoiceSummaryStatus](../../models/operations/getinvoicesummarystatus.md) | :heavy_minus_sign:                                                                       | Filter summary by invoice status                                                         | paid                                                                                     |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `statuses`                                                                                 | [operations.GetInvoiceSummaryStatus](../../models/operations/getinvoicesummarystatus.md)[] | :heavy_minus_sign:                                                                         | Filter summary by invoice statuses                                                         | [<br/>"draft",<br/>"unpaid"<br/>]                                                          |

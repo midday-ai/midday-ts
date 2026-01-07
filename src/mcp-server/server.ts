@@ -27,11 +27,33 @@ import { tool$documentsDelete } from "./tools/documentsDelete.js";
 import { tool$documentsGet } from "./tools/documentsGet.js";
 import { tool$documentsGetPreSignedUrl } from "./tools/documentsGetPreSignedUrl.js";
 import { tool$documentsList } from "./tools/documentsList.js";
+import { tool$filesDownloadFile } from "./tools/filesDownloadFile.js";
+import { tool$filesDownloadInvoice } from "./tools/filesDownloadInvoice.js";
+import { tool$filesProxy } from "./tools/filesProxy.js";
 import { tool$inboxDelete } from "./tools/inboxDelete.js";
 import { tool$inboxGet } from "./tools/inboxGet.js";
 import { tool$inboxGetPreSignedUrl } from "./tools/inboxGetPreSignedUrl.js";
 import { tool$inboxList } from "./tools/inboxList.js";
 import { tool$inboxUpdate } from "./tools/inboxUpdate.js";
+import { tool$integrationsFortnoxOAuthCallback } from "./tools/integrationsFortnoxOAuthCallback.js";
+import { tool$integrationsGetFortnoxInstallUrl } from "./tools/integrationsGetFortnoxInstallUrl.js";
+import { tool$integrationsGetGmailInstallUrl } from "./tools/integrationsGetGmailInstallUrl.js";
+import { tool$integrationsGetOutlookInstallUrl } from "./tools/integrationsGetOutlookInstallUrl.js";
+import { tool$integrationsGetQuickBooksInstallUrl } from "./tools/integrationsGetQuickBooksInstallUrl.js";
+import { tool$integrationsGetSlackInstallUrl } from "./tools/integrationsGetSlackInstallUrl.js";
+import { tool$integrationsGetXeroInstallUrl } from "./tools/integrationsGetXeroInstallUrl.js";
+import { tool$integrationsGmailOAuthCallback } from "./tools/integrationsGmailOAuthCallback.js";
+import { tool$integrationsOutlookOAuthCallback } from "./tools/integrationsOutlookOAuthCallback.js";
+import { tool$integrationsQuickBooksOAuthCallback } from "./tools/integrationsQuickBooksOAuthCallback.js";
+import { tool$integrationsSlackInteractions } from "./tools/integrationsSlackInteractions.js";
+import { tool$integrationsSlackOAuthCallback } from "./tools/integrationsSlackOAuthCallback.js";
+import { tool$integrationsSlackWebhook } from "./tools/integrationsSlackWebhook.js";
+import { tool$integrationsXeroOAuthCallback } from "./tools/integrationsXeroOAuthCallback.js";
+import { tool$invoicePaymentsCreateInvoicePaymentIntent } from "./tools/invoicePaymentsCreateInvoicePaymentIntent.js";
+import { tool$invoicePaymentsDisconnectStripe } from "./tools/invoicePaymentsDisconnectStripe.js";
+import { tool$invoicePaymentsGetStripeConnectStatus } from "./tools/invoicePaymentsGetStripeConnectStatus.js";
+import { tool$invoicePaymentsGetStripeConnectUrl } from "./tools/invoicePaymentsGetStripeConnectUrl.js";
+import { tool$invoicePaymentsStripeConnectCallback } from "./tools/invoicePaymentsStripeConnectCallback.js";
 import { tool$invoicesCreate } from "./tools/invoicesCreate.js";
 import { tool$invoicesDelete } from "./tools/invoicesDelete.js";
 import { tool$invoicesGet } from "./tools/invoicesGet.js";
@@ -87,6 +109,10 @@ import { tool$transactionsUpdate } from "./tools/transactionsUpdate.js";
 import { tool$transactionsUpdateMany } from "./tools/transactionsUpdateMany.js";
 import { tool$usersGet } from "./tools/usersGet.js";
 import { tool$usersUpdate } from "./tools/usersUpdate.js";
+import { tool$webhooksInboxWebhook } from "./tools/webhooksInboxWebhook.js";
+import { tool$webhooksStripeWebhook } from "./tools/webhooksStripeWebhook.js";
+import { tool$webhooksWhatsappWebhook } from "./tools/webhooksWhatsappWebhook.js";
+import { tool$webhooksWhatsappWebhookVerify } from "./tools/webhooksWhatsappWebhookVerify.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -98,7 +124,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.5.0",
+    version: "0.6.0",
   });
 
   const client = new MiddayCore({
@@ -132,6 +158,32 @@ export function createMCPServer(deps: {
   tool(tool$oAuthPostOAuthAuthorization);
   tool(tool$oAuthPostOAuthToken);
   tool(tool$oAuthPostOAuthRevoke);
+  tool(tool$webhooksInboxWebhook);
+  tool(tool$webhooksWhatsappWebhookVerify);
+  tool(tool$webhooksWhatsappWebhook);
+  tool(tool$webhooksStripeWebhook);
+  tool(tool$filesProxy);
+  tool(tool$filesDownloadFile);
+  tool(tool$filesDownloadInvoice);
+  tool(tool$integrationsSlackOAuthCallback);
+  tool(tool$integrationsGetSlackInstallUrl);
+  tool(tool$integrationsSlackWebhook);
+  tool(tool$integrationsSlackInteractions);
+  tool(tool$integrationsGmailOAuthCallback);
+  tool(tool$integrationsGetGmailInstallUrl);
+  tool(tool$integrationsOutlookOAuthCallback);
+  tool(tool$integrationsGetOutlookInstallUrl);
+  tool(tool$integrationsXeroOAuthCallback);
+  tool(tool$integrationsGetXeroInstallUrl);
+  tool(tool$integrationsQuickBooksOAuthCallback);
+  tool(tool$integrationsGetQuickBooksInstallUrl);
+  tool(tool$integrationsFortnoxOAuthCallback);
+  tool(tool$integrationsGetFortnoxInstallUrl);
+  tool(tool$invoicePaymentsGetStripeConnectUrl);
+  tool(tool$invoicePaymentsStripeConnectCallback);
+  tool(tool$invoicePaymentsDisconnectStripe);
+  tool(tool$invoicePaymentsCreateInvoicePaymentIntent);
+  tool(tool$invoicePaymentsGetStripeConnectStatus);
   tool(tool$notificationsList);
   tool(tool$notificationsUpdateStatus);
   tool(tool$notificationsUpdateAllStatus);

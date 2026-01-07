@@ -1,5 +1,4 @@
 # Teams
-(*teams*)
 
 ## Overview
 
@@ -184,6 +183,7 @@ async function run() {
       logoUrl: "https://cdn.midday.ai/logos/acme-corp.png",
       baseCurrency: "USD",
       countryCode: "US",
+      fiscalYearStartMonth: 4,
     },
   });
 
@@ -218,6 +218,7 @@ async function run() {
       logoUrl: "https://cdn.midday.ai/logos/acme-corp.png",
       baseCurrency: "USD",
       countryCode: "US",
+      fiscalYearStartMonth: 4,
     },
   });
   if (res.ok) {

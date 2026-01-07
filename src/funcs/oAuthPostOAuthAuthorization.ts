@@ -39,7 +39,7 @@ export function oAuthPostOAuthAuthorization(
   Result<
     operations.PostOAuthAuthorizationResponse,
     | errors.PostOAuthAuthorizationBadRequestError
-    | errors.UnauthorizedError
+    | errors.PostOAuthAuthorizationUnauthorizedError
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -66,7 +66,7 @@ async function $do(
     Result<
       operations.PostOAuthAuthorizationResponse,
       | errors.PostOAuthAuthorizationBadRequestError
-      | errors.UnauthorizedError
+      | errors.PostOAuthAuthorizationUnauthorizedError
       | MiddayError
       | ResponseValidationError
       | ConnectionError
@@ -109,7 +109,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "postOAuthAuthorization",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -153,7 +153,7 @@ async function $do(
   const [result] = await M.match<
     operations.PostOAuthAuthorizationResponse,
     | errors.PostOAuthAuthorizationBadRequestError
-    | errors.UnauthorizedError
+    | errors.PostOAuthAuthorizationUnauthorizedError
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -165,7 +165,10 @@ async function $do(
   >(
     M.json(200, operations.PostOAuthAuthorizationResponse$inboundSchema),
     M.jsonErr(400, errors.PostOAuthAuthorizationBadRequestError$inboundSchema),
-    M.jsonErr(401, errors.UnauthorizedError$inboundSchema),
+    M.jsonErr(
+      401,
+      errors.PostOAuthAuthorizationUnauthorizedError$inboundSchema,
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

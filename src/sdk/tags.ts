@@ -37,7 +37,7 @@ export class Tags extends ClientSDK {
   async create(
     request?: models.CreateTag | undefined,
     options?: RequestOptions,
-  ): Promise<models.TagsResponse> {
+  ): Promise<models.TagResponse> {
     return unwrapAsync(tagsCreate(
       this,
       request,

@@ -96,6 +96,9 @@ async function $do(
     "categories": payload.categories,
     "cursor": payload.cursor,
     "end": payload.end,
+    "exported": payload.exported,
+    "fulfilled": payload.fulfilled,
+    "manual": payload.manual,
     "pageSize": payload.pageSize,
     "q": payload.q,
     "recurring": payload.recurring,
@@ -117,7 +120,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "listTransactions",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

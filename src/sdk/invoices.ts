@@ -72,7 +72,7 @@ export class Invoices extends ClientSDK {
   async summary(
     request: operations.GetInvoiceSummaryRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.GetInvoiceSummaryResponse>> {
+  ): Promise<operations.GetInvoiceSummaryResponse> {
     return unwrapAsync(invoicesSummary(
       this,
       request,

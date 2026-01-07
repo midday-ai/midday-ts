@@ -1,7 +1,5 @@
 # GetInvoiceSummaryStatus
 
-Filter summary by invoice status
-
 ## Example Usage
 
 ```typescript
@@ -13,5 +11,5 @@ let value: GetInvoiceSummaryStatus = "paid";
 ## Values
 
 ```typescript
-"draft" | "overdue" | "paid" | "unpaid" | "canceled"
+"draft" | "overdue" | "paid" | "unpaid" | "canceled" | "scheduled"
 ```

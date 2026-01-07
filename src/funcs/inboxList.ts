@@ -92,6 +92,7 @@ async function $do(
     "order": payload.order,
     "pageSize": payload.pageSize,
     "q": payload.q,
+    "sort": payload.sort,
     "status": payload.status,
   });
 
@@ -106,7 +107,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "listInboxItems",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

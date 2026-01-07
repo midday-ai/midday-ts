@@ -61,10 +61,7 @@ bun add @midday-ai/sdk
 ### Yarn
 
 ```bash
-yarn add @midday-ai/sdk zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add @midday-ai/sdk
 ```
 
 > [!NOTE]
@@ -241,7 +238,7 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [bankAccounts](docs/sdks/bankaccounts/README.md)
+### [BankAccounts](docs/sdks/bankaccounts/README.md)
 
 * [list](docs/sdks/bankaccounts/README.md#list) - List all bank accounts
 * [create](docs/sdks/bankaccounts/README.md#create) - Create a bank account
@@ -249,7 +246,7 @@ run();
 * [update](docs/sdks/bankaccounts/README.md#update) - Update a bank account
 * [delete](docs/sdks/bankaccounts/README.md#delete) - Delete a bank account
 
-### [customers](docs/sdks/customers/README.md)
+### [Customers](docs/sdks/customers/README.md)
 
 * [list](docs/sdks/customers/README.md#list) - List all customers
 * [create](docs/sdks/customers/README.md#create) - Create customer
@@ -257,14 +254,20 @@ run();
 * [update](docs/sdks/customers/README.md#update) - Update a customer
 * [delete](docs/sdks/customers/README.md#delete) - Delete a customer
 
-### [documents](docs/sdks/documents/README.md)
+### [Documents](docs/sdks/documents/README.md)
 
 * [list](docs/sdks/documents/README.md#list) - List all documents
 * [get](docs/sdks/documents/README.md#get) - Retrieve a document
 * [delete](docs/sdks/documents/README.md#delete) - Delete a document
 * [getPreSignedUrl](docs/sdks/documents/README.md#getpresignedurl) - Generate pre-signed URL for document
 
-### [inbox](docs/sdks/inbox/README.md)
+### [Files](docs/sdks/files/README.md)
+
+* [proxy](docs/sdks/files/README.md#proxy) - Proxy file from storage
+* [downloadFile](docs/sdks/files/README.md#downloadfile) - Download file from vault
+* [downloadInvoice](docs/sdks/files/README.md#downloadinvoice) - Download invoice PDF
+
+### [Inbox](docs/sdks/inbox/README.md)
 
 * [list](docs/sdks/inbox/README.md#list) - List all inbox items
 * [get](docs/sdks/inbox/README.md#get) - Retrieve a inbox item
@@ -272,7 +275,32 @@ run();
 * [update](docs/sdks/inbox/README.md#update) - Update a inbox item
 * [getPreSignedUrl](docs/sdks/inbox/README.md#getpresignedurl) - Generate pre-signed URL for inbox attachment
 
-### [invoices](docs/sdks/invoices/README.md)
+### [Integrations](docs/sdks/integrations/README.md)
+
+* [slackOAuthCallback](docs/sdks/integrations/README.md#slackoauthcallback) - Slack OAuth callback
+* [getSlackInstallUrl](docs/sdks/integrations/README.md#getslackinstallurl) - Get Slack install URL
+* [slackWebhook](docs/sdks/integrations/README.md#slackwebhook) - Slack webhook handler
+* [slackInteractions](docs/sdks/integrations/README.md#slackinteractions) - Slack interactions handler
+* [gmailOAuthCallback](docs/sdks/integrations/README.md#gmailoauthcallback) - Gmail OAuth callback
+* [getGmailInstallUrl](docs/sdks/integrations/README.md#getgmailinstallurl) - Get Gmail install URL
+* [outlookOAuthCallback](docs/sdks/integrations/README.md#outlookoauthcallback) - Outlook OAuth callback
+* [getOutlookInstallUrl](docs/sdks/integrations/README.md#getoutlookinstallurl) - Get Outlook install URL
+* [xeroOAuthCallback](docs/sdks/integrations/README.md#xerooauthcallback) - Xero OAuth callback
+* [getXeroInstallUrl](docs/sdks/integrations/README.md#getxeroinstallurl) - Get Xero install URL
+* [quickBooksOAuthCallback](docs/sdks/integrations/README.md#quickbooksoauthcallback) - QuickBooks OAuth callback
+* [getQuickBooksInstallUrl](docs/sdks/integrations/README.md#getquickbooksinstallurl) - Get QuickBooks install URL
+* [fortnoxOAuthCallback](docs/sdks/integrations/README.md#fortnoxoauthcallback) - Fortnox OAuth callback
+* [getFortnoxInstallUrl](docs/sdks/integrations/README.md#getfortnoxinstallurl) - Get Fortnox install URL
+
+### [InvoicePayments](docs/sdks/invoicepayments/README.md)
+
+* [getStripeConnectUrl](docs/sdks/invoicepayments/README.md#getstripeconnecturl) - Get Stripe Connect URL
+* [stripeConnectCallback](docs/sdks/invoicepayments/README.md#stripeconnectcallback) - Stripe Connect OAuth callback
+* [disconnectStripe](docs/sdks/invoicepayments/README.md#disconnectstripe) - Disconnect Stripe account
+* [createInvoicePaymentIntent](docs/sdks/invoicepayments/README.md#createinvoicepaymentintent) - Create payment intent for invoice
+* [getStripeConnectStatus](docs/sdks/invoicepayments/README.md#getstripeconnectstatus) - Get Stripe Connect status
+
+### [Invoices](docs/sdks/invoices/README.md)
 
 * [list](docs/sdks/invoices/README.md#list) - List all invoices
 * [create](docs/sdks/invoices/README.md#create) - Create an invoice
@@ -282,21 +310,20 @@ run();
 * [update](docs/sdks/invoices/README.md#update) - Update an invoice
 * [delete](docs/sdks/invoices/README.md#delete) - Delete a invoice
 
-
-### [notifications](docs/sdks/notifications/README.md)
+### [Notifications](docs/sdks/notifications/README.md)
 
 * [list](docs/sdks/notifications/README.md#list) - List all notifications
 * [updateStatus](docs/sdks/notifications/README.md#updatestatus) - Update notification status
 * [updateAllStatus](docs/sdks/notifications/README.md#updateallstatus) - Update status of all notifications
 
-### [oAuth](docs/sdks/oauth/README.md)
+### [OAuth](docs/sdks/oauth/README.md)
 
 * [getOAuthAuthorization](docs/sdks/oauth/README.md#getoauthauthorization) - OAuth Authorization Endpoint
 * [postOAuthAuthorization](docs/sdks/oauth/README.md#postoauthauthorization) - OAuth Authorization Decision
 * [postOAuthToken](docs/sdks/oauth/README.md#postoauthtoken) - OAuth Token Exchange
 * [postOAuthRevoke](docs/sdks/oauth/README.md#postoauthrevoke) - OAuth Token Revocation
 
-### [reports](docs/sdks/reports/README.md)
+### [Reports](docs/sdks/reports/README.md)
 
 * [revenue](docs/sdks/reports/README.md#revenue) - Revenue reports
 * [profit](docs/sdks/reports/README.md#profit) - Profit reports
@@ -305,11 +332,11 @@ run();
 * [expenses](docs/sdks/reports/README.md#expenses) - Expense reports
 * [spending](docs/sdks/reports/README.md#spending) - Spending reports
 
-### [search](docs/sdks/search/README.md)
+### [Search](docs/sdks/search/README.md)
 
 * [search](docs/sdks/search/README.md#search) - Search
 
-### [tags](docs/sdks/tags/README.md)
+### [Tags](docs/sdks/tags/README.md)
 
 * [list](docs/sdks/tags/README.md#list) - List all tags
 * [create](docs/sdks/tags/README.md#create) - Create a new tag
@@ -317,14 +344,14 @@ run();
 * [update](docs/sdks/tags/README.md#update) - Update a tag
 * [delete](docs/sdks/tags/README.md#delete) - Delete a tag
 
-### [teams](docs/sdks/teams/README.md)
+### [Teams](docs/sdks/teams/README.md)
 
 * [list](docs/sdks/teams/README.md#list) - List all teams
 * [get](docs/sdks/teams/README.md#get) - Retrieve a team
 * [update](docs/sdks/teams/README.md#update) - Update a team
 * [members](docs/sdks/teams/README.md#members) - List all team members
 
-### [trackerEntries](docs/sdks/trackerentries/README.md)
+### [TrackerEntries](docs/sdks/trackerentries/README.md)
 
 * [list](docs/sdks/trackerentries/README.md#list) - List all tracker entries
 * [create](docs/sdks/trackerentries/README.md#create) - Create a tracker entry
@@ -332,7 +359,7 @@ run();
 * [update](docs/sdks/trackerentries/README.md#update) - Update a tracker entry
 * [delete](docs/sdks/trackerentries/README.md#delete) - Delete a tracker entry
 
-### [trackerProjects](docs/sdks/trackerprojects/README.md)
+### [TrackerProjects](docs/sdks/trackerprojects/README.md)
 
 * [list](docs/sdks/trackerprojects/README.md#list) - List all tracker projects
 * [create](docs/sdks/trackerprojects/README.md#create) - Create a tracker project
@@ -340,14 +367,14 @@ run();
 * [get](docs/sdks/trackerprojects/README.md#get) - Retrieve a tracker project
 * [delete](docs/sdks/trackerprojects/README.md#delete) - Delete a tracker project
 
-### [trackerTimer](docs/sdks/trackertimer/README.md)
+### [TrackerTimer](docs/sdks/trackertimer/README.md)
 
 * [startTimer](docs/sdks/trackertimer/README.md#starttimer) - Start a timer
 * [stopTimer](docs/sdks/trackertimer/README.md#stoptimer) - Stop a timer
 * [getCurrentTimer](docs/sdks/trackertimer/README.md#getcurrenttimer) - Get current timer
 * [getTimerStatus](docs/sdks/trackertimer/README.md#gettimerstatus) - Get timer status
 
-### [transactions](docs/sdks/transactions/README.md)
+### [Transactions](docs/sdks/transactions/README.md)
 
 * [list](docs/sdks/transactions/README.md#list) - List all transactions
 * [create](docs/sdks/transactions/README.md#create) - Create a transaction
@@ -359,10 +386,17 @@ run();
 * [createMany](docs/sdks/transactions/README.md#createmany) - Bulk create transactions
 * [deleteMany](docs/sdks/transactions/README.md#deletemany) - Bulk delete transactions
 
-### [users](docs/sdks/users/README.md)
+### [Users](docs/sdks/users/README.md)
 
 * [get](docs/sdks/users/README.md#get) - Retrieve the current user
 * [update](docs/sdks/users/README.md#update) - Update the current user
+
+### [Webhooks](docs/sdks/webhooks/README.md)
+
+* [inboxWebhook](docs/sdks/webhooks/README.md#inboxwebhook) - Inbox webhook
+* [whatsappWebhookVerify](docs/sdks/webhooks/README.md#whatsappwebhookverify) - WhatsApp webhook verification
+* [whatsappWebhook](docs/sdks/webhooks/README.md#whatsappwebhook) - WhatsApp webhook
+* [stripeWebhook](docs/sdks/webhooks/README.md#stripewebhook) - Stripe webhook handler
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -396,11 +430,33 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
 - [`documentsGetPreSignedUrl`](docs/sdks/documents/README.md#getpresignedurl) - Generate pre-signed URL for document
 - [`documentsList`](docs/sdks/documents/README.md#list) - List all documents
+- [`filesDownloadFile`](docs/sdks/files/README.md#downloadfile) - Download file from vault
+- [`filesDownloadInvoice`](docs/sdks/files/README.md#downloadinvoice) - Download invoice PDF
+- [`filesProxy`](docs/sdks/files/README.md#proxy) - Proxy file from storage
 - [`inboxDelete`](docs/sdks/inbox/README.md#delete) - Delete a inbox item
 - [`inboxGet`](docs/sdks/inbox/README.md#get) - Retrieve a inbox item
 - [`inboxGetPreSignedUrl`](docs/sdks/inbox/README.md#getpresignedurl) - Generate pre-signed URL for inbox attachment
 - [`inboxList`](docs/sdks/inbox/README.md#list) - List all inbox items
 - [`inboxUpdate`](docs/sdks/inbox/README.md#update) - Update a inbox item
+- [`integrationsFortnoxOAuthCallback`](docs/sdks/integrations/README.md#fortnoxoauthcallback) - Fortnox OAuth callback
+- [`integrationsGetFortnoxInstallUrl`](docs/sdks/integrations/README.md#getfortnoxinstallurl) - Get Fortnox install URL
+- [`integrationsGetGmailInstallUrl`](docs/sdks/integrations/README.md#getgmailinstallurl) - Get Gmail install URL
+- [`integrationsGetOutlookInstallUrl`](docs/sdks/integrations/README.md#getoutlookinstallurl) - Get Outlook install URL
+- [`integrationsGetQuickBooksInstallUrl`](docs/sdks/integrations/README.md#getquickbooksinstallurl) - Get QuickBooks install URL
+- [`integrationsGetSlackInstallUrl`](docs/sdks/integrations/README.md#getslackinstallurl) - Get Slack install URL
+- [`integrationsGetXeroInstallUrl`](docs/sdks/integrations/README.md#getxeroinstallurl) - Get Xero install URL
+- [`integrationsGmailOAuthCallback`](docs/sdks/integrations/README.md#gmailoauthcallback) - Gmail OAuth callback
+- [`integrationsOutlookOAuthCallback`](docs/sdks/integrations/README.md#outlookoauthcallback) - Outlook OAuth callback
+- [`integrationsQuickBooksOAuthCallback`](docs/sdks/integrations/README.md#quickbooksoauthcallback) - QuickBooks OAuth callback
+- [`integrationsSlackInteractions`](docs/sdks/integrations/README.md#slackinteractions) - Slack interactions handler
+- [`integrationsSlackOAuthCallback`](docs/sdks/integrations/README.md#slackoauthcallback) - Slack OAuth callback
+- [`integrationsSlackWebhook`](docs/sdks/integrations/README.md#slackwebhook) - Slack webhook handler
+- [`integrationsXeroOAuthCallback`](docs/sdks/integrations/README.md#xerooauthcallback) - Xero OAuth callback
+- [`invoicePaymentsCreateInvoicePaymentIntent`](docs/sdks/invoicepayments/README.md#createinvoicepaymentintent) - Create payment intent for invoice
+- [`invoicePaymentsDisconnectStripe`](docs/sdks/invoicepayments/README.md#disconnectstripe) - Disconnect Stripe account
+- [`invoicePaymentsGetStripeConnectStatus`](docs/sdks/invoicepayments/README.md#getstripeconnectstatus) - Get Stripe Connect status
+- [`invoicePaymentsGetStripeConnectUrl`](docs/sdks/invoicepayments/README.md#getstripeconnecturl) - Get Stripe Connect URL
+- [`invoicePaymentsStripeConnectCallback`](docs/sdks/invoicepayments/README.md#stripeconnectcallback) - Stripe Connect OAuth callback
 - [`invoicesCreate`](docs/sdks/invoices/README.md#create) - Create an invoice
 - [`invoicesDelete`](docs/sdks/invoices/README.md#delete) - Delete a invoice
 - [`invoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve a invoice
@@ -456,6 +512,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`transactionsUpdateMany`](docs/sdks/transactions/README.md#updatemany) - Bulk update transactions
 - [`usersGet`](docs/sdks/users/README.md#get) - Retrieve the current user
 - [`usersUpdate`](docs/sdks/users/README.md#update) - Update the current user
+- [`webhooksInboxWebhook`](docs/sdks/webhooks/README.md#inboxwebhook) - Inbox webhook
+- [`webhooksStripeWebhook`](docs/sdks/webhooks/README.md#stripewebhook) - Stripe webhook handler
+- [`webhooksWhatsappWebhook`](docs/sdks/webhooks/README.md#whatsappwebhook) - WhatsApp webhook
+- [`webhooksWhatsappWebhookVerify`](docs/sdks/webhooks/README.md#whatsappwebhookverify) - WhatsApp webhook verification
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -605,7 +665,7 @@ run();
 **Primary error:**
 * [`MiddayError`](./src/models/errors/middayerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (23)</summary>
+<details><summary>Less common errors (42)</summary>
 
 <br />
 
@@ -618,23 +678,42 @@ run();
 
 
 **Inherit from [`MiddayError`](./src/models/errors/middayerror.ts)**:
-* [`GetOAuthAuthorizationBadRequestError`](./src/models/errors/getoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
-* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
-* [`PostOAuthTokenBadRequestError`](./src/models/errors/postoauthtokenbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
-* [`GetTransactionAttachmentPreSignedUrlBadRequestError`](./src/models/errors/gettransactionattachmentpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 74 methods.*
-* [`GetDocumentPreSignedUrlBadRequestError`](./src/models/errors/getdocumentpresignedurlbadrequesterror.ts): Bad request - Document file path not available. Status code `400`. Applicable to 1 of 74 methods.*
-* [`GetInboxPreSignedUrlBadRequestError`](./src/models/errors/getinboxpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 74 methods.*
-* [`CreateInvoiceBadRequestError`](./src/models/errors/createinvoicebadrequesterror.ts): Bad request. Invalid input data or validation errors. Status code `400`. Applicable to 1 of 74 methods.*
-* [`UnauthorizedError`](./src/models/errors/unauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 74 methods.*
-* [`GetTransactionAttachmentPreSignedUrlNotFoundError`](./src/models/errors/gettransactionattachmentpresignedurlnotfounderror.ts): Transaction or attachment not found. Status code `404`. Applicable to 1 of 74 methods.*
-* [`GetDocumentPreSignedUrlNotFoundError`](./src/models/errors/getdocumentpresignedurlnotfounderror.ts): Document not found. Status code `404`. Applicable to 1 of 74 methods.*
-* [`GetInboxPreSignedUrlNotFoundError`](./src/models/errors/getinboxpresignedurlnotfounderror.ts): Inbox item not found. Status code `404`. Applicable to 1 of 74 methods.*
-* [`CreateInvoiceNotFoundError`](./src/models/errors/createinvoicenotfounderror.ts): Customer not found. Status code `404`. Applicable to 1 of 74 methods.*
-* [`ConflictError`](./src/models/errors/conflicterror.ts): Conflict. Invoice number already exists. Status code `409`. Applicable to 1 of 74 methods.*
-* [`GetTransactionAttachmentPreSignedUrlInternalServerError`](./src/models/errors/gettransactionattachmentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
-* [`GetDocumentPreSignedUrlInternalServerError`](./src/models/errors/getdocumentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
-* [`GetInboxPreSignedUrlInternalServerError`](./src/models/errors/getinboxpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
-* [`CreateInvoiceInternalServerError`](./src/models/errors/createinvoiceinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 74 methods.*
+* [`GetOAuthAuthorizationBadRequestError`](./src/models/errors/getoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 100 methods.*
+* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 100 methods.*
+* [`PostOAuthTokenBadRequestError`](./src/models/errors/postoauthtokenbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 100 methods.*
+* [`InboxWebhookBadRequestError`](./src/models/errors/inboxwebhookbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 100 methods.*
+* [`ProxyFileBadRequestError`](./src/models/errors/proxyfilebadrequesterror.ts): Bad request. Status code `400`. Applicable to 1 of 100 methods.*
+* [`DownloadFileBadRequestError`](./src/models/errors/downloadfilebadrequesterror.ts): Bad request. Status code `400`. Applicable to 1 of 100 methods.*
+* [`DownloadInvoiceBadRequestError`](./src/models/errors/downloadinvoicebadrequesterror.ts): Bad request. Status code `400`. Applicable to 1 of 100 methods.*
+* [`SlackOAuthCallbackBadRequestError`](./src/models/errors/slackoauthcallbackbadrequesterror.ts): Invalid request parameters. Status code `400`. Applicable to 1 of 100 methods.*
+* [`GmailOAuthCallbackBadRequestError`](./src/models/errors/gmailoauthcallbackbadrequesterror.ts): Invalid request parameters. Status code `400`. Applicable to 1 of 100 methods.*
+* [`OutlookOAuthCallbackBadRequestError`](./src/models/errors/outlookoauthcallbackbadrequesterror.ts): Invalid request parameters. Status code `400`. Applicable to 1 of 100 methods.*
+* [`GetTransactionAttachmentPreSignedUrlBadRequestError`](./src/models/errors/gettransactionattachmentpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 100 methods.*
+* [`GetDocumentPreSignedUrlBadRequestError`](./src/models/errors/getdocumentpresignedurlbadrequesterror.ts): Bad request - Document file path not available. Status code `400`. Applicable to 1 of 100 methods.*
+* [`GetInboxPreSignedUrlBadRequestError`](./src/models/errors/getinboxpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 100 methods.*
+* [`CreateInvoiceBadRequestError`](./src/models/errors/createinvoicebadrequesterror.ts): Bad request. Invalid input data or validation errors. Status code `400`. Applicable to 1 of 100 methods.*
+* [`PostOAuthAuthorizationUnauthorizedError`](./src/models/errors/postoauthauthorizationunauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 100 methods.*
+* [`DownloadFileUnauthorizedError`](./src/models/errors/downloadfileunauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 100 methods.*
+* [`DownloadInvoiceUnauthorizedError`](./src/models/errors/downloadinvoiceunauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 100 methods.*
+* [`ProxyFileNotFoundError`](./src/models/errors/proxyfilenotfounderror.ts): Not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DownloadFileNotFoundError`](./src/models/errors/downloadfilenotfounderror.ts): Not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`DownloadInvoiceNotFoundError`](./src/models/errors/downloadinvoicenotfounderror.ts): Not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetTransactionAttachmentPreSignedUrlNotFoundError`](./src/models/errors/gettransactionattachmentpresignedurlnotfounderror.ts): Transaction or attachment not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetDocumentPreSignedUrlNotFoundError`](./src/models/errors/getdocumentpresignedurlnotfounderror.ts): Document not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`GetInboxPreSignedUrlNotFoundError`](./src/models/errors/getinboxpresignedurlnotfounderror.ts): Inbox item not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`CreateInvoiceNotFoundError`](./src/models/errors/createinvoicenotfounderror.ts): Customer not found. Status code `404`. Applicable to 1 of 100 methods.*
+* [`ConflictError`](./src/models/errors/conflicterror.ts): Conflict. Invoice number already exists. Status code `409`. Applicable to 1 of 100 methods.*
+* [`InboxWebhookInternalServerError`](./src/models/errors/inboxwebhookinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 100 methods.*
+* [`ProxyFileInternalServerError`](./src/models/errors/proxyfileinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 100 methods.*
+* [`DownloadFileInternalServerError`](./src/models/errors/downloadfileinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 100 methods.*
+* [`DownloadInvoiceInternalServerError`](./src/models/errors/downloadinvoiceinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 100 methods.*
+* [`SlackOAuthCallbackInternalServerError`](./src/models/errors/slackoauthcallbackinternalservererror.ts): Failed to process OAuth callback. Status code `500`. Applicable to 1 of 100 methods.*
+* [`GmailOAuthCallbackInternalServerError`](./src/models/errors/gmailoauthcallbackinternalservererror.ts): Failed to process OAuth callback. Status code `500`. Applicable to 1 of 100 methods.*
+* [`OutlookOAuthCallbackInternalServerError`](./src/models/errors/outlookoauthcallbackinternalservererror.ts): Failed to process OAuth callback. Status code `500`. Applicable to 1 of 100 methods.*
+* [`GetTransactionAttachmentPreSignedUrlInternalServerError`](./src/models/errors/gettransactionattachmentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 100 methods.*
+* [`GetDocumentPreSignedUrlInternalServerError`](./src/models/errors/getdocumentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 100 methods.*
+* [`GetInboxPreSignedUrlInternalServerError`](./src/models/errors/getinboxpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 100 methods.*
+* [`CreateInvoiceInternalServerError`](./src/models/errors/createinvoiceinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 100 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

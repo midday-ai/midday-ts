@@ -12,9 +12,7 @@ let value: GetOAuthAuthorizationResponse = {
   name: "My Raycast Extension",
   description: "A Raycast extension for managing transactions",
   overview:
-    "This application provides advanced transaction management features including:\n"
-    + "- Real-time sync\n"
-    + "- Advanced filtering",
+    "This application provides advanced transaction management features including:\n- Real-time sync\n- Advanced filtering",
   developerName: "Acme Corp",
   logoUrl: "https://example.com/logo.png",
   website: "https://myapp.com",

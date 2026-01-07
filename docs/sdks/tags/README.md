@@ -1,5 +1,4 @@
 # Tags
-(*tags*)
 
 ## Overview
 
@@ -152,7 +151,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TagsResponse](../../models/tagsresponse.md)\>**
+**Promise\<[models.TagResponse](../../models/tagresponse.md)\>**
 
 ### Errors
 

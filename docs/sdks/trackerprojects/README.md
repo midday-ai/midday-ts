@@ -1,5 +1,4 @@
 # TrackerProjects
-(*trackerProjects*)
 
 ## Overview
 

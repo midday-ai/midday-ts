@@ -8,6 +8,57 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
+
+/**
+ * Export settings for transactions
+ */
+export type ExportSettings = {
+  csvDelimiter: string;
+  includeCSV: boolean;
+  includeXLSX: boolean;
+  sendEmail: boolean;
+  sendCopyToMe?: boolean | undefined;
+  accountantEmail?: string | undefined;
+};
+
+/**
+ * Type of company or team
+ */
+export const CompanyType = {
+  Freelancer: "freelancer",
+  SoloFounder: "solo_founder",
+  SmallTeam: "small_team",
+  Startup: "startup",
+  Agency: "agency",
+  Ecommerce: "ecommerce",
+  Creator: "creator",
+  NonProfit: "non_profit",
+  Accountant: "accountant",
+  Exploring: "exploring",
+} as const;
+/**
+ * Type of company or team
+ */
+export type CompanyType = ClosedEnum<typeof CompanyType>;
+
+/**
+ * How the user heard about the product
+ */
+export const HeardAbout = {
+  Twitter: "twitter",
+  Youtube: "youtube",
+  Friend: "friend",
+  Google: "google",
+  Blog: "blog",
+  Podcast: "podcast",
+  Github: "github",
+  Other: "other",
+} as const;
+/**
+ * How the user heard about the product
+ */
+export type HeardAbout = ClosedEnum<typeof HeardAbout>;
 
 export type UpdateTeamByIdRequestBody = {
   /**
@@ -30,11 +81,30 @@ export type UpdateTeamByIdRequestBody = {
    * Country code for the team
    */
   countryCode?: string | undefined;
+  /**
+   * Month when the fiscal year starts (1-12). Null for trailing 12 months. Defaults based on country if not specified.
+   */
+  fiscalYearStartMonth?: number | null | undefined;
+  /**
+   * Export settings for transactions
+   */
+  exportSettings?: ExportSettings | undefined;
+  /**
+   * Type of company or team
+   */
+  companyType?: CompanyType | undefined;
+  /**
+   * How the user heard about the product
+   */
+  heardAbout?: HeardAbout | undefined;
 };
 
 export type UpdateTeamByIdRequest = {
+  /**
+   * Unique identifier of the team
+   */
   id: string;
-  requestBody?: UpdateTeamByIdRequestBody | undefined;
+  requestBody: UpdateTeamByIdRequestBody;
 };
 
 /**
@@ -53,7 +123,7 @@ export type UpdateTeamByIdPlan = ClosedEnum<typeof UpdateTeamByIdPlan>;
 /**
  * Team updated
  */
-export type UpdateTeamByIdResponse = {
+export type UpdateTeamByIdResponseBody = {
   /**
    * Unique identifier of the team
    */
@@ -72,6 +142,113 @@ export type UpdateTeamByIdResponse = {
   plan: UpdateTeamByIdPlan;
 };
 
+export type UpdateTeamByIdResponse =
+  | UpdateTeamByIdResponseBody
+  | models.ErrorResponse;
+
+/** @internal */
+export const ExportSettings$inboundSchema: z.ZodType<
+  ExportSettings,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  csvDelimiter: z.string(),
+  includeCSV: z.boolean(),
+  includeXLSX: z.boolean(),
+  sendEmail: z.boolean(),
+  sendCopyToMe: z.boolean().optional(),
+  accountantEmail: z.string().optional(),
+});
+
+/** @internal */
+export type ExportSettings$Outbound = {
+  csvDelimiter: string;
+  includeCSV: boolean;
+  includeXLSX: boolean;
+  sendEmail: boolean;
+  sendCopyToMe?: boolean | undefined;
+  accountantEmail?: string | undefined;
+};
+
+/** @internal */
+export const ExportSettings$outboundSchema: z.ZodType<
+  ExportSettings$Outbound,
+  z.ZodTypeDef,
+  ExportSettings
+> = z.object({
+  csvDelimiter: z.string(),
+  includeCSV: z.boolean(),
+  includeXLSX: z.boolean(),
+  sendEmail: z.boolean(),
+  sendCopyToMe: z.boolean().optional(),
+  accountantEmail: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ExportSettings$ {
+  /** @deprecated use `ExportSettings$inboundSchema` instead. */
+  export const inboundSchema = ExportSettings$inboundSchema;
+  /** @deprecated use `ExportSettings$outboundSchema` instead. */
+  export const outboundSchema = ExportSettings$outboundSchema;
+  /** @deprecated use `ExportSettings$Outbound` instead. */
+  export type Outbound = ExportSettings$Outbound;
+}
+
+export function exportSettingsToJSON(exportSettings: ExportSettings): string {
+  return JSON.stringify(ExportSettings$outboundSchema.parse(exportSettings));
+}
+
+export function exportSettingsFromJSON(
+  jsonString: string,
+): SafeParseResult<ExportSettings, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ExportSettings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExportSettings' from JSON`,
+  );
+}
+
+/** @internal */
+export const CompanyType$inboundSchema: z.ZodNativeEnum<typeof CompanyType> = z
+  .nativeEnum(CompanyType);
+
+/** @internal */
+export const CompanyType$outboundSchema: z.ZodNativeEnum<typeof CompanyType> =
+  CompanyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CompanyType$ {
+  /** @deprecated use `CompanyType$inboundSchema` instead. */
+  export const inboundSchema = CompanyType$inboundSchema;
+  /** @deprecated use `CompanyType$outboundSchema` instead. */
+  export const outboundSchema = CompanyType$outboundSchema;
+}
+
+/** @internal */
+export const HeardAbout$inboundSchema: z.ZodNativeEnum<typeof HeardAbout> = z
+  .nativeEnum(HeardAbout);
+
+/** @internal */
+export const HeardAbout$outboundSchema: z.ZodNativeEnum<typeof HeardAbout> =
+  HeardAbout$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace HeardAbout$ {
+  /** @deprecated use `HeardAbout$inboundSchema` instead. */
+  export const inboundSchema = HeardAbout$inboundSchema;
+  /** @deprecated use `HeardAbout$outboundSchema` instead. */
+  export const outboundSchema = HeardAbout$outboundSchema;
+}
+
 /** @internal */
 export const UpdateTeamByIdRequestBody$inboundSchema: z.ZodType<
   UpdateTeamByIdRequestBody,
@@ -83,6 +260,10 @@ export const UpdateTeamByIdRequestBody$inboundSchema: z.ZodType<
   logoUrl: z.string().optional(),
   baseCurrency: z.string().optional(),
   countryCode: z.string().optional(),
+  fiscalYearStartMonth: z.nullable(z.number().int()).optional(),
+  exportSettings: z.lazy(() => ExportSettings$inboundSchema).optional(),
+  companyType: CompanyType$inboundSchema.optional(),
+  heardAbout: HeardAbout$inboundSchema.optional(),
 });
 
 /** @internal */
@@ -92,6 +273,10 @@ export type UpdateTeamByIdRequestBody$Outbound = {
   logoUrl?: string | undefined;
   baseCurrency?: string | undefined;
   countryCode?: string | undefined;
+  fiscalYearStartMonth?: number | null | undefined;
+  exportSettings?: ExportSettings$Outbound | undefined;
+  companyType?: string | undefined;
+  heardAbout?: string | undefined;
 };
 
 /** @internal */
@@ -105,6 +290,10 @@ export const UpdateTeamByIdRequestBody$outboundSchema: z.ZodType<
   logoUrl: z.string().optional(),
   baseCurrency: z.string().optional(),
   countryCode: z.string().optional(),
+  fiscalYearStartMonth: z.nullable(z.number().int()).optional(),
+  exportSettings: z.lazy(() => ExportSettings$outboundSchema).optional(),
+  companyType: CompanyType$outboundSchema.optional(),
+  heardAbout: HeardAbout$outboundSchema.optional(),
 });
 
 /**
@@ -145,7 +334,7 @@ export const UpdateTeamByIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  RequestBody: z.lazy(() => UpdateTeamByIdRequestBody$inboundSchema).optional(),
+  RequestBody: z.lazy(() => UpdateTeamByIdRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -155,7 +344,7 @@ export const UpdateTeamByIdRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateTeamByIdRequest$Outbound = {
   id: string;
-  RequestBody?: UpdateTeamByIdRequestBody$Outbound | undefined;
+  RequestBody: UpdateTeamByIdRequestBody$Outbound;
 };
 
 /** @internal */
@@ -165,8 +354,7 @@ export const UpdateTeamByIdRequest$outboundSchema: z.ZodType<
   UpdateTeamByIdRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => UpdateTeamByIdRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => UpdateTeamByIdRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",
@@ -226,8 +414,8 @@ export namespace UpdateTeamByIdPlan$ {
 }
 
 /** @internal */
-export const UpdateTeamByIdResponse$inboundSchema: z.ZodType<
-  UpdateTeamByIdResponse,
+export const UpdateTeamByIdResponseBody$inboundSchema: z.ZodType<
+  UpdateTeamByIdResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -238,7 +426,7 @@ export const UpdateTeamByIdResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateTeamByIdResponse$Outbound = {
+export type UpdateTeamByIdResponseBody$Outbound = {
   id: string;
   name: string;
   logoUrl: string | null;
@@ -246,16 +434,72 @@ export type UpdateTeamByIdResponse$Outbound = {
 };
 
 /** @internal */
-export const UpdateTeamByIdResponse$outboundSchema: z.ZodType<
-  UpdateTeamByIdResponse$Outbound,
+export const UpdateTeamByIdResponseBody$outboundSchema: z.ZodType<
+  UpdateTeamByIdResponseBody$Outbound,
   z.ZodTypeDef,
-  UpdateTeamByIdResponse
+  UpdateTeamByIdResponseBody
 > = z.object({
   id: z.string(),
   name: z.string(),
   logoUrl: z.nullable(z.string()),
   plan: UpdateTeamByIdPlan$outboundSchema,
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateTeamByIdResponseBody$ {
+  /** @deprecated use `UpdateTeamByIdResponseBody$inboundSchema` instead. */
+  export const inboundSchema = UpdateTeamByIdResponseBody$inboundSchema;
+  /** @deprecated use `UpdateTeamByIdResponseBody$outboundSchema` instead. */
+  export const outboundSchema = UpdateTeamByIdResponseBody$outboundSchema;
+  /** @deprecated use `UpdateTeamByIdResponseBody$Outbound` instead. */
+  export type Outbound = UpdateTeamByIdResponseBody$Outbound;
+}
+
+export function updateTeamByIdResponseBodyToJSON(
+  updateTeamByIdResponseBody: UpdateTeamByIdResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateTeamByIdResponseBody$outboundSchema.parse(updateTeamByIdResponseBody),
+  );
+}
+
+export function updateTeamByIdResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateTeamByIdResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateTeamByIdResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateTeamByIdResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateTeamByIdResponse$inboundSchema: z.ZodType<
+  UpdateTeamByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateTeamByIdResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateTeamByIdResponse$Outbound =
+  | UpdateTeamByIdResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const UpdateTeamByIdResponse$outboundSchema: z.ZodType<
+  UpdateTeamByIdResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateTeamByIdResponse
+> = z.union([
+  z.lazy(() => UpdateTeamByIdResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

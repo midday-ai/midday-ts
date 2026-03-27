@@ -1,6 +1,6 @@
 # Connection
 
-Bank connection information associated with the account
+Bank connection information associated with the account. Null for manual accounts.
 
 ## Example Usage
 

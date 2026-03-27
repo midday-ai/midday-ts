@@ -7,7 +7,7 @@ import { transactionsDeleteMany } from "../../funcs/transactionsDeleteMany.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: z.array(z.string()).optional(),
+  request: z.array(z.string()),
 };
 
 export const tool$transactionsDeleteMany: ToolDefinition<typeof args> = {

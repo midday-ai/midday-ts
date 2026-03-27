@@ -1,13 +1,12 @@
 # ListDocumentsResponse
 
-Response containing a list of documents and pagination metadata.
 
-## Example Usage
+## Supported Types
+
+### `operations.ListDocumentsResponseBody`
 
 ```typescript
-import { ListDocumentsResponse } from "@midday-ai/sdk/models/operations";
-
-let value: ListDocumentsResponse = {
+const value: operations.ListDocumentsResponseBody = {
   meta: {
     cursor: "20",
     hasPreviousPage: false,
@@ -35,9 +34,12 @@ let value: ListDocumentsResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `meta`                                                                         | [operations.ListDocumentsMeta](../../models/operations/listdocumentsmeta.md)   | :heavy_check_mark:                                                             | Pagination metadata for the documents list.                                    |
-| `data`                                                                         | [operations.ListDocumentsData](../../models/operations/listdocumentsdata.md)[] | :heavy_check_mark:                                                             | Array of document objects.                                                     |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

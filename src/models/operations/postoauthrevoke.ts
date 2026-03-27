@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * Hint about the token type
@@ -43,9 +44,13 @@ export type PostOAuthRevokeRequest = {
 /**
  * Token revocation successful
  */
-export type PostOAuthRevokeResponse = {
+export type PostOAuthRevokeResponseBody = {
   success: boolean;
 };
+
+export type PostOAuthRevokeResponse =
+  | PostOAuthRevokeResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const TokenTypeHint$inboundSchema: z.ZodNativeEnum<
@@ -144,8 +149,8 @@ export function postOAuthRevokeRequestFromJSON(
 }
 
 /** @internal */
-export const PostOAuthRevokeResponse$inboundSchema: z.ZodType<
-  PostOAuthRevokeResponse,
+export const PostOAuthRevokeResponseBody$inboundSchema: z.ZodType<
+  PostOAuthRevokeResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -153,18 +158,76 @@ export const PostOAuthRevokeResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type PostOAuthRevokeResponse$Outbound = {
+export type PostOAuthRevokeResponseBody$Outbound = {
   success: boolean;
 };
+
+/** @internal */
+export const PostOAuthRevokeResponseBody$outboundSchema: z.ZodType<
+  PostOAuthRevokeResponseBody$Outbound,
+  z.ZodTypeDef,
+  PostOAuthRevokeResponseBody
+> = z.object({
+  success: z.boolean(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostOAuthRevokeResponseBody$ {
+  /** @deprecated use `PostOAuthRevokeResponseBody$inboundSchema` instead. */
+  export const inboundSchema = PostOAuthRevokeResponseBody$inboundSchema;
+  /** @deprecated use `PostOAuthRevokeResponseBody$outboundSchema` instead. */
+  export const outboundSchema = PostOAuthRevokeResponseBody$outboundSchema;
+  /** @deprecated use `PostOAuthRevokeResponseBody$Outbound` instead. */
+  export type Outbound = PostOAuthRevokeResponseBody$Outbound;
+}
+
+export function postOAuthRevokeResponseBodyToJSON(
+  postOAuthRevokeResponseBody: PostOAuthRevokeResponseBody,
+): string {
+  return JSON.stringify(
+    PostOAuthRevokeResponseBody$outboundSchema.parse(
+      postOAuthRevokeResponseBody,
+    ),
+  );
+}
+
+export function postOAuthRevokeResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<PostOAuthRevokeResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostOAuthRevokeResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostOAuthRevokeResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostOAuthRevokeResponse$inboundSchema: z.ZodType<
+  PostOAuthRevokeResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => PostOAuthRevokeResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type PostOAuthRevokeResponse$Outbound =
+  | PostOAuthRevokeResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const PostOAuthRevokeResponse$outboundSchema: z.ZodType<
   PostOAuthRevokeResponse$Outbound,
   z.ZodTypeDef,
   PostOAuthRevokeResponse
-> = z.object({
-  success: z.boolean(),
-});
+> = z.union([
+  z.lazy(() => PostOAuthRevokeResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

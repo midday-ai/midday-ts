@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage teams
+
 ### Available Operations
 
 * [list](#list) - List all teams
@@ -184,6 +186,9 @@ async function run() {
       logoUrl: "https://cdn.midday.ai/logos/acme-corp.png",
       baseCurrency: "USD",
       countryCode: "US",
+      fiscalYearStartMonth: 4,
+      companyType: "solo_founder",
+      heardAbout: "twitter",
     },
   });
 
@@ -218,6 +223,9 @@ async function run() {
       logoUrl: "https://cdn.midday.ai/logos/acme-corp.png",
       baseCurrency: "USD",
       countryCode: "US",
+      fiscalYearStartMonth: 4,
+      companyType: "solo_founder",
+      heardAbout: "twitter",
     },
   });
   if (res.ok) {

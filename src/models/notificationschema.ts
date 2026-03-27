@@ -57,7 +57,7 @@ export type NotificationSchema = {
    */
   type: string;
   /**
-   * Priority level of the notification (1-3 = user notifications, 4-10 = insights)
+   * Priority level of the notification (1-3 = user notifications, 4-10 = system)
    */
   priority: number;
   /**
@@ -71,7 +71,7 @@ export type NotificationSchema = {
   /**
    * Additional metadata for the notification
    */
-  metadata: { [k: string]: any | null };
+  metadata: { [k: string]: any };
   /**
    * ISO timestamp when the notification was last used by the system
    */
@@ -132,7 +132,7 @@ export const NotificationSchema$inboundSchema: z.ZodType<
   priority: z.number().int(),
   source: Source$inboundSchema,
   status: NotificationSchemaStatus$inboundSchema,
-  metadata: z.record(z.nullable(z.any())),
+  metadata: z.record(z.any()),
   lastUsedAt: z.nullable(z.string()),
 });
 
@@ -146,7 +146,7 @@ export type NotificationSchema$Outbound = {
   priority: number;
   source: string;
   status: string;
-  metadata: { [k: string]: any | null };
+  metadata: { [k: string]: any };
   lastUsedAt: string | null;
 };
 
@@ -164,7 +164,7 @@ export const NotificationSchema$outboundSchema: z.ZodType<
   priority: z.number().int(),
   source: Source$outboundSchema,
   status: NotificationSchemaStatus$outboundSchema,
-  metadata: z.record(z.nullable(z.any())),
+  metadata: z.record(z.any()),
   lastUsedAt: z.nullable(z.string()),
 });
 

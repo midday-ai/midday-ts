@@ -31,7 +31,7 @@ export class Users extends ClientSDK {
    * Update the current user for the authenticated team.
    */
   async update(
-    request?: operations.UpdateCurrentUserRequest | undefined,
+    request: operations.UpdateCurrentUserRequest,
     options?: RequestOptions,
   ): Promise<operations.UpdateCurrentUserResponse> {
     return unwrapAsync(usersUpdate(

@@ -7,16 +7,53 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type ListInvoicesRequest = {
+  /**
+   * A cursor for pagination, representing the last item from the previous page.
+   */
   cursor?: string | null | undefined;
+  /**
+   * Sort as [column, direction]. Columns: created_at, due_date, issue_date, amount, status, customer, invoice_number. Direction: asc or desc.
+   */
   sort?: Array<string> | null | undefined;
+  /**
+   * Number of invoices to return per page (1-100).
+   */
   pageSize?: number | undefined;
+  /**
+   * Search query string to filter invoices by text.
+   */
   q?: string | null | undefined;
+  /**
+   * Start date (inclusive) for filtering invoices, in ISO 8601 format.
+   */
   start?: string | null | undefined;
+  /**
+   * End date (inclusive) for filtering invoices, in ISO 8601 format.
+   */
   end?: string | null | undefined;
+  /**
+   * List of invoice statuses to filter by (e.g., 'paid', 'unpaid', 'overdue').
+   */
   statuses?: Array<string> | null | undefined;
+  /**
+   * List of customer IDs to filter invoices.
+   */
   customers?: Array<string> | null | undefined;
+  /**
+   * List of invoice IDs to filter by.
+   */
+  ids?: Array<string> | null | undefined;
+  /**
+   * List of recurring series IDs to filter invoices by (shows all invoices from these series).
+   */
+  recurringIds?: Array<string> | null | undefined;
+  /**
+   * Filter by recurring status. true = only recurring invoices, false = only non-recurring invoices.
+   */
+  recurring?: boolean | null | undefined;
 };
 
 /**
@@ -100,13 +137,13 @@ export type ListInvoicesData = {
    */
   invoiceNumber?: string | undefined;
   /**
-   * Total amount of the invoice
+   * Total amount of the invoice, or null if not yet calculated
    */
-  amount: number;
+  amount: number | null;
   /**
    * Currency code (ISO 4217) for the invoice amount
    */
-  currency: string;
+  currency: string | null;
   /**
    * Customer details
    */
@@ -176,7 +213,7 @@ export type ListInvoicesData = {
 /**
  * Response containing a list of invoices and pagination metadata
  */
-export type ListInvoicesResponse = {
+export type ListInvoicesResponseBody = {
   /**
    * Pagination metadata
    */
@@ -186,6 +223,10 @@ export type ListInvoicesResponse = {
    */
   data: Array<ListInvoicesData>;
 };
+
+export type ListInvoicesResponse =
+  | ListInvoicesResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const ListInvoicesRequest$inboundSchema: z.ZodType<
@@ -201,6 +242,9 @@ export const ListInvoicesRequest$inboundSchema: z.ZodType<
   end: z.nullable(z.string()).optional(),
   statuses: z.nullable(z.array(z.string())).optional(),
   customers: z.nullable(z.array(z.string())).optional(),
+  ids: z.nullable(z.array(z.string())).optional(),
+  recurringIds: z.nullable(z.array(z.string())).optional(),
+  recurring: z.nullable(z.boolean()).optional(),
 });
 
 /** @internal */
@@ -213,6 +257,9 @@ export type ListInvoicesRequest$Outbound = {
   end?: string | null | undefined;
   statuses?: Array<string> | null | undefined;
   customers?: Array<string> | null | undefined;
+  ids?: Array<string> | null | undefined;
+  recurringIds?: Array<string> | null | undefined;
+  recurring?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -229,6 +276,9 @@ export const ListInvoicesRequest$outboundSchema: z.ZodType<
   end: z.nullable(z.string()).optional(),
   statuses: z.nullable(z.array(z.string())).optional(),
   customers: z.nullable(z.array(z.string())).optional(),
+  ids: z.nullable(z.array(z.string())).optional(),
+  recurringIds: z.nullable(z.array(z.string())).optional(),
+  recurring: z.nullable(z.boolean()).optional(),
 });
 
 /**
@@ -417,8 +467,8 @@ export const ListInvoicesData$inboundSchema: z.ZodType<
   dueDate: z.string(),
   issueDate: z.string(),
   invoiceNumber: z.string().optional(),
-  amount: z.number(),
-  currency: z.string(),
+  amount: z.nullable(z.number()),
+  currency: z.nullable(z.string()),
   customer: z.nullable(z.lazy(() => ListInvoicesCustomer$inboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
@@ -444,8 +494,8 @@ export type ListInvoicesData$Outbound = {
   dueDate: string;
   issueDate: string;
   invoiceNumber?: string | undefined;
-  amount: number;
-  currency: string;
+  amount: number | null;
+  currency: string | null;
   customer: ListInvoicesCustomer$Outbound | null;
   paidAt: string | null;
   reminderSentAt: string | null;
@@ -475,8 +525,8 @@ export const ListInvoicesData$outboundSchema: z.ZodType<
   dueDate: z.string(),
   issueDate: z.string(),
   invoiceNumber: z.string().optional(),
-  amount: z.number(),
-  currency: z.string(),
+  amount: z.nullable(z.number()),
+  currency: z.nullable(z.string()),
   customer: z.nullable(z.lazy(() => ListInvoicesCustomer$outboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
@@ -527,8 +577,8 @@ export function listInvoicesDataFromJSON(
 }
 
 /** @internal */
-export const ListInvoicesResponse$inboundSchema: z.ZodType<
-  ListInvoicesResponse,
+export const ListInvoicesResponseBody$inboundSchema: z.ZodType<
+  ListInvoicesResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -537,20 +587,76 @@ export const ListInvoicesResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ListInvoicesResponse$Outbound = {
+export type ListInvoicesResponseBody$Outbound = {
   meta: ListInvoicesMeta$Outbound;
   data: Array<ListInvoicesData$Outbound>;
 };
+
+/** @internal */
+export const ListInvoicesResponseBody$outboundSchema: z.ZodType<
+  ListInvoicesResponseBody$Outbound,
+  z.ZodTypeDef,
+  ListInvoicesResponseBody
+> = z.object({
+  meta: z.lazy(() => ListInvoicesMeta$outboundSchema),
+  data: z.array(z.lazy(() => ListInvoicesData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInvoicesResponseBody$ {
+  /** @deprecated use `ListInvoicesResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ListInvoicesResponseBody$inboundSchema;
+  /** @deprecated use `ListInvoicesResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ListInvoicesResponseBody$outboundSchema;
+  /** @deprecated use `ListInvoicesResponseBody$Outbound` instead. */
+  export type Outbound = ListInvoicesResponseBody$Outbound;
+}
+
+export function listInvoicesResponseBodyToJSON(
+  listInvoicesResponseBody: ListInvoicesResponseBody,
+): string {
+  return JSON.stringify(
+    ListInvoicesResponseBody$outboundSchema.parse(listInvoicesResponseBody),
+  );
+}
+
+export function listInvoicesResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInvoicesResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInvoicesResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInvoicesResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInvoicesResponse$inboundSchema: z.ZodType<
+  ListInvoicesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListInvoicesResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListInvoicesResponse$Outbound =
+  | ListInvoicesResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const ListInvoicesResponse$outboundSchema: z.ZodType<
   ListInvoicesResponse$Outbound,
   z.ZodTypeDef,
   ListInvoicesResponse
-> = z.object({
-  meta: z.lazy(() => ListInvoicesMeta$outboundSchema),
-  data: z.array(z.lazy(() => ListInvoicesData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => ListInvoicesResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

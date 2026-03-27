@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage users
+
 ### Available Operations
 
 * [get](#get) - Retrieve the current user
@@ -99,7 +101,6 @@ const midday = new Midday({
 async function run() {
   const result = await midday.users.update({
     fullName: "Jane Doe",
-    teamId: "team-abc123",
     email: "jane.doe@acme.com",
     avatarUrl: "https://cdn.midday.ai/avatars/jane-doe.jpg",
     locale: "en-US",
@@ -135,7 +136,6 @@ const midday = new MiddayCore({
 async function run() {
   const res = await usersUpdate(midday, {
     fullName: "Jane Doe",
-    teamId: "team-abc123",
     email: "jane.doe@acme.com",
     avatarUrl: "https://cdn.midday.ai/avatars/jane-doe.jpg",
     locale: "en-US",

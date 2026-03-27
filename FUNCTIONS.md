@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { oAuthGetOAuthAuthorization } from "@midday-ai/sdk/funcs/oAuthGetOAuthAuthorization.js";
+import { oAuthPostOAuthRegister } from "@midday-ai/sdk/funcs/oAuthPostOAuthRegister.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -31,19 +31,27 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await oAuthGetOAuthAuthorization(midday, {
-    responseType: "code",
-    clientId: "mid_client_abcdef123456789",
-    redirectUri: "https://myapp.com/callback",
+  const res = await oAuthPostOAuthRegister(midday, {
+    clientName: "ChatGPT",
+    redirectUris: [
+      "https://chatgpt.com/connector/oauth/callback",
+    ],
+    grantTypes: [
+      "authorization_code",
+      "refresh_token",
+    ],
     scope: "transactions.read invoices.read",
-    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
-    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+    logoUri: "https://example.com/logo.png",
+    clientUri: "https://example.com",
+    responseTypes: [
+      "code",
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("oAuthGetOAuthAuthorization failed:", res.error);
+    console.log("oAuthPostOAuthRegister failed:", res.error);
   }
 }
 

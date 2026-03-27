@@ -6,25 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type CreateTransactionsAttachment = {
-  /**
-   * Path(s) of the attachment file(s).
-   */
-  path: Array<string>;
-  /**
-   * Name of the attachment file.
-   */
-  name: string;
-  /**
-   * Size of the attachment file in bytes.
-   */
-  size: number;
-  /**
-   * MIME type of the attachment file.
-   */
-  type: string;
-};
+import * as models from "../index.js";
 
 export type RequestBody = {
   /**
@@ -66,73 +48,12 @@ export type RequestBody = {
   /**
    * Array of attachments for the transaction.
    */
-  attachments?: Array<CreateTransactionsAttachment> | undefined;
+  attachments?: Array<models.CreateTransactionAttachment> | undefined;
 };
 
-/** @internal */
-export const CreateTransactionsAttachment$inboundSchema: z.ZodType<
-  CreateTransactionsAttachment,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  path: z.array(z.string()),
-  name: z.string(),
-  size: z.number(),
-  type: z.string(),
-});
-
-/** @internal */
-export type CreateTransactionsAttachment$Outbound = {
-  path: Array<string>;
-  name: string;
-  size: number;
-  type: string;
-};
-
-/** @internal */
-export const CreateTransactionsAttachment$outboundSchema: z.ZodType<
-  CreateTransactionsAttachment$Outbound,
-  z.ZodTypeDef,
-  CreateTransactionsAttachment
-> = z.object({
-  path: z.array(z.string()),
-  name: z.string(),
-  size: z.number(),
-  type: z.string(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateTransactionsAttachment$ {
-  /** @deprecated use `CreateTransactionsAttachment$inboundSchema` instead. */
-  export const inboundSchema = CreateTransactionsAttachment$inboundSchema;
-  /** @deprecated use `CreateTransactionsAttachment$outboundSchema` instead. */
-  export const outboundSchema = CreateTransactionsAttachment$outboundSchema;
-  /** @deprecated use `CreateTransactionsAttachment$Outbound` instead. */
-  export type Outbound = CreateTransactionsAttachment$Outbound;
-}
-
-export function createTransactionsAttachmentToJSON(
-  createTransactionsAttachment: CreateTransactionsAttachment,
-): string {
-  return JSON.stringify(
-    CreateTransactionsAttachment$outboundSchema.parse(
-      createTransactionsAttachment,
-    ),
-  );
-}
-
-export function createTransactionsAttachmentFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateTransactionsAttachment, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateTransactionsAttachment$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateTransactionsAttachment' from JSON`,
-  );
-}
+export type CreateTransactionsResponse =
+  | models.ErrorResponse
+  | Array<models.TransactionResponse>;
 
 /** @internal */
 export const RequestBody$inboundSchema: z.ZodType<
@@ -149,7 +70,7 @@ export const RequestBody$inboundSchema: z.ZodType<
   categorySlug: z.string().optional(),
   note: z.string().optional(),
   internal: z.boolean().optional(),
-  attachments: z.array(z.lazy(() => CreateTransactionsAttachment$inboundSchema))
+  attachments: z.array(models.CreateTransactionAttachment$inboundSchema)
     .optional(),
 });
 
@@ -164,7 +85,7 @@ export type RequestBody$Outbound = {
   categorySlug?: string | undefined;
   note?: string | undefined;
   internal?: boolean | undefined;
-  attachments?: Array<CreateTransactionsAttachment$Outbound> | undefined;
+  attachments?: Array<models.CreateTransactionAttachment$Outbound> | undefined;
 };
 
 /** @internal */
@@ -182,9 +103,8 @@ export const RequestBody$outboundSchema: z.ZodType<
   categorySlug: z.string().optional(),
   note: z.string().optional(),
   internal: z.boolean().optional(),
-  attachments: z.array(
-    z.lazy(() => CreateTransactionsAttachment$outboundSchema),
-  ).optional(),
+  attachments: z.array(models.CreateTransactionAttachment$outboundSchema)
+    .optional(),
 });
 
 /**
@@ -211,5 +131,61 @@ export function requestBodyFromJSON(
     jsonString,
     (x) => RequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RequestBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateTransactionsResponse$inboundSchema: z.ZodType<
+  CreateTransactionsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.ErrorResponse$inboundSchema,
+  z.array(models.TransactionResponse$inboundSchema),
+]);
+
+/** @internal */
+export type CreateTransactionsResponse$Outbound =
+  | models.ErrorResponse$Outbound
+  | Array<models.TransactionResponse$Outbound>;
+
+/** @internal */
+export const CreateTransactionsResponse$outboundSchema: z.ZodType<
+  CreateTransactionsResponse$Outbound,
+  z.ZodTypeDef,
+  CreateTransactionsResponse
+> = z.union([
+  models.ErrorResponse$outboundSchema,
+  z.array(models.TransactionResponse$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateTransactionsResponse$ {
+  /** @deprecated use `CreateTransactionsResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateTransactionsResponse$inboundSchema;
+  /** @deprecated use `CreateTransactionsResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateTransactionsResponse$outboundSchema;
+  /** @deprecated use `CreateTransactionsResponse$Outbound` instead. */
+  export type Outbound = CreateTransactionsResponse$Outbound;
+}
+
+export function createTransactionsResponseToJSON(
+  createTransactionsResponse: CreateTransactionsResponse,
+): string {
+  return JSON.stringify(
+    CreateTransactionsResponse$outboundSchema.parse(createTransactionsResponse),
+  );
+}
+
+export function createTransactionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateTransactionsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateTransactionsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateTransactionsResponse' from JSON`,
   );
 }

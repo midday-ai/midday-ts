@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type UpdateTrackerEntryRequestBody = {
   /**
@@ -40,6 +41,9 @@ export type UpdateTrackerEntryRequestBody = {
 };
 
 export type UpdateTrackerEntryRequest = {
+  /**
+   * Unique identifier of the tracker entry to delete
+   */
   id: string;
   requestBody?: UpdateTrackerEntryRequestBody | undefined;
 };
@@ -180,12 +184,16 @@ export type UpdateTrackerEntryData = {
 /**
  * Response schema for created tracker entries
  */
-export type UpdateTrackerEntryResponse = {
+export type UpdateTrackerEntryResponseBody = {
   /**
    * Array of created tracker entries
    */
   data: Array<UpdateTrackerEntryData>;
 };
+
+export type UpdateTrackerEntryResponse =
+  | UpdateTrackerEntryResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const UpdateTrackerEntryRequestBody$inboundSchema: z.ZodType<
@@ -617,8 +625,8 @@ export function updateTrackerEntryDataFromJSON(
 }
 
 /** @internal */
-export const UpdateTrackerEntryResponse$inboundSchema: z.ZodType<
-  UpdateTrackerEntryResponse,
+export const UpdateTrackerEntryResponseBody$inboundSchema: z.ZodType<
+  UpdateTrackerEntryResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -626,18 +634,76 @@ export const UpdateTrackerEntryResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateTrackerEntryResponse$Outbound = {
+export type UpdateTrackerEntryResponseBody$Outbound = {
   data: Array<UpdateTrackerEntryData$Outbound>;
 };
+
+/** @internal */
+export const UpdateTrackerEntryResponseBody$outboundSchema: z.ZodType<
+  UpdateTrackerEntryResponseBody$Outbound,
+  z.ZodTypeDef,
+  UpdateTrackerEntryResponseBody
+> = z.object({
+  data: z.array(z.lazy(() => UpdateTrackerEntryData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateTrackerEntryResponseBody$ {
+  /** @deprecated use `UpdateTrackerEntryResponseBody$inboundSchema` instead. */
+  export const inboundSchema = UpdateTrackerEntryResponseBody$inboundSchema;
+  /** @deprecated use `UpdateTrackerEntryResponseBody$outboundSchema` instead. */
+  export const outboundSchema = UpdateTrackerEntryResponseBody$outboundSchema;
+  /** @deprecated use `UpdateTrackerEntryResponseBody$Outbound` instead. */
+  export type Outbound = UpdateTrackerEntryResponseBody$Outbound;
+}
+
+export function updateTrackerEntryResponseBodyToJSON(
+  updateTrackerEntryResponseBody: UpdateTrackerEntryResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateTrackerEntryResponseBody$outboundSchema.parse(
+      updateTrackerEntryResponseBody,
+    ),
+  );
+}
+
+export function updateTrackerEntryResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateTrackerEntryResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateTrackerEntryResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateTrackerEntryResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateTrackerEntryResponse$inboundSchema: z.ZodType<
+  UpdateTrackerEntryResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateTrackerEntryResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateTrackerEntryResponse$Outbound =
+  | UpdateTrackerEntryResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const UpdateTrackerEntryResponse$outboundSchema: z.ZodType<
   UpdateTrackerEntryResponse$Outbound,
   z.ZodTypeDef,
   UpdateTrackerEntryResponse
-> = z.object({
-  data: z.array(z.lazy(() => UpdateTrackerEntryData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => UpdateTrackerEntryResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

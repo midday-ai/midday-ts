@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type DeleteDocumentRequest = {
   id: string;
@@ -14,9 +15,13 @@ export type DeleteDocumentRequest = {
 /**
  * Document deleted successfully
  */
-export type DeleteDocumentResponse = {
+export type DeleteDocumentResponseBody = {
   id: string;
 };
+
+export type DeleteDocumentResponse =
+  | DeleteDocumentResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const DeleteDocumentRequest$inboundSchema: z.ZodType<
@@ -73,8 +78,8 @@ export function deleteDocumentRequestFromJSON(
 }
 
 /** @internal */
-export const DeleteDocumentResponse$inboundSchema: z.ZodType<
-  DeleteDocumentResponse,
+export const DeleteDocumentResponseBody$inboundSchema: z.ZodType<
+  DeleteDocumentResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -82,18 +87,74 @@ export const DeleteDocumentResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeleteDocumentResponse$Outbound = {
+export type DeleteDocumentResponseBody$Outbound = {
   id: string;
 };
+
+/** @internal */
+export const DeleteDocumentResponseBody$outboundSchema: z.ZodType<
+  DeleteDocumentResponseBody$Outbound,
+  z.ZodTypeDef,
+  DeleteDocumentResponseBody
+> = z.object({
+  id: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteDocumentResponseBody$ {
+  /** @deprecated use `DeleteDocumentResponseBody$inboundSchema` instead. */
+  export const inboundSchema = DeleteDocumentResponseBody$inboundSchema;
+  /** @deprecated use `DeleteDocumentResponseBody$outboundSchema` instead. */
+  export const outboundSchema = DeleteDocumentResponseBody$outboundSchema;
+  /** @deprecated use `DeleteDocumentResponseBody$Outbound` instead. */
+  export type Outbound = DeleteDocumentResponseBody$Outbound;
+}
+
+export function deleteDocumentResponseBodyToJSON(
+  deleteDocumentResponseBody: DeleteDocumentResponseBody,
+): string {
+  return JSON.stringify(
+    DeleteDocumentResponseBody$outboundSchema.parse(deleteDocumentResponseBody),
+  );
+}
+
+export function deleteDocumentResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteDocumentResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteDocumentResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteDocumentResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteDocumentResponse$inboundSchema: z.ZodType<
+  DeleteDocumentResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeleteDocumentResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type DeleteDocumentResponse$Outbound =
+  | DeleteDocumentResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const DeleteDocumentResponse$outboundSchema: z.ZodType<
   DeleteDocumentResponse$Outbound,
   z.ZodTypeDef,
   DeleteDocumentResponse
-> = z.object({
-  id: z.string(),
-});
+> = z.union([
+  z.lazy(() => DeleteDocumentResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

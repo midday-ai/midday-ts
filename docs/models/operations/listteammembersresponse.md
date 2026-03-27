@@ -1,13 +1,12 @@
 # ListTeamMembersResponse
 
-Team members
 
-## Example Usage
+## Supported Types
+
+### `operations.ListTeamMembersResponseBody`
 
 ```typescript
-import { ListTeamMembersResponse } from "@midday-ai/sdk/models/operations";
-
-let value: ListTeamMembersResponse = {
+const value: operations.ListTeamMembersResponseBody = {
   data: [
     {
       id: "123e4567-e89b-12d3-a456-426614174000",
@@ -19,8 +18,12 @@ let value: ListTeamMembersResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `data`                                                                             | [operations.ListTeamMembersData](../../models/operations/listteammembersdata.md)[] | :heavy_check_mark:                                                                 | Array of team members with their roles and information                             |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

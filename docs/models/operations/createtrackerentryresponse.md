@@ -1,19 +1,22 @@
 # CreateTrackerEntryResponse
 
-Response schema for created tracker entries
 
-## Example Usage
+## Supported Types
+
+### `operations.CreateTrackerEntryResponseBody`
 
 ```typescript
-import { CreateTrackerEntryResponse } from "@midday-ai/sdk/models/operations";
-
-let value: CreateTrackerEntryResponse = {
+const value: operations.CreateTrackerEntryResponseBody = {
   data: [],
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `data`                                                                                   | [operations.CreateTrackerEntryData](../../models/operations/createtrackerentrydata.md)[] | :heavy_check_mark:                                                                       | Array of created tracker entries                                                         |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

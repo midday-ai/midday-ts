@@ -71,9 +71,9 @@ export type PostOAuthAuthorizationRequest = {
    */
   redirectUri: string;
   /**
-   * State parameter for CSRF protection (min 32 chars, alphanumeric + _.-)
+   * Opaque state parameter for CSRF protection
    */
-  state: string;
+  state?: string | undefined;
   /**
    * Code challenge for PKCE (S256 method assumed)
    */
@@ -140,7 +140,7 @@ export const PostOAuthAuthorizationRequest$inboundSchema: z.ZodType<
   decision: Decision$inboundSchema,
   scopes: z.array(Scope$inboundSchema),
   redirect_uri: z.string(),
-  state: z.string(),
+  state: z.string().optional(),
   code_challenge: z.string().optional(),
   teamId: z.string(),
 }).transform((v) => {
@@ -157,7 +157,7 @@ export type PostOAuthAuthorizationRequest$Outbound = {
   decision: string;
   scopes: Array<string>;
   redirect_uri: string;
-  state: string;
+  state?: string | undefined;
   code_challenge?: string | undefined;
   teamId: string;
 };
@@ -172,7 +172,7 @@ export const PostOAuthAuthorizationRequest$outboundSchema: z.ZodType<
   decision: Decision$outboundSchema,
   scopes: z.array(Scope$outboundSchema),
   redirectUri: z.string(),
-  state: z.string(),
+  state: z.string().optional(),
   codeChallenge: z.string().optional(),
   teamId: z.string(),
 }).transform((v) => {

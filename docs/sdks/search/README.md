@@ -3,6 +3,8 @@
 
 ## Overview
 
+Search endpoints
+
 ### Available Operations
 
 * [search](#search) - Search
@@ -78,7 +80,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.SearchResponse[]](../../models/.md)\>**
+**Promise\<[operations.SearchResponse](../../models/operations/searchresponse.md)\>**
 
 ### Errors
 

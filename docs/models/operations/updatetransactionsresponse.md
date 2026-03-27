@@ -1,13 +1,12 @@
 # UpdateTransactionsResponse
 
-Transactions updated
 
-## Example Usage
+## Supported Types
+
+### `operations.UpdateTransactionsResponseBody`
 
 ```typescript
-import { UpdateTransactionsResponse } from "@midday-ai/sdk/models/operations";
-
-let value: UpdateTransactionsResponse = {
+const value: operations.UpdateTransactionsResponseBody = {
   meta: {
     cursor: "eyJpZCI6IjQ1NiJ9",
     hasPreviousPage: false,
@@ -17,9 +16,12 @@ let value: UpdateTransactionsResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `meta`                                                                                 | [operations.UpdateTransactionsMeta](../../models/operations/updatetransactionsmeta.md) | :heavy_check_mark:                                                                     | Pagination metadata for the transactions response                                      |
-| `data`                                                                                 | [models.TransactionResponse](../../models/transactionresponse.md)[]                    | :heavy_check_mark:                                                                     | Array of transactions matching the query criteria                                      |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

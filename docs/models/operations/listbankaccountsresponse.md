@@ -1,13 +1,12 @@
 # ListBankAccountsResponse
 
-Response containing a list of bank accounts.
 
-## Example Usage
+## Supported Types
+
+### `operations.ListBankAccountsResponseBody`
 
 ```typescript
-import { ListBankAccountsResponse } from "@midday-ai/sdk/models/operations";
-
-let value: ListBankAccountsResponse = {
+const value: operations.ListBankAccountsResponseBody = {
   data: [
     {
       id: "b7e6c2a0-1f2d-4c3b-9a8e-123456789abc",
@@ -22,8 +21,12 @@ let value: ListBankAccountsResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `data`                                                                               | [operations.ListBankAccountsData](../../models/operations/listbankaccountsdata.md)[] | :heavy_check_mark:                                                                   | Array of bank account objects.                                                       |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

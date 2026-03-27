@@ -8,7 +8,6 @@ import { trackerProjectsGet } from "../funcs/trackerProjectsGet.js";
 import { trackerProjectsList } from "../funcs/trackerProjectsList.js";
 import { trackerProjectsUpdate } from "../funcs/trackerProjectsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -22,7 +21,7 @@ export class TrackerProjects extends ClientSDK {
   async list(
     request: operations.ListTrackerProjectsRequest,
     options?: RequestOptions,
-  ): Promise<models.TrackerProjectsResponse> {
+  ): Promise<operations.ListTrackerProjectsResponse> {
     return unwrapAsync(trackerProjectsList(
       this,
       request,
@@ -39,7 +38,7 @@ export class TrackerProjects extends ClientSDK {
   async create(
     request?: operations.CreateTrackerProjectRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.TrackerProjectResponse> {
+  ): Promise<operations.CreateTrackerProjectResponse> {
     return unwrapAsync(trackerProjectsCreate(
       this,
       request,
@@ -56,7 +55,7 @@ export class TrackerProjects extends ClientSDK {
   async update(
     request: operations.UpdateTrackerProjectRequest,
     options?: RequestOptions,
-  ): Promise<models.TrackerProjectResponse> {
+  ): Promise<operations.UpdateTrackerProjectResponse> {
     return unwrapAsync(trackerProjectsUpdate(
       this,
       request,
@@ -73,7 +72,7 @@ export class TrackerProjects extends ClientSDK {
   async get(
     request: operations.GetTrackerProjectByIdRequest,
     options?: RequestOptions,
-  ): Promise<models.TrackerProjectResponse> {
+  ): Promise<operations.GetTrackerProjectByIdResponse> {
     return unwrapAsync(trackerProjectsGet(
       this,
       request,

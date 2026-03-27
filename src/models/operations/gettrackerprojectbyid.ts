@@ -6,10 +6,18 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetTrackerProjectByIdRequest = {
+  /**
+   * Unique identifier of the project to retrieve
+   */
   id: string;
 };
+
+export type GetTrackerProjectByIdResponse =
+  | models.TrackerProjectResponse
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetTrackerProjectByIdRequest$inboundSchema: z.ZodType<
@@ -64,5 +72,63 @@ export function getTrackerProjectByIdRequestFromJSON(
     jsonString,
     (x) => GetTrackerProjectByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetTrackerProjectByIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetTrackerProjectByIdResponse$inboundSchema: z.ZodType<
+  GetTrackerProjectByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.TrackerProjectResponse$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetTrackerProjectByIdResponse$Outbound =
+  | models.TrackerProjectResponse$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetTrackerProjectByIdResponse$outboundSchema: z.ZodType<
+  GetTrackerProjectByIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetTrackerProjectByIdResponse
+> = z.union([
+  models.TrackerProjectResponse$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetTrackerProjectByIdResponse$ {
+  /** @deprecated use `GetTrackerProjectByIdResponse$inboundSchema` instead. */
+  export const inboundSchema = GetTrackerProjectByIdResponse$inboundSchema;
+  /** @deprecated use `GetTrackerProjectByIdResponse$outboundSchema` instead. */
+  export const outboundSchema = GetTrackerProjectByIdResponse$outboundSchema;
+  /** @deprecated use `GetTrackerProjectByIdResponse$Outbound` instead. */
+  export type Outbound = GetTrackerProjectByIdResponse$Outbound;
+}
+
+export function getTrackerProjectByIdResponseToJSON(
+  getTrackerProjectByIdResponse: GetTrackerProjectByIdResponse,
+): string {
+  return JSON.stringify(
+    GetTrackerProjectByIdResponse$outboundSchema.parse(
+      getTrackerProjectByIdResponse,
+    ),
+  );
+}
+
+export function getTrackerProjectByIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTrackerProjectByIdResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTrackerProjectByIdResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTrackerProjectByIdResponse' from JSON`,
   );
 }

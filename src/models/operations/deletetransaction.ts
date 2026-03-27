@@ -6,20 +6,28 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type DeleteTransactionRequest = {
+  /**
+   * Transaction ID (UUID).
+   */
   id: string;
 };
 
 /**
  * Transaction deleted
  */
-export type DeleteTransactionResponse = {
+export type DeleteTransactionResponseBody = {
   /**
    * Transaction ID (UUID).
    */
   id: string;
 };
+
+export type DeleteTransactionResponse =
+  | DeleteTransactionResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const DeleteTransactionRequest$inboundSchema: z.ZodType<
@@ -76,8 +84,8 @@ export function deleteTransactionRequestFromJSON(
 }
 
 /** @internal */
-export const DeleteTransactionResponse$inboundSchema: z.ZodType<
-  DeleteTransactionResponse,
+export const DeleteTransactionResponseBody$inboundSchema: z.ZodType<
+  DeleteTransactionResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -85,18 +93,76 @@ export const DeleteTransactionResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeleteTransactionResponse$Outbound = {
+export type DeleteTransactionResponseBody$Outbound = {
   id: string;
 };
+
+/** @internal */
+export const DeleteTransactionResponseBody$outboundSchema: z.ZodType<
+  DeleteTransactionResponseBody$Outbound,
+  z.ZodTypeDef,
+  DeleteTransactionResponseBody
+> = z.object({
+  id: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteTransactionResponseBody$ {
+  /** @deprecated use `DeleteTransactionResponseBody$inboundSchema` instead. */
+  export const inboundSchema = DeleteTransactionResponseBody$inboundSchema;
+  /** @deprecated use `DeleteTransactionResponseBody$outboundSchema` instead. */
+  export const outboundSchema = DeleteTransactionResponseBody$outboundSchema;
+  /** @deprecated use `DeleteTransactionResponseBody$Outbound` instead. */
+  export type Outbound = DeleteTransactionResponseBody$Outbound;
+}
+
+export function deleteTransactionResponseBodyToJSON(
+  deleteTransactionResponseBody: DeleteTransactionResponseBody,
+): string {
+  return JSON.stringify(
+    DeleteTransactionResponseBody$outboundSchema.parse(
+      deleteTransactionResponseBody,
+    ),
+  );
+}
+
+export function deleteTransactionResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteTransactionResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteTransactionResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteTransactionResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteTransactionResponse$inboundSchema: z.ZodType<
+  DeleteTransactionResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeleteTransactionResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type DeleteTransactionResponse$Outbound =
+  | DeleteTransactionResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const DeleteTransactionResponse$outboundSchema: z.ZodType<
   DeleteTransactionResponse$Outbound,
   z.ZodTypeDef,
   DeleteTransactionResponse
-> = z.object({
-  id: z.string(),
-});
+> = z.union([
+  z.lazy(() => DeleteTransactionResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

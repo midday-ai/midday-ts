@@ -7,8 +7,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetTeamByIdRequest = {
+  /**
+   * Unique identifier of the team
+   */
   id: string;
 };
 
@@ -28,7 +32,7 @@ export type GetTeamByIdPlan = ClosedEnum<typeof GetTeamByIdPlan>;
 /**
  * Team details
  */
-export type GetTeamByIdResponse = {
+export type GetTeamByIdResponseBody = {
   /**
    * Unique identifier of the team
    */
@@ -46,6 +50,10 @@ export type GetTeamByIdResponse = {
    */
   plan: GetTeamByIdPlan;
 };
+
+export type GetTeamByIdResponse =
+  | GetTeamByIdResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetTeamByIdRequest$inboundSchema: z.ZodType<
@@ -123,8 +131,8 @@ export namespace GetTeamByIdPlan$ {
 }
 
 /** @internal */
-export const GetTeamByIdResponse$inboundSchema: z.ZodType<
-  GetTeamByIdResponse,
+export const GetTeamByIdResponseBody$inboundSchema: z.ZodType<
+  GetTeamByIdResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -135,7 +143,7 @@ export const GetTeamByIdResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetTeamByIdResponse$Outbound = {
+export type GetTeamByIdResponseBody$Outbound = {
   id: string;
   name: string;
   logoUrl: string | null;
@@ -143,16 +151,72 @@ export type GetTeamByIdResponse$Outbound = {
 };
 
 /** @internal */
-export const GetTeamByIdResponse$outboundSchema: z.ZodType<
-  GetTeamByIdResponse$Outbound,
+export const GetTeamByIdResponseBody$outboundSchema: z.ZodType<
+  GetTeamByIdResponseBody$Outbound,
   z.ZodTypeDef,
-  GetTeamByIdResponse
+  GetTeamByIdResponseBody
 > = z.object({
   id: z.string(),
   name: z.string(),
   logoUrl: z.nullable(z.string()),
   plan: GetTeamByIdPlan$outboundSchema,
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetTeamByIdResponseBody$ {
+  /** @deprecated use `GetTeamByIdResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetTeamByIdResponseBody$inboundSchema;
+  /** @deprecated use `GetTeamByIdResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetTeamByIdResponseBody$outboundSchema;
+  /** @deprecated use `GetTeamByIdResponseBody$Outbound` instead. */
+  export type Outbound = GetTeamByIdResponseBody$Outbound;
+}
+
+export function getTeamByIdResponseBodyToJSON(
+  getTeamByIdResponseBody: GetTeamByIdResponseBody,
+): string {
+  return JSON.stringify(
+    GetTeamByIdResponseBody$outboundSchema.parse(getTeamByIdResponseBody),
+  );
+}
+
+export function getTeamByIdResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTeamByIdResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTeamByIdResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTeamByIdResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetTeamByIdResponse$inboundSchema: z.ZodType<
+  GetTeamByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetTeamByIdResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetTeamByIdResponse$Outbound =
+  | GetTeamByIdResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetTeamByIdResponse$outboundSchema: z.ZodType<
+  GetTeamByIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetTeamByIdResponse
+> = z.union([
+  z.lazy(() => GetTeamByIdResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

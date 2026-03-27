@@ -1,21 +1,38 @@
 # GetInvoiceSummaryResponse
 
-## Example Usage
+
+## Supported Types
+
+### `operations.GetInvoiceSummaryResponseBody`
 
 ```typescript
-import { GetInvoiceSummaryResponse } from "@midday-ai/sdk/models/operations";
-
-let value: GetInvoiceSummaryResponse = {
-  currency: "SEK",
+const value: operations.GetInvoiceSummaryResponseBody = {
+  currency: "USD",
   totalAmount: 224171.25,
   invoiceCount: 15,
+  breakdown: [
+    {
+      currency: "EUR",
+      originalAmount: 15000.5,
+      convertedAmount: 16250.75,
+      count: 5,
+    },
+    {
+      currency: "GBP",
+      originalAmount: 8000.25,
+      convertedAmount: 9200.5,
+      count: 3,
+    },
+  ],
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                | Type                                 | Required                             | Description                          | Example                              |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `currency`                           | *string*                             | :heavy_check_mark:                   | Currency of the invoice              | SEK                                  |
-| `totalAmount`                        | *number*                             | :heavy_check_mark:                   | Total amount of the invoice          | 224171.25                            |
-| `invoiceCount`                       | *number*                             | :heavy_check_mark:                   | Number of invoices for this currency | 15                                   |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

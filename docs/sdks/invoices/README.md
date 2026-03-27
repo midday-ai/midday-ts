@@ -3,11 +3,13 @@
 
 ## Overview
 
+Manage invoices
+
 ### Available Operations
 
 * [list](#list) - List all invoices
 * [create](#create) - Create an invoice
-* [getInvoicesPaymentStatus](#getinvoicespaymentstatus) - Payment status
+* [paymentStatus](#paymentstatus) - Payment status
 * [summary](#summary) - Invoice summary
 * [get](#get) - Retrieve a invoice
 * [update](#update) - Update an invoice
@@ -33,7 +35,7 @@ async function run() {
   const result = await midday.invoices.list({
     cursor: "25",
     sort: [
-      "createdAt",
+      "created_at",
       "desc",
     ],
     pageSize: 25,
@@ -48,6 +50,15 @@ async function run() {
       "customer-uuid-1",
       "customer-uuid-2",
     ],
+    ids: [
+      "invoice-uuid-1",
+      "invoice-uuid-2",
+    ],
+    recurringIds: [
+      "recurring-uuid-1",
+      "recurring-uuid-2",
+    ],
+    recurring: true,
   });
 
   console.log(result);
@@ -76,7 +87,7 @@ async function run() {
   const res = await invoicesList(midday, {
     cursor: "25",
     sort: [
-      "createdAt",
+      "created_at",
       "desc",
     ],
     pageSize: 25,
@@ -91,6 +102,15 @@ async function run() {
       "customer-uuid-1",
       "customer-uuid-2",
     ],
+    ids: [
+      "invoice-uuid-1",
+      "invoice-uuid-2",
+    ],
+    recurringIds: [
+      "recurring-uuid-1",
+      "recurring-uuid-2",
+    ],
+    recurring: true,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -181,8 +201,8 @@ async function run() {
     customerId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     paymentDetails: {},
     noteDetails: {},
-    dueDate: "2024-07-15T23:59:59.000Z",
-    issueDate: "2024-06-15T00:00:00.000Z",
+    dueDate: new Date("2024-07-15T23:59:59.000Z"),
+    issueDate: new Date("2024-06-15T00:00:00.000Z"),
     invoiceNumber: "INV-2024-001",
     logoUrl: "https://example.com/logo.png",
     tax: 85,
@@ -272,8 +292,8 @@ async function run() {
     customerId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     paymentDetails: {},
     noteDetails: {},
-    dueDate: "2024-07-15T23:59:59.000Z",
-    issueDate: "2024-06-15T00:00:00.000Z",
+    dueDate: new Date("2024-07-15T23:59:59.000Z"),
+    issueDate: new Date("2024-06-15T00:00:00.000Z"),
     invoiceNumber: "INV-2024-001",
     logoUrl: "https://example.com/logo.png",
     tax: 85,
@@ -331,13 +351,13 @@ run();
 | errors.CreateInvoiceInternalServerError | 500                                     | application/json                        |
 | errors.APIError                         | 4XX, 5XX                                | \*/\*                                   |
 
-## getInvoicesPaymentStatus
+## paymentStatus
 
 Get payment status for the authenticated team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get_/invoices/payment-status" method="get" path="/invoices/payment-status" -->
+<!-- UsageSnippet language="typescript" operationID="getInvoicePaymentStatus" method="get" path="/invoices/payment-status" -->
 ```typescript
 import { Midday } from "@midday-ai/sdk";
 
@@ -348,7 +368,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.invoices.getInvoicesPaymentStatus();
+  const result = await midday.invoices.paymentStatus();
 
   console.log(result);
 }
@@ -362,7 +382,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { invoicesGetInvoicesPaymentStatus } from "@midday-ai/sdk/funcs/invoicesGetInvoicesPaymentStatus.js";
+import { invoicesPaymentStatus } from "@midday-ai/sdk/funcs/invoicesPaymentStatus.js";
 
 // Use `MiddayCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -373,12 +393,12 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await invoicesGetInvoicesPaymentStatus(midday);
+  const res = await invoicesPaymentStatus(midday);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("invoicesGetInvoicesPaymentStatus failed:", res.error);
+    console.log("invoicesPaymentStatus failed:", res.error);
   }
 }
 
@@ -395,7 +415,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetInvoicesPaymentStatusResponse](../../models/operations/getinvoicespaymentstatusresponse.md)\>**
+**Promise\<[operations.GetInvoicePaymentStatusResponse](../../models/operations/getinvoicepaymentstatusresponse.md)\>**
 
 ### Errors
 
@@ -421,7 +441,10 @@ const midday = new Midday({
 
 async function run() {
   const result = await midday.invoices.summary({
-    status: "paid",
+    statuses: [
+      "draft",
+      "unpaid",
+    ],
   });
 
   console.log(result);
@@ -448,7 +471,10 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await invoicesSummary(midday, {
-    status: "paid",
+    statuses: [
+      "draft",
+      "unpaid",
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -472,7 +498,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetInvoiceSummaryResponse[]](../../models/.md)\>**
+**Promise\<[operations.GetInvoiceSummaryResponse](../../models/operations/getinvoicesummaryresponse.md)\>**
 
 ### Errors
 

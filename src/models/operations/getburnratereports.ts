@@ -6,12 +6,26 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetBurnRateReportsRequest = {
+  /**
+   * Start date (ISO 8601 format)
+   */
   from: string;
+  /**
+   * End date (ISO 8601 format)
+   */
   to: string;
+  /**
+   * Currency code (ISO 4217)
+   */
   currency?: string | undefined;
 };
+
+export type GetBurnRateReportsResponse =
+  | models.ErrorResponse
+  | Array<models.BurnRateItem>;
 
 /** @internal */
 export const GetBurnRateReportsRequest$inboundSchema: z.ZodType<
@@ -70,5 +84,61 @@ export function getBurnRateReportsRequestFromJSON(
     jsonString,
     (x) => GetBurnRateReportsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetBurnRateReportsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetBurnRateReportsResponse$inboundSchema: z.ZodType<
+  GetBurnRateReportsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.ErrorResponse$inboundSchema,
+  z.array(models.BurnRateItem$inboundSchema),
+]);
+
+/** @internal */
+export type GetBurnRateReportsResponse$Outbound =
+  | models.ErrorResponse$Outbound
+  | Array<models.BurnRateItem$Outbound>;
+
+/** @internal */
+export const GetBurnRateReportsResponse$outboundSchema: z.ZodType<
+  GetBurnRateReportsResponse$Outbound,
+  z.ZodTypeDef,
+  GetBurnRateReportsResponse
+> = z.union([
+  models.ErrorResponse$outboundSchema,
+  z.array(models.BurnRateItem$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetBurnRateReportsResponse$ {
+  /** @deprecated use `GetBurnRateReportsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetBurnRateReportsResponse$inboundSchema;
+  /** @deprecated use `GetBurnRateReportsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetBurnRateReportsResponse$outboundSchema;
+  /** @deprecated use `GetBurnRateReportsResponse$Outbound` instead. */
+  export type Outbound = GetBurnRateReportsResponse$Outbound;
+}
+
+export function getBurnRateReportsResponseToJSON(
+  getBurnRateReportsResponse: GetBurnRateReportsResponse,
+): string {
+  return JSON.stringify(
+    GetBurnRateReportsResponse$outboundSchema.parse(getBurnRateReportsResponse),
+  );
+}
+
+export function getBurnRateReportsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetBurnRateReportsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetBurnRateReportsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetBurnRateReportsResponse' from JSON`,
   );
 }

@@ -15,7 +15,7 @@ Learn more about the Midday TypeScript SDK in the [official documentation](https
 <!-- Start Summary [summary] -->
 ## Summary
 
-Midday API: Midday is a platform for Invoicing, Time tracking, File reconciliation, Storage, Financial Overview & your own Assistant.
+Midday API: Midday is a platform for Invoicing, Time tracking, File reconciliation, Storage & Financial Overview.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -178,13 +178,21 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.oAuth.getOAuthAuthorization({
-    responseType: "code",
-    clientId: "mid_client_abcdef123456789",
-    redirectUri: "https://myapp.com/callback",
+  const result = await midday.oAuth.postOAuthRegister({
+    clientName: "ChatGPT",
+    redirectUris: [
+      "https://chatgpt.com/connector/oauth/callback",
+    ],
+    grantTypes: [
+      "authorization_code",
+      "refresh_token",
+    ],
     scope: "transactions.read invoices.read",
-    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
-    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+    logoUri: "https://example.com/logo.png",
+    clientUri: "https://example.com",
+    responseTypes: [
+      "code",
+    ],
   });
 
   console.log(result);
@@ -202,10 +210,10 @@ run();
 
 This SDK supports the following security schemes globally:
 
-| Name     | Type   | Scheme      | Environment Variable |
-| -------- | ------ | ----------- | -------------------- |
-| `oauth2` | apiKey | API key     | `MIDDAY_OAUTH2`      |
-| `token`  | http   | HTTP Bearer | `MIDDAY_TOKEN`       |
+| Name     | Type   | Scheme       | Environment Variable |
+| -------- | ------ | ------------ | -------------------- |
+| `oauth2` | oauth2 | OAuth2 token | `MIDDAY_OAUTH2`      |
+| `token`  | http   | HTTP Bearer  | `MIDDAY_TOKEN`       |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
@@ -218,13 +226,21 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.oAuth.getOAuthAuthorization({
-    responseType: "code",
-    clientId: "mid_client_abcdef123456789",
-    redirectUri: "https://myapp.com/callback",
+  const result = await midday.oAuth.postOAuthRegister({
+    clientName: "ChatGPT",
+    redirectUris: [
+      "https://chatgpt.com/connector/oauth/callback",
+    ],
+    grantTypes: [
+      "authorization_code",
+      "refresh_token",
+    ],
     scope: "transactions.read invoices.read",
-    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
-    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+    logoUri: "https://example.com/logo.png",
+    clientUri: "https://example.com",
+    responseTypes: [
+      "code",
+    ],
   });
 
   console.log(result);
@@ -257,12 +273,23 @@ run();
 * [update](docs/sdks/customers/README.md#update) - Update a customer
 * [delete](docs/sdks/customers/README.md#delete) - Delete a customer
 
+### [desktop](docs/sdks/desktop/README.md)
+
+* [checkUpdate](docs/sdks/desktop/README.md#checkupdate) - Check for desktop app updates
+* [downloadUpdate](docs/sdks/desktop/README.md#downloadupdate) - Download desktop app update artifact
+
 ### [documents](docs/sdks/documents/README.md)
 
 * [list](docs/sdks/documents/README.md#list) - List all documents
 * [get](docs/sdks/documents/README.md#get) - Retrieve a document
 * [delete](docs/sdks/documents/README.md#delete) - Delete a document
 * [getPreSignedUrl](docs/sdks/documents/README.md#getpresignedurl) - Generate pre-signed URL for document
+
+### [files](docs/sdks/files/README.md)
+
+* [proxy](docs/sdks/files/README.md#proxy) - Proxy file from storage
+* [downloadFile](docs/sdks/files/README.md#downloadfile) - Download file from vault
+* [downloadInvoice](docs/sdks/files/README.md#downloadinvoice) - Download invoice PDF
 
 ### [inbox](docs/sdks/inbox/README.md)
 
@@ -272,11 +299,36 @@ run();
 * [update](docs/sdks/inbox/README.md#update) - Update a inbox item
 * [getPreSignedUrl](docs/sdks/inbox/README.md#getpresignedurl) - Generate pre-signed URL for inbox attachment
 
+### [integrations](docs/sdks/integrations/README.md)
+
+* [slackOAuthCallback](docs/sdks/integrations/README.md#slackoauthcallback) - Slack OAuth callback
+* [getSlackInstallUrl](docs/sdks/integrations/README.md#getslackinstallurl) - Get Slack install URL
+* [slackWebhook](docs/sdks/integrations/README.md#slackwebhook) - Slack webhook handler
+* [slackInteractions](docs/sdks/integrations/README.md#slackinteractions) - Slack interactions handler
+* [gmailOAuthCallback](docs/sdks/integrations/README.md#gmailoauthcallback) - Gmail OAuth callback
+* [getGmailInstallUrl](docs/sdks/integrations/README.md#getgmailinstallurl) - Get Gmail install URL
+* [outlookOAuthCallback](docs/sdks/integrations/README.md#outlookoauthcallback) - Outlook OAuth callback
+* [getOutlookInstallUrl](docs/sdks/integrations/README.md#getoutlookinstallurl) - Get Outlook install URL
+* [xeroOAuthCallback](docs/sdks/integrations/README.md#xerooauthcallback) - Xero OAuth callback
+* [getXeroInstallUrl](docs/sdks/integrations/README.md#getxeroinstallurl) - Get Xero install URL
+* [quickBooksOAuthCallback](docs/sdks/integrations/README.md#quickbooksoauthcallback) - QuickBooks OAuth callback
+* [getQuickBooksInstallUrl](docs/sdks/integrations/README.md#getquickbooksinstallurl) - Get QuickBooks install URL
+* [fortnoxOAuthCallback](docs/sdks/integrations/README.md#fortnoxoauthcallback) - Fortnox OAuth callback
+* [getFortnoxInstallUrl](docs/sdks/integrations/README.md#getfortnoxinstallurl) - Get Fortnox install URL
+
+### [invoicePayments](docs/sdks/invoicepayments/README.md)
+
+* [getStripeConnectUrl](docs/sdks/invoicepayments/README.md#getstripeconnecturl) - Get Stripe Connect URL
+* [stripeConnectCallback](docs/sdks/invoicepayments/README.md#stripeconnectcallback) - Stripe Connect OAuth callback
+* [disconnectStripe](docs/sdks/invoicepayments/README.md#disconnectstripe) - Disconnect Stripe account
+* [createInvoicePaymentIntent](docs/sdks/invoicepayments/README.md#createinvoicepaymentintent) - Create payment intent for invoice
+* [getStripeConnectStatus](docs/sdks/invoicepayments/README.md#getstripeconnectstatus) - Get Stripe Connect status
+
 ### [invoices](docs/sdks/invoices/README.md)
 
 * [list](docs/sdks/invoices/README.md#list) - List all invoices
 * [create](docs/sdks/invoices/README.md#create) - Create an invoice
-* [getInvoicesPaymentStatus](docs/sdks/invoices/README.md#getinvoicespaymentstatus) - Payment status
+* [paymentStatus](docs/sdks/invoices/README.md#paymentstatus) - Payment status
 * [summary](docs/sdks/invoices/README.md#summary) - Invoice summary
 * [get](docs/sdks/invoices/README.md#get) - Retrieve a invoice
 * [update](docs/sdks/invoices/README.md#update) - Update an invoice
@@ -291,6 +343,7 @@ run();
 
 ### [oAuth](docs/sdks/oauth/README.md)
 
+* [postOAuthRegister](docs/sdks/oauth/README.md#postoauthregister) - Dynamic Client Registration
 * [getOAuthAuthorization](docs/sdks/oauth/README.md#getoauthauthorization) - OAuth Authorization Endpoint
 * [postOAuthAuthorization](docs/sdks/oauth/README.md#postoauthauthorization) - OAuth Authorization Decision
 * [postOAuthToken](docs/sdks/oauth/README.md#postoauthtoken) - OAuth Token Exchange
@@ -364,6 +417,16 @@ run();
 * [get](docs/sdks/users/README.md#get) - Retrieve the current user
 * [update](docs/sdks/users/README.md#update) - Update the current user
 
+### [webhooks](docs/sdks/webhooks/README.md)
+
+* [inboxWebhook](docs/sdks/webhooks/README.md#inboxwebhook) - Inbox webhook
+* [plaidWebhook](docs/sdks/webhooks/README.md#plaidwebhook) - Plaid webhook handler
+* [polarWebhook](docs/sdks/webhooks/README.md#polarwebhook) - Polar webhook handler
+* [stripeWebhook](docs/sdks/webhooks/README.md#stripewebhook) - Stripe webhook handler
+* [tellerWebhook](docs/sdks/webhooks/README.md#tellerwebhook) - Teller webhook handler
+* [whatsappWebhookVerify](docs/sdks/webhooks/README.md#whatsappwebhookverify) - WhatsApp webhook verification
+* [whatsappWebhook](docs/sdks/webhooks/README.md#whatsappwebhook) - WhatsApp webhook
+
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
@@ -392,20 +455,44 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`customersGet`](docs/sdks/customers/README.md#get) - Retrieve a customer
 - [`customersList`](docs/sdks/customers/README.md#list) - List all customers
 - [`customersUpdate`](docs/sdks/customers/README.md#update) - Update a customer
+- [`desktopCheckUpdate`](docs/sdks/desktop/README.md#checkupdate) - Check for desktop app updates
+- [`desktopDownloadUpdate`](docs/sdks/desktop/README.md#downloadupdate) - Download desktop app update artifact
 - [`documentsDelete`](docs/sdks/documents/README.md#delete) - Delete a document
 - [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
 - [`documentsGetPreSignedUrl`](docs/sdks/documents/README.md#getpresignedurl) - Generate pre-signed URL for document
 - [`documentsList`](docs/sdks/documents/README.md#list) - List all documents
+- [`filesDownloadFile`](docs/sdks/files/README.md#downloadfile) - Download file from vault
+- [`filesDownloadInvoice`](docs/sdks/files/README.md#downloadinvoice) - Download invoice PDF
+- [`filesProxy`](docs/sdks/files/README.md#proxy) - Proxy file from storage
 - [`inboxDelete`](docs/sdks/inbox/README.md#delete) - Delete a inbox item
 - [`inboxGet`](docs/sdks/inbox/README.md#get) - Retrieve a inbox item
 - [`inboxGetPreSignedUrl`](docs/sdks/inbox/README.md#getpresignedurl) - Generate pre-signed URL for inbox attachment
 - [`inboxList`](docs/sdks/inbox/README.md#list) - List all inbox items
 - [`inboxUpdate`](docs/sdks/inbox/README.md#update) - Update a inbox item
+- [`integrationsFortnoxOAuthCallback`](docs/sdks/integrations/README.md#fortnoxoauthcallback) - Fortnox OAuth callback
+- [`integrationsGetFortnoxInstallUrl`](docs/sdks/integrations/README.md#getfortnoxinstallurl) - Get Fortnox install URL
+- [`integrationsGetGmailInstallUrl`](docs/sdks/integrations/README.md#getgmailinstallurl) - Get Gmail install URL
+- [`integrationsGetOutlookInstallUrl`](docs/sdks/integrations/README.md#getoutlookinstallurl) - Get Outlook install URL
+- [`integrationsGetQuickBooksInstallUrl`](docs/sdks/integrations/README.md#getquickbooksinstallurl) - Get QuickBooks install URL
+- [`integrationsGetSlackInstallUrl`](docs/sdks/integrations/README.md#getslackinstallurl) - Get Slack install URL
+- [`integrationsGetXeroInstallUrl`](docs/sdks/integrations/README.md#getxeroinstallurl) - Get Xero install URL
+- [`integrationsGmailOAuthCallback`](docs/sdks/integrations/README.md#gmailoauthcallback) - Gmail OAuth callback
+- [`integrationsOutlookOAuthCallback`](docs/sdks/integrations/README.md#outlookoauthcallback) - Outlook OAuth callback
+- [`integrationsQuickBooksOAuthCallback`](docs/sdks/integrations/README.md#quickbooksoauthcallback) - QuickBooks OAuth callback
+- [`integrationsSlackInteractions`](docs/sdks/integrations/README.md#slackinteractions) - Slack interactions handler
+- [`integrationsSlackOAuthCallback`](docs/sdks/integrations/README.md#slackoauthcallback) - Slack OAuth callback
+- [`integrationsSlackWebhook`](docs/sdks/integrations/README.md#slackwebhook) - Slack webhook handler
+- [`integrationsXeroOAuthCallback`](docs/sdks/integrations/README.md#xerooauthcallback) - Xero OAuth callback
+- [`invoicePaymentsCreateInvoicePaymentIntent`](docs/sdks/invoicepayments/README.md#createinvoicepaymentintent) - Create payment intent for invoice
+- [`invoicePaymentsDisconnectStripe`](docs/sdks/invoicepayments/README.md#disconnectstripe) - Disconnect Stripe account
+- [`invoicePaymentsGetStripeConnectStatus`](docs/sdks/invoicepayments/README.md#getstripeconnectstatus) - Get Stripe Connect status
+- [`invoicePaymentsGetStripeConnectUrl`](docs/sdks/invoicepayments/README.md#getstripeconnecturl) - Get Stripe Connect URL
+- [`invoicePaymentsStripeConnectCallback`](docs/sdks/invoicepayments/README.md#stripeconnectcallback) - Stripe Connect OAuth callback
 - [`invoicesCreate`](docs/sdks/invoices/README.md#create) - Create an invoice
 - [`invoicesDelete`](docs/sdks/invoices/README.md#delete) - Delete a invoice
 - [`invoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve a invoice
-- [`invoicesGetInvoicesPaymentStatus`](docs/sdks/invoices/README.md#getinvoicespaymentstatus) - Payment status
 - [`invoicesList`](docs/sdks/invoices/README.md#list) - List all invoices
+- [`invoicesPaymentStatus`](docs/sdks/invoices/README.md#paymentstatus) - Payment status
 - [`invoicesSummary`](docs/sdks/invoices/README.md#summary) - Invoice summary
 - [`invoicesUpdate`](docs/sdks/invoices/README.md#update) - Update an invoice
 - [`notificationsList`](docs/sdks/notifications/README.md#list) - List all notifications
@@ -413,6 +500,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`notificationsUpdateStatus`](docs/sdks/notifications/README.md#updatestatus) - Update notification status
 - [`oAuthGetOAuthAuthorization`](docs/sdks/oauth/README.md#getoauthauthorization) - OAuth Authorization Endpoint
 - [`oAuthPostOAuthAuthorization`](docs/sdks/oauth/README.md#postoauthauthorization) - OAuth Authorization Decision
+- [`oAuthPostOAuthRegister`](docs/sdks/oauth/README.md#postoauthregister) - Dynamic Client Registration
 - [`oAuthPostOAuthRevoke`](docs/sdks/oauth/README.md#postoauthrevoke) - OAuth Token Revocation
 - [`oAuthPostOAuthToken`](docs/sdks/oauth/README.md#postoauthtoken) - OAuth Token Exchange
 - [`reportsBurnRate`](docs/sdks/reports/README.md#burnrate) - Burn rate reports
@@ -456,6 +544,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`transactionsUpdateMany`](docs/sdks/transactions/README.md#updatemany) - Bulk update transactions
 - [`usersGet`](docs/sdks/users/README.md#get) - Retrieve the current user
 - [`usersUpdate`](docs/sdks/users/README.md#update) - Update the current user
+- [`webhooksInboxWebhook`](docs/sdks/webhooks/README.md#inboxwebhook) - Inbox webhook
+- [`webhooksPlaidWebhook`](docs/sdks/webhooks/README.md#plaidwebhook) - Plaid webhook handler
+- [`webhooksPolarWebhook`](docs/sdks/webhooks/README.md#polarwebhook) - Polar webhook handler
+- [`webhooksStripeWebhook`](docs/sdks/webhooks/README.md#stripewebhook) - Stripe webhook handler
+- [`webhooksTellerWebhook`](docs/sdks/webhooks/README.md#tellerwebhook) - Teller webhook handler
+- [`webhooksWhatsappWebhook`](docs/sdks/webhooks/README.md#whatsappwebhook) - WhatsApp webhook
+- [`webhooksWhatsappWebhookVerify`](docs/sdks/webhooks/README.md#whatsappwebhookverify) - WhatsApp webhook verification
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -476,13 +571,21 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.oAuth.getOAuthAuthorization({
-    responseType: "code",
-    clientId: "mid_client_abcdef123456789",
-    redirectUri: "https://myapp.com/callback",
+  const result = await midday.oAuth.postOAuthRegister({
+    clientName: "ChatGPT",
+    redirectUris: [
+      "https://chatgpt.com/connector/oauth/callback",
+    ],
+    grantTypes: [
+      "authorization_code",
+      "refresh_token",
+    ],
     scope: "transactions.read invoices.read",
-    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
-    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+    logoUri: "https://example.com/logo.png",
+    clientUri: "https://example.com",
+    responseTypes: [
+      "code",
+    ],
   }, {
     retries: {
       strategy: "backoff",
@@ -524,13 +627,21 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.oAuth.getOAuthAuthorization({
-    responseType: "code",
-    clientId: "mid_client_abcdef123456789",
-    redirectUri: "https://myapp.com/callback",
+  const result = await midday.oAuth.postOAuthRegister({
+    clientName: "ChatGPT",
+    redirectUris: [
+      "https://chatgpt.com/connector/oauth/callback",
+    ],
+    grantTypes: [
+      "authorization_code",
+      "refresh_token",
+    ],
     scope: "transactions.read invoices.read",
-    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
-    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+    logoUri: "https://example.com/logo.png",
+    clientUri: "https://example.com",
+    responseTypes: [
+      "code",
+    ],
   });
 
   console.log(result);
@@ -568,13 +679,21 @@ const midday = new Midday({
 
 async function run() {
   try {
-    const result = await midday.oAuth.getOAuthAuthorization({
-      responseType: "code",
-      clientId: "mid_client_abcdef123456789",
-      redirectUri: "https://myapp.com/callback",
+    const result = await midday.oAuth.postOAuthRegister({
+      clientName: "ChatGPT",
+      redirectUris: [
+        "https://chatgpt.com/connector/oauth/callback",
+      ],
+      grantTypes: [
+        "authorization_code",
+        "refresh_token",
+      ],
       scope: "transactions.read invoices.read",
-      state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
-      codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+      logoUri: "https://example.com/logo.png",
+      clientUri: "https://example.com",
+      responseTypes: [
+        "code",
+      ],
     });
 
     console.log(result);
@@ -587,7 +706,7 @@ async function run() {
       console.log(error.headers);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.GetOAuthAuthorizationBadRequestError) {
+      if (error instanceof errors.OAuthErrorResponse) {
         console.log(error.data$.error); // string
         console.log(error.data$.errorDescription); // string
         console.log(error.data$.errorUri); // string
@@ -605,7 +724,7 @@ run();
 **Primary error:**
 * [`MiddayError`](./src/models/errors/middayerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (23)</summary>
+<details><summary>Less common errors (44)</summary>
 
 <br />
 
@@ -618,23 +737,44 @@ run();
 
 
 **Inherit from [`MiddayError`](./src/models/errors/middayerror.ts)**:
-* [`GetOAuthAuthorizationBadRequestError`](./src/models/errors/getoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
-* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
-* [`PostOAuthTokenBadRequestError`](./src/models/errors/postoauthtokenbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 74 methods.*
-* [`GetTransactionAttachmentPreSignedUrlBadRequestError`](./src/models/errors/gettransactionattachmentpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 74 methods.*
-* [`GetDocumentPreSignedUrlBadRequestError`](./src/models/errors/getdocumentpresignedurlbadrequesterror.ts): Bad request - Document file path not available. Status code `400`. Applicable to 1 of 74 methods.*
-* [`GetInboxPreSignedUrlBadRequestError`](./src/models/errors/getinboxpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 74 methods.*
-* [`CreateInvoiceBadRequestError`](./src/models/errors/createinvoicebadrequesterror.ts): Bad request. Invalid input data or validation errors. Status code `400`. Applicable to 1 of 74 methods.*
-* [`UnauthorizedError`](./src/models/errors/unauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 74 methods.*
-* [`GetTransactionAttachmentPreSignedUrlNotFoundError`](./src/models/errors/gettransactionattachmentpresignedurlnotfounderror.ts): Transaction or attachment not found. Status code `404`. Applicable to 1 of 74 methods.*
-* [`GetDocumentPreSignedUrlNotFoundError`](./src/models/errors/getdocumentpresignedurlnotfounderror.ts): Document not found. Status code `404`. Applicable to 1 of 74 methods.*
-* [`GetInboxPreSignedUrlNotFoundError`](./src/models/errors/getinboxpresignedurlnotfounderror.ts): Inbox item not found. Status code `404`. Applicable to 1 of 74 methods.*
-* [`CreateInvoiceNotFoundError`](./src/models/errors/createinvoicenotfounderror.ts): Customer not found. Status code `404`. Applicable to 1 of 74 methods.*
-* [`ConflictError`](./src/models/errors/conflicterror.ts): Conflict. Invoice number already exists. Status code `409`. Applicable to 1 of 74 methods.*
-* [`GetTransactionAttachmentPreSignedUrlInternalServerError`](./src/models/errors/gettransactionattachmentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
-* [`GetDocumentPreSignedUrlInternalServerError`](./src/models/errors/getdocumentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
-* [`GetInboxPreSignedUrlInternalServerError`](./src/models/errors/getinboxpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 74 methods.*
-* [`CreateInvoiceInternalServerError`](./src/models/errors/createinvoiceinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 74 methods.*
+* [`OAuthErrorResponse`](./src/models/errors/oautherrorresponse.ts): Invalid request. Status code `400`. Applicable to 3 of 106 methods.*
+* [`PostOAuthAuthorizationBadRequestError`](./src/models/errors/postoauthauthorizationbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 106 methods.*
+* [`InboxWebhookBadRequestError`](./src/models/errors/inboxwebhookbadrequesterror.ts): Invalid request. Status code `400`. Applicable to 1 of 106 methods.*
+* [`ProxyFileBadRequestError`](./src/models/errors/proxyfilebadrequesterror.ts): Bad request. Status code `400`. Applicable to 1 of 106 methods.*
+* [`DownloadFileBadRequestError`](./src/models/errors/downloadfilebadrequesterror.ts): Bad request. Status code `400`. Applicable to 1 of 106 methods.*
+* [`DownloadInvoiceBadRequestError`](./src/models/errors/downloadinvoicebadrequesterror.ts): Bad request. Status code `400`. Applicable to 1 of 106 methods.*
+* [`SlackOAuthCallbackBadRequestError`](./src/models/errors/slackoauthcallbackbadrequesterror.ts): Invalid request parameters. Status code `400`. Applicable to 1 of 106 methods.*
+* [`GmailOAuthCallbackBadRequestError`](./src/models/errors/gmailoauthcallbackbadrequesterror.ts): Invalid request parameters. Status code `400`. Applicable to 1 of 106 methods.*
+* [`OutlookOAuthCallbackBadRequestError`](./src/models/errors/outlookoauthcallbackbadrequesterror.ts): Invalid request parameters. Status code `400`. Applicable to 1 of 106 methods.*
+* [`DownloadDesktopUpdateBadRequestError`](./src/models/errors/downloaddesktopupdatebadrequesterror.ts): Invalid download URL. Status code `400`. Applicable to 1 of 106 methods.*
+* [`GetTransactionAttachmentPreSignedUrlBadRequestError`](./src/models/errors/gettransactionattachmentpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 106 methods.*
+* [`GetDocumentPreSignedUrlBadRequestError`](./src/models/errors/getdocumentpresignedurlbadrequesterror.ts): Bad request - Document file path not available. Status code `400`. Applicable to 1 of 106 methods.*
+* [`GetInboxPreSignedUrlBadRequestError`](./src/models/errors/getinboxpresignedurlbadrequesterror.ts): Bad request - Attachment file path not available. Status code `400`. Applicable to 1 of 106 methods.*
+* [`CreateInvoiceBadRequestError`](./src/models/errors/createinvoicebadrequesterror.ts): Bad request. Invalid input data or validation errors. Status code `400`. Applicable to 1 of 106 methods.*
+* [`PostOAuthAuthorizationUnauthorizedError`](./src/models/errors/postoauthauthorizationunauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 106 methods.*
+* [`DownloadFileUnauthorizedError`](./src/models/errors/downloadfileunauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 106 methods.*
+* [`DownloadInvoiceUnauthorizedError`](./src/models/errors/downloadinvoiceunauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 106 methods.*
+* [`ProxyFileNotFoundError`](./src/models/errors/proxyfilenotfounderror.ts): Not found. Status code `404`. Applicable to 1 of 106 methods.*
+* [`DownloadFileNotFoundError`](./src/models/errors/downloadfilenotfounderror.ts): Not found. Status code `404`. Applicable to 1 of 106 methods.*
+* [`DownloadInvoiceNotFoundError`](./src/models/errors/downloadinvoicenotfounderror.ts): Not found. Status code `404`. Applicable to 1 of 106 methods.*
+* [`GetTransactionAttachmentPreSignedUrlNotFoundError`](./src/models/errors/gettransactionattachmentpresignedurlnotfounderror.ts): Transaction or attachment not found. Status code `404`. Applicable to 1 of 106 methods.*
+* [`GetDocumentPreSignedUrlNotFoundError`](./src/models/errors/getdocumentpresignedurlnotfounderror.ts): Document not found. Status code `404`. Applicable to 1 of 106 methods.*
+* [`GetInboxPreSignedUrlNotFoundError`](./src/models/errors/getinboxpresignedurlnotfounderror.ts): Inbox item not found. Status code `404`. Applicable to 1 of 106 methods.*
+* [`CreateInvoiceNotFoundError`](./src/models/errors/createinvoicenotfounderror.ts): Customer not found. Status code `404`. Applicable to 1 of 106 methods.*
+* [`ConflictError`](./src/models/errors/conflicterror.ts): Conflict. Invoice number already exists. Status code `409`. Applicable to 1 of 106 methods.*
+* [`InboxWebhookInternalServerError`](./src/models/errors/inboxwebhookinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 106 methods.*
+* [`ProxyFileInternalServerError`](./src/models/errors/proxyfileinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 106 methods.*
+* [`DownloadFileInternalServerError`](./src/models/errors/downloadfileinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 106 methods.*
+* [`DownloadInvoiceInternalServerError`](./src/models/errors/downloadinvoiceinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 106 methods.*
+* [`SlackOAuthCallbackInternalServerError`](./src/models/errors/slackoauthcallbackinternalservererror.ts): Failed to process OAuth callback. Status code `500`. Applicable to 1 of 106 methods.*
+* [`GmailOAuthCallbackInternalServerError`](./src/models/errors/gmailoauthcallbackinternalservererror.ts): Failed to process OAuth callback. Status code `500`. Applicable to 1 of 106 methods.*
+* [`OutlookOAuthCallbackInternalServerError`](./src/models/errors/outlookoauthcallbackinternalservererror.ts): Failed to process OAuth callback. Status code `500`. Applicable to 1 of 106 methods.*
+* [`GetTransactionAttachmentPreSignedUrlInternalServerError`](./src/models/errors/gettransactionattachmentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 106 methods.*
+* [`GetDocumentPreSignedUrlInternalServerError`](./src/models/errors/getdocumentpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 106 methods.*
+* [`GetInboxPreSignedUrlInternalServerError`](./src/models/errors/getinboxpresignedurlinternalservererror.ts): Internal server error - Failed to generate pre-signed URL. Status code `500`. Applicable to 1 of 106 methods.*
+* [`CreateInvoiceInternalServerError`](./src/models/errors/createinvoiceinternalservererror.ts): Internal server error. Status code `500`. Applicable to 1 of 106 methods.*
+* [`CheckDesktopUpdateBadGatewayError`](./src/models/errors/checkdesktopupdatebadgatewayerror.ts): Failed to fetch update info from upstream. Status code `502`. Applicable to 1 of 106 methods.*
+* [`DownloadDesktopUpdateBadGatewayError`](./src/models/errors/downloaddesktopupdatebadgatewayerror.ts): Failed to download artifact from upstream. Status code `502`. Applicable to 1 of 106 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -659,13 +799,21 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.oAuth.getOAuthAuthorization({
-    responseType: "code",
-    clientId: "mid_client_abcdef123456789",
-    redirectUri: "https://myapp.com/callback",
+  const result = await midday.oAuth.postOAuthRegister({
+    clientName: "ChatGPT",
+    redirectUris: [
+      "https://chatgpt.com/connector/oauth/callback",
+    ],
+    grantTypes: [
+      "authorization_code",
+      "refresh_token",
+    ],
     scope: "transactions.read invoices.read",
-    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
-    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+    logoUri: "https://example.com/logo.png",
+    clientUri: "https://example.com",
+    responseTypes: [
+      "code",
+    ],
   });
 
   console.log(result);

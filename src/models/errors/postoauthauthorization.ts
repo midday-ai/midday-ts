@@ -9,21 +9,21 @@ import { MiddayError } from "./middayerror.js";
 /**
  * Unauthorized
  */
-export type UnauthorizedErrorData = {
+export type PostOAuthAuthorizationUnauthorizedErrorData = {
   redirectUrl: string;
 };
 
 /**
  * Unauthorized
  */
-export class UnauthorizedError extends MiddayError {
+export class PostOAuthAuthorizationUnauthorizedError extends MiddayError {
   redirectUrl: string;
 
   /** The original data that was passed to this error instance. */
-  data$: UnauthorizedErrorData;
+  data$: PostOAuthAuthorizationUnauthorizedErrorData;
 
   constructor(
-    err: UnauthorizedErrorData,
+    err: PostOAuthAuthorizationUnauthorizedErrorData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
     const message = "message" in err && typeof err.message === "string"
@@ -33,7 +33,7 @@ export class UnauthorizedError extends MiddayError {
     this.data$ = err;
     this.redirectUrl = err.redirectUrl;
 
-    this.name = "UnauthorizedError";
+    this.name = "PostOAuthAuthorizationUnauthorizedError";
   }
 }
 
@@ -69,8 +69,8 @@ export class PostOAuthAuthorizationBadRequestError extends MiddayError {
 }
 
 /** @internal */
-export const UnauthorizedError$inboundSchema: z.ZodType<
-  UnauthorizedError,
+export const PostOAuthAuthorizationUnauthorizedError$inboundSchema: z.ZodType<
+  PostOAuthAuthorizationUnauthorizedError,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -84,7 +84,7 @@ export const UnauthorizedError$inboundSchema: z.ZodType<
       "redirect_url": "redirectUrl",
     });
 
-    return new UnauthorizedError(remapped, {
+    return new PostOAuthAuthorizationUnauthorizedError(remapped, {
       request: v.request$,
       response: v.response$,
       body: v.body$,
@@ -92,16 +92,16 @@ export const UnauthorizedError$inboundSchema: z.ZodType<
   });
 
 /** @internal */
-export type UnauthorizedError$Outbound = {
+export type PostOAuthAuthorizationUnauthorizedError$Outbound = {
   redirect_url: string;
 };
 
 /** @internal */
-export const UnauthorizedError$outboundSchema: z.ZodType<
-  UnauthorizedError$Outbound,
+export const PostOAuthAuthorizationUnauthorizedError$outboundSchema: z.ZodType<
+  PostOAuthAuthorizationUnauthorizedError$Outbound,
   z.ZodTypeDef,
-  UnauthorizedError
-> = z.instanceof(UnauthorizedError)
+  PostOAuthAuthorizationUnauthorizedError
+> = z.instanceof(PostOAuthAuthorizationUnauthorizedError)
   .transform(v => v.data$)
   .pipe(
     z.object({
@@ -117,13 +117,15 @@ export const UnauthorizedError$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UnauthorizedError$ {
-  /** @deprecated use `UnauthorizedError$inboundSchema` instead. */
-  export const inboundSchema = UnauthorizedError$inboundSchema;
-  /** @deprecated use `UnauthorizedError$outboundSchema` instead. */
-  export const outboundSchema = UnauthorizedError$outboundSchema;
-  /** @deprecated use `UnauthorizedError$Outbound` instead. */
-  export type Outbound = UnauthorizedError$Outbound;
+export namespace PostOAuthAuthorizationUnauthorizedError$ {
+  /** @deprecated use `PostOAuthAuthorizationUnauthorizedError$inboundSchema` instead. */
+  export const inboundSchema =
+    PostOAuthAuthorizationUnauthorizedError$inboundSchema;
+  /** @deprecated use `PostOAuthAuthorizationUnauthorizedError$outboundSchema` instead. */
+  export const outboundSchema =
+    PostOAuthAuthorizationUnauthorizedError$outboundSchema;
+  /** @deprecated use `PostOAuthAuthorizationUnauthorizedError$Outbound` instead. */
+  export type Outbound = PostOAuthAuthorizationUnauthorizedError$Outbound;
 }
 
 /** @internal */

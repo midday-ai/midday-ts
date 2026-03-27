@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type StartTimerRequest = {
   /**
@@ -126,9 +127,9 @@ export type StartTimerData = {
    */
   start: string;
   /**
-   * Stop time of the tracker entry in ISO 8601 format
+   * Stop time of the tracker entry in ISO 8601 format. Null for running timers.
    */
-  stop: string;
+  stop: string | null;
   /**
    * Unique identifier of the team that owns this tracker entry
    */
@@ -166,9 +167,11 @@ export type StartTimerData = {
 /**
  * Timer started successfully.
  */
-export type StartTimerResponse = {
+export type StartTimerResponseBody = {
   data: StartTimerData;
 };
+
+export type StartTimerResponse = StartTimerResponseBody | models.ErrorResponse;
 
 /** @internal */
 export const StartTimerRequest$inboundSchema: z.ZodType<
@@ -441,7 +444,7 @@ export const StartTimerData$inboundSchema: z.ZodType<
   createdAt: z.string(),
   duration: z.nullable(z.number()),
   start: z.string(),
-  stop: z.string(),
+  stop: z.nullable(z.string()),
   teamId: z.string(),
   description: z.nullable(z.string()),
   rate: z.nullable(z.number()),
@@ -458,7 +461,7 @@ export type StartTimerData$Outbound = {
   createdAt: string;
   duration: number | null;
   start: string;
-  stop: string;
+  stop: string | null;
   teamId: string;
   description: string | null;
   rate: number | null;
@@ -479,7 +482,7 @@ export const StartTimerData$outboundSchema: z.ZodType<
   createdAt: z.string(),
   duration: z.nullable(z.number()),
   start: z.string(),
-  stop: z.string(),
+  stop: z.nullable(z.string()),
   teamId: z.string(),
   description: z.nullable(z.string()),
   rate: z.nullable(z.number()),
@@ -518,8 +521,8 @@ export function startTimerDataFromJSON(
 }
 
 /** @internal */
-export const StartTimerResponse$inboundSchema: z.ZodType<
-  StartTimerResponse,
+export const StartTimerResponseBody$inboundSchema: z.ZodType<
+  StartTimerResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -527,18 +530,74 @@ export const StartTimerResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type StartTimerResponse$Outbound = {
+export type StartTimerResponseBody$Outbound = {
   data: StartTimerData$Outbound;
 };
+
+/** @internal */
+export const StartTimerResponseBody$outboundSchema: z.ZodType<
+  StartTimerResponseBody$Outbound,
+  z.ZodTypeDef,
+  StartTimerResponseBody
+> = z.object({
+  data: z.lazy(() => StartTimerData$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StartTimerResponseBody$ {
+  /** @deprecated use `StartTimerResponseBody$inboundSchema` instead. */
+  export const inboundSchema = StartTimerResponseBody$inboundSchema;
+  /** @deprecated use `StartTimerResponseBody$outboundSchema` instead. */
+  export const outboundSchema = StartTimerResponseBody$outboundSchema;
+  /** @deprecated use `StartTimerResponseBody$Outbound` instead. */
+  export type Outbound = StartTimerResponseBody$Outbound;
+}
+
+export function startTimerResponseBodyToJSON(
+  startTimerResponseBody: StartTimerResponseBody,
+): string {
+  return JSON.stringify(
+    StartTimerResponseBody$outboundSchema.parse(startTimerResponseBody),
+  );
+}
+
+export function startTimerResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<StartTimerResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StartTimerResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StartTimerResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const StartTimerResponse$inboundSchema: z.ZodType<
+  StartTimerResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StartTimerResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type StartTimerResponse$Outbound =
+  | StartTimerResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const StartTimerResponse$outboundSchema: z.ZodType<
   StartTimerResponse$Outbound,
   z.ZodTypeDef,
   StartTimerResponse
-> = z.object({
-  data: z.lazy(() => StartTimerData$outboundSchema),
-});
+> = z.union([
+  z.lazy(() => StartTimerResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

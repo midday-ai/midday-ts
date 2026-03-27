@@ -1,19 +1,22 @@
 # PostOAuthRevokeResponse
 
-Token revocation successful
 
-## Example Usage
+## Supported Types
+
+### `operations.PostOAuthRevokeResponseBody`
 
 ```typescript
-import { PostOAuthRevokeResponse } from "@midday-ai/sdk/models/operations";
-
-let value: PostOAuthRevokeResponse = {
+const value: operations.PostOAuthRevokeResponseBody = {
   success: false,
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `success`          | *boolean*          | :heavy_check_mark: | N/A                |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

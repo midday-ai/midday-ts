@@ -6,20 +6,28 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type DeleteTrackerProjectRequest = {
+  /**
+   * Unique identifier of the project to retrieve
+   */
   id: string;
 };
 
 /**
  * Tracker project deleted successfully.
  */
-export type DeleteTrackerProjectResponse = {
+export type DeleteTrackerProjectResponseBody = {
   /**
    * Unique identifier of the project to delete
    */
   id: string;
 };
+
+export type DeleteTrackerProjectResponse =
+  | DeleteTrackerProjectResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const DeleteTrackerProjectRequest$inboundSchema: z.ZodType<
@@ -78,8 +86,8 @@ export function deleteTrackerProjectRequestFromJSON(
 }
 
 /** @internal */
-export const DeleteTrackerProjectResponse$inboundSchema: z.ZodType<
-  DeleteTrackerProjectResponse,
+export const DeleteTrackerProjectResponseBody$inboundSchema: z.ZodType<
+  DeleteTrackerProjectResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -87,18 +95,76 @@ export const DeleteTrackerProjectResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeleteTrackerProjectResponse$Outbound = {
+export type DeleteTrackerProjectResponseBody$Outbound = {
   id: string;
 };
+
+/** @internal */
+export const DeleteTrackerProjectResponseBody$outboundSchema: z.ZodType<
+  DeleteTrackerProjectResponseBody$Outbound,
+  z.ZodTypeDef,
+  DeleteTrackerProjectResponseBody
+> = z.object({
+  id: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteTrackerProjectResponseBody$ {
+  /** @deprecated use `DeleteTrackerProjectResponseBody$inboundSchema` instead. */
+  export const inboundSchema = DeleteTrackerProjectResponseBody$inboundSchema;
+  /** @deprecated use `DeleteTrackerProjectResponseBody$outboundSchema` instead. */
+  export const outboundSchema = DeleteTrackerProjectResponseBody$outboundSchema;
+  /** @deprecated use `DeleteTrackerProjectResponseBody$Outbound` instead. */
+  export type Outbound = DeleteTrackerProjectResponseBody$Outbound;
+}
+
+export function deleteTrackerProjectResponseBodyToJSON(
+  deleteTrackerProjectResponseBody: DeleteTrackerProjectResponseBody,
+): string {
+  return JSON.stringify(
+    DeleteTrackerProjectResponseBody$outboundSchema.parse(
+      deleteTrackerProjectResponseBody,
+    ),
+  );
+}
+
+export function deleteTrackerProjectResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteTrackerProjectResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteTrackerProjectResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteTrackerProjectResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteTrackerProjectResponse$inboundSchema: z.ZodType<
+  DeleteTrackerProjectResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeleteTrackerProjectResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type DeleteTrackerProjectResponse$Outbound =
+  | DeleteTrackerProjectResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const DeleteTrackerProjectResponse$outboundSchema: z.ZodType<
   DeleteTrackerProjectResponse$Outbound,
   z.ZodTypeDef,
   DeleteTrackerProjectResponse
-> = z.object({
-  id: z.string(),
-});
+> = z.union([
+  z.lazy(() => DeleteTrackerProjectResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

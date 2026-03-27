@@ -7,7 +7,7 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.UpdateTransactionsRequest$inboundSchema.optional(),
+  request: operations.UpdateTransactionsRequest$inboundSchema,
 };
 
 export const tool$transactionsUpdateMany: ToolDefinition<typeof args> = {

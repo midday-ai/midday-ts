@@ -9,7 +9,6 @@ import { reportsRevenue } from "../funcs/reportsRevenue.js";
 import { reportsRunway } from "../funcs/reportsRunway.js";
 import { reportsSpending } from "../funcs/reportsSpending.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -23,7 +22,7 @@ export class Reports extends ClientSDK {
   async revenue(
     request: operations.GetRevenueReportsRequest,
     options?: RequestOptions,
-  ): Promise<models.GetRevenueResponseSchema> {
+  ): Promise<operations.GetRevenueReportsResponse> {
     return unwrapAsync(reportsRevenue(
       this,
       request,
@@ -40,7 +39,7 @@ export class Reports extends ClientSDK {
   async profit(
     request: operations.GetProfitReportsRequest,
     options?: RequestOptions,
-  ): Promise<models.GetProfitResponseSchema> {
+  ): Promise<operations.GetProfitReportsResponse> {
     return unwrapAsync(reportsProfit(
       this,
       request,
@@ -57,7 +56,7 @@ export class Reports extends ClientSDK {
   async burnRate(
     request: operations.GetBurnRateReportsRequest,
     options?: RequestOptions,
-  ): Promise<Array<models.GetBurnRateResponseSchema>> {
+  ): Promise<operations.GetBurnRateReportsResponse> {
     return unwrapAsync(reportsBurnRate(
       this,
       request,
@@ -74,7 +73,7 @@ export class Reports extends ClientSDK {
   async runway(
     request: operations.GetRunwayReportsRequest,
     options?: RequestOptions,
-  ): Promise<number> {
+  ): Promise<operations.GetRunwayReportsResponse> {
     return unwrapAsync(reportsRunway(
       this,
       request,
@@ -91,7 +90,7 @@ export class Reports extends ClientSDK {
   async expenses(
     request: operations.GetExpensesReportsRequest,
     options?: RequestOptions,
-  ): Promise<models.GetExpensesResponseSchema> {
+  ): Promise<operations.GetExpensesReportsResponse> {
     return unwrapAsync(reportsExpenses(
       this,
       request,
@@ -108,7 +107,7 @@ export class Reports extends ClientSDK {
   async spending(
     request: operations.GetSpendingReportsRequest,
     options?: RequestOptions,
-  ): Promise<Array<models.SpendingResultArray>> {
+  ): Promise<operations.GetSpendingReportsResponse> {
     return unwrapAsync(reportsSpending(
       this,
       request,

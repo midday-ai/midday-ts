@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage bank accounts
+
 ### Available Operations
 
 * [list](#list) - List all bank accounts

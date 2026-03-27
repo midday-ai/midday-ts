@@ -6,15 +6,19 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type DeleteBankAccountRequest = {
+  /**
+   * The unique identifier of the bank account.
+   */
   id: string;
 };
 
 /**
  * A single bank account object response.
  */
-export type DeleteBankAccountResponse = {
+export type DeleteBankAccountResponseBody = {
   /**
    * Unique identifier for the bank account.
    */
@@ -44,6 +48,10 @@ export type DeleteBankAccountResponse = {
    */
   manual: boolean | null;
 };
+
+export type DeleteBankAccountResponse =
+  | DeleteBankAccountResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const DeleteBankAccountRequest$inboundSchema: z.ZodType<
@@ -100,8 +108,8 @@ export function deleteBankAccountRequestFromJSON(
 }
 
 /** @internal */
-export const DeleteBankAccountResponse$inboundSchema: z.ZodType<
-  DeleteBankAccountResponse,
+export const DeleteBankAccountResponseBody$inboundSchema: z.ZodType<
+  DeleteBankAccountResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -115,7 +123,7 @@ export const DeleteBankAccountResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeleteBankAccountResponse$Outbound = {
+export type DeleteBankAccountResponseBody$Outbound = {
   id: string;
   name: string | null;
   currency: string | null;
@@ -126,10 +134,10 @@ export type DeleteBankAccountResponse$Outbound = {
 };
 
 /** @internal */
-export const DeleteBankAccountResponse$outboundSchema: z.ZodType<
-  DeleteBankAccountResponse$Outbound,
+export const DeleteBankAccountResponseBody$outboundSchema: z.ZodType<
+  DeleteBankAccountResponseBody$Outbound,
   z.ZodTypeDef,
-  DeleteBankAccountResponse
+  DeleteBankAccountResponseBody
 > = z.object({
   id: z.string(),
   name: z.nullable(z.string()),
@@ -139,6 +147,64 @@ export const DeleteBankAccountResponse$outboundSchema: z.ZodType<
   balance: z.nullable(z.number()),
   manual: z.nullable(z.boolean()),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteBankAccountResponseBody$ {
+  /** @deprecated use `DeleteBankAccountResponseBody$inboundSchema` instead. */
+  export const inboundSchema = DeleteBankAccountResponseBody$inboundSchema;
+  /** @deprecated use `DeleteBankAccountResponseBody$outboundSchema` instead. */
+  export const outboundSchema = DeleteBankAccountResponseBody$outboundSchema;
+  /** @deprecated use `DeleteBankAccountResponseBody$Outbound` instead. */
+  export type Outbound = DeleteBankAccountResponseBody$Outbound;
+}
+
+export function deleteBankAccountResponseBodyToJSON(
+  deleteBankAccountResponseBody: DeleteBankAccountResponseBody,
+): string {
+  return JSON.stringify(
+    DeleteBankAccountResponseBody$outboundSchema.parse(
+      deleteBankAccountResponseBody,
+    ),
+  );
+}
+
+export function deleteBankAccountResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteBankAccountResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteBankAccountResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteBankAccountResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteBankAccountResponse$inboundSchema: z.ZodType<
+  DeleteBankAccountResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeleteBankAccountResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type DeleteBankAccountResponse$Outbound =
+  | DeleteBankAccountResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const DeleteBankAccountResponse$outboundSchema: z.ZodType<
+  DeleteBankAccountResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteBankAccountResponse
+> = z.union([
+  z.lazy(() => DeleteBankAccountResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

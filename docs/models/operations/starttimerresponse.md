@@ -1,13 +1,12 @@
 # StartTimerResponse
 
-Timer started successfully.
 
-## Example Usage
+## Supported Types
+
+### `operations.StartTimerResponseBody`
 
 ```typescript
-import { StartTimerResponse } from "@midday-ai/sdk/models/operations";
-
-let value: StartTimerResponse = {
+const value: operations.StartTimerResponseBody = {
   data: {
     id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",
     createdAt: "2024-04-15T09:00:00.000Z",
@@ -44,8 +43,12 @@ let value: StartTimerResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `data`                                                                 | [operations.StartTimerData](../../models/operations/starttimerdata.md) | :heavy_check_mark:                                                     | N/A                                                                    |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

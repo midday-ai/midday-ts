@@ -4,13 +4,32 @@
 
 import { oAuthGetOAuthAuthorization } from "../funcs/oAuthGetOAuthAuthorization.js";
 import { oAuthPostOAuthAuthorization } from "../funcs/oAuthPostOAuthAuthorization.js";
+import { oAuthPostOAuthRegister } from "../funcs/oAuthPostOAuthRegister.js";
 import { oAuthPostOAuthRevoke } from "../funcs/oAuthPostOAuthRevoke.js";
 import { oAuthPostOAuthToken } from "../funcs/oAuthPostOAuthToken.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class OAuth extends ClientSDK {
+  /**
+   * Dynamic Client Registration
+   *
+   * @remarks
+   * Register an OAuth client dynamically (RFC 7591). Used by MCP clients like ChatGPT and Claude.
+   */
+  async postOAuthRegister(
+    request: operations.PostOAuthRegisterRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostOAuthRegisterResponse> {
+    return unwrapAsync(oAuthPostOAuthRegister(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * OAuth Authorization Endpoint
    *
@@ -35,7 +54,7 @@ export class OAuth extends ClientSDK {
    * Process user's authorization decision (allow/deny)
    */
   async postOAuthAuthorization(
-    request?: operations.PostOAuthAuthorizationRequest | undefined,
+    request: operations.PostOAuthAuthorizationRequest,
     options?: RequestOptions,
   ): Promise<operations.PostOAuthAuthorizationResponse> {
     return unwrapAsync(oAuthPostOAuthAuthorization(
@@ -52,7 +71,7 @@ export class OAuth extends ClientSDK {
    * Exchange authorization code for access token or refresh an access token
    */
   async postOAuthToken(
-    request?: operations.PostOAuthTokenRequest | undefined,
+    request: models.OAuthTokenEndpointRequest,
     options?: RequestOptions,
   ): Promise<operations.PostOAuthTokenResponse> {
     return unwrapAsync(oAuthPostOAuthToken(
@@ -69,7 +88,7 @@ export class OAuth extends ClientSDK {
    * Revoke an access token or refresh token
    */
   async postOAuthRevoke(
-    request?: operations.PostOAuthRevokeRequest | undefined,
+    request: operations.PostOAuthRevokeRequest,
     options?: RequestOptions,
   ): Promise<operations.PostOAuthRevokeResponse> {
     return unwrapAsync(oAuthPostOAuthRevoke(

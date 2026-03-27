@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type CreateTrackerEntryRequest = {
   /**
@@ -174,12 +175,16 @@ export type CreateTrackerEntryData = {
 /**
  * Response schema for created tracker entries
  */
-export type CreateTrackerEntryResponse = {
+export type CreateTrackerEntryResponseBody = {
   /**
    * Array of created tracker entries
    */
   data: Array<CreateTrackerEntryData>;
 };
+
+export type CreateTrackerEntryResponse =
+  | CreateTrackerEntryResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const CreateTrackerEntryRequest$inboundSchema: z.ZodType<
@@ -542,8 +547,8 @@ export function createTrackerEntryDataFromJSON(
 }
 
 /** @internal */
-export const CreateTrackerEntryResponse$inboundSchema: z.ZodType<
-  CreateTrackerEntryResponse,
+export const CreateTrackerEntryResponseBody$inboundSchema: z.ZodType<
+  CreateTrackerEntryResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -551,18 +556,76 @@ export const CreateTrackerEntryResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateTrackerEntryResponse$Outbound = {
+export type CreateTrackerEntryResponseBody$Outbound = {
   data: Array<CreateTrackerEntryData$Outbound>;
 };
+
+/** @internal */
+export const CreateTrackerEntryResponseBody$outboundSchema: z.ZodType<
+  CreateTrackerEntryResponseBody$Outbound,
+  z.ZodTypeDef,
+  CreateTrackerEntryResponseBody
+> = z.object({
+  data: z.array(z.lazy(() => CreateTrackerEntryData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateTrackerEntryResponseBody$ {
+  /** @deprecated use `CreateTrackerEntryResponseBody$inboundSchema` instead. */
+  export const inboundSchema = CreateTrackerEntryResponseBody$inboundSchema;
+  /** @deprecated use `CreateTrackerEntryResponseBody$outboundSchema` instead. */
+  export const outboundSchema = CreateTrackerEntryResponseBody$outboundSchema;
+  /** @deprecated use `CreateTrackerEntryResponseBody$Outbound` instead. */
+  export type Outbound = CreateTrackerEntryResponseBody$Outbound;
+}
+
+export function createTrackerEntryResponseBodyToJSON(
+  createTrackerEntryResponseBody: CreateTrackerEntryResponseBody,
+): string {
+  return JSON.stringify(
+    CreateTrackerEntryResponseBody$outboundSchema.parse(
+      createTrackerEntryResponseBody,
+    ),
+  );
+}
+
+export function createTrackerEntryResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateTrackerEntryResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateTrackerEntryResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateTrackerEntryResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateTrackerEntryResponse$inboundSchema: z.ZodType<
+  CreateTrackerEntryResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreateTrackerEntryResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type CreateTrackerEntryResponse$Outbound =
+  | CreateTrackerEntryResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const CreateTrackerEntryResponse$outboundSchema: z.ZodType<
   CreateTrackerEntryResponse$Outbound,
   z.ZodTypeDef,
   CreateTrackerEntryResponse
-> = z.object({
-  data: z.array(z.lazy(() => CreateTrackerEntryData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => CreateTrackerEntryResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

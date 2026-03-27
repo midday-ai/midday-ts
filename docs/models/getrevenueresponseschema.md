@@ -15,25 +15,7 @@ let value: GetRevenueResponseSchema = {
     type: "revenue",
     currency: "USD",
   },
-  result: [
-    {
-      date: "2023-01-31",
-      percentage: {
-        value: 25,
-        status: "positive",
-      },
-      current: {
-        date: "2023-01-31",
-        value: 1000,
-        currency: "USD",
-      },
-      previous: {
-        date: "2022-01-31",
-        value: 800,
-        currency: "USD",
-      },
-    },
-  ],
+  result: [],
 };
 ```
 

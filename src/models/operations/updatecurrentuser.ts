@@ -7,6 +7,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * User's preferred date format. Available options: 'dd/MM/yyyy', 'MM/dd/yyyy', 'yyyy-MM-dd', 'dd.MM.yyyy'
@@ -27,10 +28,6 @@ export type UpdateCurrentUserRequest = {
    * Full name of the user. Must be between 2 and 32 characters
    */
   fullName?: string | undefined;
-  /**
-   * Unique identifier of the team the user belongs to
-   */
-  teamId?: string | undefined;
   /**
    * Email address of the user
    */
@@ -96,7 +93,7 @@ export type UpdateCurrentUserTeam = {
   /**
    * URL to the team's logo image
    */
-  logoUrl: string;
+  logoUrl: string | null;
   /**
    * Current subscription plan of the team
    */
@@ -106,7 +103,7 @@ export type UpdateCurrentUserTeam = {
 /**
  * The updated user
  */
-export type UpdateCurrentUserResponse = {
+export type UpdateCurrentUserResponseBody = {
   /**
    * Unique identifier of the user
    */
@@ -148,10 +145,18 @@ export type UpdateCurrentUserResponse = {
    */
   dateFormat: UpdateCurrentUserDateFormatResponse | null;
   /**
+   * Team file key (JWT token) for proxy/download access to team files. This compact JWT token contains the team ID and is shared by all team members. Use this token as the `fk` query parameter when accessing file endpoints (proxy, download). The token is team-scoped and provides access to files belonging to the user's team. Returns null if the user has no team.
+   */
+  fileKey: string | null;
+  /**
    * Team information that the user belongs to
    */
   team: UpdateCurrentUserTeam | null;
 };
+
+export type UpdateCurrentUserResponse =
+  | UpdateCurrentUserResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const DateFormatRequest$inboundSchema: z.ZodNativeEnum<
@@ -181,7 +186,6 @@ export const UpdateCurrentUserRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   fullName: z.string().optional(),
-  teamId: z.string().optional(),
   email: z.string().optional(),
   avatarUrl: z.string().optional(),
   locale: z.string().optional(),
@@ -195,7 +199,6 @@ export const UpdateCurrentUserRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateCurrentUserRequest$Outbound = {
   fullName?: string | undefined;
-  teamId?: string | undefined;
   email?: string | undefined;
   avatarUrl?: string | undefined;
   locale?: string | undefined;
@@ -213,7 +216,6 @@ export const UpdateCurrentUserRequest$outboundSchema: z.ZodType<
   UpdateCurrentUserRequest
 > = z.object({
   fullName: z.string().optional(),
-  teamId: z.string().optional(),
   email: z.string().optional(),
   avatarUrl: z.string().optional(),
   locale: z.string().optional(),
@@ -286,7 +288,7 @@ export const UpdateCurrentUserTeam$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  logoUrl: z.string(),
+  logoUrl: z.nullable(z.string()),
   plan: z.string(),
 });
 
@@ -294,7 +296,7 @@ export const UpdateCurrentUserTeam$inboundSchema: z.ZodType<
 export type UpdateCurrentUserTeam$Outbound = {
   id: string;
   name: string;
-  logoUrl: string;
+  logoUrl: string | null;
   plan: string;
 };
 
@@ -306,7 +308,7 @@ export const UpdateCurrentUserTeam$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  logoUrl: z.string(),
+  logoUrl: z.nullable(z.string()),
   plan: z.string(),
 });
 
@@ -342,8 +344,8 @@ export function updateCurrentUserTeamFromJSON(
 }
 
 /** @internal */
-export const UpdateCurrentUserResponse$inboundSchema: z.ZodType<
-  UpdateCurrentUserResponse,
+export const UpdateCurrentUserResponseBody$inboundSchema: z.ZodType<
+  UpdateCurrentUserResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -357,11 +359,12 @@ export const UpdateCurrentUserResponse$inboundSchema: z.ZodType<
   timezoneAutoSync: z.nullable(z.boolean()),
   timeFormat: z.nullable(z.number()),
   dateFormat: z.nullable(UpdateCurrentUserDateFormatResponse$inboundSchema),
+  fileKey: z.nullable(z.string()),
   team: z.nullable(z.lazy(() => UpdateCurrentUserTeam$inboundSchema)),
 });
 
 /** @internal */
-export type UpdateCurrentUserResponse$Outbound = {
+export type UpdateCurrentUserResponseBody$Outbound = {
   id: string;
   fullName: string;
   email: string;
@@ -372,14 +375,15 @@ export type UpdateCurrentUserResponse$Outbound = {
   timezoneAutoSync: boolean | null;
   timeFormat: number | null;
   dateFormat: string | null;
+  fileKey: string | null;
   team: UpdateCurrentUserTeam$Outbound | null;
 };
 
 /** @internal */
-export const UpdateCurrentUserResponse$outboundSchema: z.ZodType<
-  UpdateCurrentUserResponse$Outbound,
+export const UpdateCurrentUserResponseBody$outboundSchema: z.ZodType<
+  UpdateCurrentUserResponseBody$Outbound,
   z.ZodTypeDef,
-  UpdateCurrentUserResponse
+  UpdateCurrentUserResponseBody
 > = z.object({
   id: z.string(),
   fullName: z.string(),
@@ -391,8 +395,67 @@ export const UpdateCurrentUserResponse$outboundSchema: z.ZodType<
   timezoneAutoSync: z.nullable(z.boolean()),
   timeFormat: z.nullable(z.number()),
   dateFormat: z.nullable(UpdateCurrentUserDateFormatResponse$outboundSchema),
+  fileKey: z.nullable(z.string()),
   team: z.nullable(z.lazy(() => UpdateCurrentUserTeam$outboundSchema)),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateCurrentUserResponseBody$ {
+  /** @deprecated use `UpdateCurrentUserResponseBody$inboundSchema` instead. */
+  export const inboundSchema = UpdateCurrentUserResponseBody$inboundSchema;
+  /** @deprecated use `UpdateCurrentUserResponseBody$outboundSchema` instead. */
+  export const outboundSchema = UpdateCurrentUserResponseBody$outboundSchema;
+  /** @deprecated use `UpdateCurrentUserResponseBody$Outbound` instead. */
+  export type Outbound = UpdateCurrentUserResponseBody$Outbound;
+}
+
+export function updateCurrentUserResponseBodyToJSON(
+  updateCurrentUserResponseBody: UpdateCurrentUserResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateCurrentUserResponseBody$outboundSchema.parse(
+      updateCurrentUserResponseBody,
+    ),
+  );
+}
+
+export function updateCurrentUserResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateCurrentUserResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateCurrentUserResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateCurrentUserResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateCurrentUserResponse$inboundSchema: z.ZodType<
+  UpdateCurrentUserResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateCurrentUserResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateCurrentUserResponse$Outbound =
+  | UpdateCurrentUserResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const UpdateCurrentUserResponse$outboundSchema: z.ZodType<
+  UpdateCurrentUserResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateCurrentUserResponse
+> = z.union([
+  z.lazy(() => UpdateCurrentUserResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

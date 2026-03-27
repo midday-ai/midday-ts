@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type CreateCustomerTagRequest = {
   /**
@@ -32,7 +33,7 @@ export type CreateCustomerRequest = {
    */
   email: string;
   /**
-   * Billing email address of the customer
+   * Billing email addresses of the customer (comma-separated for multiple)
    */
   billingEmail?: string | null | undefined;
   /**
@@ -103,7 +104,7 @@ export type CreateCustomerTagResponse = {
 /**
  * Customer created
  */
-export type CreateCustomerResponse = {
+export type CreateCustomerResponseBody = {
   /**
    * Unique identifier of the customer
    */
@@ -117,7 +118,7 @@ export type CreateCustomerResponse = {
    */
   email: string;
   /**
-   * Billing email address of the customer
+   * Billing email addresses of the customer (comma-separated for multiple)
    */
   billingEmail: string | null;
   /**
@@ -185,10 +186,118 @@ export type CreateCustomerResponse = {
    */
   projectCount: number;
   /**
+   * Total revenue from paid invoices for this customer (in invoice currency). Only returned in list queries.
+   */
+  totalRevenue?: number | undefined;
+  /**
+   * Total outstanding amount from unpaid/overdue invoices (in invoice currency). Only returned in list queries.
+   */
+  outstandingAmount?: number | undefined;
+  /**
+   * Date of the most recent invoice in ISO 8601 format. Only returned in list queries.
+   */
+  lastInvoiceDate?: string | null | undefined;
+  /**
+   * Primary currency used in invoices for this customer. Only returned in list queries.
+   */
+  invoiceCurrency?: string | null | undefined;
+  /**
    * Array of tags associated with the customer for categorization
    */
   tags: Array<CreateCustomerTagResponse>;
+  /**
+   * AI-generated description of what the company does
+   */
+  description: string | null;
+  /**
+   * Primary industry of the company
+   */
+  industry: string | null;
+  /**
+   * Business model type
+   */
+  companyType: string | null;
+  /**
+   * Estimated number of employees
+   */
+  employeeCount: string | null;
+  /**
+   * Year the company was founded
+   */
+  foundedYear: number | null;
+  /**
+   * Estimated annual revenue range
+   */
+  estimatedRevenue: string | null;
+  /**
+   * Current funding stage
+   */
+  fundingStage: string | null;
+  /**
+   * Total funding raised
+   */
+  totalFunding: string | null;
+  /**
+   * Company headquarters location
+   */
+  headquartersLocation: string | null;
+  /**
+   * IANA timezone of the company headquarters
+   */
+  timezone: string | null;
+  /**
+   * LinkedIn company page URL
+   */
+  linkedinUrl: string | null;
+  /**
+   * Twitter/X profile URL
+   */
+  twitterUrl: string | null;
+  /**
+   * Instagram profile URL
+   */
+  instagramUrl: string | null;
+  /**
+   * Facebook page URL
+   */
+  facebookUrl: string | null;
+  /**
+   * URL to the company logo
+   */
+  logoUrl: string | null;
+  /**
+   * Name of the CEO or founder
+   */
+  ceoName: string | null;
+  /**
+   * Name of the finance/AP contact for invoicing
+   */
+  financeContact: string | null;
+  /**
+   * Email of the finance/AP contact
+   */
+  financeContactEmail: string | null;
+  /**
+   * Primary business language (ISO 639-1 code)
+   */
+  primaryLanguage: string | null;
+  /**
+   * Month when the fiscal year ends
+   */
+  fiscalYearEnd: string | null;
+  /**
+   * Status of the enrichment process
+   */
+  enrichmentStatus: string | null;
+  /**
+   * When the customer was last enriched
+   */
+  enrichedAt: string | null;
 };
+
+export type CreateCustomerResponse =
+  | CreateCustomerResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const CreateCustomerTagRequest$inboundSchema: z.ZodType<
@@ -409,8 +518,8 @@ export function createCustomerTagResponseFromJSON(
 }
 
 /** @internal */
-export const CreateCustomerResponse$inboundSchema: z.ZodType<
-  CreateCustomerResponse,
+export const CreateCustomerResponseBody$inboundSchema: z.ZodType<
+  CreateCustomerResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -434,11 +543,37 @@ export const CreateCustomerResponse$inboundSchema: z.ZodType<
   contact: z.nullable(z.string()),
   invoiceCount: z.number(),
   projectCount: z.number(),
+  totalRevenue: z.number().optional(),
+  outstandingAmount: z.number().optional(),
+  lastInvoiceDate: z.nullable(z.string()).optional(),
+  invoiceCurrency: z.nullable(z.string()).optional(),
   tags: z.array(z.lazy(() => CreateCustomerTagResponse$inboundSchema)),
+  description: z.nullable(z.string()),
+  industry: z.nullable(z.string()),
+  companyType: z.nullable(z.string()),
+  employeeCount: z.nullable(z.string()),
+  foundedYear: z.nullable(z.number()),
+  estimatedRevenue: z.nullable(z.string()),
+  fundingStage: z.nullable(z.string()),
+  totalFunding: z.nullable(z.string()),
+  headquartersLocation: z.nullable(z.string()),
+  timezone: z.nullable(z.string()),
+  linkedinUrl: z.nullable(z.string()),
+  twitterUrl: z.nullable(z.string()),
+  instagramUrl: z.nullable(z.string()),
+  facebookUrl: z.nullable(z.string()),
+  logoUrl: z.nullable(z.string()),
+  ceoName: z.nullable(z.string()),
+  financeContact: z.nullable(z.string()),
+  financeContactEmail: z.nullable(z.string()),
+  primaryLanguage: z.nullable(z.string()),
+  fiscalYearEnd: z.nullable(z.string()),
+  enrichmentStatus: z.nullable(z.string()),
+  enrichedAt: z.nullable(z.string()),
 });
 
 /** @internal */
-export type CreateCustomerResponse$Outbound = {
+export type CreateCustomerResponseBody$Outbound = {
   id: string;
   name: string;
   email: string;
@@ -459,14 +594,40 @@ export type CreateCustomerResponse$Outbound = {
   contact: string | null;
   invoiceCount: number;
   projectCount: number;
+  totalRevenue?: number | undefined;
+  outstandingAmount?: number | undefined;
+  lastInvoiceDate?: string | null | undefined;
+  invoiceCurrency?: string | null | undefined;
   tags: Array<CreateCustomerTagResponse$Outbound>;
+  description: string | null;
+  industry: string | null;
+  companyType: string | null;
+  employeeCount: string | null;
+  foundedYear: number | null;
+  estimatedRevenue: string | null;
+  fundingStage: string | null;
+  totalFunding: string | null;
+  headquartersLocation: string | null;
+  timezone: string | null;
+  linkedinUrl: string | null;
+  twitterUrl: string | null;
+  instagramUrl: string | null;
+  facebookUrl: string | null;
+  logoUrl: string | null;
+  ceoName: string | null;
+  financeContact: string | null;
+  financeContactEmail: string | null;
+  primaryLanguage: string | null;
+  fiscalYearEnd: string | null;
+  enrichmentStatus: string | null;
+  enrichedAt: string | null;
 };
 
 /** @internal */
-export const CreateCustomerResponse$outboundSchema: z.ZodType<
-  CreateCustomerResponse$Outbound,
+export const CreateCustomerResponseBody$outboundSchema: z.ZodType<
+  CreateCustomerResponseBody$Outbound,
   z.ZodTypeDef,
-  CreateCustomerResponse
+  CreateCustomerResponseBody
 > = z.object({
   id: z.string(),
   name: z.string(),
@@ -488,8 +649,90 @@ export const CreateCustomerResponse$outboundSchema: z.ZodType<
   contact: z.nullable(z.string()),
   invoiceCount: z.number(),
   projectCount: z.number(),
+  totalRevenue: z.number().optional(),
+  outstandingAmount: z.number().optional(),
+  lastInvoiceDate: z.nullable(z.string()).optional(),
+  invoiceCurrency: z.nullable(z.string()).optional(),
   tags: z.array(z.lazy(() => CreateCustomerTagResponse$outboundSchema)),
+  description: z.nullable(z.string()),
+  industry: z.nullable(z.string()),
+  companyType: z.nullable(z.string()),
+  employeeCount: z.nullable(z.string()),
+  foundedYear: z.nullable(z.number()),
+  estimatedRevenue: z.nullable(z.string()),
+  fundingStage: z.nullable(z.string()),
+  totalFunding: z.nullable(z.string()),
+  headquartersLocation: z.nullable(z.string()),
+  timezone: z.nullable(z.string()),
+  linkedinUrl: z.nullable(z.string()),
+  twitterUrl: z.nullable(z.string()),
+  instagramUrl: z.nullable(z.string()),
+  facebookUrl: z.nullable(z.string()),
+  logoUrl: z.nullable(z.string()),
+  ceoName: z.nullable(z.string()),
+  financeContact: z.nullable(z.string()),
+  financeContactEmail: z.nullable(z.string()),
+  primaryLanguage: z.nullable(z.string()),
+  fiscalYearEnd: z.nullable(z.string()),
+  enrichmentStatus: z.nullable(z.string()),
+  enrichedAt: z.nullable(z.string()),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateCustomerResponseBody$ {
+  /** @deprecated use `CreateCustomerResponseBody$inboundSchema` instead. */
+  export const inboundSchema = CreateCustomerResponseBody$inboundSchema;
+  /** @deprecated use `CreateCustomerResponseBody$outboundSchema` instead. */
+  export const outboundSchema = CreateCustomerResponseBody$outboundSchema;
+  /** @deprecated use `CreateCustomerResponseBody$Outbound` instead. */
+  export type Outbound = CreateCustomerResponseBody$Outbound;
+}
+
+export function createCustomerResponseBodyToJSON(
+  createCustomerResponseBody: CreateCustomerResponseBody,
+): string {
+  return JSON.stringify(
+    CreateCustomerResponseBody$outboundSchema.parse(createCustomerResponseBody),
+  );
+}
+
+export function createCustomerResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateCustomerResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateCustomerResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateCustomerResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateCustomerResponse$inboundSchema: z.ZodType<
+  CreateCustomerResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreateCustomerResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type CreateCustomerResponse$Outbound =
+  | CreateCustomerResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const CreateCustomerResponse$outboundSchema: z.ZodType<
+  CreateCustomerResponse$Outbound,
+  z.ZodTypeDef,
+  CreateCustomerResponse
+> = z.union([
+  z.lazy(() => CreateCustomerResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

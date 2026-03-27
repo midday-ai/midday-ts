@@ -8,6 +8,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteTagRequest = {
+  /**
+   * The UUID of the tag to delete.
+   */
   id: string;
 };
 

@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage notifications
+
 ### Available Operations
 
 * [list](#list) - List all notifications
@@ -94,7 +96,7 @@ run();
 
 ### Response
 
-**Promise\<[models.NotificationsResponseSchema](../../models/notificationsresponseschema.md)\>**
+**Promise\<[operations.ListNotificationsResponse](../../models/operations/listnotificationsresponse.md)\>**
 
 ### Errors
 
@@ -177,7 +179,7 @@ run();
 
 ### Response
 
-**Promise\<[models.NotificationResponseSchema](../../models/notificationresponseschema.md)\>**
+**Promise\<[operations.UpdateNotificationStatusResponse](../../models/operations/updatenotificationstatusresponse.md)\>**
 
 ### Errors
 
@@ -254,7 +256,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UpdateAllNotificationsStatusResponseSchema](../../models/updateallnotificationsstatusresponseschema.md)\>**
+**Promise\<[operations.UpdateAllNotificationsStatusResponse](../../models/operations/updateallnotificationsstatusresponse.md)\>**
 
 ### Errors
 

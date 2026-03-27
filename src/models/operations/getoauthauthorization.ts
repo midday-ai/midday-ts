@@ -20,16 +20,50 @@ export const ResponseType = {
  */
 export type ResponseType = ClosedEnum<typeof ResponseType>;
 
+/**
+ * Code challenge method, must be S256
+ */
+export const CodeChallengeMethod = {
+  S256: "S256",
+} as const;
+/**
+ * Code challenge method, must be S256
+ */
+export type CodeChallengeMethod = ClosedEnum<typeof CodeChallengeMethod>;
+
 export type GetOAuthAuthorizationRequest = {
   /**
    * OAuth response type, must be 'code'
    */
   responseType: ResponseType;
+  /**
+   * Client ID of the OAuth application
+   */
   clientId: string;
+  /**
+   * Redirect URI for OAuth callback
+   */
   redirectUri: string;
+  /**
+   * Space-separated list of requested scopes
+   */
   scope: string;
+  /**
+   * Opaque state parameter for CSRF protection
+   */
   state: string;
+  /**
+   * Code challenge for PKCE (S256)
+   */
   codeChallenge?: string | undefined;
+  /**
+   * Code challenge method, must be S256
+   */
+  codeChallengeMethod?: CodeChallengeMethod | undefined;
+  /**
+   * Resource parameter per RFC 9728 — identifies the MCP server
+   */
+  resource?: string | undefined;
 };
 
 /**
@@ -101,7 +135,7 @@ export type GetOAuthAuthorizationResponse = {
    */
   redirectUri: string;
   /**
-   * State parameter (min 32 chars, alphanumeric + _.-)
+   * Opaque state parameter
    */
   state?: string | undefined;
   /**
@@ -130,6 +164,27 @@ export namespace ResponseType$ {
 }
 
 /** @internal */
+export const CodeChallengeMethod$inboundSchema: z.ZodNativeEnum<
+  typeof CodeChallengeMethod
+> = z.nativeEnum(CodeChallengeMethod);
+
+/** @internal */
+export const CodeChallengeMethod$outboundSchema: z.ZodNativeEnum<
+  typeof CodeChallengeMethod
+> = CodeChallengeMethod$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CodeChallengeMethod$ {
+  /** @deprecated use `CodeChallengeMethod$inboundSchema` instead. */
+  export const inboundSchema = CodeChallengeMethod$inboundSchema;
+  /** @deprecated use `CodeChallengeMethod$outboundSchema` instead. */
+  export const outboundSchema = CodeChallengeMethod$outboundSchema;
+}
+
+/** @internal */
 export const GetOAuthAuthorizationRequest$inboundSchema: z.ZodType<
   GetOAuthAuthorizationRequest,
   z.ZodTypeDef,
@@ -141,12 +196,15 @@ export const GetOAuthAuthorizationRequest$inboundSchema: z.ZodType<
   scope: z.string(),
   state: z.string(),
   code_challenge: z.string().optional(),
+  code_challenge_method: CodeChallengeMethod$inboundSchema.optional(),
+  resource: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "response_type": "responseType",
     "client_id": "clientId",
     "redirect_uri": "redirectUri",
     "code_challenge": "codeChallenge",
+    "code_challenge_method": "codeChallengeMethod",
   });
 });
 
@@ -158,6 +216,8 @@ export type GetOAuthAuthorizationRequest$Outbound = {
   scope: string;
   state: string;
   code_challenge?: string | undefined;
+  code_challenge_method?: string | undefined;
+  resource?: string | undefined;
 };
 
 /** @internal */
@@ -172,12 +232,15 @@ export const GetOAuthAuthorizationRequest$outboundSchema: z.ZodType<
   scope: z.string(),
   state: z.string(),
   codeChallenge: z.string().optional(),
+  codeChallengeMethod: CodeChallengeMethod$outboundSchema.optional(),
+  resource: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     responseType: "response_type",
     clientId: "client_id",
     redirectUri: "redirect_uri",
     codeChallenge: "code_challenge",
+    codeChallengeMethod: "code_challenge_method",
   });
 });
 

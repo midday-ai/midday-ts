@@ -7,45 +7,71 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
-/**
- * Filter summary by invoice status
- */
 export const GetInvoiceSummaryStatus = {
   Draft: "draft",
   Overdue: "overdue",
   Paid: "paid",
   Unpaid: "unpaid",
   Canceled: "canceled",
+  Scheduled: "scheduled",
 } as const;
-/**
- * Filter summary by invoice status
- */
 export type GetInvoiceSummaryStatus = ClosedEnum<
   typeof GetInvoiceSummaryStatus
 >;
 
 export type GetInvoiceSummaryRequest = {
   /**
-   * Filter summary by invoice status
+   * Filter summary by invoice statuses
    */
-  status?: GetInvoiceSummaryStatus | undefined;
+  statuses?: Array<GetInvoiceSummaryStatus> | undefined;
 };
 
-export type GetInvoiceSummaryResponse = {
+export type Breakdown = {
   /**
-   * Currency of the invoice
+   * Original currency of the invoices
    */
   currency: string;
   /**
-   * Total amount of the invoice
+   * Total amount in original currency
+   */
+  originalAmount: number;
+  /**
+   * Amount converted to base currency
+   */
+  convertedAmount: number;
+  /**
+   * Number of invoices in this currency
+   */
+  count: number;
+};
+
+/**
+ * Invoice summary object containing total amount converted to team's base currency and total invoice count.
+ */
+export type GetInvoiceSummaryResponseBody = {
+  /**
+   * Base currency of the team
+   */
+  currency: string;
+  /**
+   * Total amount of all invoices converted to base currency
    */
   totalAmount: number;
   /**
-   * Number of invoices for this currency
+   * Total number of invoices
    */
   invoiceCount: number;
+  /**
+   * Currency breakdown when multiple currencies are involved
+   */
+  breakdown?: Array<Breakdown> | undefined;
 };
+
+export type GetInvoiceSummaryResponse =
+  | GetInvoiceSummaryResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetInvoiceSummaryStatus$inboundSchema: z.ZodNativeEnum<
@@ -74,12 +100,12 @@ export const GetInvoiceSummaryRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: GetInvoiceSummaryStatus$inboundSchema.optional(),
+  statuses: z.array(GetInvoiceSummaryStatus$inboundSchema).optional(),
 });
 
 /** @internal */
 export type GetInvoiceSummaryRequest$Outbound = {
-  status?: string | undefined;
+  statuses?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -88,7 +114,7 @@ export const GetInvoiceSummaryRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetInvoiceSummaryRequest
 > = z.object({
-  status: GetInvoiceSummaryStatus$outboundSchema.optional(),
+  statuses: z.array(GetInvoiceSummaryStatus$outboundSchema).optional(),
 });
 
 /**
@@ -123,33 +149,153 @@ export function getInvoiceSummaryRequestFromJSON(
 }
 
 /** @internal */
-export const GetInvoiceSummaryResponse$inboundSchema: z.ZodType<
-  GetInvoiceSummaryResponse,
+export const Breakdown$inboundSchema: z.ZodType<
+  Breakdown,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  currency: z.string(),
+  originalAmount: z.number(),
+  convertedAmount: z.number(),
+  count: z.number(),
+});
+
+/** @internal */
+export type Breakdown$Outbound = {
+  currency: string;
+  originalAmount: number;
+  convertedAmount: number;
+  count: number;
+};
+
+/** @internal */
+export const Breakdown$outboundSchema: z.ZodType<
+  Breakdown$Outbound,
+  z.ZodTypeDef,
+  Breakdown
+> = z.object({
+  currency: z.string(),
+  originalAmount: z.number(),
+  convertedAmount: z.number(),
+  count: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Breakdown$ {
+  /** @deprecated use `Breakdown$inboundSchema` instead. */
+  export const inboundSchema = Breakdown$inboundSchema;
+  /** @deprecated use `Breakdown$outboundSchema` instead. */
+  export const outboundSchema = Breakdown$outboundSchema;
+  /** @deprecated use `Breakdown$Outbound` instead. */
+  export type Outbound = Breakdown$Outbound;
+}
+
+export function breakdownToJSON(breakdown: Breakdown): string {
+  return JSON.stringify(Breakdown$outboundSchema.parse(breakdown));
+}
+
+export function breakdownFromJSON(
+  jsonString: string,
+): SafeParseResult<Breakdown, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Breakdown$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Breakdown' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetInvoiceSummaryResponseBody$inboundSchema: z.ZodType<
+  GetInvoiceSummaryResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   currency: z.string(),
   totalAmount: z.number(),
   invoiceCount: z.number(),
+  breakdown: z.array(z.lazy(() => Breakdown$inboundSchema)).optional(),
 });
 
 /** @internal */
-export type GetInvoiceSummaryResponse$Outbound = {
+export type GetInvoiceSummaryResponseBody$Outbound = {
   currency: string;
   totalAmount: number;
   invoiceCount: number;
+  breakdown?: Array<Breakdown$Outbound> | undefined;
 };
+
+/** @internal */
+export const GetInvoiceSummaryResponseBody$outboundSchema: z.ZodType<
+  GetInvoiceSummaryResponseBody$Outbound,
+  z.ZodTypeDef,
+  GetInvoiceSummaryResponseBody
+> = z.object({
+  currency: z.string(),
+  totalAmount: z.number(),
+  invoiceCount: z.number(),
+  breakdown: z.array(z.lazy(() => Breakdown$outboundSchema)).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetInvoiceSummaryResponseBody$ {
+  /** @deprecated use `GetInvoiceSummaryResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetInvoiceSummaryResponseBody$inboundSchema;
+  /** @deprecated use `GetInvoiceSummaryResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetInvoiceSummaryResponseBody$outboundSchema;
+  /** @deprecated use `GetInvoiceSummaryResponseBody$Outbound` instead. */
+  export type Outbound = GetInvoiceSummaryResponseBody$Outbound;
+}
+
+export function getInvoiceSummaryResponseBodyToJSON(
+  getInvoiceSummaryResponseBody: GetInvoiceSummaryResponseBody,
+): string {
+  return JSON.stringify(
+    GetInvoiceSummaryResponseBody$outboundSchema.parse(
+      getInvoiceSummaryResponseBody,
+    ),
+  );
+}
+
+export function getInvoiceSummaryResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetInvoiceSummaryResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetInvoiceSummaryResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetInvoiceSummaryResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetInvoiceSummaryResponse$inboundSchema: z.ZodType<
+  GetInvoiceSummaryResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetInvoiceSummaryResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetInvoiceSummaryResponse$Outbound =
+  | GetInvoiceSummaryResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const GetInvoiceSummaryResponse$outboundSchema: z.ZodType<
   GetInvoiceSummaryResponse$Outbound,
   z.ZodTypeDef,
   GetInvoiceSummaryResponse
-> = z.object({
-  currency: z.string(),
-  totalAmount: z.number(),
-  invoiceCount: z.number(),
-});
+> = z.union([
+  z.lazy(() => GetInvoiceSummaryResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

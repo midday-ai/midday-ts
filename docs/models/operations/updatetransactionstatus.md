@@ -13,5 +13,5 @@ let value: UpdateTransactionStatus = "archived";
 ## Values
 
 ```typescript
-"pending" | "archived" | "completed" | "posted" | "excluded"
+"pending" | "archived" | "completed" | "posted" | "excluded" | "exported"
 ```

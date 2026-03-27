@@ -9,13 +9,21 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.oAuth.getOAuthAuthorization({
-    responseType: "code",
-    clientId: "mid_client_abcdef123456789",
-    redirectUri: "https://myapp.com/callback",
+  const result = await midday.oAuth.postOAuthRegister({
+    clientName: "ChatGPT",
+    redirectUris: [
+      "https://chatgpt.com/connector/oauth/callback",
+    ],
+    grantTypes: [
+      "authorization_code",
+      "refresh_token",
+    ],
     scope: "transactions.read invoices.read",
-    state: "abc123xyz789_secure-random-state-value-with-sufficient-entropy",
-    codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+    logoUri: "https://example.com/logo.png",
+    clientUri: "https://example.com",
+    responseTypes: [
+      "code",
+    ],
   });
 
   console.log(result);

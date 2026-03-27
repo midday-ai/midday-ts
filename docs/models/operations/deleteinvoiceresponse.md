@@ -1,19 +1,22 @@
 # DeleteInvoiceResponse
 
-Delete a invoice by its unique identifier for the authenticated team.
 
-## Example Usage
+## Supported Types
+
+### `operations.DeleteInvoiceResponseBody`
 
 ```typescript
-import { DeleteInvoiceResponse } from "@midday-ai/sdk/models/operations";
-
-let value: DeleteInvoiceResponse = {
+const value: operations.DeleteInvoiceResponseBody = {
   id: "b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a",
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                     | Type                                      | Required                                  | Description                               | Example                                   |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `id`                                      | *string*                                  | :heavy_check_mark:                        | Unique identifier for the deleted invoice | b3b7e6e2-8c2a-4e2a-9b1a-2e4b5c6d7f8a      |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

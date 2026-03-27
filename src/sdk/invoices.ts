@@ -5,8 +5,8 @@
 import { invoicesCreate } from "../funcs/invoicesCreate.js";
 import { invoicesDelete } from "../funcs/invoicesDelete.js";
 import { invoicesGet } from "../funcs/invoicesGet.js";
-import { invoicesGetInvoicesPaymentStatus } from "../funcs/invoicesGetInvoicesPaymentStatus.js";
 import { invoicesList } from "../funcs/invoicesList.js";
+import { invoicesPaymentStatus } from "../funcs/invoicesPaymentStatus.js";
 import { invoicesSummary } from "../funcs/invoicesSummary.js";
 import { invoicesUpdate } from "../funcs/invoicesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -38,7 +38,7 @@ export class Invoices extends ClientSDK {
    * Create an invoice for the authenticated team. The behavior depends on deliveryType: 'create' generates and finalizes the invoice immediately, 'create_and_send' also sends it to the customer, 'scheduled' schedules the invoice for automatic processing at the specified date.
    */
   async create(
-    request?: operations.CreateInvoiceRequest | undefined,
+    request: operations.CreateInvoiceRequest,
     options?: RequestOptions,
   ): Promise<operations.CreateInvoiceResponse> {
     return unwrapAsync(invoicesCreate(
@@ -54,10 +54,10 @@ export class Invoices extends ClientSDK {
    * @remarks
    * Get payment status for the authenticated team.
    */
-  async getInvoicesPaymentStatus(
+  async paymentStatus(
     options?: RequestOptions,
-  ): Promise<operations.GetInvoicesPaymentStatusResponse> {
-    return unwrapAsync(invoicesGetInvoicesPaymentStatus(
+  ): Promise<operations.GetInvoicePaymentStatusResponse> {
+    return unwrapAsync(invoicesPaymentStatus(
       this,
       options,
     ));
@@ -72,7 +72,7 @@ export class Invoices extends ClientSDK {
   async summary(
     request: operations.GetInvoiceSummaryRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.GetInvoiceSummaryResponse>> {
+  ): Promise<operations.GetInvoiceSummaryResponse> {
     return unwrapAsync(invoicesSummary(
       this,
       request,

@@ -7,6 +7,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * User's preferred date format. Available options: 'dd/MM/yyyy', 'MM/dd/yyyy', 'yyyy-MM-dd', 'dd.MM.yyyy'
@@ -39,7 +40,7 @@ export type GetCurrentUserTeam = {
   /**
    * URL to the team's logo image
    */
-  logoUrl: string;
+  logoUrl: string | null;
   /**
    * Current subscription plan of the team
    */
@@ -49,7 +50,7 @@ export type GetCurrentUserTeam = {
 /**
  * Retrieve the current user for the authenticated team.
  */
-export type GetCurrentUserResponse = {
+export type GetCurrentUserResponseBody = {
   /**
    * Unique identifier of the user
    */
@@ -91,10 +92,18 @@ export type GetCurrentUserResponse = {
    */
   dateFormat: GetCurrentUserDateFormat | null;
   /**
+   * Team file key (JWT token) for proxy/download access to team files. This compact JWT token contains the team ID and is shared by all team members. Use this token as the `fk` query parameter when accessing file endpoints (proxy, download). The token is team-scoped and provides access to files belonging to the user's team. Returns null if the user has no team.
+   */
+  fileKey: string | null;
+  /**
    * Team information that the user belongs to
    */
   team: GetCurrentUserTeam | null;
 };
+
+export type GetCurrentUserResponse =
+  | GetCurrentUserResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetCurrentUserDateFormat$inboundSchema: z.ZodNativeEnum<
@@ -125,7 +134,7 @@ export const GetCurrentUserTeam$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  logoUrl: z.string(),
+  logoUrl: z.nullable(z.string()),
   plan: z.string(),
 });
 
@@ -133,7 +142,7 @@ export const GetCurrentUserTeam$inboundSchema: z.ZodType<
 export type GetCurrentUserTeam$Outbound = {
   id: string;
   name: string;
-  logoUrl: string;
+  logoUrl: string | null;
   plan: string;
 };
 
@@ -145,7 +154,7 @@ export const GetCurrentUserTeam$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  logoUrl: z.string(),
+  logoUrl: z.nullable(z.string()),
   plan: z.string(),
 });
 
@@ -181,8 +190,8 @@ export function getCurrentUserTeamFromJSON(
 }
 
 /** @internal */
-export const GetCurrentUserResponse$inboundSchema: z.ZodType<
-  GetCurrentUserResponse,
+export const GetCurrentUserResponseBody$inboundSchema: z.ZodType<
+  GetCurrentUserResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -196,11 +205,12 @@ export const GetCurrentUserResponse$inboundSchema: z.ZodType<
   timezoneAutoSync: z.nullable(z.boolean()),
   timeFormat: z.nullable(z.number()),
   dateFormat: z.nullable(GetCurrentUserDateFormat$inboundSchema),
+  fileKey: z.nullable(z.string()),
   team: z.nullable(z.lazy(() => GetCurrentUserTeam$inboundSchema)),
 });
 
 /** @internal */
-export type GetCurrentUserResponse$Outbound = {
+export type GetCurrentUserResponseBody$Outbound = {
   id: string;
   fullName: string;
   email: string;
@@ -211,14 +221,15 @@ export type GetCurrentUserResponse$Outbound = {
   timezoneAutoSync: boolean | null;
   timeFormat: number | null;
   dateFormat: string | null;
+  fileKey: string | null;
   team: GetCurrentUserTeam$Outbound | null;
 };
 
 /** @internal */
-export const GetCurrentUserResponse$outboundSchema: z.ZodType<
-  GetCurrentUserResponse$Outbound,
+export const GetCurrentUserResponseBody$outboundSchema: z.ZodType<
+  GetCurrentUserResponseBody$Outbound,
   z.ZodTypeDef,
-  GetCurrentUserResponse
+  GetCurrentUserResponseBody
 > = z.object({
   id: z.string(),
   fullName: z.string(),
@@ -230,8 +241,65 @@ export const GetCurrentUserResponse$outboundSchema: z.ZodType<
   timezoneAutoSync: z.nullable(z.boolean()),
   timeFormat: z.nullable(z.number()),
   dateFormat: z.nullable(GetCurrentUserDateFormat$outboundSchema),
+  fileKey: z.nullable(z.string()),
   team: z.nullable(z.lazy(() => GetCurrentUserTeam$outboundSchema)),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetCurrentUserResponseBody$ {
+  /** @deprecated use `GetCurrentUserResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetCurrentUserResponseBody$inboundSchema;
+  /** @deprecated use `GetCurrentUserResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetCurrentUserResponseBody$outboundSchema;
+  /** @deprecated use `GetCurrentUserResponseBody$Outbound` instead. */
+  export type Outbound = GetCurrentUserResponseBody$Outbound;
+}
+
+export function getCurrentUserResponseBodyToJSON(
+  getCurrentUserResponseBody: GetCurrentUserResponseBody,
+): string {
+  return JSON.stringify(
+    GetCurrentUserResponseBody$outboundSchema.parse(getCurrentUserResponseBody),
+  );
+}
+
+export function getCurrentUserResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetCurrentUserResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetCurrentUserResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetCurrentUserResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetCurrentUserResponse$inboundSchema: z.ZodType<
+  GetCurrentUserResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetCurrentUserResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetCurrentUserResponse$Outbound =
+  | GetCurrentUserResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetCurrentUserResponse$outboundSchema: z.ZodType<
+  GetCurrentUserResponse$Outbound,
+  z.ZodTypeDef,
+  GetCurrentUserResponse
+> = z.union([
+  z.lazy(() => GetCurrentUserResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

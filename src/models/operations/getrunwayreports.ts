@@ -6,12 +6,16 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetRunwayReportsRequest = {
-  from: string;
-  to: string;
+  /**
+   * Currency code (ISO 4217)
+   */
   currency?: string | undefined;
 };
+
+export type GetRunwayReportsResponse = models.ErrorResponse | number;
 
 /** @internal */
 export const GetRunwayReportsRequest$inboundSchema: z.ZodType<
@@ -19,15 +23,11 @@ export const GetRunwayReportsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  from: z.string(),
-  to: z.string(),
   currency: z.string().optional(),
 });
 
 /** @internal */
 export type GetRunwayReportsRequest$Outbound = {
-  from: string;
-  to: string;
   currency?: string | undefined;
 };
 
@@ -37,8 +37,6 @@ export const GetRunwayReportsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetRunwayReportsRequest
 > = z.object({
-  from: z.string(),
-  to: z.string(),
   currency: z.string().optional(),
 });
 
@@ -70,5 +68,55 @@ export function getRunwayReportsRequestFromJSON(
     jsonString,
     (x) => GetRunwayReportsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetRunwayReportsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetRunwayReportsResponse$inboundSchema: z.ZodType<
+  GetRunwayReportsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([models.ErrorResponse$inboundSchema, z.number()]);
+
+/** @internal */
+export type GetRunwayReportsResponse$Outbound =
+  | models.ErrorResponse$Outbound
+  | number;
+
+/** @internal */
+export const GetRunwayReportsResponse$outboundSchema: z.ZodType<
+  GetRunwayReportsResponse$Outbound,
+  z.ZodTypeDef,
+  GetRunwayReportsResponse
+> = z.union([models.ErrorResponse$outboundSchema, z.number()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetRunwayReportsResponse$ {
+  /** @deprecated use `GetRunwayReportsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetRunwayReportsResponse$inboundSchema;
+  /** @deprecated use `GetRunwayReportsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetRunwayReportsResponse$outboundSchema;
+  /** @deprecated use `GetRunwayReportsResponse$Outbound` instead. */
+  export type Outbound = GetRunwayReportsResponse$Outbound;
+}
+
+export function getRunwayReportsResponseToJSON(
+  getRunwayReportsResponse: GetRunwayReportsResponse,
+): string {
+  return JSON.stringify(
+    GetRunwayReportsResponse$outboundSchema.parse(getRunwayReportsResponse),
+  );
+}
+
+export function getRunwayReportsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetRunwayReportsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetRunwayReportsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetRunwayReportsResponse' from JSON`,
   );
 }

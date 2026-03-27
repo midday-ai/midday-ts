@@ -1,13 +1,12 @@
 # GetCurrentTimerResponse
 
-Current timer retrieved successfully.
 
-## Example Usage
+## Supported Types
+
+### `operations.GetCurrentTimerResponseBody`
 
 ```typescript
-import { GetCurrentTimerResponse } from "@midday-ai/sdk/models/operations";
-
-let value: GetCurrentTimerResponse = {
+const value: operations.GetCurrentTimerResponseBody = {
   data: {
     id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",
     createdAt: "2024-04-15T09:00:00.000Z",
@@ -44,8 +43,12 @@ let value: GetCurrentTimerResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `data`                                                                           | [operations.GetCurrentTimerData](../../models/operations/getcurrenttimerdata.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

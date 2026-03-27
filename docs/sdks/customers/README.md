@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage customers
+
 ### Available Operations
 
 * [list](#list) - List all customers
@@ -121,7 +123,7 @@ async function run() {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     name: "Acme Corporation",
     email: "contact@acme.com",
-    billingEmail: "finance@acme.com",
+    billingEmail: "finance@acme.com, accounting@acme.com",
     country: "United States",
     addressLine1: "123 Main Street",
     addressLine2: "Suite 400",
@@ -173,7 +175,7 @@ async function run() {
     id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     name: "Acme Corporation",
     email: "contact@acme.com",
-    billingEmail: "finance@acme.com",
+    billingEmail: "finance@acme.com, accounting@acme.com",
     country: "United States",
     addressLine1: "123 Main Street",
     addressLine2: "Suite 400",
@@ -327,7 +329,7 @@ async function run() {
       id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
       name: "Acme Corporation",
       email: "contact@acme.com",
-      billingEmail: "finance@acme.com",
+      billingEmail: "finance@acme.com, accounting@acme.com",
       country: "United States",
       addressLine1: "123 Main Street",
       addressLine2: "Suite 400",
@@ -382,7 +384,7 @@ async function run() {
       id: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
       name: "Acme Corporation",
       email: "contact@acme.com",
-      billingEmail: "finance@acme.com",
+      billingEmail: "finance@acme.com, accounting@acme.com",
       country: "United States",
       addressLine1: "123 Main Street",
       addressLine2: "Suite 400",

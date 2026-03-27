@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * Type of the bank account.
@@ -55,14 +56,17 @@ export type UpdateBankAccountRequestBody = {
 };
 
 export type UpdateBankAccountRequest = {
+  /**
+   * The unique identifier of the bank account.
+   */
   id: string;
-  requestBody?: UpdateBankAccountRequestBody | undefined;
+  requestBody: UpdateBankAccountRequestBody;
 };
 
 /**
  * A single bank account object response.
  */
-export type UpdateBankAccountResponse = {
+export type UpdateBankAccountResponseBody = {
   /**
    * Unique identifier for the bank account.
    */
@@ -92,6 +96,10 @@ export type UpdateBankAccountResponse = {
    */
   manual: boolean | null;
 };
+
+export type UpdateBankAccountResponse =
+  | UpdateBankAccountResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const UpdateBankAccountType$inboundSchema: z.ZodNativeEnum<
@@ -192,8 +200,7 @@ export const UpdateBankAccountRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  RequestBody: z.lazy(() => UpdateBankAccountRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => UpdateBankAccountRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -203,7 +210,7 @@ export const UpdateBankAccountRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateBankAccountRequest$Outbound = {
   id: string;
-  RequestBody?: UpdateBankAccountRequestBody$Outbound | undefined;
+  RequestBody: UpdateBankAccountRequestBody$Outbound;
 };
 
 /** @internal */
@@ -213,8 +220,7 @@ export const UpdateBankAccountRequest$outboundSchema: z.ZodType<
   UpdateBankAccountRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => UpdateBankAccountRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => UpdateBankAccountRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",
@@ -253,8 +259,8 @@ export function updateBankAccountRequestFromJSON(
 }
 
 /** @internal */
-export const UpdateBankAccountResponse$inboundSchema: z.ZodType<
-  UpdateBankAccountResponse,
+export const UpdateBankAccountResponseBody$inboundSchema: z.ZodType<
+  UpdateBankAccountResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -268,7 +274,7 @@ export const UpdateBankAccountResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateBankAccountResponse$Outbound = {
+export type UpdateBankAccountResponseBody$Outbound = {
   id: string;
   name: string | null;
   currency: string | null;
@@ -279,10 +285,10 @@ export type UpdateBankAccountResponse$Outbound = {
 };
 
 /** @internal */
-export const UpdateBankAccountResponse$outboundSchema: z.ZodType<
-  UpdateBankAccountResponse$Outbound,
+export const UpdateBankAccountResponseBody$outboundSchema: z.ZodType<
+  UpdateBankAccountResponseBody$Outbound,
   z.ZodTypeDef,
-  UpdateBankAccountResponse
+  UpdateBankAccountResponseBody
 > = z.object({
   id: z.string(),
   name: z.nullable(z.string()),
@@ -292,6 +298,64 @@ export const UpdateBankAccountResponse$outboundSchema: z.ZodType<
   balance: z.nullable(z.number()),
   manual: z.nullable(z.boolean()),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateBankAccountResponseBody$ {
+  /** @deprecated use `UpdateBankAccountResponseBody$inboundSchema` instead. */
+  export const inboundSchema = UpdateBankAccountResponseBody$inboundSchema;
+  /** @deprecated use `UpdateBankAccountResponseBody$outboundSchema` instead. */
+  export const outboundSchema = UpdateBankAccountResponseBody$outboundSchema;
+  /** @deprecated use `UpdateBankAccountResponseBody$Outbound` instead. */
+  export type Outbound = UpdateBankAccountResponseBody$Outbound;
+}
+
+export function updateBankAccountResponseBodyToJSON(
+  updateBankAccountResponseBody: UpdateBankAccountResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateBankAccountResponseBody$outboundSchema.parse(
+      updateBankAccountResponseBody,
+    ),
+  );
+}
+
+export function updateBankAccountResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateBankAccountResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateBankAccountResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateBankAccountResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateBankAccountResponse$inboundSchema: z.ZodType<
+  UpdateBankAccountResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateBankAccountResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateBankAccountResponse$Outbound =
+  | UpdateBankAccountResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const UpdateBankAccountResponse$outboundSchema: z.ZodType<
+  UpdateBankAccountResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateBankAccountResponse
+> = z.union([
+  z.lazy(() => UpdateBankAccountResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

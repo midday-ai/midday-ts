@@ -8,7 +8,7 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: z.array(operations.RequestBody$inboundSchema).optional(),
+  request: z.array(operations.RequestBody$inboundSchema),
 };
 
 export const tool$transactionsCreateMany: ToolDefinition<typeof args> = {

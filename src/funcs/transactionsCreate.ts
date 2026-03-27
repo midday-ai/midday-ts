@@ -20,7 +20,6 @@ import {
 import { MiddayError } from "../models/errors/middayerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
@@ -33,11 +32,11 @@ import { Result } from "../types/fp.js";
  */
 export function transactionsCreate(
   client: MiddayCore,
-  request?: operations.CreateTransactionRequest | undefined,
+  request: operations.CreateTransactionRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.TransactionResponse,
+    operations.CreateTransactionResponse,
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +56,12 @@ export function transactionsCreate(
 
 async function $do(
   client: MiddayCore,
-  request?: operations.CreateTransactionRequest | undefined,
+  request: operations.CreateTransactionRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.TransactionResponse,
+      operations.CreateTransactionResponse,
       | MiddayError
       | ResponseValidationError
       | ConnectionError
@@ -77,19 +76,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.CreateTransactionRequest$outboundSchema.optional().parse(
-        value,
-      ),
+    (value) => operations.CreateTransactionRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/transactions")();
 
@@ -112,8 +106,18 @@ async function $do(
     securitySource: client._options.security,
     retryConfig: options?.retries
       || client._options.retryConfig
+      || {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 500,
+          maxInterval: 60000,
+          exponent: 1.5,
+          maxElapsedTime: 300000,
+        },
+        retryConnectionErrors: true,
+      }
       || { strategy: "none" },
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryCodes: options?.retryCodes || ["5XX"],
   };
 
   const requestRes = client._createRequest(context, {
@@ -143,7 +147,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.TransactionResponse,
+    operations.CreateTransactionResponse,
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -153,9 +157,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.TransactionResponse$inboundSchema),
+    M.json(200, operations.CreateTransactionResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
+    M.json("default", operations.CreateTransactionResponse$inboundSchema),
   )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

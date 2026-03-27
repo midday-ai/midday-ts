@@ -36,7 +36,7 @@ export class Customers extends ClientSDK {
    * Create a new customer for the authenticated team.
    */
   async create(
-    request?: operations.CreateCustomerRequest | undefined,
+    request: operations.CreateCustomerRequest,
     options?: RequestOptions,
   ): Promise<operations.CreateCustomerResponse> {
     return unwrapAsync(customersCreate(

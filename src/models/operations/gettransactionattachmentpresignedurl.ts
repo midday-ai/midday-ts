@@ -8,8 +8,17 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetTransactionAttachmentPreSignedUrlRequest = {
+  /**
+   * Unique identifier of the transaction
+   */
   transactionId: string;
+  /**
+   * Unique identifier of the attachment to generate a pre-signed URL for
+   */
   attachmentId: string;
+  /**
+   * Whether to force download the file. If true, the file will be downloaded. If false or omitted, the file will be displayed in the browser if possible.
+   */
   download?: boolean | null | undefined;
 };
 

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type UpdateTagRequestBody = {
   /**
@@ -16,9 +17,14 @@ export type UpdateTagRequestBody = {
 };
 
 export type UpdateTagRequest = {
+  /**
+   * The ID of the tag to update.
+   */
   id: string;
-  requestBody?: UpdateTagRequestBody | undefined;
+  requestBody: UpdateTagRequestBody;
 };
+
+export type UpdateTagResponse = models.TagResponse | models.ErrorResponse;
 
 /** @internal */
 export const UpdateTagRequestBody$inboundSchema: z.ZodType<
@@ -81,7 +87,7 @@ export const UpdateTagRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  RequestBody: z.lazy(() => UpdateTagRequestBody$inboundSchema).optional(),
+  RequestBody: z.lazy(() => UpdateTagRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -91,7 +97,7 @@ export const UpdateTagRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateTagRequest$Outbound = {
   id: string;
-  RequestBody?: UpdateTagRequestBody$Outbound | undefined;
+  RequestBody: UpdateTagRequestBody$Outbound;
 };
 
 /** @internal */
@@ -101,7 +107,7 @@ export const UpdateTagRequest$outboundSchema: z.ZodType<
   UpdateTagRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => UpdateTagRequestBody$outboundSchema).optional(),
+  requestBody: z.lazy(() => UpdateTagRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",
@@ -136,5 +142,61 @@ export function updateTagRequestFromJSON(
     jsonString,
     (x) => UpdateTagRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateTagRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateTagResponse$inboundSchema: z.ZodType<
+  UpdateTagResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.TagResponse$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateTagResponse$Outbound =
+  | models.TagResponse$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const UpdateTagResponse$outboundSchema: z.ZodType<
+  UpdateTagResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateTagResponse
+> = z.union([
+  models.TagResponse$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateTagResponse$ {
+  /** @deprecated use `UpdateTagResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateTagResponse$inboundSchema;
+  /** @deprecated use `UpdateTagResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateTagResponse$outboundSchema;
+  /** @deprecated use `UpdateTagResponse$Outbound` instead. */
+  export type Outbound = UpdateTagResponse$Outbound;
+}
+
+export function updateTagResponseToJSON(
+  updateTagResponse: UpdateTagResponse,
+): string {
+  return JSON.stringify(
+    UpdateTagResponse$outboundSchema.parse(updateTagResponse),
+  );
+}
+
+export function updateTagResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateTagResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateTagResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateTagResponse' from JSON`,
   );
 }

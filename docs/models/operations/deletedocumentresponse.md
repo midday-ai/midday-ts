@@ -1,19 +1,22 @@
 # DeleteDocumentResponse
 
-Document deleted successfully
 
-## Example Usage
+## Supported Types
+
+### `operations.DeleteDocumentResponseBody`
 
 ```typescript
-import { DeleteDocumentResponse } from "@midday-ai/sdk/models/operations";
-
-let value: DeleteDocumentResponse = {
+const value: operations.DeleteDocumentResponseBody = {
   id: "<id>",
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

@@ -1,17 +1,24 @@
 # DeleteTransactionsResponse
 
-## Example Usage
+
+## Supported Types
+
+### `operations.DeleteTransactionsResponseBody[]`
 
 ```typescript
-import { DeleteTransactionsResponse } from "@midday-ai/sdk/models/operations";
+const value: operations.DeleteTransactionsResponseBody[] = [
+  {
+    id: "5571e1c4-ee9d-4c24-bf19-f4fd83305249",
+  },
+];
+```
 
-let value: DeleteTransactionsResponse = {
-  id: "672e8cc4-8528-4f99-968f-7bafc28cda82",
+### `models.ErrorResponse`
+
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
 };
 ```
 
-## Fields
-
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `id`                   | *string*               | :heavy_check_mark:     | Transaction ID (UUID). |

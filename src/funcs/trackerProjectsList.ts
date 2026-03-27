@@ -20,7 +20,6 @@ import {
 import { MiddayError } from "../models/errors/middayerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
@@ -37,7 +36,7 @@ export function trackerProjectsList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.TrackerProjectsResponse,
+    operations.ListTrackerProjectsResponse,
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +61,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.TrackerProjectsResponse,
+      operations.ListTrackerProjectsResponse,
       | MiddayError
       | ResponseValidationError
       | ConnectionError
@@ -119,8 +118,18 @@ async function $do(
     securitySource: client._options.security,
     retryConfig: options?.retries
       || client._options.retryConfig
+      || {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 500,
+          maxInterval: 60000,
+          exponent: 1.5,
+          maxElapsedTime: 300000,
+        },
+        retryConnectionErrors: true,
+      }
       || { strategy: "none" },
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryCodes: options?.retryCodes || ["5XX"],
   };
 
   const requestRes = client._createRequest(context, {
@@ -151,7 +160,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.TrackerProjectsResponse,
+    operations.ListTrackerProjectsResponse,
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -161,9 +170,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.TrackerProjectsResponse$inboundSchema),
+    M.json(200, operations.ListTrackerProjectsResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
+    M.json("default", operations.ListTrackerProjectsResponse$inboundSchema),
   )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

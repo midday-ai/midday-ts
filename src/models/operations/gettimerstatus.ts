@@ -6,12 +6,16 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetTimerStatusRequest = {
+  /**
+   * Unique identifier of the user whose current timer should be retrieved. If not provided, will use the authenticated user
+   */
   assignedId?: string | null | undefined;
 };
 
-export type TrackerProject = {
+export type GetTimerStatusTrackerProject = {
   id: string;
   name: string;
 };
@@ -24,7 +28,7 @@ export type CurrentEntry = {
   start: string | null;
   description: string | null;
   projectId: string;
-  trackerProject: TrackerProject;
+  trackerProject: GetTimerStatusTrackerProject;
 };
 
 export type GetTimerStatusData = {
@@ -45,9 +49,13 @@ export type GetTimerStatusData = {
 /**
  * Timer status retrieved successfully.
  */
-export type GetTimerStatusResponse = {
+export type GetTimerStatusResponseBody = {
   data: GetTimerStatusData;
 };
+
+export type GetTimerStatusResponse =
+  | GetTimerStatusResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetTimerStatusRequest$inboundSchema: z.ZodType<
@@ -104,8 +112,8 @@ export function getTimerStatusRequestFromJSON(
 }
 
 /** @internal */
-export const TrackerProject$inboundSchema: z.ZodType<
-  TrackerProject,
+export const GetTimerStatusTrackerProject$inboundSchema: z.ZodType<
+  GetTimerStatusTrackerProject,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -114,16 +122,16 @@ export const TrackerProject$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TrackerProject$Outbound = {
+export type GetTimerStatusTrackerProject$Outbound = {
   id: string;
   name: string;
 };
 
 /** @internal */
-export const TrackerProject$outboundSchema: z.ZodType<
-  TrackerProject$Outbound,
+export const GetTimerStatusTrackerProject$outboundSchema: z.ZodType<
+  GetTimerStatusTrackerProject$Outbound,
   z.ZodTypeDef,
-  TrackerProject
+  GetTimerStatusTrackerProject
 > = z.object({
   id: z.string(),
   name: z.string(),
@@ -133,26 +141,32 @@ export const TrackerProject$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TrackerProject$ {
-  /** @deprecated use `TrackerProject$inboundSchema` instead. */
-  export const inboundSchema = TrackerProject$inboundSchema;
-  /** @deprecated use `TrackerProject$outboundSchema` instead. */
-  export const outboundSchema = TrackerProject$outboundSchema;
-  /** @deprecated use `TrackerProject$Outbound` instead. */
-  export type Outbound = TrackerProject$Outbound;
+export namespace GetTimerStatusTrackerProject$ {
+  /** @deprecated use `GetTimerStatusTrackerProject$inboundSchema` instead. */
+  export const inboundSchema = GetTimerStatusTrackerProject$inboundSchema;
+  /** @deprecated use `GetTimerStatusTrackerProject$outboundSchema` instead. */
+  export const outboundSchema = GetTimerStatusTrackerProject$outboundSchema;
+  /** @deprecated use `GetTimerStatusTrackerProject$Outbound` instead. */
+  export type Outbound = GetTimerStatusTrackerProject$Outbound;
 }
 
-export function trackerProjectToJSON(trackerProject: TrackerProject): string {
-  return JSON.stringify(TrackerProject$outboundSchema.parse(trackerProject));
+export function getTimerStatusTrackerProjectToJSON(
+  getTimerStatusTrackerProject: GetTimerStatusTrackerProject,
+): string {
+  return JSON.stringify(
+    GetTimerStatusTrackerProject$outboundSchema.parse(
+      getTimerStatusTrackerProject,
+    ),
+  );
 }
 
-export function trackerProjectFromJSON(
+export function getTimerStatusTrackerProjectFromJSON(
   jsonString: string,
-): SafeParseResult<TrackerProject, SDKValidationError> {
+): SafeParseResult<GetTimerStatusTrackerProject, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TrackerProject$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TrackerProject' from JSON`,
+    (x) => GetTimerStatusTrackerProject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTimerStatusTrackerProject' from JSON`,
   );
 }
 
@@ -166,7 +180,7 @@ export const CurrentEntry$inboundSchema: z.ZodType<
   start: z.nullable(z.string()),
   description: z.nullable(z.string()),
   projectId: z.string(),
-  trackerProject: z.lazy(() => TrackerProject$inboundSchema),
+  trackerProject: z.lazy(() => GetTimerStatusTrackerProject$inboundSchema),
 });
 
 /** @internal */
@@ -175,7 +189,7 @@ export type CurrentEntry$Outbound = {
   start: string | null;
   description: string | null;
   projectId: string;
-  trackerProject: TrackerProject$Outbound;
+  trackerProject: GetTimerStatusTrackerProject$Outbound;
 };
 
 /** @internal */
@@ -188,7 +202,7 @@ export const CurrentEntry$outboundSchema: z.ZodType<
   start: z.nullable(z.string()),
   description: z.nullable(z.string()),
   projectId: z.string(),
-  trackerProject: z.lazy(() => TrackerProject$outboundSchema),
+  trackerProject: z.lazy(() => GetTimerStatusTrackerProject$outboundSchema),
 });
 
 /**
@@ -279,8 +293,8 @@ export function getTimerStatusDataFromJSON(
 }
 
 /** @internal */
-export const GetTimerStatusResponse$inboundSchema: z.ZodType<
-  GetTimerStatusResponse,
+export const GetTimerStatusResponseBody$inboundSchema: z.ZodType<
+  GetTimerStatusResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -288,18 +302,74 @@ export const GetTimerStatusResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetTimerStatusResponse$Outbound = {
+export type GetTimerStatusResponseBody$Outbound = {
   data: GetTimerStatusData$Outbound;
 };
+
+/** @internal */
+export const GetTimerStatusResponseBody$outboundSchema: z.ZodType<
+  GetTimerStatusResponseBody$Outbound,
+  z.ZodTypeDef,
+  GetTimerStatusResponseBody
+> = z.object({
+  data: z.lazy(() => GetTimerStatusData$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetTimerStatusResponseBody$ {
+  /** @deprecated use `GetTimerStatusResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetTimerStatusResponseBody$inboundSchema;
+  /** @deprecated use `GetTimerStatusResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetTimerStatusResponseBody$outboundSchema;
+  /** @deprecated use `GetTimerStatusResponseBody$Outbound` instead. */
+  export type Outbound = GetTimerStatusResponseBody$Outbound;
+}
+
+export function getTimerStatusResponseBodyToJSON(
+  getTimerStatusResponseBody: GetTimerStatusResponseBody,
+): string {
+  return JSON.stringify(
+    GetTimerStatusResponseBody$outboundSchema.parse(getTimerStatusResponseBody),
+  );
+}
+
+export function getTimerStatusResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTimerStatusResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTimerStatusResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTimerStatusResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetTimerStatusResponse$inboundSchema: z.ZodType<
+  GetTimerStatusResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetTimerStatusResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetTimerStatusResponse$Outbound =
+  | GetTimerStatusResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const GetTimerStatusResponse$outboundSchema: z.ZodType<
   GetTimerStatusResponse$Outbound,
   z.ZodTypeDef,
   GetTimerStatusResponse
-> = z.object({
-  data: z.lazy(() => GetTimerStatusData$outboundSchema),
-});
+> = z.union([
+  z.lazy(() => GetTimerStatusResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

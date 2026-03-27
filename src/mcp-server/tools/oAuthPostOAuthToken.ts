@@ -3,11 +3,11 @@
  */
 
 import { oAuthPostOAuthToken } from "../../funcs/oAuthPostOAuthToken.js";
-import * as operations from "../../models/operations/index.js";
+import * as models from "../../models/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.PostOAuthTokenRequest$inboundSchema.optional(),
+  request: models.OAuthTokenEndpointRequest$inboundSchema,
 };
 
 export const tool$oAuthPostOAuthToken: ToolDefinition<typeof args> = {

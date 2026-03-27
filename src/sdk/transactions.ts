@@ -12,7 +12,6 @@ import { transactionsList } from "../funcs/transactionsList.js";
 import { transactionsUpdate } from "../funcs/transactionsUpdate.js";
 import { transactionsUpdateMany } from "../funcs/transactionsUpdateMany.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -41,9 +40,9 @@ export class Transactions extends ClientSDK {
    * Create a transaction
    */
   async create(
-    request?: operations.CreateTransactionRequest | undefined,
+    request: operations.CreateTransactionRequest,
     options?: RequestOptions,
-  ): Promise<models.TransactionResponse> {
+  ): Promise<operations.CreateTransactionResponse> {
     return unwrapAsync(transactionsCreate(
       this,
       request,
@@ -60,7 +59,7 @@ export class Transactions extends ClientSDK {
   async get(
     request: operations.GetTransactionByIdRequest,
     options?: RequestOptions,
-  ): Promise<models.TransactionResponse> {
+  ): Promise<operations.GetTransactionByIdResponse> {
     return unwrapAsync(transactionsGet(
       this,
       request,
@@ -77,7 +76,7 @@ export class Transactions extends ClientSDK {
   async update(
     request: operations.UpdateTransactionRequest,
     options?: RequestOptions,
-  ): Promise<models.TransactionResponse> {
+  ): Promise<operations.UpdateTransactionResponse> {
     return unwrapAsync(transactionsUpdate(
       this,
       request,
@@ -126,7 +125,7 @@ export class Transactions extends ClientSDK {
    * Bulk update transactions for the authenticated team. If there's no change, returns it as it is.
    */
   async updateMany(
-    request?: operations.UpdateTransactionsRequest | undefined,
+    request: operations.UpdateTransactionsRequest,
     options?: RequestOptions,
   ): Promise<operations.UpdateTransactionsResponse> {
     return unwrapAsync(transactionsUpdateMany(
@@ -143,9 +142,9 @@ export class Transactions extends ClientSDK {
    * Bulk create transactions for the authenticated team.
    */
   async createMany(
-    request?: Array<operations.RequestBody> | undefined,
+    request: Array<operations.RequestBody>,
     options?: RequestOptions,
-  ): Promise<Array<models.TransactionResponse>> {
+  ): Promise<operations.CreateTransactionsResponse> {
     return unwrapAsync(transactionsCreateMany(
       this,
       request,
@@ -160,9 +159,9 @@ export class Transactions extends ClientSDK {
    * Bulk delete transactions for the authenticated team. Only manually created transactions can be deleted via this endpoint or the form. Transactions inserted by bank connections cannot be deleted, but can be excluded by updating the status.
    */
   async deleteMany(
-    request?: Array<string> | undefined,
+    request: Array<string>,
     options?: RequestOptions,
-  ): Promise<Array<operations.DeleteTransactionsResponse>> {
+  ): Promise<operations.DeleteTransactionsResponse> {
     return unwrapAsync(transactionsDeleteMany(
       this,
       request,

@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage inbox items
+
 ### Available Operations
 
 * [list](#list) - List all inbox items

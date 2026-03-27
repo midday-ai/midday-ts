@@ -33,7 +33,7 @@ import { Result } from "../types/fp.js";
  */
 export function invoicesCreate(
   client: MiddayCore,
-  request?: operations.CreateInvoiceRequest | undefined,
+  request: operations.CreateInvoiceRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -61,7 +61,7 @@ export function invoicesCreate(
 
 async function $do(
   client: MiddayCore,
-  request?: operations.CreateInvoiceRequest | undefined,
+  request: operations.CreateInvoiceRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -85,17 +85,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.CreateInvoiceRequest$outboundSchema.optional().parse(value),
+    (value) => operations.CreateInvoiceRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/invoices")();
 
@@ -118,8 +115,18 @@ async function $do(
     securitySource: client._options.security,
     retryConfig: options?.retries
       || client._options.retryConfig
+      || {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 500,
+          maxInterval: 60000,
+          exponent: 1.5,
+          maxElapsedTime: 300000,
+        },
+        retryConnectionErrors: true,
+      }
       || { strategy: "none" },
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryCodes: options?.retryCodes || ["5XX"],
   };
 
   const requestRes = client._createRequest(context, {

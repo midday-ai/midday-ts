@@ -6,15 +6,19 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetBankAccountByIdRequest = {
+  /**
+   * The unique identifier of the bank account.
+   */
   id: string;
 };
 
 /**
  * A single bank account object response.
  */
-export type GetBankAccountByIdResponse = {
+export type GetBankAccountByIdResponseBody = {
   /**
    * Unique identifier for the bank account.
    */
@@ -44,6 +48,10 @@ export type GetBankAccountByIdResponse = {
    */
   manual: boolean | null;
 };
+
+export type GetBankAccountByIdResponse =
+  | GetBankAccountByIdResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetBankAccountByIdRequest$inboundSchema: z.ZodType<
@@ -100,8 +108,8 @@ export function getBankAccountByIdRequestFromJSON(
 }
 
 /** @internal */
-export const GetBankAccountByIdResponse$inboundSchema: z.ZodType<
-  GetBankAccountByIdResponse,
+export const GetBankAccountByIdResponseBody$inboundSchema: z.ZodType<
+  GetBankAccountByIdResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -115,7 +123,7 @@ export const GetBankAccountByIdResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetBankAccountByIdResponse$Outbound = {
+export type GetBankAccountByIdResponseBody$Outbound = {
   id: string;
   name: string | null;
   currency: string | null;
@@ -126,10 +134,10 @@ export type GetBankAccountByIdResponse$Outbound = {
 };
 
 /** @internal */
-export const GetBankAccountByIdResponse$outboundSchema: z.ZodType<
-  GetBankAccountByIdResponse$Outbound,
+export const GetBankAccountByIdResponseBody$outboundSchema: z.ZodType<
+  GetBankAccountByIdResponseBody$Outbound,
   z.ZodTypeDef,
-  GetBankAccountByIdResponse
+  GetBankAccountByIdResponseBody
 > = z.object({
   id: z.string(),
   name: z.nullable(z.string()),
@@ -139,6 +147,64 @@ export const GetBankAccountByIdResponse$outboundSchema: z.ZodType<
   balance: z.nullable(z.number()),
   manual: z.nullable(z.boolean()),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetBankAccountByIdResponseBody$ {
+  /** @deprecated use `GetBankAccountByIdResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetBankAccountByIdResponseBody$inboundSchema;
+  /** @deprecated use `GetBankAccountByIdResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetBankAccountByIdResponseBody$outboundSchema;
+  /** @deprecated use `GetBankAccountByIdResponseBody$Outbound` instead. */
+  export type Outbound = GetBankAccountByIdResponseBody$Outbound;
+}
+
+export function getBankAccountByIdResponseBodyToJSON(
+  getBankAccountByIdResponseBody: GetBankAccountByIdResponseBody,
+): string {
+  return JSON.stringify(
+    GetBankAccountByIdResponseBody$outboundSchema.parse(
+      getBankAccountByIdResponseBody,
+    ),
+  );
+}
+
+export function getBankAccountByIdResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetBankAccountByIdResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetBankAccountByIdResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetBankAccountByIdResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetBankAccountByIdResponse$inboundSchema: z.ZodType<
+  GetBankAccountByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetBankAccountByIdResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetBankAccountByIdResponse$Outbound =
+  | GetBankAccountByIdResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetBankAccountByIdResponse$outboundSchema: z.ZodType<
+  GetBankAccountByIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetBankAccountByIdResponse
+> = z.union([
+  z.lazy(() => GetBankAccountByIdResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

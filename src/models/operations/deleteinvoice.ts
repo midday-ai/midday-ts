@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type DeleteInvoiceRequest = {
   id: string;
@@ -14,12 +15,16 @@ export type DeleteInvoiceRequest = {
 /**
  * Delete a invoice by its unique identifier for the authenticated team.
  */
-export type DeleteInvoiceResponse = {
+export type DeleteInvoiceResponseBody = {
   /**
    * Unique identifier for the deleted invoice
    */
   id: string;
 };
+
+export type DeleteInvoiceResponse =
+  | DeleteInvoiceResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const DeleteInvoiceRequest$inboundSchema: z.ZodType<
@@ -76,8 +81,8 @@ export function deleteInvoiceRequestFromJSON(
 }
 
 /** @internal */
-export const DeleteInvoiceResponse$inboundSchema: z.ZodType<
-  DeleteInvoiceResponse,
+export const DeleteInvoiceResponseBody$inboundSchema: z.ZodType<
+  DeleteInvoiceResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -85,18 +90,74 @@ export const DeleteInvoiceResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeleteInvoiceResponse$Outbound = {
+export type DeleteInvoiceResponseBody$Outbound = {
   id: string;
 };
+
+/** @internal */
+export const DeleteInvoiceResponseBody$outboundSchema: z.ZodType<
+  DeleteInvoiceResponseBody$Outbound,
+  z.ZodTypeDef,
+  DeleteInvoiceResponseBody
+> = z.object({
+  id: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteInvoiceResponseBody$ {
+  /** @deprecated use `DeleteInvoiceResponseBody$inboundSchema` instead. */
+  export const inboundSchema = DeleteInvoiceResponseBody$inboundSchema;
+  /** @deprecated use `DeleteInvoiceResponseBody$outboundSchema` instead. */
+  export const outboundSchema = DeleteInvoiceResponseBody$outboundSchema;
+  /** @deprecated use `DeleteInvoiceResponseBody$Outbound` instead. */
+  export type Outbound = DeleteInvoiceResponseBody$Outbound;
+}
+
+export function deleteInvoiceResponseBodyToJSON(
+  deleteInvoiceResponseBody: DeleteInvoiceResponseBody,
+): string {
+  return JSON.stringify(
+    DeleteInvoiceResponseBody$outboundSchema.parse(deleteInvoiceResponseBody),
+  );
+}
+
+export function deleteInvoiceResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteInvoiceResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteInvoiceResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteInvoiceResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteInvoiceResponse$inboundSchema: z.ZodType<
+  DeleteInvoiceResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeleteInvoiceResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type DeleteInvoiceResponse$Outbound =
+  | DeleteInvoiceResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const DeleteInvoiceResponse$outboundSchema: z.ZodType<
   DeleteInvoiceResponse$Outbound,
   z.ZodTypeDef,
   DeleteInvoiceResponse
-> = z.object({
-  id: z.string(),
-});
+> = z.union([
+  z.lazy(() => DeleteInvoiceResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

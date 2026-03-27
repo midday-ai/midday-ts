@@ -6,10 +6,18 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetTransactionByIdRequest = {
+  /**
+   * Transaction ID (UUID).
+   */
   id: string;
 };
+
+export type GetTransactionByIdResponse =
+  | models.TransactionResponse
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetTransactionByIdRequest$inboundSchema: z.ZodType<
@@ -62,5 +70,61 @@ export function getTransactionByIdRequestFromJSON(
     jsonString,
     (x) => GetTransactionByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetTransactionByIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetTransactionByIdResponse$inboundSchema: z.ZodType<
+  GetTransactionByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.TransactionResponse$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetTransactionByIdResponse$Outbound =
+  | models.TransactionResponse$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetTransactionByIdResponse$outboundSchema: z.ZodType<
+  GetTransactionByIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetTransactionByIdResponse
+> = z.union([
+  models.TransactionResponse$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetTransactionByIdResponse$ {
+  /** @deprecated use `GetTransactionByIdResponse$inboundSchema` instead. */
+  export const inboundSchema = GetTransactionByIdResponse$inboundSchema;
+  /** @deprecated use `GetTransactionByIdResponse$outboundSchema` instead. */
+  export const outboundSchema = GetTransactionByIdResponse$outboundSchema;
+  /** @deprecated use `GetTransactionByIdResponse$Outbound` instead. */
+  export type Outbound = GetTransactionByIdResponse$Outbound;
+}
+
+export function getTransactionByIdResponseToJSON(
+  getTransactionByIdResponse: GetTransactionByIdResponse,
+): string {
+  return JSON.stringify(
+    GetTransactionByIdResponse$outboundSchema.parse(getTransactionByIdResponse),
+  );
+}
+
+export function getTransactionByIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTransactionByIdResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTransactionByIdResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTransactionByIdResponse' from JSON`,
   );
 }

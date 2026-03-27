@@ -38,7 +38,7 @@ export function oAuthGetOAuthAuthorization(
 ): APIPromise<
   Result<
     operations.GetOAuthAuthorizationResponse,
-    | errors.GetOAuthAuthorizationBadRequestError
+    | errors.OAuthErrorResponse
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -64,7 +64,7 @@ async function $do(
   [
     Result<
       operations.GetOAuthAuthorizationResponse,
-      | errors.GetOAuthAuthorizationBadRequestError
+      | errors.OAuthErrorResponse
       | MiddayError
       | ResponseValidationError
       | ConnectionError
@@ -94,7 +94,9 @@ async function $do(
   const query = encodeFormQuery({
     "client_id": payload.client_id,
     "code_challenge": payload.code_challenge,
+    "code_challenge_method": payload.code_challenge_method,
     "redirect_uri": payload.redirect_uri,
+    "resource": payload.resource,
     "response_type": payload.response_type,
     "scope": payload.scope,
     "state": payload.state,
@@ -118,8 +120,18 @@ async function $do(
     securitySource: client._options.security,
     retryConfig: options?.retries
       || client._options.retryConfig
+      || {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 500,
+          maxInterval: 60000,
+          exponent: 1.5,
+          maxElapsedTime: 300000,
+        },
+        retryConnectionErrors: true,
+      }
       || { strategy: "none" },
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryCodes: options?.retryCodes || ["5XX"],
   };
 
   const requestRes = client._createRequest(context, {
@@ -155,7 +167,7 @@ async function $do(
 
   const [result] = await M.match<
     operations.GetOAuthAuthorizationResponse,
-    | errors.GetOAuthAuthorizationBadRequestError
+    | errors.OAuthErrorResponse
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -166,7 +178,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, operations.GetOAuthAuthorizationResponse$inboundSchema),
-    M.jsonErr(400, errors.GetOAuthAuthorizationBadRequestError$inboundSchema),
+    M.jsonErr(400, errors.OAuthErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

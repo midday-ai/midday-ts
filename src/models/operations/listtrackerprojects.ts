@@ -7,6 +7,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * Filter projects by status
@@ -23,19 +24,47 @@ export type ListTrackerProjectsStatus = ClosedEnum<
 >;
 
 export type ListTrackerProjectsRequest = {
+  /**
+   * Cursor for pagination, representing the last item from the previous page
+   */
   cursor?: string | null | undefined;
+  /**
+   * Number of projects to return per page (1-100)
+   */
   pageSize?: number | undefined;
+  /**
+   * Search query string to filter projects by name or description
+   */
   q?: string | null | undefined;
+  /**
+   * Start date for filtering projects by creation date in YYYY-MM-DD format
+   */
   start?: string | null | undefined;
+  /**
+   * End date for filtering projects by creation date in YYYY-MM-DD format
+   */
   end?: string | null | undefined;
   /**
    * Filter projects by status
    */
   status?: ListTrackerProjectsStatus | null | undefined;
+  /**
+   * Array of customer IDs to filter projects by specific customers
+   */
   customers?: Array<string> | null | undefined;
+  /**
+   * Array of tag IDs to filter projects by specific tags
+   */
   tags?: Array<string> | null | undefined;
+  /**
+   * Sort as [column, direction]. Columns: name, created_at, time, amount, assigned, customer, tags. Direction: asc or desc.
+   */
   sort?: Array<string> | null | undefined;
 };
+
+export type ListTrackerProjectsResponse =
+  | models.TrackerProjectsResponse
+  | models.ErrorResponse;
 
 /** @internal */
 export const ListTrackerProjectsStatus$inboundSchema: z.ZodNativeEnum<
@@ -133,5 +162,63 @@ export function listTrackerProjectsRequestFromJSON(
     jsonString,
     (x) => ListTrackerProjectsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListTrackerProjectsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListTrackerProjectsResponse$inboundSchema: z.ZodType<
+  ListTrackerProjectsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.TrackerProjectsResponse$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListTrackerProjectsResponse$Outbound =
+  | models.TrackerProjectsResponse$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const ListTrackerProjectsResponse$outboundSchema: z.ZodType<
+  ListTrackerProjectsResponse$Outbound,
+  z.ZodTypeDef,
+  ListTrackerProjectsResponse
+> = z.union([
+  models.TrackerProjectsResponse$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListTrackerProjectsResponse$ {
+  /** @deprecated use `ListTrackerProjectsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListTrackerProjectsResponse$inboundSchema;
+  /** @deprecated use `ListTrackerProjectsResponse$outboundSchema` instead. */
+  export const outboundSchema = ListTrackerProjectsResponse$outboundSchema;
+  /** @deprecated use `ListTrackerProjectsResponse$Outbound` instead. */
+  export type Outbound = ListTrackerProjectsResponse$Outbound;
+}
+
+export function listTrackerProjectsResponseToJSON(
+  listTrackerProjectsResponse: ListTrackerProjectsResponse,
+): string {
+  return JSON.stringify(
+    ListTrackerProjectsResponse$outboundSchema.parse(
+      listTrackerProjectsResponse,
+    ),
+  );
+}
+
+export function listTrackerProjectsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListTrackerProjectsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListTrackerProjectsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListTrackerProjectsResponse' from JSON`,
   );
 }

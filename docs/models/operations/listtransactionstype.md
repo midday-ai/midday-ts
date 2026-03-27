@@ -1,6 +1,6 @@
 # ListTransactionsType
 
-Transaction type to filter by. 'income' for money received, 'expense' for money spent
+Filter by transaction type. 'income' for money received, 'expense' for money spent
 
 ## Example Usage
 

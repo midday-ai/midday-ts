@@ -1,13 +1,12 @@
 # StopTimerResponse
 
-Timer stopped successfully.
 
-## Example Usage
+## Supported Types
+
+### `operations.StopTimerResponseBody`
 
 ```typescript
-import { StopTimerResponse } from "@midday-ai/sdk/models/operations";
-
-let value: StopTimerResponse = {
+const value: operations.StopTimerResponseBody = {
   data: {
     id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",
     createdAt: "2024-04-15T09:00:00.000Z",
@@ -44,8 +43,12 @@ let value: StopTimerResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `data`                                                               | [operations.StopTimerData](../../models/operations/stoptimerdata.md) | :heavy_check_mark:                                                   | N/A                                                                  |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

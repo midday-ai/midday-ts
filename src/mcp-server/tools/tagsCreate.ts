@@ -7,7 +7,7 @@ import * as models from "../../models/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: models.CreateTag$inboundSchema.optional(),
+  request: models.CreateTag$inboundSchema,
 };
 
 export const tool$tagsCreate: ToolDefinition<typeof args> = {

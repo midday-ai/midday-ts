@@ -6,10 +6,16 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetTagByIdRequest = {
+  /**
+   * The UUID of the tag.
+   */
   id: string;
 };
+
+export type GetTagByIdResponse = models.TagResponse | models.ErrorResponse;
 
 /** @internal */
 export const GetTagByIdRequest$inboundSchema: z.ZodType<
@@ -62,5 +68,61 @@ export function getTagByIdRequestFromJSON(
     jsonString,
     (x) => GetTagByIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetTagByIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetTagByIdResponse$inboundSchema: z.ZodType<
+  GetTagByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.TagResponse$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetTagByIdResponse$Outbound =
+  | models.TagResponse$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetTagByIdResponse$outboundSchema: z.ZodType<
+  GetTagByIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetTagByIdResponse
+> = z.union([
+  models.TagResponse$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetTagByIdResponse$ {
+  /** @deprecated use `GetTagByIdResponse$inboundSchema` instead. */
+  export const inboundSchema = GetTagByIdResponse$inboundSchema;
+  /** @deprecated use `GetTagByIdResponse$outboundSchema` instead. */
+  export const outboundSchema = GetTagByIdResponse$outboundSchema;
+  /** @deprecated use `GetTagByIdResponse$Outbound` instead. */
+  export type Outbound = GetTagByIdResponse$Outbound;
+}
+
+export function getTagByIdResponseToJSON(
+  getTagByIdResponse: GetTagByIdResponse,
+): string {
+  return JSON.stringify(
+    GetTagByIdResponse$outboundSchema.parse(getTagByIdResponse),
+  );
+}
+
+export function getTagByIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTagByIdResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTagByIdResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTagByIdResponse' from JSON`,
   );
 }

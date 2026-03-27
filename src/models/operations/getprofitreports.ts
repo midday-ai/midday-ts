@@ -4,14 +4,68 @@
 
 import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
+
+/**
+ * Type of revenue calculation
+ */
+export const GetProfitReportsRevenueType = {
+  Gross: "gross",
+  Net: "net",
+} as const;
+/**
+ * Type of revenue calculation
+ */
+export type GetProfitReportsRevenueType = ClosedEnum<
+  typeof GetProfitReportsRevenueType
+>;
 
 export type GetProfitReportsRequest = {
+  /**
+   * Start date (ISO 8601 format)
+   */
   from: string;
+  /**
+   * End date (ISO 8601 format)
+   */
   to: string;
+  /**
+   * Currency code (ISO 4217)
+   */
   currency?: string | undefined;
+  /**
+   * Type of revenue calculation
+   */
+  revenueType?: GetProfitReportsRevenueType | undefined;
 };
+
+export type GetProfitReportsResponse =
+  | models.GetProfitResponseSchema
+  | models.ErrorResponse;
+
+/** @internal */
+export const GetProfitReportsRevenueType$inboundSchema: z.ZodNativeEnum<
+  typeof GetProfitReportsRevenueType
+> = z.nativeEnum(GetProfitReportsRevenueType);
+
+/** @internal */
+export const GetProfitReportsRevenueType$outboundSchema: z.ZodNativeEnum<
+  typeof GetProfitReportsRevenueType
+> = GetProfitReportsRevenueType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProfitReportsRevenueType$ {
+  /** @deprecated use `GetProfitReportsRevenueType$inboundSchema` instead. */
+  export const inboundSchema = GetProfitReportsRevenueType$inboundSchema;
+  /** @deprecated use `GetProfitReportsRevenueType$outboundSchema` instead. */
+  export const outboundSchema = GetProfitReportsRevenueType$outboundSchema;
+}
 
 /** @internal */
 export const GetProfitReportsRequest$inboundSchema: z.ZodType<
@@ -22,6 +76,7 @@ export const GetProfitReportsRequest$inboundSchema: z.ZodType<
   from: z.string(),
   to: z.string(),
   currency: z.string().optional(),
+  revenueType: GetProfitReportsRevenueType$inboundSchema.default("net"),
 });
 
 /** @internal */
@@ -29,6 +84,7 @@ export type GetProfitReportsRequest$Outbound = {
   from: string;
   to: string;
   currency?: string | undefined;
+  revenueType: string;
 };
 
 /** @internal */
@@ -40,6 +96,7 @@ export const GetProfitReportsRequest$outboundSchema: z.ZodType<
   from: z.string(),
   to: z.string(),
   currency: z.string().optional(),
+  revenueType: GetProfitReportsRevenueType$outboundSchema.default("net"),
 });
 
 /**
@@ -70,5 +127,61 @@ export function getProfitReportsRequestFromJSON(
     jsonString,
     (x) => GetProfitReportsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetProfitReportsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetProfitReportsResponse$inboundSchema: z.ZodType<
+  GetProfitReportsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.GetProfitResponseSchema$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetProfitReportsResponse$Outbound =
+  | models.GetProfitResponseSchema$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetProfitReportsResponse$outboundSchema: z.ZodType<
+  GetProfitReportsResponse$Outbound,
+  z.ZodTypeDef,
+  GetProfitReportsResponse
+> = z.union([
+  models.GetProfitResponseSchema$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetProfitReportsResponse$ {
+  /** @deprecated use `GetProfitReportsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetProfitReportsResponse$inboundSchema;
+  /** @deprecated use `GetProfitReportsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetProfitReportsResponse$outboundSchema;
+  /** @deprecated use `GetProfitReportsResponse$Outbound` instead. */
+  export type Outbound = GetProfitReportsResponse$Outbound;
+}
+
+export function getProfitReportsResponseToJSON(
+  getProfitReportsResponse: GetProfitReportsResponse,
+): string {
+  return JSON.stringify(
+    GetProfitReportsResponse$outboundSchema.parse(getProfitReportsResponse),
+  );
+}
+
+export function getProfitReportsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProfitReportsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProfitReportsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProfitReportsResponse' from JSON`,
   );
 }

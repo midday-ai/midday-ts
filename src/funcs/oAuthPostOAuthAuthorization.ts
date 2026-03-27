@@ -33,13 +33,13 @@ import { Result } from "../types/fp.js";
  */
 export function oAuthPostOAuthAuthorization(
   client: MiddayCore,
-  request?: operations.PostOAuthAuthorizationRequest | undefined,
+  request: operations.PostOAuthAuthorizationRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     operations.PostOAuthAuthorizationResponse,
     | errors.PostOAuthAuthorizationBadRequestError
-    | errors.UnauthorizedError
+    | errors.PostOAuthAuthorizationUnauthorizedError
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -59,14 +59,14 @@ export function oAuthPostOAuthAuthorization(
 
 async function $do(
   client: MiddayCore,
-  request?: operations.PostOAuthAuthorizationRequest | undefined,
+  request: operations.PostOAuthAuthorizationRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
       operations.PostOAuthAuthorizationResponse,
       | errors.PostOAuthAuthorizationBadRequestError
-      | errors.UnauthorizedError
+      | errors.PostOAuthAuthorizationUnauthorizedError
       | MiddayError
       | ResponseValidationError
       | ConnectionError
@@ -82,18 +82,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostOAuthAuthorizationRequest$outboundSchema.optional().parse(
-        value,
-      ),
+      operations.PostOAuthAuthorizationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/oauth/authorize")();
 
@@ -116,8 +112,18 @@ async function $do(
     securitySource: client._options.security,
     retryConfig: options?.retries
       || client._options.retryConfig
+      || {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 500,
+          maxInterval: 60000,
+          exponent: 1.5,
+          maxElapsedTime: 300000,
+        },
+        retryConnectionErrors: true,
+      }
       || { strategy: "none" },
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryCodes: options?.retryCodes || ["5XX"],
   };
 
   const requestRes = client._createRequest(context, {
@@ -153,7 +159,7 @@ async function $do(
   const [result] = await M.match<
     operations.PostOAuthAuthorizationResponse,
     | errors.PostOAuthAuthorizationBadRequestError
-    | errors.UnauthorizedError
+    | errors.PostOAuthAuthorizationUnauthorizedError
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -165,7 +171,10 @@ async function $do(
   >(
     M.json(200, operations.PostOAuthAuthorizationResponse$inboundSchema),
     M.jsonErr(400, errors.PostOAuthAuthorizationBadRequestError$inboundSchema),
-    M.jsonErr(401, errors.UnauthorizedError$inboundSchema),
+    M.jsonErr(
+      401,
+      errors.PostOAuthAuthorizationUnauthorizedError$inboundSchema,
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

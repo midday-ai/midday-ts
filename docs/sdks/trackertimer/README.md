@@ -3,6 +3,8 @@
 
 ## Overview
 
+Timer operations
+
 ### Available Operations
 
 * [startTimer](#starttimer) - Start a timer

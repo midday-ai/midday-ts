@@ -14,8 +14,8 @@ let value: GetSpendingReportsRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `from`             | *string*           | :heavy_check_mark: | N/A                | 2023-01-01         |
-| `to`               | *string*           | :heavy_check_mark: | N/A                | 2023-12-31         |
-| `currency`         | *string*           | :heavy_minus_sign: | N/A                | USD                |
+| Field                        | Type                         | Required                     | Description                  | Example                      |
+| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
+| `from`                       | *string*                     | :heavy_check_mark:           | Start date (ISO 8601 format) | 2023-01-01                   |
+| `to`                         | *string*                     | :heavy_check_mark:           | End date (ISO 8601 format)   | 2023-12-31                   |
+| `currency`                   | *string*                     | :heavy_minus_sign:           | Currency code (ISO 4217)     | USD                          |

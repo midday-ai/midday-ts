@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type StopTimerRequest = {
   /**
@@ -20,6 +21,30 @@ export type StopTimerRequest = {
    * Stop time in ISO 8601 format. If not provided, will use current time
    */
   stop?: Date | undefined;
+};
+
+export type StopTimerProject2 = {
+  id: string;
+  name: string;
+};
+
+export type StopTimerTrackerProject = {
+  id: string;
+  name: string;
+};
+
+export type StopTimerData2 = {
+  id: string;
+  /**
+   * Always true for discarded timer entries (duration < 60s)
+   */
+  discarded: boolean;
+  duration: number;
+  project?: StopTimerProject2 | null | undefined;
+  trackerProject?: StopTimerTrackerProject | null | undefined;
+  start: string | null;
+  stop: string | null;
+  description: string | null;
 };
 
 /**
@@ -57,7 +82,7 @@ export type StopTimerCustomer = {
 /**
  * Project information associated with this tracker entry
  */
-export type StopTimerProject = {
+export type StopTimerProject1 = {
   /**
    * Unique identifier of the project
    */
@@ -100,7 +125,7 @@ export type StopTimerProject = {
   customer: StopTimerCustomer | null;
 };
 
-export type StopTimerData = {
+export type StopTimerData1 = {
   /**
    * Unique identifier of the tracker entry
    */
@@ -118,9 +143,9 @@ export type StopTimerData = {
    */
   start: string;
   /**
-   * Stop time of the tracker entry in ISO 8601 format
+   * Stop time of the tracker entry in ISO 8601 format. Null for running timers.
    */
-  stop: string;
+  stop: string | null;
   /**
    * Unique identifier of the team that owns this tracker entry
    */
@@ -152,15 +177,19 @@ export type StopTimerData = {
   /**
    * Project information associated with this tracker entry
    */
-  project: StopTimerProject;
+  project: StopTimerProject1;
 };
+
+export type Data = StopTimerData1 | StopTimerData2;
 
 /**
  * Timer stopped successfully.
  */
-export type StopTimerResponse = {
-  data: StopTimerData;
+export type StopTimerResponseBody = {
+  data: StopTimerData1 | StopTimerData2;
 };
+
+export type StopTimerResponse = StopTimerResponseBody | models.ErrorResponse;
 
 /** @internal */
 export const StopTimerRequest$inboundSchema: z.ZodType<
@@ -220,6 +249,196 @@ export function stopTimerRequestFromJSON(
     jsonString,
     (x) => StopTimerRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'StopTimerRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const StopTimerProject2$inboundSchema: z.ZodType<
+  StopTimerProject2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+/** @internal */
+export type StopTimerProject2$Outbound = {
+  id: string;
+  name: string;
+};
+
+/** @internal */
+export const StopTimerProject2$outboundSchema: z.ZodType<
+  StopTimerProject2$Outbound,
+  z.ZodTypeDef,
+  StopTimerProject2
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StopTimerProject2$ {
+  /** @deprecated use `StopTimerProject2$inboundSchema` instead. */
+  export const inboundSchema = StopTimerProject2$inboundSchema;
+  /** @deprecated use `StopTimerProject2$outboundSchema` instead. */
+  export const outboundSchema = StopTimerProject2$outboundSchema;
+  /** @deprecated use `StopTimerProject2$Outbound` instead. */
+  export type Outbound = StopTimerProject2$Outbound;
+}
+
+export function stopTimerProject2ToJSON(
+  stopTimerProject2: StopTimerProject2,
+): string {
+  return JSON.stringify(
+    StopTimerProject2$outboundSchema.parse(stopTimerProject2),
+  );
+}
+
+export function stopTimerProject2FromJSON(
+  jsonString: string,
+): SafeParseResult<StopTimerProject2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StopTimerProject2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StopTimerProject2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StopTimerTrackerProject$inboundSchema: z.ZodType<
+  StopTimerTrackerProject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+/** @internal */
+export type StopTimerTrackerProject$Outbound = {
+  id: string;
+  name: string;
+};
+
+/** @internal */
+export const StopTimerTrackerProject$outboundSchema: z.ZodType<
+  StopTimerTrackerProject$Outbound,
+  z.ZodTypeDef,
+  StopTimerTrackerProject
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StopTimerTrackerProject$ {
+  /** @deprecated use `StopTimerTrackerProject$inboundSchema` instead. */
+  export const inboundSchema = StopTimerTrackerProject$inboundSchema;
+  /** @deprecated use `StopTimerTrackerProject$outboundSchema` instead. */
+  export const outboundSchema = StopTimerTrackerProject$outboundSchema;
+  /** @deprecated use `StopTimerTrackerProject$Outbound` instead. */
+  export type Outbound = StopTimerTrackerProject$Outbound;
+}
+
+export function stopTimerTrackerProjectToJSON(
+  stopTimerTrackerProject: StopTimerTrackerProject,
+): string {
+  return JSON.stringify(
+    StopTimerTrackerProject$outboundSchema.parse(stopTimerTrackerProject),
+  );
+}
+
+export function stopTimerTrackerProjectFromJSON(
+  jsonString: string,
+): SafeParseResult<StopTimerTrackerProject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StopTimerTrackerProject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StopTimerTrackerProject' from JSON`,
+  );
+}
+
+/** @internal */
+export const StopTimerData2$inboundSchema: z.ZodType<
+  StopTimerData2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  discarded: z.boolean(),
+  duration: z.number(),
+  project: z.nullable(z.lazy(() => StopTimerProject2$inboundSchema)).optional(),
+  trackerProject: z.nullable(
+    z.lazy(() => StopTimerTrackerProject$inboundSchema),
+  ).optional(),
+  start: z.nullable(z.string()),
+  stop: z.nullable(z.string()),
+  description: z.nullable(z.string()),
+});
+
+/** @internal */
+export type StopTimerData2$Outbound = {
+  id: string;
+  discarded: boolean;
+  duration: number;
+  project?: StopTimerProject2$Outbound | null | undefined;
+  trackerProject?: StopTimerTrackerProject$Outbound | null | undefined;
+  start: string | null;
+  stop: string | null;
+  description: string | null;
+};
+
+/** @internal */
+export const StopTimerData2$outboundSchema: z.ZodType<
+  StopTimerData2$Outbound,
+  z.ZodTypeDef,
+  StopTimerData2
+> = z.object({
+  id: z.string(),
+  discarded: z.boolean(),
+  duration: z.number(),
+  project: z.nullable(z.lazy(() => StopTimerProject2$outboundSchema))
+    .optional(),
+  trackerProject: z.nullable(
+    z.lazy(() => StopTimerTrackerProject$outboundSchema),
+  ).optional(),
+  start: z.nullable(z.string()),
+  stop: z.nullable(z.string()),
+  description: z.nullable(z.string()),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StopTimerData2$ {
+  /** @deprecated use `StopTimerData2$inboundSchema` instead. */
+  export const inboundSchema = StopTimerData2$inboundSchema;
+  /** @deprecated use `StopTimerData2$outboundSchema` instead. */
+  export const outboundSchema = StopTimerData2$outboundSchema;
+  /** @deprecated use `StopTimerData2$Outbound` instead. */
+  export type Outbound = StopTimerData2$Outbound;
+}
+
+export function stopTimerData2ToJSON(stopTimerData2: StopTimerData2): string {
+  return JSON.stringify(StopTimerData2$outboundSchema.parse(stopTimerData2));
+}
+
+export function stopTimerData2FromJSON(
+  jsonString: string,
+): SafeParseResult<StopTimerData2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StopTimerData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StopTimerData2' from JSON`,
   );
 }
 
@@ -337,8 +556,8 @@ export function stopTimerCustomerFromJSON(
 }
 
 /** @internal */
-export const StopTimerProject$inboundSchema: z.ZodType<
-  StopTimerProject,
+export const StopTimerProject1$inboundSchema: z.ZodType<
+  StopTimerProject1,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -355,7 +574,7 @@ export const StopTimerProject$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type StopTimerProject$Outbound = {
+export type StopTimerProject1$Outbound = {
   id: string;
   createdAt: string;
   rate: number | null;
@@ -369,10 +588,10 @@ export type StopTimerProject$Outbound = {
 };
 
 /** @internal */
-export const StopTimerProject$outboundSchema: z.ZodType<
-  StopTimerProject$Outbound,
+export const StopTimerProject1$outboundSchema: z.ZodType<
+  StopTimerProject1$Outbound,
   z.ZodTypeDef,
-  StopTimerProject
+  StopTimerProject1
 > = z.object({
   id: z.string(),
   createdAt: z.string(),
@@ -390,36 +609,36 @@ export const StopTimerProject$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace StopTimerProject$ {
-  /** @deprecated use `StopTimerProject$inboundSchema` instead. */
-  export const inboundSchema = StopTimerProject$inboundSchema;
-  /** @deprecated use `StopTimerProject$outboundSchema` instead. */
-  export const outboundSchema = StopTimerProject$outboundSchema;
-  /** @deprecated use `StopTimerProject$Outbound` instead. */
-  export type Outbound = StopTimerProject$Outbound;
+export namespace StopTimerProject1$ {
+  /** @deprecated use `StopTimerProject1$inboundSchema` instead. */
+  export const inboundSchema = StopTimerProject1$inboundSchema;
+  /** @deprecated use `StopTimerProject1$outboundSchema` instead. */
+  export const outboundSchema = StopTimerProject1$outboundSchema;
+  /** @deprecated use `StopTimerProject1$Outbound` instead. */
+  export type Outbound = StopTimerProject1$Outbound;
 }
 
-export function stopTimerProjectToJSON(
-  stopTimerProject: StopTimerProject,
+export function stopTimerProject1ToJSON(
+  stopTimerProject1: StopTimerProject1,
 ): string {
   return JSON.stringify(
-    StopTimerProject$outboundSchema.parse(stopTimerProject),
+    StopTimerProject1$outboundSchema.parse(stopTimerProject1),
   );
 }
 
-export function stopTimerProjectFromJSON(
+export function stopTimerProject1FromJSON(
   jsonString: string,
-): SafeParseResult<StopTimerProject, SDKValidationError> {
+): SafeParseResult<StopTimerProject1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => StopTimerProject$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StopTimerProject' from JSON`,
+    (x) => StopTimerProject1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StopTimerProject1' from JSON`,
   );
 }
 
 /** @internal */
-export const StopTimerData$inboundSchema: z.ZodType<
-  StopTimerData,
+export const StopTimerData1$inboundSchema: z.ZodType<
+  StopTimerData1,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -427,7 +646,7 @@ export const StopTimerData$inboundSchema: z.ZodType<
   createdAt: z.string(),
   duration: z.nullable(z.number()),
   start: z.string(),
-  stop: z.string(),
+  stop: z.nullable(z.string()),
   teamId: z.string(),
   description: z.nullable(z.string()),
   rate: z.nullable(z.number()),
@@ -435,16 +654,16 @@ export const StopTimerData$inboundSchema: z.ZodType<
   billed: z.boolean(),
   date: z.string(),
   user: z.lazy(() => StopTimerUser$inboundSchema),
-  project: z.lazy(() => StopTimerProject$inboundSchema),
+  project: z.lazy(() => StopTimerProject1$inboundSchema),
 });
 
 /** @internal */
-export type StopTimerData$Outbound = {
+export type StopTimerData1$Outbound = {
   id: string;
   createdAt: string;
   duration: number | null;
   start: string;
-  stop: string;
+  stop: string | null;
   teamId: string;
   description: string | null;
   rate: number | null;
@@ -452,20 +671,20 @@ export type StopTimerData$Outbound = {
   billed: boolean;
   date: string;
   user: StopTimerUser$Outbound;
-  project: StopTimerProject$Outbound;
+  project: StopTimerProject1$Outbound;
 };
 
 /** @internal */
-export const StopTimerData$outboundSchema: z.ZodType<
-  StopTimerData$Outbound,
+export const StopTimerData1$outboundSchema: z.ZodType<
+  StopTimerData1$Outbound,
   z.ZodTypeDef,
-  StopTimerData
+  StopTimerData1
 > = z.object({
   id: z.string(),
   createdAt: z.string(),
   duration: z.nullable(z.number()),
   start: z.string(),
-  stop: z.string(),
+  stop: z.nullable(z.string()),
   teamId: z.string(),
   description: z.nullable(z.string()),
   rate: z.nullable(z.number()),
@@ -473,33 +692,137 @@ export const StopTimerData$outboundSchema: z.ZodType<
   billed: z.boolean(),
   date: z.string(),
   user: z.lazy(() => StopTimerUser$outboundSchema),
-  project: z.lazy(() => StopTimerProject$outboundSchema),
+  project: z.lazy(() => StopTimerProject1$outboundSchema),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace StopTimerData$ {
-  /** @deprecated use `StopTimerData$inboundSchema` instead. */
-  export const inboundSchema = StopTimerData$inboundSchema;
-  /** @deprecated use `StopTimerData$outboundSchema` instead. */
-  export const outboundSchema = StopTimerData$outboundSchema;
-  /** @deprecated use `StopTimerData$Outbound` instead. */
-  export type Outbound = StopTimerData$Outbound;
+export namespace StopTimerData1$ {
+  /** @deprecated use `StopTimerData1$inboundSchema` instead. */
+  export const inboundSchema = StopTimerData1$inboundSchema;
+  /** @deprecated use `StopTimerData1$outboundSchema` instead. */
+  export const outboundSchema = StopTimerData1$outboundSchema;
+  /** @deprecated use `StopTimerData1$Outbound` instead. */
+  export type Outbound = StopTimerData1$Outbound;
 }
 
-export function stopTimerDataToJSON(stopTimerData: StopTimerData): string {
-  return JSON.stringify(StopTimerData$outboundSchema.parse(stopTimerData));
+export function stopTimerData1ToJSON(stopTimerData1: StopTimerData1): string {
+  return JSON.stringify(StopTimerData1$outboundSchema.parse(stopTimerData1));
 }
 
-export function stopTimerDataFromJSON(
+export function stopTimerData1FromJSON(
   jsonString: string,
-): SafeParseResult<StopTimerData, SDKValidationError> {
+): SafeParseResult<StopTimerData1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => StopTimerData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StopTimerData' from JSON`,
+    (x) => StopTimerData1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StopTimerData1' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
+  .union([
+    z.lazy(() => StopTimerData1$inboundSchema),
+    z.lazy(() => StopTimerData2$inboundSchema),
+  ]);
+
+/** @internal */
+export type Data$Outbound = StopTimerData1$Outbound | StopTimerData2$Outbound;
+
+/** @internal */
+export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
+  z.union([
+    z.lazy(() => StopTimerData1$outboundSchema),
+    z.lazy(() => StopTimerData2$outboundSchema),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Data$ {
+  /** @deprecated use `Data$inboundSchema` instead. */
+  export const inboundSchema = Data$inboundSchema;
+  /** @deprecated use `Data$outboundSchema` instead. */
+  export const outboundSchema = Data$outboundSchema;
+  /** @deprecated use `Data$Outbound` instead. */
+  export type Outbound = Data$Outbound;
+}
+
+export function dataToJSON(data: Data): string {
+  return JSON.stringify(Data$outboundSchema.parse(data));
+}
+
+export function dataFromJSON(
+  jsonString: string,
+): SafeParseResult<Data, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data' from JSON`,
+  );
+}
+
+/** @internal */
+export const StopTimerResponseBody$inboundSchema: z.ZodType<
+  StopTimerResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  data: z.union([
+    z.lazy(() => StopTimerData1$inboundSchema),
+    z.lazy(() => StopTimerData2$inboundSchema),
+  ]),
+});
+
+/** @internal */
+export type StopTimerResponseBody$Outbound = {
+  data: StopTimerData1$Outbound | StopTimerData2$Outbound;
+};
+
+/** @internal */
+export const StopTimerResponseBody$outboundSchema: z.ZodType<
+  StopTimerResponseBody$Outbound,
+  z.ZodTypeDef,
+  StopTimerResponseBody
+> = z.object({
+  data: z.union([
+    z.lazy(() => StopTimerData1$outboundSchema),
+    z.lazy(() => StopTimerData2$outboundSchema),
+  ]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StopTimerResponseBody$ {
+  /** @deprecated use `StopTimerResponseBody$inboundSchema` instead. */
+  export const inboundSchema = StopTimerResponseBody$inboundSchema;
+  /** @deprecated use `StopTimerResponseBody$outboundSchema` instead. */
+  export const outboundSchema = StopTimerResponseBody$outboundSchema;
+  /** @deprecated use `StopTimerResponseBody$Outbound` instead. */
+  export type Outbound = StopTimerResponseBody$Outbound;
+}
+
+export function stopTimerResponseBodyToJSON(
+  stopTimerResponseBody: StopTimerResponseBody,
+): string {
+  return JSON.stringify(
+    StopTimerResponseBody$outboundSchema.parse(stopTimerResponseBody),
+  );
+}
+
+export function stopTimerResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<StopTimerResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StopTimerResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StopTimerResponseBody' from JSON`,
   );
 }
 
@@ -508,23 +831,25 @@ export const StopTimerResponse$inboundSchema: z.ZodType<
   StopTimerResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => StopTimerData$inboundSchema),
-});
+> = z.union([
+  z.lazy(() => StopTimerResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
 
 /** @internal */
-export type StopTimerResponse$Outbound = {
-  data: StopTimerData$Outbound;
-};
+export type StopTimerResponse$Outbound =
+  | StopTimerResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const StopTimerResponse$outboundSchema: z.ZodType<
   StopTimerResponse$Outbound,
   z.ZodTypeDef,
   StopTimerResponse
-> = z.object({
-  data: z.lazy(() => StopTimerData$outboundSchema),
-});
+> = z.union([
+  z.lazy(() => StopTimerResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

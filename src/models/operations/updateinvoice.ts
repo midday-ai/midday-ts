@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * New status for the invoice
@@ -46,7 +47,7 @@ export type UpdateInvoiceRequestBody = {
 
 export type UpdateInvoiceRequest = {
   id: string;
-  requestBody?: UpdateInvoiceRequestBody | undefined;
+  requestBody: UpdateInvoiceRequestBody;
 };
 
 /**
@@ -92,7 +93,7 @@ export type UpdateInvoiceCustomer = {
 /**
  * Response after updating an invoice
  */
-export type UpdateInvoiceResponse = {
+export type UpdateInvoiceResponseBody = {
   /**
    * Unique identifier for the invoice
    */
@@ -114,13 +115,13 @@ export type UpdateInvoiceResponse = {
    */
   invoiceNumber?: string | undefined;
   /**
-   * Total amount of the invoice
+   * Total amount of the invoice, or null if not yet calculated
    */
-  amount: number;
+  amount: number | null;
   /**
    * Currency code (ISO 4217) for the invoice amount
    */
-  currency: string;
+  currency: string | null;
   /**
    * Customer details
    */
@@ -186,6 +187,10 @@ export type UpdateInvoiceResponse = {
    */
   previewUrl: string | null;
 };
+
+export type UpdateInvoiceResponse =
+  | UpdateInvoiceResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const UpdateInvoiceStatusRequest$inboundSchema: z.ZodNativeEnum<
@@ -277,7 +282,7 @@ export const UpdateInvoiceRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  RequestBody: z.lazy(() => UpdateInvoiceRequestBody$inboundSchema).optional(),
+  RequestBody: z.lazy(() => UpdateInvoiceRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -287,7 +292,7 @@ export const UpdateInvoiceRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateInvoiceRequest$Outbound = {
   id: string;
-  RequestBody?: UpdateInvoiceRequestBody$Outbound | undefined;
+  RequestBody: UpdateInvoiceRequestBody$Outbound;
 };
 
 /** @internal */
@@ -297,7 +302,7 @@ export const UpdateInvoiceRequest$outboundSchema: z.ZodType<
   UpdateInvoiceRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => UpdateInvoiceRequestBody$outboundSchema).optional(),
+  requestBody: z.lazy(() => UpdateInvoiceRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",
@@ -420,8 +425,8 @@ export function updateInvoiceCustomerFromJSON(
 }
 
 /** @internal */
-export const UpdateInvoiceResponse$inboundSchema: z.ZodType<
-  UpdateInvoiceResponse,
+export const UpdateInvoiceResponseBody$inboundSchema: z.ZodType<
+  UpdateInvoiceResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -430,8 +435,8 @@ export const UpdateInvoiceResponse$inboundSchema: z.ZodType<
   dueDate: z.string(),
   issueDate: z.string(),
   invoiceNumber: z.string().optional(),
-  amount: z.number(),
-  currency: z.string(),
+  amount: z.nullable(z.number()),
+  currency: z.nullable(z.string()),
   customer: z.nullable(z.lazy(() => UpdateInvoiceCustomer$inboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
@@ -451,14 +456,14 @@ export const UpdateInvoiceResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateInvoiceResponse$Outbound = {
+export type UpdateInvoiceResponseBody$Outbound = {
   id: string;
   status: string;
   dueDate: string;
   issueDate: string;
   invoiceNumber?: string | undefined;
-  amount: number;
-  currency: string;
+  amount: number | null;
+  currency: string | null;
   customer: UpdateInvoiceCustomer$Outbound | null;
   paidAt: string | null;
   reminderSentAt: string | null;
@@ -478,18 +483,18 @@ export type UpdateInvoiceResponse$Outbound = {
 };
 
 /** @internal */
-export const UpdateInvoiceResponse$outboundSchema: z.ZodType<
-  UpdateInvoiceResponse$Outbound,
+export const UpdateInvoiceResponseBody$outboundSchema: z.ZodType<
+  UpdateInvoiceResponseBody$Outbound,
   z.ZodTypeDef,
-  UpdateInvoiceResponse
+  UpdateInvoiceResponseBody
 > = z.object({
   id: z.string(),
   status: UpdateInvoiceStatusResponse$outboundSchema,
   dueDate: z.string(),
   issueDate: z.string(),
   invoiceNumber: z.string().optional(),
-  amount: z.number(),
-  currency: z.string(),
+  amount: z.nullable(z.number()),
+  currency: z.nullable(z.string()),
   customer: z.nullable(z.lazy(() => UpdateInvoiceCustomer$outboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
@@ -507,6 +512,62 @@ export const UpdateInvoiceResponse$outboundSchema: z.ZodType<
   pdfUrl: z.nullable(z.string()),
   previewUrl: z.nullable(z.string()),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateInvoiceResponseBody$ {
+  /** @deprecated use `UpdateInvoiceResponseBody$inboundSchema` instead. */
+  export const inboundSchema = UpdateInvoiceResponseBody$inboundSchema;
+  /** @deprecated use `UpdateInvoiceResponseBody$outboundSchema` instead. */
+  export const outboundSchema = UpdateInvoiceResponseBody$outboundSchema;
+  /** @deprecated use `UpdateInvoiceResponseBody$Outbound` instead. */
+  export type Outbound = UpdateInvoiceResponseBody$Outbound;
+}
+
+export function updateInvoiceResponseBodyToJSON(
+  updateInvoiceResponseBody: UpdateInvoiceResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateInvoiceResponseBody$outboundSchema.parse(updateInvoiceResponseBody),
+  );
+}
+
+export function updateInvoiceResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateInvoiceResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateInvoiceResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateInvoiceResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateInvoiceResponse$inboundSchema: z.ZodType<
+  UpdateInvoiceResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateInvoiceResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateInvoiceResponse$Outbound =
+  | UpdateInvoiceResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const UpdateInvoiceResponse$outboundSchema: z.ZodType<
+  UpdateInvoiceResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateInvoiceResponse
+> = z.union([
+  z.lazy(() => UpdateInvoiceResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

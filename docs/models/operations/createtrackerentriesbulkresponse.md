@@ -1,13 +1,12 @@
 # CreateTrackerEntriesBulkResponse
 
-Response schema for created tracker entries
 
-## Example Usage
+## Supported Types
+
+### `operations.CreateTrackerEntriesBulkResponseBody`
 
 ```typescript
-import { CreateTrackerEntriesBulkResponse } from "@midday-ai/sdk/models/operations";
-
-let value: CreateTrackerEntriesBulkResponse = {
+const value: operations.CreateTrackerEntriesBulkResponseBody = {
   data: [
     {
       id: "b3b6e2c2-1f2a-4e3b-9c1d-2a4b6e2c21f2",
@@ -46,8 +45,12 @@ let value: CreateTrackerEntriesBulkResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `data`                                                                                               | [operations.CreateTrackerEntriesBulkData](../../models/operations/createtrackerentriesbulkdata.md)[] | :heavy_check_mark:                                                                                   | Array of created tracker entries                                                                     |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

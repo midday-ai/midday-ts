@@ -6,13 +6,37 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type ListDocumentsRequest = {
+  /**
+   * A cursor for pagination. Pass the value returned from the previous response to get the next page.
+   */
   cursor?: string | null | undefined;
+  /**
+   * Sort as [column, direction]. Currently documents are sorted by created date descending.
+   */
   sort?: Array<string> | null | undefined;
+  /**
+   * Number of documents to return per page.
+   */
   pageSize?: number | undefined;
+  /**
+   * Search query string to filter documents by text.
+   */
   q?: string | null | undefined;
+  /**
+   * Array of tag IDs to filter documents by tags.
+   */
   tags?: Array<string> | null | undefined;
+  /**
+   * Start date for filtering documents (ISO 8601 date).
+   */
+  start?: string | null | undefined;
+  /**
+   * End date for filtering documents (ISO 8601 date).
+   */
+  end?: string | null | undefined;
 };
 
 /**
@@ -84,7 +108,7 @@ export type ListDocumentsData = {
 /**
  * Response containing a list of documents and pagination metadata.
  */
-export type ListDocumentsResponse = {
+export type ListDocumentsResponseBody = {
   /**
    * Pagination metadata for the documents list.
    */
@@ -94,6 +118,10 @@ export type ListDocumentsResponse = {
    */
   data: Array<ListDocumentsData>;
 };
+
+export type ListDocumentsResponse =
+  | ListDocumentsResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const ListDocumentsRequest$inboundSchema: z.ZodType<
@@ -106,6 +134,8 @@ export const ListDocumentsRequest$inboundSchema: z.ZodType<
   pageSize: z.number().optional(),
   q: z.nullable(z.string()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
+  start: z.nullable(z.string()).optional(),
+  end: z.nullable(z.string()).optional(),
 });
 
 /** @internal */
@@ -115,6 +145,8 @@ export type ListDocumentsRequest$Outbound = {
   pageSize?: number | undefined;
   q?: string | null | undefined;
   tags?: Array<string> | null | undefined;
+  start?: string | null | undefined;
+  end?: string | null | undefined;
 };
 
 /** @internal */
@@ -128,6 +160,8 @@ export const ListDocumentsRequest$outboundSchema: z.ZodType<
   pageSize: z.number().optional(),
   q: z.nullable(z.string()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
+  start: z.nullable(z.string()).optional(),
+  end: z.nullable(z.string()).optional(),
 });
 
 /**
@@ -351,8 +385,8 @@ export function listDocumentsDataFromJSON(
 }
 
 /** @internal */
-export const ListDocumentsResponse$inboundSchema: z.ZodType<
-  ListDocumentsResponse,
+export const ListDocumentsResponseBody$inboundSchema: z.ZodType<
+  ListDocumentsResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -361,20 +395,76 @@ export const ListDocumentsResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ListDocumentsResponse$Outbound = {
+export type ListDocumentsResponseBody$Outbound = {
   meta: ListDocumentsMeta$Outbound;
   data: Array<ListDocumentsData$Outbound>;
 };
+
+/** @internal */
+export const ListDocumentsResponseBody$outboundSchema: z.ZodType<
+  ListDocumentsResponseBody$Outbound,
+  z.ZodTypeDef,
+  ListDocumentsResponseBody
+> = z.object({
+  meta: z.lazy(() => ListDocumentsMeta$outboundSchema),
+  data: z.array(z.lazy(() => ListDocumentsData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDocumentsResponseBody$ {
+  /** @deprecated use `ListDocumentsResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ListDocumentsResponseBody$inboundSchema;
+  /** @deprecated use `ListDocumentsResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ListDocumentsResponseBody$outboundSchema;
+  /** @deprecated use `ListDocumentsResponseBody$Outbound` instead. */
+  export type Outbound = ListDocumentsResponseBody$Outbound;
+}
+
+export function listDocumentsResponseBodyToJSON(
+  listDocumentsResponseBody: ListDocumentsResponseBody,
+): string {
+  return JSON.stringify(
+    ListDocumentsResponseBody$outboundSchema.parse(listDocumentsResponseBody),
+  );
+}
+
+export function listDocumentsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListDocumentsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListDocumentsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDocumentsResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListDocumentsResponse$inboundSchema: z.ZodType<
+  ListDocumentsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListDocumentsResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListDocumentsResponse$Outbound =
+  | ListDocumentsResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const ListDocumentsResponse$outboundSchema: z.ZodType<
   ListDocumentsResponse$Outbound,
   z.ZodTypeDef,
   ListDocumentsResponse
-> = z.object({
-  meta: z.lazy(() => ListDocumentsMeta$outboundSchema),
-  data: z.array(z.lazy(() => ListDocumentsData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => ListDocumentsResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

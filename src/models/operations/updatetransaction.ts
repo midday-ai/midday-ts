@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * Status of the transaction.
@@ -18,6 +19,7 @@ export const UpdateTransactionStatus = {
   Completed: "completed",
   Posted: "posted",
   Excluded: "excluded",
+  Exported: "exported",
 } as const;
 /**
  * Status of the transaction.
@@ -43,6 +45,26 @@ export type UpdateTransactionFrequency = ClosedEnum<
 >;
 
 export type UpdateTransactionRequestBody = {
+  /**
+   * Name/description of the transaction.
+   */
+  name?: string | undefined;
+  /**
+   * Amount of the transaction.
+   */
+  amount?: number | undefined;
+  /**
+   * Currency of the transaction.
+   */
+  currency?: string | undefined;
+  /**
+   * Date of the transaction (ISO 8601).
+   */
+  date?: string | undefined;
+  /**
+   * Bank account ID associated with the transaction.
+   */
+  bankAccountId?: string | undefined;
   /**
    * Category slug for the transaction.
    */
@@ -71,12 +93,27 @@ export type UpdateTransactionRequestBody = {
    * Assigned user ID for the transaction.
    */
   assignedId?: string | null | undefined;
+  /**
+   * Tax rate as a percentage (e.g., 25 for 25% VAT). Only set when tax is calculated from a percentage.
+   */
+  taxRate?: number | null | undefined;
+  /**
+   * Tax amount in the transaction currency. Always set when tax is present.
+   */
+  taxAmount?: number | null | undefined;
 };
 
 export type UpdateTransactionRequest = {
+  /**
+   * Transaction ID (UUID).
+   */
   id: string;
-  requestBody?: UpdateTransactionRequestBody | undefined;
+  requestBody: UpdateTransactionRequestBody;
 };
+
+export type UpdateTransactionResponse =
+  | models.TransactionResponse
+  | models.ErrorResponse;
 
 /** @internal */
 export const UpdateTransactionStatus$inboundSchema: z.ZodNativeEnum<
@@ -126,6 +163,11 @@ export const UpdateTransactionRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  name: z.string().optional(),
+  amount: z.number().optional(),
+  currency: z.string().optional(),
+  date: z.string().optional(),
+  bankAccountId: z.string().optional(),
   categorySlug: z.nullable(z.string()).optional(),
   status: z.nullable(UpdateTransactionStatus$inboundSchema).optional(),
   internal: z.boolean().optional(),
@@ -133,10 +175,17 @@ export const UpdateTransactionRequestBody$inboundSchema: z.ZodType<
   frequency: z.nullable(UpdateTransactionFrequency$inboundSchema).optional(),
   note: z.nullable(z.string()).optional(),
   assignedId: z.nullable(z.string()).optional(),
+  taxRate: z.nullable(z.number()).optional(),
+  taxAmount: z.nullable(z.number()).optional(),
 });
 
 /** @internal */
 export type UpdateTransactionRequestBody$Outbound = {
+  name?: string | undefined;
+  amount?: number | undefined;
+  currency?: string | undefined;
+  date?: string | undefined;
+  bankAccountId?: string | undefined;
   categorySlug?: string | null | undefined;
   status?: string | null | undefined;
   internal?: boolean | undefined;
@@ -144,6 +193,8 @@ export type UpdateTransactionRequestBody$Outbound = {
   frequency?: string | null | undefined;
   note?: string | null | undefined;
   assignedId?: string | null | undefined;
+  taxRate?: number | null | undefined;
+  taxAmount?: number | null | undefined;
 };
 
 /** @internal */
@@ -152,6 +203,11 @@ export const UpdateTransactionRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateTransactionRequestBody
 > = z.object({
+  name: z.string().optional(),
+  amount: z.number().optional(),
+  currency: z.string().optional(),
+  date: z.string().optional(),
+  bankAccountId: z.string().optional(),
   categorySlug: z.nullable(z.string()).optional(),
   status: z.nullable(UpdateTransactionStatus$outboundSchema).optional(),
   internal: z.boolean().optional(),
@@ -159,6 +215,8 @@ export const UpdateTransactionRequestBody$outboundSchema: z.ZodType<
   frequency: z.nullable(UpdateTransactionFrequency$outboundSchema).optional(),
   note: z.nullable(z.string()).optional(),
   assignedId: z.nullable(z.string()).optional(),
+  taxRate: z.nullable(z.number()).optional(),
+  taxAmount: z.nullable(z.number()).optional(),
 });
 
 /**
@@ -201,8 +259,7 @@ export const UpdateTransactionRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  RequestBody: z.lazy(() => UpdateTransactionRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => UpdateTransactionRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -212,7 +269,7 @@ export const UpdateTransactionRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateTransactionRequest$Outbound = {
   id: string;
-  RequestBody?: UpdateTransactionRequestBody$Outbound | undefined;
+  RequestBody: UpdateTransactionRequestBody$Outbound;
 };
 
 /** @internal */
@@ -222,8 +279,7 @@ export const UpdateTransactionRequest$outboundSchema: z.ZodType<
   UpdateTransactionRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => UpdateTransactionRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => UpdateTransactionRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",
@@ -258,5 +314,61 @@ export function updateTransactionRequestFromJSON(
     jsonString,
     (x) => UpdateTransactionRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateTransactionRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateTransactionResponse$inboundSchema: z.ZodType<
+  UpdateTransactionResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.TransactionResponse$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateTransactionResponse$Outbound =
+  | models.TransactionResponse$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const UpdateTransactionResponse$outboundSchema: z.ZodType<
+  UpdateTransactionResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateTransactionResponse
+> = z.union([
+  models.TransactionResponse$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateTransactionResponse$ {
+  /** @deprecated use `UpdateTransactionResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateTransactionResponse$inboundSchema;
+  /** @deprecated use `UpdateTransactionResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateTransactionResponse$outboundSchema;
+  /** @deprecated use `UpdateTransactionResponse$Outbound` instead. */
+  export type Outbound = UpdateTransactionResponse$Outbound;
+}
+
+export function updateTransactionResponseToJSON(
+  updateTransactionResponse: UpdateTransactionResponse,
+): string {
+  return JSON.stringify(
+    UpdateTransactionResponse$outboundSchema.parse(updateTransactionResponse),
+  );
+}
+
+export function updateTransactionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateTransactionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateTransactionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateTransactionResponse' from JSON`,
   );
 }

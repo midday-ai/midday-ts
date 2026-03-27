@@ -38,7 +38,7 @@ export type Category = {
 };
 
 /**
- * Bank connection information associated with the account
+ * Bank connection information associated with the account. Null for manual accounts.
  */
 export type Connection = {
   /**
@@ -56,7 +56,7 @@ export type Connection = {
 };
 
 /**
- * Bank account information associated with the transaction
+ * Bank account information associated with the transaction. Null when no account is linked.
  */
 export type Account = {
   /**
@@ -72,9 +72,9 @@ export type Account = {
    */
   currency: string;
   /**
-   * Bank connection information associated with the account
+   * Bank connection information associated with the account. Null for manual accounts.
    */
-  connection: Connection;
+  connection: Connection | null;
 };
 
 export type TransactionResponseTag = {
@@ -181,9 +181,9 @@ export type TransactionResponse = {
    */
   note: string | null;
   /**
-   * Bank account information associated with the transaction
+   * Bank account information associated with the transaction. Null when no account is linked.
    */
-  account: Account;
+  account: Account | null;
   /**
    * Array of tags associated with the transaction for categorization and filtering
    */
@@ -321,7 +321,7 @@ export const Account$inboundSchema: z.ZodType<Account, z.ZodTypeDef, unknown> =
     id: z.string(),
     name: z.string(),
     currency: z.string(),
-    connection: z.lazy(() => Connection$inboundSchema),
+    connection: z.nullable(z.lazy(() => Connection$inboundSchema)),
   });
 
 /** @internal */
@@ -329,7 +329,7 @@ export type Account$Outbound = {
   id: string;
   name: string;
   currency: string;
-  connection: Connection$Outbound;
+  connection: Connection$Outbound | null;
 };
 
 /** @internal */
@@ -341,7 +341,7 @@ export const Account$outboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   currency: z.string(),
-  connection: z.lazy(() => Connection$outboundSchema),
+  connection: z.nullable(z.lazy(() => Connection$outboundSchema)),
 });
 
 /**
@@ -513,7 +513,7 @@ export const TransactionResponse$inboundSchema: z.ZodType<
   frequency: z.nullable(z.string()),
   isFulfilled: z.boolean(),
   note: z.nullable(z.string()),
-  account: z.lazy(() => Account$inboundSchema),
+  account: z.nullable(z.lazy(() => Account$inboundSchema)),
   tags: z.nullable(z.array(z.lazy(() => TransactionResponseTag$inboundSchema))),
   attachments: z.nullable(z.array(z.lazy(() => Attachment$inboundSchema))),
 });
@@ -537,7 +537,7 @@ export type TransactionResponse$Outbound = {
   frequency: string | null;
   isFulfilled: boolean;
   note: string | null;
-  account: Account$Outbound;
+  account: Account$Outbound | null;
   tags: Array<TransactionResponseTag$Outbound> | null;
   attachments: Array<Attachment$Outbound> | null;
 };
@@ -565,7 +565,7 @@ export const TransactionResponse$outboundSchema: z.ZodType<
   frequency: z.nullable(z.string()),
   isFulfilled: z.boolean(),
   note: z.nullable(z.string()),
-  account: z.lazy(() => Account$outboundSchema),
+  account: z.nullable(z.lazy(() => Account$outboundSchema)),
   tags: z.nullable(
     z.array(z.lazy(() => TransactionResponseTag$outboundSchema)),
   ),

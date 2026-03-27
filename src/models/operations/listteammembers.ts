@@ -7,8 +7,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type ListTeamMembersRequest = {
+  /**
+   * Unique identifier of the team
+   */
   id: string;
 };
 
@@ -46,12 +50,16 @@ export type ListTeamMembersData = {
 /**
  * Team members
  */
-export type ListTeamMembersResponse = {
+export type ListTeamMembersResponseBody = {
   /**
    * Array of team members with their roles and information
    */
   data: Array<ListTeamMembersData>;
 };
+
+export type ListTeamMembersResponse =
+  | ListTeamMembersResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const ListTeamMembersRequest$inboundSchema: z.ZodType<
@@ -191,8 +199,8 @@ export function listTeamMembersDataFromJSON(
 }
 
 /** @internal */
-export const ListTeamMembersResponse$inboundSchema: z.ZodType<
-  ListTeamMembersResponse,
+export const ListTeamMembersResponseBody$inboundSchema: z.ZodType<
+  ListTeamMembersResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -200,18 +208,76 @@ export const ListTeamMembersResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ListTeamMembersResponse$Outbound = {
+export type ListTeamMembersResponseBody$Outbound = {
   data: Array<ListTeamMembersData$Outbound>;
 };
+
+/** @internal */
+export const ListTeamMembersResponseBody$outboundSchema: z.ZodType<
+  ListTeamMembersResponseBody$Outbound,
+  z.ZodTypeDef,
+  ListTeamMembersResponseBody
+> = z.object({
+  data: z.array(z.lazy(() => ListTeamMembersData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListTeamMembersResponseBody$ {
+  /** @deprecated use `ListTeamMembersResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ListTeamMembersResponseBody$inboundSchema;
+  /** @deprecated use `ListTeamMembersResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ListTeamMembersResponseBody$outboundSchema;
+  /** @deprecated use `ListTeamMembersResponseBody$Outbound` instead. */
+  export type Outbound = ListTeamMembersResponseBody$Outbound;
+}
+
+export function listTeamMembersResponseBodyToJSON(
+  listTeamMembersResponseBody: ListTeamMembersResponseBody,
+): string {
+  return JSON.stringify(
+    ListTeamMembersResponseBody$outboundSchema.parse(
+      listTeamMembersResponseBody,
+    ),
+  );
+}
+
+export function listTeamMembersResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListTeamMembersResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListTeamMembersResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListTeamMembersResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListTeamMembersResponse$inboundSchema: z.ZodType<
+  ListTeamMembersResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListTeamMembersResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListTeamMembersResponse$Outbound =
+  | ListTeamMembersResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const ListTeamMembersResponse$outboundSchema: z.ZodType<
   ListTeamMembersResponse$Outbound,
   z.ZodTypeDef,
   ListTeamMembersResponse
-> = z.object({
-  data: z.array(z.lazy(() => ListTeamMembersData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => ListTeamMembersResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

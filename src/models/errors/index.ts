@@ -3,14 +3,22 @@
  */
 
 export * from "./apierror.js";
+export * from "./checkdesktopupdate.js";
 export * from "./createinvoice.js";
+export * from "./downloaddesktopupdate.js";
+export * from "./downloadfile.js";
+export * from "./downloadinvoice.js";
 export * from "./getdocumentpresignedurl.js";
 export * from "./getinboxpresignedurl.js";
-export * from "./getoauthauthorization.js";
 export * from "./gettransactionattachmentpresignedurl.js";
+export * from "./gmailoauthcallback.js";
 export * from "./httpclienterrors.js";
+export * from "./inboxwebhook.js";
 export * from "./middayerror.js";
+export * from "./oautherrorresponse.js";
+export * from "./outlookoauthcallback.js";
 export * from "./postoauthauthorization.js";
-export * from "./postoauthtoken.js";
+export * from "./proxyfile.js";
 export * from "./responsevalidationerror.js";
 export * from "./sdkvalidationerror.js";
+export * from "./slackoauthcallback.js";

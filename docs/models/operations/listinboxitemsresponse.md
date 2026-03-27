@@ -1,13 +1,12 @@
 # ListInboxItemsResponse
 
-Retrieve a list of inbox items for the authenticated team.
 
-## Example Usage
+## Supported Types
+
+### `operations.ListInboxItemsResponseBody`
 
 ```typescript
-import { ListInboxItemsResponse } from "@midday-ai/sdk/models/operations";
-
-let value: ListInboxItemsResponse = {
+const value: operations.ListInboxItemsResponseBody = {
   meta: {
     cursor: "b3b7c1e2-4c2a-4e7a-9c1a-2b7c1e24c2a4",
     hasPreviousPage: false,
@@ -17,9 +16,12 @@ let value: ListInboxItemsResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `meta`                                                                           | [operations.ListInboxItemsMeta](../../models/operations/listinboxitemsmeta.md)   | :heavy_check_mark:                                                               | Pagination metadata for the inbox list response.                                 |
-| `data`                                                                           | [operations.ListInboxItemsData](../../models/operations/listinboxitemsdata.md)[] | :heavy_check_mark:                                                               | List of inbox items                                                              |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

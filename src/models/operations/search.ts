@@ -7,16 +7,32 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type SearchRequest = {
+  /**
+   * The term to search for across all data sources.
+   */
   searchTerm?: string | undefined;
+  /**
+   * Language code to use for search relevance and results.
+   */
   language?: string | undefined;
+  /**
+   * Maximum number of results to return.
+   */
   limit?: number | undefined;
+  /**
+   * Maximum number of results to return per table/entity.
+   */
   itemsPerTableLimit?: number | undefined;
+  /**
+   * Minimum relevance score threshold for including a result.
+   */
   relevanceThreshold?: number | null | undefined;
 };
 
-export type SearchResponse = {
+export type SearchResponseBody = {
   /**
    * Unique identifier for the search result item.
    */
@@ -36,8 +52,10 @@ export type SearchResponse = {
   /**
    * Additional data for the search result, structure depends on the type.
    */
-  data?: any | null | undefined;
+  data?: any | undefined;
 };
+
+export type SearchResponse = models.ErrorResponse | Array<SearchResponseBody>;
 
 /** @internal */
 export const SearchRequest$inboundSchema: z.ZodType<
@@ -102,8 +120,8 @@ export function searchRequestFromJSON(
 }
 
 /** @internal */
-export const SearchResponse$inboundSchema: z.ZodType<
-  SearchResponse,
+export const SearchResponseBody$inboundSchema: z.ZodType<
+  SearchResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -111,7 +129,7 @@ export const SearchResponse$inboundSchema: z.ZodType<
   type: z.string(),
   relevance: z.number(),
   created_at: z.string(),
-  data: z.nullable(z.any()).optional(),
+  data: z.any().optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -119,30 +137,86 @@ export const SearchResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type SearchResponse$Outbound = {
+export type SearchResponseBody$Outbound = {
   id: string;
   type: string;
   relevance: number;
   created_at: string;
-  data?: any | null | undefined;
+  data?: any | undefined;
 };
+
+/** @internal */
+export const SearchResponseBody$outboundSchema: z.ZodType<
+  SearchResponseBody$Outbound,
+  z.ZodTypeDef,
+  SearchResponseBody
+> = z.object({
+  id: z.string(),
+  type: z.string(),
+  relevance: z.number(),
+  createdAt: z.string(),
+  data: z.any().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    createdAt: "created_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchResponseBody$ {
+  /** @deprecated use `SearchResponseBody$inboundSchema` instead. */
+  export const inboundSchema = SearchResponseBody$inboundSchema;
+  /** @deprecated use `SearchResponseBody$outboundSchema` instead. */
+  export const outboundSchema = SearchResponseBody$outboundSchema;
+  /** @deprecated use `SearchResponseBody$Outbound` instead. */
+  export type Outbound = SearchResponseBody$Outbound;
+}
+
+export function searchResponseBodyToJSON(
+  searchResponseBody: SearchResponseBody,
+): string {
+  return JSON.stringify(
+    SearchResponseBody$outboundSchema.parse(searchResponseBody),
+  );
+}
+
+export function searchResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchResponse$inboundSchema: z.ZodType<
+  SearchResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.ErrorResponse$inboundSchema,
+  z.array(z.lazy(() => SearchResponseBody$inboundSchema)),
+]);
+
+/** @internal */
+export type SearchResponse$Outbound =
+  | models.ErrorResponse$Outbound
+  | Array<SearchResponseBody$Outbound>;
 
 /** @internal */
 export const SearchResponse$outboundSchema: z.ZodType<
   SearchResponse$Outbound,
   z.ZodTypeDef,
   SearchResponse
-> = z.object({
-  id: z.string(),
-  type: z.string(),
-  relevance: z.number(),
-  createdAt: z.string(),
-  data: z.nullable(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = z.union([
+  models.ErrorResponse$outboundSchema,
+  z.array(z.lazy(() => SearchResponseBody$outboundSchema)),
+]);
 
 /**
  * @internal

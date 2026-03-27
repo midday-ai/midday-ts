@@ -6,8 +6,12 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetCurrentTimerRequest = {
+  /**
+   * Unique identifier of the user whose current timer should be retrieved. If not provided, will use the authenticated user
+   */
   assignedId?: string | null | undefined;
 };
 
@@ -107,9 +111,9 @@ export type GetCurrentTimerData = {
    */
   start: string;
   /**
-   * Stop time of the tracker entry in ISO 8601 format
+   * Stop time of the tracker entry in ISO 8601 format. Null for running timers.
    */
-  stop: string;
+  stop: string | null;
   /**
    * Unique identifier of the team that owns this tracker entry
    */
@@ -147,9 +151,13 @@ export type GetCurrentTimerData = {
 /**
  * Current timer retrieved successfully.
  */
-export type GetCurrentTimerResponse = {
+export type GetCurrentTimerResponseBody = {
   data: GetCurrentTimerData | null;
 };
+
+export type GetCurrentTimerResponse =
+  | GetCurrentTimerResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetCurrentTimerRequest$inboundSchema: z.ZodType<
@@ -413,7 +421,7 @@ export const GetCurrentTimerData$inboundSchema: z.ZodType<
   createdAt: z.string(),
   duration: z.nullable(z.number()),
   start: z.string(),
-  stop: z.string(),
+  stop: z.nullable(z.string()),
   teamId: z.string(),
   description: z.nullable(z.string()),
   rate: z.nullable(z.number()),
@@ -430,7 +438,7 @@ export type GetCurrentTimerData$Outbound = {
   createdAt: string;
   duration: number | null;
   start: string;
-  stop: string;
+  stop: string | null;
   teamId: string;
   description: string | null;
   rate: number | null;
@@ -451,7 +459,7 @@ export const GetCurrentTimerData$outboundSchema: z.ZodType<
   createdAt: z.string(),
   duration: z.nullable(z.number()),
   start: z.string(),
-  stop: z.string(),
+  stop: z.nullable(z.string()),
   teamId: z.string(),
   description: z.nullable(z.string()),
   rate: z.nullable(z.number()),
@@ -494,8 +502,8 @@ export function getCurrentTimerDataFromJSON(
 }
 
 /** @internal */
-export const GetCurrentTimerResponse$inboundSchema: z.ZodType<
-  GetCurrentTimerResponse,
+export const GetCurrentTimerResponseBody$inboundSchema: z.ZodType<
+  GetCurrentTimerResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -503,18 +511,76 @@ export const GetCurrentTimerResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetCurrentTimerResponse$Outbound = {
+export type GetCurrentTimerResponseBody$Outbound = {
   data: GetCurrentTimerData$Outbound | null;
 };
+
+/** @internal */
+export const GetCurrentTimerResponseBody$outboundSchema: z.ZodType<
+  GetCurrentTimerResponseBody$Outbound,
+  z.ZodTypeDef,
+  GetCurrentTimerResponseBody
+> = z.object({
+  data: z.nullable(z.lazy(() => GetCurrentTimerData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetCurrentTimerResponseBody$ {
+  /** @deprecated use `GetCurrentTimerResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetCurrentTimerResponseBody$inboundSchema;
+  /** @deprecated use `GetCurrentTimerResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetCurrentTimerResponseBody$outboundSchema;
+  /** @deprecated use `GetCurrentTimerResponseBody$Outbound` instead. */
+  export type Outbound = GetCurrentTimerResponseBody$Outbound;
+}
+
+export function getCurrentTimerResponseBodyToJSON(
+  getCurrentTimerResponseBody: GetCurrentTimerResponseBody,
+): string {
+  return JSON.stringify(
+    GetCurrentTimerResponseBody$outboundSchema.parse(
+      getCurrentTimerResponseBody,
+    ),
+  );
+}
+
+export function getCurrentTimerResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetCurrentTimerResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetCurrentTimerResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetCurrentTimerResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetCurrentTimerResponse$inboundSchema: z.ZodType<
+  GetCurrentTimerResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetCurrentTimerResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetCurrentTimerResponse$Outbound =
+  | GetCurrentTimerResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const GetCurrentTimerResponse$outboundSchema: z.ZodType<
   GetCurrentTimerResponse$Outbound,
   z.ZodTypeDef,
   GetCurrentTimerResponse
-> = z.object({
-  data: z.nullable(z.lazy(() => GetCurrentTimerData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => GetCurrentTimerResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

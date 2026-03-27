@@ -6,10 +6,20 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type ListTrackerEntriesRequest = {
+  /**
+   * Start date of the range (inclusive) in YYYY-MM-DD format
+   */
   from: string;
+  /**
+   * End date of the range (inclusive) in YYYY-MM-DD format
+   */
   to: string;
+  /**
+   * Optional project ID to filter tracker entries by specific project
+   */
   projectId?: string | undefined;
 };
 
@@ -171,7 +181,7 @@ export type Result = {
 /**
  * List all tracker entries for the authenticated team.
  */
-export type ListTrackerEntriesResponse = {
+export type ListTrackerEntriesResponseBody = {
   /**
    * Metadata about the tracker entries response including totals and date range
    */
@@ -181,6 +191,10 @@ export type ListTrackerEntriesResponse = {
    */
   result: { [k: string]: Array<Result> };
 };
+
+export type ListTrackerEntriesResponse =
+  | ListTrackerEntriesResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const ListTrackerEntriesRequest$inboundSchema: z.ZodType<
@@ -587,8 +601,8 @@ export function resultFromJSON(
 }
 
 /** @internal */
-export const ListTrackerEntriesResponse$inboundSchema: z.ZodType<
-  ListTrackerEntriesResponse,
+export const ListTrackerEntriesResponseBody$inboundSchema: z.ZodType<
+  ListTrackerEntriesResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -597,20 +611,78 @@ export const ListTrackerEntriesResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ListTrackerEntriesResponse$Outbound = {
+export type ListTrackerEntriesResponseBody$Outbound = {
   meta: ListTrackerEntriesMeta$Outbound;
   result: { [k: string]: Array<Result$Outbound> };
 };
+
+/** @internal */
+export const ListTrackerEntriesResponseBody$outboundSchema: z.ZodType<
+  ListTrackerEntriesResponseBody$Outbound,
+  z.ZodTypeDef,
+  ListTrackerEntriesResponseBody
+> = z.object({
+  meta: z.lazy(() => ListTrackerEntriesMeta$outboundSchema),
+  result: z.record(z.array(z.lazy(() => Result$outboundSchema))),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListTrackerEntriesResponseBody$ {
+  /** @deprecated use `ListTrackerEntriesResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ListTrackerEntriesResponseBody$inboundSchema;
+  /** @deprecated use `ListTrackerEntriesResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ListTrackerEntriesResponseBody$outboundSchema;
+  /** @deprecated use `ListTrackerEntriesResponseBody$Outbound` instead. */
+  export type Outbound = ListTrackerEntriesResponseBody$Outbound;
+}
+
+export function listTrackerEntriesResponseBodyToJSON(
+  listTrackerEntriesResponseBody: ListTrackerEntriesResponseBody,
+): string {
+  return JSON.stringify(
+    ListTrackerEntriesResponseBody$outboundSchema.parse(
+      listTrackerEntriesResponseBody,
+    ),
+  );
+}
+
+export function listTrackerEntriesResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListTrackerEntriesResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListTrackerEntriesResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListTrackerEntriesResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListTrackerEntriesResponse$inboundSchema: z.ZodType<
+  ListTrackerEntriesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListTrackerEntriesResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListTrackerEntriesResponse$Outbound =
+  | ListTrackerEntriesResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const ListTrackerEntriesResponse$outboundSchema: z.ZodType<
   ListTrackerEntriesResponse$Outbound,
   z.ZodTypeDef,
   ListTrackerEntriesResponse
-> = z.object({
-  meta: z.lazy(() => ListTrackerEntriesMeta$outboundSchema),
-  result: z.record(z.array(z.lazy(() => Result$outboundSchema))),
-});
+> = z.union([
+  z.lazy(() => ListTrackerEntriesResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

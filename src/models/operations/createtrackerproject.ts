@@ -7,6 +7,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * Current status of the project
@@ -74,6 +75,10 @@ export type CreateTrackerProjectRequest = {
    */
   tags?: Array<CreateTrackerProjectTag> | null | undefined;
 };
+
+export type CreateTrackerProjectResponse =
+  | models.TrackerProjectResponse
+  | models.ErrorResponse;
 
 /** @internal */
 export const CreateTrackerProjectStatus$inboundSchema: z.ZodNativeEnum<
@@ -233,5 +238,63 @@ export function createTrackerProjectRequestFromJSON(
     jsonString,
     (x) => CreateTrackerProjectRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateTrackerProjectRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateTrackerProjectResponse$inboundSchema: z.ZodType<
+  CreateTrackerProjectResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.TrackerProjectResponse$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type CreateTrackerProjectResponse$Outbound =
+  | models.TrackerProjectResponse$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const CreateTrackerProjectResponse$outboundSchema: z.ZodType<
+  CreateTrackerProjectResponse$Outbound,
+  z.ZodTypeDef,
+  CreateTrackerProjectResponse
+> = z.union([
+  models.TrackerProjectResponse$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateTrackerProjectResponse$ {
+  /** @deprecated use `CreateTrackerProjectResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateTrackerProjectResponse$inboundSchema;
+  /** @deprecated use `CreateTrackerProjectResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateTrackerProjectResponse$outboundSchema;
+  /** @deprecated use `CreateTrackerProjectResponse$Outbound` instead. */
+  export type Outbound = CreateTrackerProjectResponse$Outbound;
+}
+
+export function createTrackerProjectResponseToJSON(
+  createTrackerProjectResponse: CreateTrackerProjectResponse,
+): string {
+  return JSON.stringify(
+    CreateTrackerProjectResponse$outboundSchema.parse(
+      createTrackerProjectResponse,
+    ),
+  );
+}
+
+export function createTrackerProjectResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateTrackerProjectResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateTrackerProjectResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateTrackerProjectResponse' from JSON`,
   );
 }

@@ -1,13 +1,12 @@
 # GetTimerStatusResponse
 
-Timer status retrieved successfully.
 
-## Example Usage
+## Supported Types
+
+### `operations.GetTimerStatusResponseBody`
 
 ```typescript
-import { GetTimerStatusResponse } from "@midday-ai/sdk/models/operations";
-
-let value: GetTimerStatusResponse = {
+const value: operations.GetTimerStatusResponseBody = {
   data: {
     isRunning: true,
     currentEntry: {
@@ -26,8 +25,12 @@ let value: GetTimerStatusResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `data`                                                                         | [operations.GetTimerStatusData](../../models/operations/gettimerstatusdata.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

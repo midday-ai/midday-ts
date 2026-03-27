@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage tags
+
 ### Available Operations
 
 * [list](#list) - List all tags
@@ -75,7 +77,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TagsResponse](../../models/tagsresponse.md)\>**
+**Promise\<[operations.ListTagsResponse](../../models/operations/listtagsresponse.md)\>**
 
 ### Errors
 
@@ -152,7 +154,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TagsResponse](../../models/tagsresponse.md)\>**
+**Promise\<[operations.CreateTagResponse](../../models/operations/createtagresponse.md)\>**
 
 ### Errors
 
@@ -229,7 +231,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TagResponse](../../models/tagresponse.md)\>**
+**Promise\<[operations.GetTagByIdResponse](../../models/operations/gettagbyidresponse.md)\>**
 
 ### Errors
 
@@ -312,7 +314,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TagResponse](../../models/tagresponse.md)\>**
+**Promise\<[operations.UpdateTagResponse](../../models/operations/updatetagresponse.md)\>**
 
 ### Errors
 
@@ -337,11 +339,11 @@ const midday = new Midday({
 });
 
 async function run() {
-  await midday.tags.delete({
+  const result = await midday.tags.delete({
     id: "b3b7c8e2-1f2a-4c3d-9e4f-5a6b7c8d9e0f",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -369,7 +371,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("tagsDelete failed:", res.error);
   }
@@ -389,7 +391,7 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[models.ErrorResponse](../../models/errorresponse.md)\>**
 
 ### Errors
 

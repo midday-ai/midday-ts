@@ -7,6 +7,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export const ListNotificationsStatusEnum2 = {
   Unread: "unread",
@@ -34,7 +35,13 @@ export type Status =
   | Array<ListNotificationsStatusEnum2>;
 
 export type ListNotificationsRequest = {
+  /**
+   * Cursor for pagination, representing the last item from the previous page
+   */
   cursor?: string | null | undefined;
+  /**
+   * Number of notifications to return per page (1-100)
+   */
   pageSize?: number | undefined;
   /**
    * Filter by notification status. Can be a single status or array of statuses. unread = new notifications, read = viewed but not dismissed, archived = dismissed from view
@@ -43,10 +50,23 @@ export type ListNotificationsRequest = {
     | ListNotificationsStatusEnum1
     | Array<ListNotificationsStatusEnum2>
     | undefined;
+  /**
+   * Filter notifications by specific user ID
+   */
   userId?: string | null | undefined;
+  /**
+   * Filter notifications by priority level (1-10)
+   */
   priority?: number | null | undefined;
+  /**
+   * Filter notifications by maximum priority level (priority <= maxPriority). Use 3 for user-facing notifications only.
+   */
   maxPriority?: number | null | undefined;
 };
+
+export type ListNotificationsResponse =
+  | models.NotificationsResponseSchema
+  | models.ErrorResponse;
 
 /** @internal */
 export const ListNotificationsStatusEnum2$inboundSchema: z.ZodNativeEnum<
@@ -209,5 +229,61 @@ export function listNotificationsRequestFromJSON(
     jsonString,
     (x) => ListNotificationsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListNotificationsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListNotificationsResponse$inboundSchema: z.ZodType<
+  ListNotificationsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.NotificationsResponseSchema$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListNotificationsResponse$Outbound =
+  | models.NotificationsResponseSchema$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const ListNotificationsResponse$outboundSchema: z.ZodType<
+  ListNotificationsResponse$Outbound,
+  z.ZodTypeDef,
+  ListNotificationsResponse
+> = z.union([
+  models.NotificationsResponseSchema$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListNotificationsResponse$ {
+  /** @deprecated use `ListNotificationsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListNotificationsResponse$inboundSchema;
+  /** @deprecated use `ListNotificationsResponse$outboundSchema` instead. */
+  export const outboundSchema = ListNotificationsResponse$outboundSchema;
+  /** @deprecated use `ListNotificationsResponse$Outbound` instead. */
+  export type Outbound = ListNotificationsResponse$Outbound;
+}
+
+export function listNotificationsResponseToJSON(
+  listNotificationsResponse: ListNotificationsResponse,
+): string {
+  return JSON.stringify(
+    ListNotificationsResponse$outboundSchema.parse(listNotificationsResponse),
+  );
+}
+
+export function listNotificationsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListNotificationsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListNotificationsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListNotificationsResponse' from JSON`,
   );
 }

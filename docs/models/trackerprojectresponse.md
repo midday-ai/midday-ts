@@ -21,12 +21,7 @@ let value: TrackerProjectResponse = {
     name: "Acme Corporation",
     website: "https://acme.com",
   },
-  tags: [
-    {
-      id: "d1e2f3a4-b5c6-7890-abcd-1234567890ef",
-      name: "Design",
-    },
-  ],
+  tags: [],
   users: [],
 };
 ```

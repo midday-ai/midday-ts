@@ -1,13 +1,12 @@
 # ListInvoicesResponse
 
-Response containing a list of invoices and pagination metadata
 
-## Example Usage
+## Supported Types
+
+### `operations.ListInvoicesResponseBody`
 
 ```typescript
-import { ListInvoicesResponse } from "@midday-ai/sdk/models/operations";
-
-let value: ListInvoicesResponse = {
+const value: operations.ListInvoicesResponseBody = {
   meta: {
     cursor: "25",
     hasPreviousPage: false,
@@ -17,9 +16,12 @@ let value: ListInvoicesResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `meta`                                                                       | [operations.ListInvoicesMeta](../../models/operations/listinvoicesmeta.md)   | :heavy_check_mark:                                                           | Pagination metadata                                                          |
-| `data`                                                                       | [operations.ListInvoicesData](../../models/operations/listinvoicesdata.md)[] | :heavy_check_mark:                                                           | Array of invoice objects                                                     |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

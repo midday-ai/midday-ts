@@ -32,6 +32,11 @@ export type TemplatePaymentDetails = {};
 export type TemplateFromDetails = {};
 
 /**
+ * Default footer notes in TipTap JSONContent format for new invoices
+ */
+export type TemplateNoteDetails = {};
+
+/**
  * Invoice template details
  */
 export type Template = {
@@ -64,11 +69,19 @@ export type Template = {
   sendCopy?: boolean | undefined;
   includeUnits?: boolean | undefined;
   includeQr?: boolean | undefined;
-  taxRate?: number | undefined;
-  vatRate?: number | undefined;
+  includeLineItemTax?: boolean | undefined;
+  lineItemTaxLabel?: string | undefined;
+  taxRate?: number | null | undefined;
+  vatRate?: number | null | undefined;
   size?: Size | undefined;
   deliveryType?: TemplateDeliveryType | undefined;
   locale?: string | undefined;
+  paymentEnabled?: boolean | undefined;
+  paymentTermsDays?: number | undefined;
+  emailSubject?: string | null | undefined;
+  emailHeading?: string | null | undefined;
+  emailBody?: string | null | undefined;
+  emailButtonText?: string | null | undefined;
   /**
    * Payment details in TipTap JSONContent format
    */
@@ -77,6 +90,10 @@ export type Template = {
    * Sender details in TipTap JSONContent format
    */
   fromDetails?: TemplateFromDetails | undefined;
+  /**
+   * Default footer notes in TipTap JSONContent format for new invoices
+   */
+  noteDetails?: TemplateNoteDetails | undefined;
 };
 
 /**
@@ -115,10 +132,15 @@ export type LineItem = {
   price?: number | undefined;
   vat?: number | null | undefined;
   tax?: number | null | undefined;
+  taxRate?: number | null | undefined;
   /**
    * Line item description in TipTap JSONContent format
    */
   name?: Name | undefined;
+  /**
+   * Optional reference to a saved product
+   */
+  productId?: string | undefined;
 };
 
 /**
@@ -159,13 +181,13 @@ export type CreateInvoiceRequest = {
    */
   noteDetails?: NoteDetails | undefined;
   /**
-   * Due date of the invoice in ISO 8601 format
+   * Due date of the invoice in ISO 8601 format. Defaults to issue date + payment terms (30 days) if not provided.
    */
-  dueDate: string;
+  dueDate?: Date | undefined;
   /**
-   * Issue date of the invoice in ISO 8601 format
+   * Issue date of the invoice in ISO 8601 format. Defaults to current date if not provided.
    */
-  issueDate: string;
+  issueDate?: Date | undefined;
   /**
    * Invoice number as shown to the customer (auto-generated if not provided)
    */
@@ -207,7 +229,7 @@ export type CreateInvoiceRequest = {
    */
   deliveryType: DeliveryType;
   /**
-   * Scheduled date of the invoice in ISO 8601 format. Required when deliveryType is 'scheduled'. Must be in the future.
+   * Scheduled date of the invoice in ISO 8601 format with timezone offset (e.g., Z or +00:00). Required when deliveryType is 'scheduled'. Must be in the future.
    */
   scheduledAt?: Date | undefined;
 };
@@ -396,6 +418,54 @@ export function templateFromDetailsFromJSON(
 }
 
 /** @internal */
+export const TemplateNoteDetails$inboundSchema: z.ZodType<
+  TemplateNoteDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+/** @internal */
+export type TemplateNoteDetails$Outbound = {};
+
+/** @internal */
+export const TemplateNoteDetails$outboundSchema: z.ZodType<
+  TemplateNoteDetails$Outbound,
+  z.ZodTypeDef,
+  TemplateNoteDetails
+> = z.object({});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TemplateNoteDetails$ {
+  /** @deprecated use `TemplateNoteDetails$inboundSchema` instead. */
+  export const inboundSchema = TemplateNoteDetails$inboundSchema;
+  /** @deprecated use `TemplateNoteDetails$outboundSchema` instead. */
+  export const outboundSchema = TemplateNoteDetails$outboundSchema;
+  /** @deprecated use `TemplateNoteDetails$Outbound` instead. */
+  export type Outbound = TemplateNoteDetails$Outbound;
+}
+
+export function templateNoteDetailsToJSON(
+  templateNoteDetails: TemplateNoteDetails,
+): string {
+  return JSON.stringify(
+    TemplateNoteDetails$outboundSchema.parse(templateNoteDetails),
+  );
+}
+
+export function templateNoteDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<TemplateNoteDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TemplateNoteDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TemplateNoteDetails' from JSON`,
+  );
+}
+
+/** @internal */
 export const Template$inboundSchema: z.ZodType<
   Template,
   z.ZodTypeDef,
@@ -430,13 +500,22 @@ export const Template$inboundSchema: z.ZodType<
   sendCopy: z.boolean().optional(),
   includeUnits: z.boolean().optional(),
   includeQr: z.boolean().optional(),
-  taxRate: z.number().optional(),
-  vatRate: z.number().optional(),
+  includeLineItemTax: z.boolean().optional(),
+  lineItemTaxLabel: z.string().optional(),
+  taxRate: z.nullable(z.number()).optional(),
+  vatRate: z.nullable(z.number()).optional(),
   size: Size$inboundSchema.optional(),
   deliveryType: TemplateDeliveryType$inboundSchema.optional(),
   locale: z.string().optional(),
+  paymentEnabled: z.boolean().optional(),
+  paymentTermsDays: z.number().optional(),
+  emailSubject: z.nullable(z.string()).optional(),
+  emailHeading: z.nullable(z.string()).optional(),
+  emailBody: z.nullable(z.string()).optional(),
+  emailButtonText: z.nullable(z.string()).optional(),
   paymentDetails: z.lazy(() => TemplatePaymentDetails$inboundSchema).optional(),
   fromDetails: z.lazy(() => TemplateFromDetails$inboundSchema).optional(),
+  noteDetails: z.lazy(() => TemplateNoteDetails$inboundSchema).optional(),
 });
 
 /** @internal */
@@ -470,13 +549,22 @@ export type Template$Outbound = {
   sendCopy?: boolean | undefined;
   includeUnits?: boolean | undefined;
   includeQr?: boolean | undefined;
-  taxRate?: number | undefined;
-  vatRate?: number | undefined;
+  includeLineItemTax?: boolean | undefined;
+  lineItemTaxLabel?: string | undefined;
+  taxRate?: number | null | undefined;
+  vatRate?: number | null | undefined;
   size?: string | undefined;
   deliveryType?: string | undefined;
   locale?: string | undefined;
+  paymentEnabled?: boolean | undefined;
+  paymentTermsDays?: number | undefined;
+  emailSubject?: string | null | undefined;
+  emailHeading?: string | null | undefined;
+  emailBody?: string | null | undefined;
+  emailButtonText?: string | null | undefined;
   paymentDetails?: TemplatePaymentDetails$Outbound | undefined;
   fromDetails?: TemplateFromDetails$Outbound | undefined;
+  noteDetails?: TemplateNoteDetails$Outbound | undefined;
 };
 
 /** @internal */
@@ -514,14 +602,23 @@ export const Template$outboundSchema: z.ZodType<
   sendCopy: z.boolean().optional(),
   includeUnits: z.boolean().optional(),
   includeQr: z.boolean().optional(),
-  taxRate: z.number().optional(),
-  vatRate: z.number().optional(),
+  includeLineItemTax: z.boolean().optional(),
+  lineItemTaxLabel: z.string().optional(),
+  taxRate: z.nullable(z.number()).optional(),
+  vatRate: z.nullable(z.number()).optional(),
   size: Size$outboundSchema.optional(),
   deliveryType: TemplateDeliveryType$outboundSchema.optional(),
   locale: z.string().optional(),
+  paymentEnabled: z.boolean().optional(),
+  paymentTermsDays: z.number().optional(),
+  emailSubject: z.nullable(z.string()).optional(),
+  emailHeading: z.nullable(z.string()).optional(),
+  emailBody: z.nullable(z.string()).optional(),
+  emailButtonText: z.nullable(z.string()).optional(),
   paymentDetails: z.lazy(() => TemplatePaymentDetails$outboundSchema)
     .optional(),
   fromDetails: z.lazy(() => TemplateFromDetails$outboundSchema).optional(),
+  noteDetails: z.lazy(() => TemplateNoteDetails$outboundSchema).optional(),
 });
 
 /**
@@ -820,7 +917,9 @@ export const LineItem$inboundSchema: z.ZodType<
   price: z.number().optional(),
   vat: z.nullable(z.number()).optional(),
   tax: z.nullable(z.number()).optional(),
+  taxRate: z.nullable(z.number()).optional(),
   name: z.lazy(() => Name$inboundSchema).optional(),
+  productId: z.string().optional(),
 });
 
 /** @internal */
@@ -830,7 +929,9 @@ export type LineItem$Outbound = {
   price?: number | undefined;
   vat?: number | null | undefined;
   tax?: number | null | undefined;
+  taxRate?: number | null | undefined;
   name?: Name$Outbound | undefined;
+  productId?: string | undefined;
 };
 
 /** @internal */
@@ -844,7 +945,9 @@ export const LineItem$outboundSchema: z.ZodType<
   price: z.number().optional(),
   vat: z.nullable(z.number()).optional(),
   tax: z.nullable(z.number()).optional(),
+  taxRate: z.nullable(z.number()).optional(),
   name: z.lazy(() => Name$outboundSchema).optional(),
+  productId: z.string().optional(),
 });
 
 /**
@@ -904,8 +1007,10 @@ export const CreateInvoiceRequest$inboundSchema: z.ZodType<
   customerId: z.string(),
   paymentDetails: z.lazy(() => PaymentDetails$inboundSchema).optional(),
   noteDetails: z.lazy(() => NoteDetails$inboundSchema).optional(),
-  dueDate: z.string(),
-  issueDate: z.string(),
+  dueDate: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  issueDate: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   invoiceNumber: z.string().optional(),
   logoUrl: z.nullable(z.string()).optional(),
   vat: z.nullable(z.number()).optional(),
@@ -927,8 +1032,8 @@ export type CreateInvoiceRequest$Outbound = {
   customerId: string;
   paymentDetails?: PaymentDetails$Outbound | undefined;
   noteDetails?: NoteDetails$Outbound | undefined;
-  dueDate: string;
-  issueDate: string;
+  dueDate?: string | undefined;
+  issueDate?: string | undefined;
   invoiceNumber?: string | undefined;
   logoUrl?: string | null | undefined;
   vat?: number | null | undefined;
@@ -953,8 +1058,8 @@ export const CreateInvoiceRequest$outboundSchema: z.ZodType<
   customerId: z.string(),
   paymentDetails: z.lazy(() => PaymentDetails$outboundSchema).optional(),
   noteDetails: z.lazy(() => NoteDetails$outboundSchema).optional(),
-  dueDate: z.string(),
-  issueDate: z.string(),
+  dueDate: z.date().transform(v => v.toISOString()).optional(),
+  issueDate: z.date().transform(v => v.toISOString()).optional(),
   invoiceNumber: z.string().optional(),
   logoUrl: z.nullable(z.string()).optional(),
   vat: z.nullable(z.number()).optional(),

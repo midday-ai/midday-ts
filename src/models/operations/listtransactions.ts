@@ -9,6 +9,17 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
 
+export const ListTransactionsStatus = {
+  Blank: "blank",
+  ReceiptMatch: "receipt_match",
+  InReview: "in_review",
+  ExportError: "export_error",
+  Exported: "exported",
+  Excluded: "excluded",
+  Archived: "archived",
+} as const;
+export type ListTransactionsStatus = ClosedEnum<typeof ListTransactionsStatus>;
+
 /**
  * Filter transactions based on attachment presence. 'include' returns only transactions with attachments, 'exclude' returns only transactions without attachments
  */
@@ -22,40 +33,106 @@ export const Attachments = {
 export type Attachments = ClosedEnum<typeof Attachments>;
 
 /**
- * Transaction type to filter by. 'income' for money received, 'expense' for money spent
+ * Filter by transaction type. 'income' for money received, 'expense' for money spent
  */
 export const ListTransactionsType = {
   Income: "income",
   Expense: "expense",
 } as const;
 /**
- * Transaction type to filter by. 'income' for money received, 'expense' for money spent
+ * Filter by transaction type. 'income' for money received, 'expense' for money spent
  */
 export type ListTransactionsType = ClosedEnum<typeof ListTransactionsType>;
 
+/**
+ * Filter transactions based on whether they were manually imported. 'include' returns only manual transactions, 'exclude' returns only non-manual transactions
+ */
+export const Manual = {
+  Include: "include",
+  Exclude: "exclude",
+} as const;
+/**
+ * Filter transactions based on whether they were manually imported. 'include' returns only manual transactions, 'exclude' returns only non-manual transactions
+ */
+export type Manual = ClosedEnum<typeof Manual>;
+
 export type ListTransactionsRequest = {
+  /**
+   * Cursor for pagination, representing the last item from the previous page
+   */
   cursor?: string | null | undefined;
+  /**
+   * Sort as [column, direction]. Columns: date, amount, name, status, attachment, assigned, bank_account, category, tags, counterparty. Direction: asc or desc.
+   */
   sort?: Array<string> | null | undefined;
+  /**
+   * Number of transactions to return per page (1-10000)
+   */
   pageSize?: number | undefined;
+  /**
+   * Search query string to filter transactions by name, description, or other text fields
+   */
   q?: string | null | undefined;
+  /**
+   * Array of category slugs to filter transactions by specific categories
+   */
   categories?: Array<string> | null | undefined;
+  /**
+   * Array of tag IDs to filter transactions by specific tags
+   */
   tags?: Array<string> | null | undefined;
+  /**
+   * Start date (inclusive) for filtering transactions in ISO 8601 format
+   */
   start?: string | null | undefined;
+  /**
+   * End date (inclusive) for filtering transactions in ISO 8601 format
+   */
   end?: string | null | undefined;
+  /**
+   * Array of bank account IDs to filter transactions by specific accounts
+   */
   accounts?: Array<string> | null | undefined;
+  /**
+   * Array of user IDs to filter transactions by assigned users
+   */
   assignees?: Array<string> | null | undefined;
-  statuses?: Array<string> | null | undefined;
+  /**
+   * Array of transaction list status filters. Supported UI filters: 'blank', 'receipt_match', 'in_review', 'export_error', 'exported', 'excluded', 'archived'
+   */
+  statuses?: Array<ListTransactionsStatus> | null | undefined;
+  /**
+   * Array of recurring frequency values to filter by. Available frequencies: 'weekly', 'monthly', 'annually', 'irregular'
+   */
   recurring?: Array<string> | null | undefined;
   /**
    * Filter transactions based on attachment presence. 'include' returns only transactions with attachments, 'exclude' returns only transactions without attachments
    */
   attachments?: Attachments | null | undefined;
+  /**
+   * Amount range as [min, max] to filter transactions by monetary value
+   */
   amountRange?: Array<number | null> | null | undefined;
+  /**
+   * Array of specific amounts (as strings) to filter transactions by exact values
+   */
   amount?: Array<string> | null | undefined;
   /**
-   * Transaction type to filter by. 'income' for money received, 'expense' for money spent
+   * Filter by transaction type. 'income' for money received, 'expense' for money spent
    */
   type?: ListTransactionsType | null | undefined;
+  /**
+   * Filter transactions based on whether they were manually imported. 'include' returns only manual transactions, 'exclude' returns only non-manual transactions
+   */
+  manual?: Manual | null | undefined;
+  /**
+   * Filter by export status. true = only exported transactions, false = only NOT exported transactions, undefined = no filter
+   */
+  exported?: boolean | null | undefined;
+  /**
+   * Filter by fulfillment status. true = transactions ready for review (has attachments OR status=completed), false = not ready, undefined = no filter
+   */
+  fulfilled?: boolean | null | undefined;
 };
 
 /**
@@ -79,7 +156,7 @@ export type ListTransactionsMeta = {
 /**
  * Retrieve a list of transactions for the authenticated team.
  */
-export type ListTransactionsResponse = {
+export type ListTransactionsResponseBody = {
   /**
    * Pagination metadata for the transactions response
    */
@@ -89,6 +166,31 @@ export type ListTransactionsResponse = {
    */
   data: Array<models.TransactionResponse>;
 };
+
+export type ListTransactionsResponse =
+  | ListTransactionsResponseBody
+  | models.ErrorResponse;
+
+/** @internal */
+export const ListTransactionsStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ListTransactionsStatus
+> = z.nativeEnum(ListTransactionsStatus);
+
+/** @internal */
+export const ListTransactionsStatus$outboundSchema: z.ZodNativeEnum<
+  typeof ListTransactionsStatus
+> = ListTransactionsStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListTransactionsStatus$ {
+  /** @deprecated use `ListTransactionsStatus$inboundSchema` instead. */
+  export const inboundSchema = ListTransactionsStatus$inboundSchema;
+  /** @deprecated use `ListTransactionsStatus$outboundSchema` instead. */
+  export const outboundSchema = ListTransactionsStatus$outboundSchema;
+}
 
 /** @internal */
 export const Attachments$inboundSchema: z.ZodNativeEnum<typeof Attachments> = z
@@ -131,6 +233,25 @@ export namespace ListTransactionsType$ {
 }
 
 /** @internal */
+export const Manual$inboundSchema: z.ZodNativeEnum<typeof Manual> = z
+  .nativeEnum(Manual);
+
+/** @internal */
+export const Manual$outboundSchema: z.ZodNativeEnum<typeof Manual> =
+  Manual$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Manual$ {
+  /** @deprecated use `Manual$inboundSchema` instead. */
+  export const inboundSchema = Manual$inboundSchema;
+  /** @deprecated use `Manual$outboundSchema` instead. */
+  export const outboundSchema = Manual$outboundSchema;
+}
+
+/** @internal */
 export const ListTransactionsRequest$inboundSchema: z.ZodType<
   ListTransactionsRequest,
   z.ZodTypeDef,
@@ -146,12 +267,16 @@ export const ListTransactionsRequest$inboundSchema: z.ZodType<
   end: z.nullable(z.string()).optional(),
   accounts: z.nullable(z.array(z.string())).optional(),
   assignees: z.nullable(z.array(z.string())).optional(),
-  statuses: z.nullable(z.array(z.string())).optional(),
+  statuses: z.nullable(z.array(ListTransactionsStatus$inboundSchema))
+    .optional(),
   recurring: z.nullable(z.array(z.string())).optional(),
   attachments: z.nullable(Attachments$inboundSchema).optional(),
   amountRange: z.nullable(z.array(z.nullable(z.number()))).optional(),
   amount: z.nullable(z.array(z.string())).optional(),
   type: z.nullable(ListTransactionsType$inboundSchema).optional(),
+  manual: z.nullable(Manual$inboundSchema).optional(),
+  exported: z.nullable(z.boolean()).optional(),
+  fulfilled: z.nullable(z.boolean()).optional(),
 });
 
 /** @internal */
@@ -172,6 +297,9 @@ export type ListTransactionsRequest$Outbound = {
   amountRange?: Array<number | null> | null | undefined;
   amount?: Array<string> | null | undefined;
   type?: string | null | undefined;
+  manual?: string | null | undefined;
+  exported?: boolean | null | undefined;
+  fulfilled?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -190,12 +318,16 @@ export const ListTransactionsRequest$outboundSchema: z.ZodType<
   end: z.nullable(z.string()).optional(),
   accounts: z.nullable(z.array(z.string())).optional(),
   assignees: z.nullable(z.array(z.string())).optional(),
-  statuses: z.nullable(z.array(z.string())).optional(),
+  statuses: z.nullable(z.array(ListTransactionsStatus$outboundSchema))
+    .optional(),
   recurring: z.nullable(z.array(z.string())).optional(),
   attachments: z.nullable(Attachments$outboundSchema).optional(),
   amountRange: z.nullable(z.array(z.nullable(z.number()))).optional(),
   amount: z.nullable(z.array(z.string())).optional(),
   type: z.nullable(ListTransactionsType$outboundSchema).optional(),
+  manual: z.nullable(Manual$outboundSchema).optional(),
+  exported: z.nullable(z.boolean()).optional(),
+  fulfilled: z.nullable(z.boolean()).optional(),
 });
 
 /**
@@ -290,8 +422,8 @@ export function listTransactionsMetaFromJSON(
 }
 
 /** @internal */
-export const ListTransactionsResponse$inboundSchema: z.ZodType<
-  ListTransactionsResponse,
+export const ListTransactionsResponseBody$inboundSchema: z.ZodType<
+  ListTransactionsResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -300,20 +432,78 @@ export const ListTransactionsResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ListTransactionsResponse$Outbound = {
+export type ListTransactionsResponseBody$Outbound = {
   meta: ListTransactionsMeta$Outbound;
   data: Array<models.TransactionResponse$Outbound>;
 };
+
+/** @internal */
+export const ListTransactionsResponseBody$outboundSchema: z.ZodType<
+  ListTransactionsResponseBody$Outbound,
+  z.ZodTypeDef,
+  ListTransactionsResponseBody
+> = z.object({
+  meta: z.lazy(() => ListTransactionsMeta$outboundSchema),
+  data: z.array(models.TransactionResponse$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListTransactionsResponseBody$ {
+  /** @deprecated use `ListTransactionsResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ListTransactionsResponseBody$inboundSchema;
+  /** @deprecated use `ListTransactionsResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ListTransactionsResponseBody$outboundSchema;
+  /** @deprecated use `ListTransactionsResponseBody$Outbound` instead. */
+  export type Outbound = ListTransactionsResponseBody$Outbound;
+}
+
+export function listTransactionsResponseBodyToJSON(
+  listTransactionsResponseBody: ListTransactionsResponseBody,
+): string {
+  return JSON.stringify(
+    ListTransactionsResponseBody$outboundSchema.parse(
+      listTransactionsResponseBody,
+    ),
+  );
+}
+
+export function listTransactionsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListTransactionsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListTransactionsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListTransactionsResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListTransactionsResponse$inboundSchema: z.ZodType<
+  ListTransactionsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListTransactionsResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListTransactionsResponse$Outbound =
+  | ListTransactionsResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const ListTransactionsResponse$outboundSchema: z.ZodType<
   ListTransactionsResponse$Outbound,
   z.ZodTypeDef,
   ListTransactionsResponse
-> = z.object({
-  meta: z.lazy(() => ListTransactionsMeta$outboundSchema),
-  data: z.array(models.TransactionResponse$outboundSchema),
-});
+> = z.union([
+  z.lazy(() => ListTransactionsResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

@@ -3,6 +3,8 @@
 
 ## Overview
 
+Financial reports
+
 ### Available Operations
 
 * [revenue](#revenue) - Revenue reports
@@ -85,7 +87,7 @@ run();
 
 ### Response
 
-**Promise\<[models.GetRevenueResponseSchema](../../models/getrevenueresponseschema.md)\>**
+**Promise\<[operations.GetRevenueReportsResponse](../../models/operations/getrevenuereportsresponse.md)\>**
 
 ### Errors
 
@@ -166,7 +168,7 @@ run();
 
 ### Response
 
-**Promise\<[models.GetProfitResponseSchema](../../models/getprofitresponseschema.md)\>**
+**Promise\<[operations.GetProfitReportsResponse](../../models/operations/getprofitreportsresponse.md)\>**
 
 ### Errors
 
@@ -247,7 +249,7 @@ run();
 
 ### Response
 
-**Promise\<[models.GetBurnRateResponseSchema[]](../../models/.md)\>**
+**Promise\<[operations.GetBurnRateReportsResponse](../../models/operations/getburnratereportsresponse.md)\>**
 
 ### Errors
 
@@ -273,8 +275,6 @@ const midday = new Midday({
 
 async function run() {
   const result = await midday.reports.runway({
-    from: "2023-01-01",
-    to: "2023-12-31",
     currency: "USD",
   });
 
@@ -302,8 +302,6 @@ const midday = new MiddayCore({
 
 async function run() {
   const res = await reportsRunway(midday, {
-    from: "2023-01-01",
-    to: "2023-12-31",
     currency: "USD",
   });
   if (res.ok) {
@@ -328,7 +326,7 @@ run();
 
 ### Response
 
-**Promise\<[number](../../models/.md)\>**
+**Promise\<[operations.GetRunwayReportsResponse](../../models/operations/getrunwayreportsresponse.md)\>**
 
 ### Errors
 
@@ -409,7 +407,7 @@ run();
 
 ### Response
 
-**Promise\<[models.GetExpensesResponseSchema](../../models/getexpensesresponseschema.md)\>**
+**Promise\<[operations.GetExpensesReportsResponse](../../models/operations/getexpensesreportsresponse.md)\>**
 
 ### Errors
 
@@ -490,7 +488,7 @@ run();
 
 ### Response
 
-**Promise\<[models.SpendingResultArray[]](../../models/.md)\>**
+**Promise\<[operations.GetSpendingReportsResponse](../../models/operations/getspendingreportsresponse.md)\>**
 
 ### Errors
 

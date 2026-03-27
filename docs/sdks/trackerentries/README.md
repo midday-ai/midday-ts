@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage time tracker entries
+
 ### Available Operations
 
 * [list](#list) - List all tracker entries

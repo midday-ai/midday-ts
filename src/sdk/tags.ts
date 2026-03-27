@@ -21,7 +21,7 @@ export class Tags extends ClientSDK {
    */
   async list(
     options?: RequestOptions,
-  ): Promise<models.TagsResponse> {
+  ): Promise<operations.ListTagsResponse> {
     return unwrapAsync(tagsList(
       this,
       options,
@@ -35,9 +35,9 @@ export class Tags extends ClientSDK {
    * Create a new tag for the authenticated team.
    */
   async create(
-    request?: models.CreateTag | undefined,
+    request: models.CreateTag,
     options?: RequestOptions,
-  ): Promise<models.TagsResponse> {
+  ): Promise<operations.CreateTagResponse> {
     return unwrapAsync(tagsCreate(
       this,
       request,
@@ -54,7 +54,7 @@ export class Tags extends ClientSDK {
   async get(
     request: operations.GetTagByIdRequest,
     options?: RequestOptions,
-  ): Promise<models.TagResponse> {
+  ): Promise<operations.GetTagByIdResponse> {
     return unwrapAsync(tagsGet(
       this,
       request,
@@ -71,7 +71,7 @@ export class Tags extends ClientSDK {
   async update(
     request: operations.UpdateTagRequest,
     options?: RequestOptions,
-  ): Promise<models.TagResponse> {
+  ): Promise<operations.UpdateTagResponse> {
     return unwrapAsync(tagsUpdate(
       this,
       request,
@@ -88,7 +88,7 @@ export class Tags extends ClientSDK {
   async delete(
     request: operations.DeleteTagRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<models.ErrorResponse | undefined> {
     return unwrapAsync(tagsDelete(
       this,
       request,

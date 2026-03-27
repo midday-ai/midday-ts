@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * Schema for creating a new bank account.
@@ -28,7 +29,7 @@ export type CreateBankAccountRequest = {
 /**
  * A single bank account object response.
  */
-export type CreateBankAccountResponse = {
+export type CreateBankAccountResponseBody = {
   /**
    * Unique identifier for the bank account.
    */
@@ -58,6 +59,10 @@ export type CreateBankAccountResponse = {
    */
   manual: boolean | null;
 };
+
+export type CreateBankAccountResponse =
+  | CreateBankAccountResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const CreateBankAccountRequest$inboundSchema: z.ZodType<
@@ -120,8 +125,8 @@ export function createBankAccountRequestFromJSON(
 }
 
 /** @internal */
-export const CreateBankAccountResponse$inboundSchema: z.ZodType<
-  CreateBankAccountResponse,
+export const CreateBankAccountResponseBody$inboundSchema: z.ZodType<
+  CreateBankAccountResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -135,7 +140,7 @@ export const CreateBankAccountResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateBankAccountResponse$Outbound = {
+export type CreateBankAccountResponseBody$Outbound = {
   id: string;
   name: string | null;
   currency: string | null;
@@ -146,10 +151,10 @@ export type CreateBankAccountResponse$Outbound = {
 };
 
 /** @internal */
-export const CreateBankAccountResponse$outboundSchema: z.ZodType<
-  CreateBankAccountResponse$Outbound,
+export const CreateBankAccountResponseBody$outboundSchema: z.ZodType<
+  CreateBankAccountResponseBody$Outbound,
   z.ZodTypeDef,
-  CreateBankAccountResponse
+  CreateBankAccountResponseBody
 > = z.object({
   id: z.string(),
   name: z.nullable(z.string()),
@@ -159,6 +164,64 @@ export const CreateBankAccountResponse$outboundSchema: z.ZodType<
   balance: z.nullable(z.number()),
   manual: z.nullable(z.boolean()),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateBankAccountResponseBody$ {
+  /** @deprecated use `CreateBankAccountResponseBody$inboundSchema` instead. */
+  export const inboundSchema = CreateBankAccountResponseBody$inboundSchema;
+  /** @deprecated use `CreateBankAccountResponseBody$outboundSchema` instead. */
+  export const outboundSchema = CreateBankAccountResponseBody$outboundSchema;
+  /** @deprecated use `CreateBankAccountResponseBody$Outbound` instead. */
+  export type Outbound = CreateBankAccountResponseBody$Outbound;
+}
+
+export function createBankAccountResponseBodyToJSON(
+  createBankAccountResponseBody: CreateBankAccountResponseBody,
+): string {
+  return JSON.stringify(
+    CreateBankAccountResponseBody$outboundSchema.parse(
+      createBankAccountResponseBody,
+    ),
+  );
+}
+
+export function createBankAccountResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateBankAccountResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateBankAccountResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateBankAccountResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateBankAccountResponse$inboundSchema: z.ZodType<
+  CreateBankAccountResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreateBankAccountResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type CreateBankAccountResponse$Outbound =
+  | CreateBankAccountResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const CreateBankAccountResponse$outboundSchema: z.ZodType<
+  CreateBankAccountResponse$Outbound,
+  z.ZodTypeDef,
+  CreateBankAccountResponse
+> = z.union([
+  z.lazy(() => CreateBankAccountResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

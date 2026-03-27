@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetDocumentByIdRequest = {
   id: string | null;
@@ -28,7 +29,7 @@ export type GetDocumentByIdMetadata = {
 /**
  * A single document object response.
  */
-export type GetDocumentByIdResponse = {
+export type GetDocumentByIdResponseBody = {
   /**
    * Unique identifier for the document.
    */
@@ -58,6 +59,10 @@ export type GetDocumentByIdResponse = {
    */
   date: string | null;
 };
+
+export type GetDocumentByIdResponse =
+  | GetDocumentByIdResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetDocumentByIdRequest$inboundSchema: z.ZodType<
@@ -171,8 +176,8 @@ export function getDocumentByIdMetadataFromJSON(
 }
 
 /** @internal */
-export const GetDocumentByIdResponse$inboundSchema: z.ZodType<
-  GetDocumentByIdResponse,
+export const GetDocumentByIdResponseBody$inboundSchema: z.ZodType<
+  GetDocumentByIdResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -186,7 +191,7 @@ export const GetDocumentByIdResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetDocumentByIdResponse$Outbound = {
+export type GetDocumentByIdResponseBody$Outbound = {
   id: string;
   title: string | null;
   pathTokens: Array<string>;
@@ -197,10 +202,10 @@ export type GetDocumentByIdResponse$Outbound = {
 };
 
 /** @internal */
-export const GetDocumentByIdResponse$outboundSchema: z.ZodType<
-  GetDocumentByIdResponse$Outbound,
+export const GetDocumentByIdResponseBody$outboundSchema: z.ZodType<
+  GetDocumentByIdResponseBody$Outbound,
   z.ZodTypeDef,
-  GetDocumentByIdResponse
+  GetDocumentByIdResponseBody
 > = z.object({
   id: z.string(),
   title: z.nullable(z.string()),
@@ -210,6 +215,64 @@ export const GetDocumentByIdResponse$outboundSchema: z.ZodType<
   summary: z.nullable(z.string()),
   date: z.nullable(z.string()),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetDocumentByIdResponseBody$ {
+  /** @deprecated use `GetDocumentByIdResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetDocumentByIdResponseBody$inboundSchema;
+  /** @deprecated use `GetDocumentByIdResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetDocumentByIdResponseBody$outboundSchema;
+  /** @deprecated use `GetDocumentByIdResponseBody$Outbound` instead. */
+  export type Outbound = GetDocumentByIdResponseBody$Outbound;
+}
+
+export function getDocumentByIdResponseBodyToJSON(
+  getDocumentByIdResponseBody: GetDocumentByIdResponseBody,
+): string {
+  return JSON.stringify(
+    GetDocumentByIdResponseBody$outboundSchema.parse(
+      getDocumentByIdResponseBody,
+    ),
+  );
+}
+
+export function getDocumentByIdResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetDocumentByIdResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetDocumentByIdResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetDocumentByIdResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetDocumentByIdResponse$inboundSchema: z.ZodType<
+  GetDocumentByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetDocumentByIdResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetDocumentByIdResponse$Outbound =
+  | GetDocumentByIdResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetDocumentByIdResponse$outboundSchema: z.ZodType<
+  GetDocumentByIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetDocumentByIdResponse
+> = z.union([
+  z.lazy(() => GetDocumentByIdResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

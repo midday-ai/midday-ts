@@ -17,7 +17,7 @@ export class Search extends ClientSDK {
   async search(
     request: operations.SearchRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.SearchResponse>> {
+  ): Promise<operations.SearchResponse> {
     return unwrapAsync(searchSearch(
       this,
       request,

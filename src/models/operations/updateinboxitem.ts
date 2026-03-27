@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export const UpdateInboxItemStatus = {
   New: "new",
@@ -18,6 +19,7 @@ export const UpdateInboxItemStatus = {
   Deleted: "deleted",
   Analyzing: "analyzing",
   SuggestedMatch: "suggested_match",
+  Other: "other",
 } as const;
 export type UpdateInboxItemStatus = ClosedEnum<typeof UpdateInboxItemStatus>;
 
@@ -62,7 +64,7 @@ export type UpdateInboxItemTransaction = {
 /**
  * Inbox item object
  */
-export type UpdateInboxItemResponse = {
+export type UpdateInboxItemResponseBody = {
   /**
    * Inbox item ID (UUID)
    */
@@ -116,6 +118,10 @@ export type UpdateInboxItemResponse = {
    */
   transaction: UpdateInboxItemTransaction | null;
 };
+
+export type UpdateInboxItemResponse =
+  | UpdateInboxItemResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const UpdateInboxItemStatus$inboundSchema: z.ZodNativeEnum<
@@ -333,8 +339,8 @@ export function updateInboxItemTransactionFromJSON(
 }
 
 /** @internal */
-export const UpdateInboxItemResponse$inboundSchema: z.ZodType<
-  UpdateInboxItemResponse,
+export const UpdateInboxItemResponseBody$inboundSchema: z.ZodType<
+  UpdateInboxItemResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -356,7 +362,7 @@ export const UpdateInboxItemResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateInboxItemResponse$Outbound = {
+export type UpdateInboxItemResponseBody$Outbound = {
   id: string;
   fileName: string;
   filePath: Array<string>;
@@ -373,10 +379,10 @@ export type UpdateInboxItemResponse$Outbound = {
 };
 
 /** @internal */
-export const UpdateInboxItemResponse$outboundSchema: z.ZodType<
-  UpdateInboxItemResponse$Outbound,
+export const UpdateInboxItemResponseBody$outboundSchema: z.ZodType<
+  UpdateInboxItemResponseBody$Outbound,
   z.ZodTypeDef,
-  UpdateInboxItemResponse
+  UpdateInboxItemResponseBody
 > = z.object({
   id: z.string(),
   fileName: z.string(),
@@ -394,6 +400,64 @@ export const UpdateInboxItemResponse$outboundSchema: z.ZodType<
     z.lazy(() => UpdateInboxItemTransaction$outboundSchema),
   ),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateInboxItemResponseBody$ {
+  /** @deprecated use `UpdateInboxItemResponseBody$inboundSchema` instead. */
+  export const inboundSchema = UpdateInboxItemResponseBody$inboundSchema;
+  /** @deprecated use `UpdateInboxItemResponseBody$outboundSchema` instead. */
+  export const outboundSchema = UpdateInboxItemResponseBody$outboundSchema;
+  /** @deprecated use `UpdateInboxItemResponseBody$Outbound` instead. */
+  export type Outbound = UpdateInboxItemResponseBody$Outbound;
+}
+
+export function updateInboxItemResponseBodyToJSON(
+  updateInboxItemResponseBody: UpdateInboxItemResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateInboxItemResponseBody$outboundSchema.parse(
+      updateInboxItemResponseBody,
+    ),
+  );
+}
+
+export function updateInboxItemResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateInboxItemResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateInboxItemResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateInboxItemResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateInboxItemResponse$inboundSchema: z.ZodType<
+  UpdateInboxItemResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateInboxItemResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateInboxItemResponse$Outbound =
+  | UpdateInboxItemResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const UpdateInboxItemResponse$outboundSchema: z.ZodType<
+  UpdateInboxItemResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateInboxItemResponse
+> = z.union([
+  z.lazy(() => UpdateInboxItemResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

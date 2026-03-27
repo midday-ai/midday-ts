@@ -6,9 +6,16 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type ListBankAccountsRequest = {
+  /**
+   * Whether the bank account is enabled.
+   */
   enabled?: boolean | undefined;
+  /**
+   * Whether the bank account is a manual account.
+   */
   manual?: boolean | undefined;
 };
 
@@ -49,12 +56,16 @@ export type ListBankAccountsData = {
 /**
  * Response containing a list of bank accounts.
  */
-export type ListBankAccountsResponse = {
+export type ListBankAccountsResponseBody = {
   /**
    * Array of bank account objects.
    */
   data: Array<ListBankAccountsData>;
 };
+
+export type ListBankAccountsResponse =
+  | ListBankAccountsResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const ListBankAccountsRequest$inboundSchema: z.ZodType<
@@ -186,8 +197,8 @@ export function listBankAccountsDataFromJSON(
 }
 
 /** @internal */
-export const ListBankAccountsResponse$inboundSchema: z.ZodType<
-  ListBankAccountsResponse,
+export const ListBankAccountsResponseBody$inboundSchema: z.ZodType<
+  ListBankAccountsResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -195,18 +206,76 @@ export const ListBankAccountsResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ListBankAccountsResponse$Outbound = {
+export type ListBankAccountsResponseBody$Outbound = {
   data: Array<ListBankAccountsData$Outbound>;
 };
+
+/** @internal */
+export const ListBankAccountsResponseBody$outboundSchema: z.ZodType<
+  ListBankAccountsResponseBody$Outbound,
+  z.ZodTypeDef,
+  ListBankAccountsResponseBody
+> = z.object({
+  data: z.array(z.lazy(() => ListBankAccountsData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListBankAccountsResponseBody$ {
+  /** @deprecated use `ListBankAccountsResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ListBankAccountsResponseBody$inboundSchema;
+  /** @deprecated use `ListBankAccountsResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ListBankAccountsResponseBody$outboundSchema;
+  /** @deprecated use `ListBankAccountsResponseBody$Outbound` instead. */
+  export type Outbound = ListBankAccountsResponseBody$Outbound;
+}
+
+export function listBankAccountsResponseBodyToJSON(
+  listBankAccountsResponseBody: ListBankAccountsResponseBody,
+): string {
+  return JSON.stringify(
+    ListBankAccountsResponseBody$outboundSchema.parse(
+      listBankAccountsResponseBody,
+    ),
+  );
+}
+
+export function listBankAccountsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListBankAccountsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListBankAccountsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListBankAccountsResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListBankAccountsResponse$inboundSchema: z.ZodType<
+  ListBankAccountsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListBankAccountsResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListBankAccountsResponse$Outbound =
+  | ListBankAccountsResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const ListBankAccountsResponse$outboundSchema: z.ZodType<
   ListBankAccountsResponse$Outbound,
   z.ZodTypeDef,
   ListBankAccountsResponse
-> = z.object({
-  data: z.array(z.lazy(() => ListBankAccountsData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => ListBankAccountsResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

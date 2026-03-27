@@ -7,6 +7,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetInvoiceByIdRequest = {
   id: string;
@@ -53,7 +54,7 @@ export type GetInvoiceByIdCustomer = {
 /**
  * Invoice object
  */
-export type GetInvoiceByIdResponse = {
+export type GetInvoiceByIdResponseBody = {
   /**
    * Unique identifier for the invoice
    */
@@ -75,13 +76,13 @@ export type GetInvoiceByIdResponse = {
    */
   invoiceNumber?: string | undefined;
   /**
-   * Total amount of the invoice
+   * Total amount of the invoice, or null if not yet calculated
    */
-  amount: number;
+  amount: number | null;
   /**
    * Currency code (ISO 4217) for the invoice amount
    */
-  currency: string;
+  currency: string | null;
   /**
    * Customer details
    */
@@ -147,6 +148,10 @@ export type GetInvoiceByIdResponse = {
    */
   previewUrl: string | null;
 };
+
+export type GetInvoiceByIdResponse =
+  | GetInvoiceByIdResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetInvoiceByIdRequest$inboundSchema: z.ZodType<
@@ -287,8 +292,8 @@ export function getInvoiceByIdCustomerFromJSON(
 }
 
 /** @internal */
-export const GetInvoiceByIdResponse$inboundSchema: z.ZodType<
-  GetInvoiceByIdResponse,
+export const GetInvoiceByIdResponseBody$inboundSchema: z.ZodType<
+  GetInvoiceByIdResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -297,8 +302,8 @@ export const GetInvoiceByIdResponse$inboundSchema: z.ZodType<
   dueDate: z.string(),
   issueDate: z.string(),
   invoiceNumber: z.string().optional(),
-  amount: z.number(),
-  currency: z.string(),
+  amount: z.nullable(z.number()),
+  currency: z.nullable(z.string()),
   customer: z.nullable(z.lazy(() => GetInvoiceByIdCustomer$inboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
@@ -318,14 +323,14 @@ export const GetInvoiceByIdResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetInvoiceByIdResponse$Outbound = {
+export type GetInvoiceByIdResponseBody$Outbound = {
   id: string;
   status: string;
   dueDate: string;
   issueDate: string;
   invoiceNumber?: string | undefined;
-  amount: number;
-  currency: string;
+  amount: number | null;
+  currency: string | null;
   customer: GetInvoiceByIdCustomer$Outbound | null;
   paidAt: string | null;
   reminderSentAt: string | null;
@@ -345,18 +350,18 @@ export type GetInvoiceByIdResponse$Outbound = {
 };
 
 /** @internal */
-export const GetInvoiceByIdResponse$outboundSchema: z.ZodType<
-  GetInvoiceByIdResponse$Outbound,
+export const GetInvoiceByIdResponseBody$outboundSchema: z.ZodType<
+  GetInvoiceByIdResponseBody$Outbound,
   z.ZodTypeDef,
-  GetInvoiceByIdResponse
+  GetInvoiceByIdResponseBody
 > = z.object({
   id: z.string(),
   status: GetInvoiceByIdStatus$outboundSchema,
   dueDate: z.string(),
   issueDate: z.string(),
   invoiceNumber: z.string().optional(),
-  amount: z.number(),
-  currency: z.string(),
+  amount: z.nullable(z.number()),
+  currency: z.nullable(z.string()),
   customer: z.nullable(z.lazy(() => GetInvoiceByIdCustomer$outboundSchema)),
   paidAt: z.nullable(z.string()),
   reminderSentAt: z.nullable(z.string()),
@@ -374,6 +379,62 @@ export const GetInvoiceByIdResponse$outboundSchema: z.ZodType<
   pdfUrl: z.nullable(z.string()),
   previewUrl: z.nullable(z.string()),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetInvoiceByIdResponseBody$ {
+  /** @deprecated use `GetInvoiceByIdResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetInvoiceByIdResponseBody$inboundSchema;
+  /** @deprecated use `GetInvoiceByIdResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetInvoiceByIdResponseBody$outboundSchema;
+  /** @deprecated use `GetInvoiceByIdResponseBody$Outbound` instead. */
+  export type Outbound = GetInvoiceByIdResponseBody$Outbound;
+}
+
+export function getInvoiceByIdResponseBodyToJSON(
+  getInvoiceByIdResponseBody: GetInvoiceByIdResponseBody,
+): string {
+  return JSON.stringify(
+    GetInvoiceByIdResponseBody$outboundSchema.parse(getInvoiceByIdResponseBody),
+  );
+}
+
+export function getInvoiceByIdResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetInvoiceByIdResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetInvoiceByIdResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetInvoiceByIdResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetInvoiceByIdResponse$inboundSchema: z.ZodType<
+  GetInvoiceByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetInvoiceByIdResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetInvoiceByIdResponse$Outbound =
+  | GetInvoiceByIdResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetInvoiceByIdResponse$outboundSchema: z.ZodType<
+  GetInvoiceByIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetInvoiceByIdResponse
+> = z.union([
+  z.lazy(() => GetInvoiceByIdResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

@@ -8,7 +8,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetInboxPreSignedUrlRequest = {
+  /**
+   * Unique identifier of the inbox item to generate a pre-signed URL for
+   */
   id: string;
+  /**
+   * Whether to force download the file. If true, the file will be downloaded. If false or omitted, the file will be displayed in the browser if possible.
+   */
   download?: boolean | null | undefined;
 };
 

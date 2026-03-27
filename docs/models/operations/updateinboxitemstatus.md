@@ -11,5 +11,5 @@ let value: UpdateInboxItemStatus = "processing";
 ## Values
 
 ```typescript
-"new" | "archived" | "processing" | "done" | "pending" | "deleted" | "analyzing" | "suggested_match"
+"new" | "archived" | "processing" | "done" | "pending" | "deleted" | "analyzing" | "suggested_match" | "other"
 ```

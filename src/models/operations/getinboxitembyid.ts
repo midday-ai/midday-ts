@@ -6,8 +6,12 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetInboxItemByIdRequest = {
+  /**
+   * The unique identifier of the inbox item.
+   */
   id: string;
 };
 
@@ -40,7 +44,7 @@ export type GetInboxItemByIdTransaction = {
 /**
  * Inbox item object
  */
-export type GetInboxItemByIdResponse = {
+export type GetInboxItemByIdResponseBody = {
   /**
    * Inbox item ID (UUID)
    */
@@ -94,6 +98,10 @@ export type GetInboxItemByIdResponse = {
    */
   transaction: GetInboxItemByIdTransaction | null;
 };
+
+export type GetInboxItemByIdResponse =
+  | GetInboxItemByIdResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetInboxItemByIdRequest$inboundSchema: z.ZodType<
@@ -218,8 +226,8 @@ export function getInboxItemByIdTransactionFromJSON(
 }
 
 /** @internal */
-export const GetInboxItemByIdResponse$inboundSchema: z.ZodType<
-  GetInboxItemByIdResponse,
+export const GetInboxItemByIdResponseBody$inboundSchema: z.ZodType<
+  GetInboxItemByIdResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -241,7 +249,7 @@ export const GetInboxItemByIdResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetInboxItemByIdResponse$Outbound = {
+export type GetInboxItemByIdResponseBody$Outbound = {
   id: string;
   fileName: string;
   filePath: Array<string>;
@@ -258,10 +266,10 @@ export type GetInboxItemByIdResponse$Outbound = {
 };
 
 /** @internal */
-export const GetInboxItemByIdResponse$outboundSchema: z.ZodType<
-  GetInboxItemByIdResponse$Outbound,
+export const GetInboxItemByIdResponseBody$outboundSchema: z.ZodType<
+  GetInboxItemByIdResponseBody$Outbound,
   z.ZodTypeDef,
-  GetInboxItemByIdResponse
+  GetInboxItemByIdResponseBody
 > = z.object({
   id: z.string(),
   fileName: z.string(),
@@ -279,6 +287,64 @@ export const GetInboxItemByIdResponse$outboundSchema: z.ZodType<
     z.lazy(() => GetInboxItemByIdTransaction$outboundSchema),
   ),
 });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetInboxItemByIdResponseBody$ {
+  /** @deprecated use `GetInboxItemByIdResponseBody$inboundSchema` instead. */
+  export const inboundSchema = GetInboxItemByIdResponseBody$inboundSchema;
+  /** @deprecated use `GetInboxItemByIdResponseBody$outboundSchema` instead. */
+  export const outboundSchema = GetInboxItemByIdResponseBody$outboundSchema;
+  /** @deprecated use `GetInboxItemByIdResponseBody$Outbound` instead. */
+  export type Outbound = GetInboxItemByIdResponseBody$Outbound;
+}
+
+export function getInboxItemByIdResponseBodyToJSON(
+  getInboxItemByIdResponseBody: GetInboxItemByIdResponseBody,
+): string {
+  return JSON.stringify(
+    GetInboxItemByIdResponseBody$outboundSchema.parse(
+      getInboxItemByIdResponseBody,
+    ),
+  );
+}
+
+export function getInboxItemByIdResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetInboxItemByIdResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetInboxItemByIdResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetInboxItemByIdResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetInboxItemByIdResponse$inboundSchema: z.ZodType<
+  GetInboxItemByIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetInboxItemByIdResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type GetInboxItemByIdResponse$Outbound =
+  | GetInboxItemByIdResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const GetInboxItemByIdResponse$outboundSchema: z.ZodType<
+  GetInboxItemByIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetInboxItemByIdResponse
+> = z.union([
+  z.lazy(() => GetInboxItemByIdResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

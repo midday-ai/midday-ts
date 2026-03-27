@@ -20,7 +20,7 @@ export class Notifications extends ClientSDK {
   async list(
     request: operations.ListNotificationsRequest,
     options?: RequestOptions,
-  ): Promise<models.NotificationsResponseSchema> {
+  ): Promise<operations.ListNotificationsResponse> {
     return unwrapAsync(notificationsList(
       this,
       request,
@@ -37,7 +37,7 @@ export class Notifications extends ClientSDK {
   async updateStatus(
     request: operations.UpdateNotificationStatusRequest,
     options?: RequestOptions,
-  ): Promise<models.NotificationResponseSchema> {
+  ): Promise<operations.UpdateNotificationStatusResponse> {
     return unwrapAsync(notificationsUpdateStatus(
       this,
       request,
@@ -52,9 +52,9 @@ export class Notifications extends ClientSDK {
    * Update the status of all notifications for the authenticated team.
    */
   async updateAllStatus(
-    request?: models.UpdateAllNotificationsStatusSchema | undefined,
+    request: models.UpdateAllNotificationsStatusSchema,
     options?: RequestOptions,
-  ): Promise<models.UpdateAllNotificationsStatusResponseSchema> {
+  ): Promise<operations.UpdateAllNotificationsStatusResponse> {
     return unwrapAsync(notificationsUpdateAllStatus(
       this,
       request,

@@ -33,11 +33,11 @@ import { Result } from "../types/fp.js";
  */
 export function transactionsDeleteMany(
   client: MiddayCore,
-  request?: Array<string> | undefined,
+  request: Array<string>,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<operations.DeleteTransactionsResponse>,
+    operations.DeleteTransactionsResponse,
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function transactionsDeleteMany(
 
 async function $do(
   client: MiddayCore,
-  request?: Array<string> | undefined,
+  request: Array<string>,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      Array<operations.DeleteTransactionsResponse>,
+      operations.DeleteTransactionsResponse,
       | MiddayError
       | ResponseValidationError
       | ConnectionError
@@ -77,16 +77,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.array(z.string()).optional().parse(value),
+    (value) => z.array(z.string()).parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/transactions/bulk")();
 
@@ -109,8 +107,18 @@ async function $do(
     securitySource: client._options.security,
     retryConfig: options?.retries
       || client._options.retryConfig
+      || {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 500,
+          maxInterval: 60000,
+          exponent: 1.5,
+          maxElapsedTime: 300000,
+        },
+        retryConnectionErrors: true,
+      }
       || { strategy: "none" },
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryCodes: options?.retryCodes || ["5XX"],
   };
 
   const requestRes = client._createRequest(context, {
@@ -140,7 +148,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    Array<operations.DeleteTransactionsResponse>,
+    operations.DeleteTransactionsResponse,
     | MiddayError
     | ResponseValidationError
     | ConnectionError
@@ -150,9 +158,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, z.array(operations.DeleteTransactionsResponse$inboundSchema)),
+    M.json(200, operations.DeleteTransactionsResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
+    M.json("default", operations.DeleteTransactionsResponse$inboundSchema),
   )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

@@ -6,6 +6,7 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type Entry = {
   /**
@@ -181,12 +182,16 @@ export type CreateTrackerEntriesBulkData = {
 /**
  * Response schema for created tracker entries
  */
-export type CreateTrackerEntriesBulkResponse = {
+export type CreateTrackerEntriesBulkResponseBody = {
   /**
    * Array of created tracker entries
    */
   data: Array<CreateTrackerEntriesBulkData>;
 };
+
+export type CreateTrackerEntriesBulkResponse =
+  | CreateTrackerEntriesBulkResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const Entry$inboundSchema: z.ZodType<Entry, z.ZodTypeDef, unknown> = z
@@ -610,8 +615,8 @@ export function createTrackerEntriesBulkDataFromJSON(
 }
 
 /** @internal */
-export const CreateTrackerEntriesBulkResponse$inboundSchema: z.ZodType<
-  CreateTrackerEntriesBulkResponse,
+export const CreateTrackerEntriesBulkResponseBody$inboundSchema: z.ZodType<
+  CreateTrackerEntriesBulkResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -619,18 +624,79 @@ export const CreateTrackerEntriesBulkResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateTrackerEntriesBulkResponse$Outbound = {
+export type CreateTrackerEntriesBulkResponseBody$Outbound = {
   data: Array<CreateTrackerEntriesBulkData$Outbound>;
 };
+
+/** @internal */
+export const CreateTrackerEntriesBulkResponseBody$outboundSchema: z.ZodType<
+  CreateTrackerEntriesBulkResponseBody$Outbound,
+  z.ZodTypeDef,
+  CreateTrackerEntriesBulkResponseBody
+> = z.object({
+  data: z.array(z.lazy(() => CreateTrackerEntriesBulkData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateTrackerEntriesBulkResponseBody$ {
+  /** @deprecated use `CreateTrackerEntriesBulkResponseBody$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateTrackerEntriesBulkResponseBody$inboundSchema;
+  /** @deprecated use `CreateTrackerEntriesBulkResponseBody$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateTrackerEntriesBulkResponseBody$outboundSchema;
+  /** @deprecated use `CreateTrackerEntriesBulkResponseBody$Outbound` instead. */
+  export type Outbound = CreateTrackerEntriesBulkResponseBody$Outbound;
+}
+
+export function createTrackerEntriesBulkResponseBodyToJSON(
+  createTrackerEntriesBulkResponseBody: CreateTrackerEntriesBulkResponseBody,
+): string {
+  return JSON.stringify(
+    CreateTrackerEntriesBulkResponseBody$outboundSchema.parse(
+      createTrackerEntriesBulkResponseBody,
+    ),
+  );
+}
+
+export function createTrackerEntriesBulkResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateTrackerEntriesBulkResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateTrackerEntriesBulkResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateTrackerEntriesBulkResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateTrackerEntriesBulkResponse$inboundSchema: z.ZodType<
+  CreateTrackerEntriesBulkResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreateTrackerEntriesBulkResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type CreateTrackerEntriesBulkResponse$Outbound =
+  | CreateTrackerEntriesBulkResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const CreateTrackerEntriesBulkResponse$outboundSchema: z.ZodType<
   CreateTrackerEntriesBulkResponse$Outbound,
   z.ZodTypeDef,
   CreateTrackerEntriesBulkResponse
-> = z.object({
-  data: z.array(z.lazy(() => CreateTrackerEntriesBulkData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => CreateTrackerEntriesBulkResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

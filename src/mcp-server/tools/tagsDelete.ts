@@ -30,6 +30,8 @@ Delete a tag by ID for the authenticated team.`,
       };
     }
 
-    return formatResult(void 0, apiCall);
+    const value = result.value;
+
+    return formatResult(value, apiCall);
   },
 };

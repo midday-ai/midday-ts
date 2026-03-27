@@ -6,20 +6,28 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type DeleteInboxItemRequest = {
+  /**
+   * The unique identifier of the inbox item to delete.
+   */
   id: string;
 };
 
 /**
  * Response schema for a successfully deleted inbox item.
  */
-export type DeleteInboxItemResponse = {
+export type DeleteInboxItemResponseBody = {
   /**
    * The unique identifier of the deleted inbox item.
    */
   id: string;
 };
+
+export type DeleteInboxItemResponse =
+  | DeleteInboxItemResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const DeleteInboxItemRequest$inboundSchema: z.ZodType<
@@ -76,8 +84,8 @@ export function deleteInboxItemRequestFromJSON(
 }
 
 /** @internal */
-export const DeleteInboxItemResponse$inboundSchema: z.ZodType<
-  DeleteInboxItemResponse,
+export const DeleteInboxItemResponseBody$inboundSchema: z.ZodType<
+  DeleteInboxItemResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -85,18 +93,76 @@ export const DeleteInboxItemResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeleteInboxItemResponse$Outbound = {
+export type DeleteInboxItemResponseBody$Outbound = {
   id: string;
 };
+
+/** @internal */
+export const DeleteInboxItemResponseBody$outboundSchema: z.ZodType<
+  DeleteInboxItemResponseBody$Outbound,
+  z.ZodTypeDef,
+  DeleteInboxItemResponseBody
+> = z.object({
+  id: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteInboxItemResponseBody$ {
+  /** @deprecated use `DeleteInboxItemResponseBody$inboundSchema` instead. */
+  export const inboundSchema = DeleteInboxItemResponseBody$inboundSchema;
+  /** @deprecated use `DeleteInboxItemResponseBody$outboundSchema` instead. */
+  export const outboundSchema = DeleteInboxItemResponseBody$outboundSchema;
+  /** @deprecated use `DeleteInboxItemResponseBody$Outbound` instead. */
+  export type Outbound = DeleteInboxItemResponseBody$Outbound;
+}
+
+export function deleteInboxItemResponseBodyToJSON(
+  deleteInboxItemResponseBody: DeleteInboxItemResponseBody,
+): string {
+  return JSON.stringify(
+    DeleteInboxItemResponseBody$outboundSchema.parse(
+      deleteInboxItemResponseBody,
+    ),
+  );
+}
+
+export function deleteInboxItemResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteInboxItemResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteInboxItemResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteInboxItemResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteInboxItemResponse$inboundSchema: z.ZodType<
+  DeleteInboxItemResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeleteInboxItemResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type DeleteInboxItemResponse$Outbound =
+  | DeleteInboxItemResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const DeleteInboxItemResponse$outboundSchema: z.ZodType<
   DeleteInboxItemResponse$Outbound,
   z.ZodTypeDef,
   DeleteInboxItemResponse
-> = z.object({
-  id: z.string(),
-});
+> = z.union([
+  z.lazy(() => DeleteInboxItemResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

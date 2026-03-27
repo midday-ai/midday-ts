@@ -36,7 +36,7 @@ export class BankAccounts extends ClientSDK {
    * Create a new bank account for the authenticated team.
    */
   async create(
-    request?: operations.CreateBankAccountRequest | undefined,
+    request: operations.CreateBankAccountRequest,
     options?: RequestOptions,
   ): Promise<operations.CreateBankAccountResponse> {
     return unwrapAsync(bankAccountsCreate(

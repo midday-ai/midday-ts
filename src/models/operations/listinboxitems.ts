@@ -7,20 +7,64 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
+/**
+ * Filter by processing status: done (processed), pending (awaiting action), suggested_match (auto-matched), no_match (unmatched), other
+ */
 export const ListInboxItemsStatus = {
   Done: "done",
   Pending: "pending",
   SuggestedMatch: "suggested_match",
+  NoMatch: "no_match",
+  Other: "other",
 } as const;
+/**
+ * Filter by processing status: done (processed), pending (awaiting action), suggested_match (auto-matched), no_match (unmatched), other
+ */
 export type ListInboxItemsStatus = ClosedEnum<typeof ListInboxItemsStatus>;
 
+/**
+ * Tab filter: all or other
+ */
+export const Tab = {
+  All: "all",
+  Other: "other",
+} as const;
+/**
+ * Tab filter: all or other
+ */
+export type Tab = ClosedEnum<typeof Tab>;
+
 export type ListInboxItemsRequest = {
+  /**
+   * Pagination cursor from previous response
+   */
   cursor?: string | null | undefined;
+  /**
+   * Sort direction: asc or desc
+   */
   order?: string | null | undefined;
+  /**
+   * Sort field. Valid values: alphabetical, document_date. Defaults to created date.
+   */
+  sort?: string | null | undefined;
+  /**
+   * Number of items per page (1-100)
+   */
   pageSize?: number | undefined;
+  /**
+   * Search query to filter inbox items
+   */
   q?: string | null | undefined;
+  /**
+   * Filter by processing status: done (processed), pending (awaiting action), suggested_match (auto-matched), no_match (unmatched), other
+   */
   status?: ListInboxItemsStatus | null | undefined;
+  /**
+   * Tab filter: all or other
+   */
+  tab?: Tab | null | undefined;
 };
 
 /**
@@ -128,7 +172,7 @@ export type ListInboxItemsData = {
 /**
  * Retrieve a list of inbox items for the authenticated team.
  */
-export type ListInboxItemsResponse = {
+export type ListInboxItemsResponseBody = {
   /**
    * Pagination metadata for the inbox list response.
    */
@@ -138,6 +182,10 @@ export type ListInboxItemsResponse = {
    */
   data: Array<ListInboxItemsData>;
 };
+
+export type ListInboxItemsResponse =
+  | ListInboxItemsResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const ListInboxItemsStatus$inboundSchema: z.ZodNativeEnum<
@@ -161,6 +209,24 @@ export namespace ListInboxItemsStatus$ {
 }
 
 /** @internal */
+export const Tab$inboundSchema: z.ZodNativeEnum<typeof Tab> = z.nativeEnum(Tab);
+
+/** @internal */
+export const Tab$outboundSchema: z.ZodNativeEnum<typeof Tab> =
+  Tab$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Tab$ {
+  /** @deprecated use `Tab$inboundSchema` instead. */
+  export const inboundSchema = Tab$inboundSchema;
+  /** @deprecated use `Tab$outboundSchema` instead. */
+  export const outboundSchema = Tab$outboundSchema;
+}
+
+/** @internal */
 export const ListInboxItemsRequest$inboundSchema: z.ZodType<
   ListInboxItemsRequest,
   z.ZodTypeDef,
@@ -168,18 +234,22 @@ export const ListInboxItemsRequest$inboundSchema: z.ZodType<
 > = z.object({
   cursor: z.nullable(z.string()).optional(),
   order: z.nullable(z.string()).optional(),
+  sort: z.nullable(z.string()).optional(),
   pageSize: z.number().optional(),
   q: z.nullable(z.string()).optional(),
   status: z.nullable(ListInboxItemsStatus$inboundSchema).optional(),
+  tab: z.nullable(Tab$inboundSchema).optional(),
 });
 
 /** @internal */
 export type ListInboxItemsRequest$Outbound = {
   cursor?: string | null | undefined;
   order?: string | null | undefined;
+  sort?: string | null | undefined;
   pageSize?: number | undefined;
   q?: string | null | undefined;
   status?: string | null | undefined;
+  tab?: string | null | undefined;
 };
 
 /** @internal */
@@ -190,9 +260,11 @@ export const ListInboxItemsRequest$outboundSchema: z.ZodType<
 > = z.object({
   cursor: z.nullable(z.string()).optional(),
   order: z.nullable(z.string()).optional(),
+  sort: z.nullable(z.string()).optional(),
   pageSize: z.number().optional(),
   q: z.nullable(z.string()).optional(),
   status: z.nullable(ListInboxItemsStatus$outboundSchema).optional(),
+  tab: z.nullable(Tab$outboundSchema).optional(),
 });
 
 /**
@@ -447,8 +519,8 @@ export function listInboxItemsDataFromJSON(
 }
 
 /** @internal */
-export const ListInboxItemsResponse$inboundSchema: z.ZodType<
-  ListInboxItemsResponse,
+export const ListInboxItemsResponseBody$inboundSchema: z.ZodType<
+  ListInboxItemsResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -457,20 +529,76 @@ export const ListInboxItemsResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ListInboxItemsResponse$Outbound = {
+export type ListInboxItemsResponseBody$Outbound = {
   meta: ListInboxItemsMeta$Outbound;
   data: Array<ListInboxItemsData$Outbound>;
 };
+
+/** @internal */
+export const ListInboxItemsResponseBody$outboundSchema: z.ZodType<
+  ListInboxItemsResponseBody$Outbound,
+  z.ZodTypeDef,
+  ListInboxItemsResponseBody
+> = z.object({
+  meta: z.lazy(() => ListInboxItemsMeta$outboundSchema),
+  data: z.array(z.lazy(() => ListInboxItemsData$outboundSchema)),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListInboxItemsResponseBody$ {
+  /** @deprecated use `ListInboxItemsResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ListInboxItemsResponseBody$inboundSchema;
+  /** @deprecated use `ListInboxItemsResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ListInboxItemsResponseBody$outboundSchema;
+  /** @deprecated use `ListInboxItemsResponseBody$Outbound` instead. */
+  export type Outbound = ListInboxItemsResponseBody$Outbound;
+}
+
+export function listInboxItemsResponseBodyToJSON(
+  listInboxItemsResponseBody: ListInboxItemsResponseBody,
+): string {
+  return JSON.stringify(
+    ListInboxItemsResponseBody$outboundSchema.parse(listInboxItemsResponseBody),
+  );
+}
+
+export function listInboxItemsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListInboxItemsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListInboxItemsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListInboxItemsResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListInboxItemsResponse$inboundSchema: z.ZodType<
+  ListInboxItemsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListInboxItemsResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type ListInboxItemsResponse$Outbound =
+  | ListInboxItemsResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const ListInboxItemsResponse$outboundSchema: z.ZodType<
   ListInboxItemsResponse$Outbound,
   z.ZodTypeDef,
   ListInboxItemsResponse
-> = z.object({
-  meta: z.lazy(() => ListInboxItemsMeta$outboundSchema),
-  data: z.array(z.lazy(() => ListInboxItemsData$outboundSchema)),
-});
+> = z.union([
+  z.lazy(() => ListInboxItemsResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

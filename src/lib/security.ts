@@ -246,7 +246,7 @@ export function resolveGlobalSecurity(
     [
       {
         fieldName: "Authorization",
-        type: "apiKey:header",
+        type: "oauth2",
         value: security?.oauth2 ?? env().MIDDAY_OAUTH2,
       },
     ],

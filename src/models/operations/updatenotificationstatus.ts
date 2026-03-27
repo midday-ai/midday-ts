@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 /**
  * The new status for the notification
@@ -32,9 +33,16 @@ export type UpdateNotificationStatusRequestBody = {
 };
 
 export type UpdateNotificationStatusRequest = {
+  /**
+   * The ID of the notification to update
+   */
   notificationId: string;
-  requestBody?: UpdateNotificationStatusRequestBody | undefined;
+  requestBody: UpdateNotificationStatusRequestBody;
 };
+
+export type UpdateNotificationStatusResponse =
+  | models.NotificationResponseSchema
+  | models.ErrorResponse;
 
 /** @internal */
 export const UpdateNotificationStatusStatus$inboundSchema: z.ZodNativeEnum<
@@ -123,8 +131,7 @@ export const UpdateNotificationStatusRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   notificationId: z.string(),
-  RequestBody: z.lazy(() => UpdateNotificationStatusRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => UpdateNotificationStatusRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -134,7 +141,7 @@ export const UpdateNotificationStatusRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateNotificationStatusRequest$Outbound = {
   notificationId: string;
-  RequestBody?: UpdateNotificationStatusRequestBody$Outbound | undefined;
+  RequestBody: UpdateNotificationStatusRequestBody$Outbound;
 };
 
 /** @internal */
@@ -144,8 +151,7 @@ export const UpdateNotificationStatusRequest$outboundSchema: z.ZodType<
   UpdateNotificationStatusRequest
 > = z.object({
   notificationId: z.string(),
-  requestBody: z.lazy(() => UpdateNotificationStatusRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => UpdateNotificationStatusRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",
@@ -182,5 +188,63 @@ export function updateNotificationStatusRequestFromJSON(
     jsonString,
     (x) => UpdateNotificationStatusRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateNotificationStatusRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateNotificationStatusResponse$inboundSchema: z.ZodType<
+  UpdateNotificationStatusResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.NotificationResponseSchema$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateNotificationStatusResponse$Outbound =
+  | models.NotificationResponseSchema$Outbound
+  | models.ErrorResponse$Outbound;
+
+/** @internal */
+export const UpdateNotificationStatusResponse$outboundSchema: z.ZodType<
+  UpdateNotificationStatusResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateNotificationStatusResponse
+> = z.union([
+  models.NotificationResponseSchema$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateNotificationStatusResponse$ {
+  /** @deprecated use `UpdateNotificationStatusResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateNotificationStatusResponse$inboundSchema;
+  /** @deprecated use `UpdateNotificationStatusResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateNotificationStatusResponse$outboundSchema;
+  /** @deprecated use `UpdateNotificationStatusResponse$Outbound` instead. */
+  export type Outbound = UpdateNotificationStatusResponse$Outbound;
+}
+
+export function updateNotificationStatusResponseToJSON(
+  updateNotificationStatusResponse: UpdateNotificationStatusResponse,
+): string {
+  return JSON.stringify(
+    UpdateNotificationStatusResponse$outboundSchema.parse(
+      updateNotificationStatusResponse,
+    ),
+  );
+}
+
+export function updateNotificationStatusResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateNotificationStatusResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateNotificationStatusResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateNotificationStatusResponse' from JSON`,
   );
 }

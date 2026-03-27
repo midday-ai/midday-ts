@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage documents
+
 ### Available Operations
 
 * [list](#list) - List all documents
@@ -35,6 +37,8 @@ async function run() {
       "tag1",
       "tag2",
     ],
+    start: "2024-01-01",
+    end: "2024-12-31",
   });
 
   console.log(result);
@@ -68,6 +72,8 @@ async function run() {
       "tag1",
       "tag2",
     ],
+    start: "2024-01-01",
+    end: "2024-12-31",
   });
   if (res.ok) {
     const { value: result } = res;

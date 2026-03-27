@@ -6,20 +6,28 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type DeleteTrackerEntryRequest = {
+  /**
+   * Unique identifier of the tracker entry to delete
+   */
   id: string;
 };
 
 /**
  * Tracker entry deleted successfully.
  */
-export type DeleteTrackerEntryResponse = {
+export type DeleteTrackerEntryResponseBody = {
   /**
    * Unique identifier of the tracker entry to delete
    */
   id: string;
 };
+
+export type DeleteTrackerEntryResponse =
+  | DeleteTrackerEntryResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const DeleteTrackerEntryRequest$inboundSchema: z.ZodType<
@@ -76,8 +84,8 @@ export function deleteTrackerEntryRequestFromJSON(
 }
 
 /** @internal */
-export const DeleteTrackerEntryResponse$inboundSchema: z.ZodType<
-  DeleteTrackerEntryResponse,
+export const DeleteTrackerEntryResponseBody$inboundSchema: z.ZodType<
+  DeleteTrackerEntryResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -85,18 +93,76 @@ export const DeleteTrackerEntryResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeleteTrackerEntryResponse$Outbound = {
+export type DeleteTrackerEntryResponseBody$Outbound = {
   id: string;
 };
+
+/** @internal */
+export const DeleteTrackerEntryResponseBody$outboundSchema: z.ZodType<
+  DeleteTrackerEntryResponseBody$Outbound,
+  z.ZodTypeDef,
+  DeleteTrackerEntryResponseBody
+> = z.object({
+  id: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteTrackerEntryResponseBody$ {
+  /** @deprecated use `DeleteTrackerEntryResponseBody$inboundSchema` instead. */
+  export const inboundSchema = DeleteTrackerEntryResponseBody$inboundSchema;
+  /** @deprecated use `DeleteTrackerEntryResponseBody$outboundSchema` instead. */
+  export const outboundSchema = DeleteTrackerEntryResponseBody$outboundSchema;
+  /** @deprecated use `DeleteTrackerEntryResponseBody$Outbound` instead. */
+  export type Outbound = DeleteTrackerEntryResponseBody$Outbound;
+}
+
+export function deleteTrackerEntryResponseBodyToJSON(
+  deleteTrackerEntryResponseBody: DeleteTrackerEntryResponseBody,
+): string {
+  return JSON.stringify(
+    DeleteTrackerEntryResponseBody$outboundSchema.parse(
+      deleteTrackerEntryResponseBody,
+    ),
+  );
+}
+
+export function deleteTrackerEntryResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteTrackerEntryResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteTrackerEntryResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteTrackerEntryResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteTrackerEntryResponse$inboundSchema: z.ZodType<
+  DeleteTrackerEntryResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeleteTrackerEntryResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type DeleteTrackerEntryResponse$Outbound =
+  | DeleteTrackerEntryResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const DeleteTrackerEntryResponse$outboundSchema: z.ZodType<
   DeleteTrackerEntryResponse$Outbound,
   z.ZodTypeDef,
   DeleteTrackerEntryResponse
-> = z.object({
-  id: z.string(),
-});
+> = z.union([
+  z.lazy(() => DeleteTrackerEntryResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

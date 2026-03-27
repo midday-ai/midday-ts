@@ -1,13 +1,12 @@
 # ListTransactionsResponse
 
-Retrieve a list of transactions for the authenticated team.
 
-## Example Usage
+## Supported Types
+
+### `operations.ListTransactionsResponseBody`
 
 ```typescript
-import { ListTransactionsResponse } from "@midday-ai/sdk/models/operations";
-
-let value: ListTransactionsResponse = {
+const value: operations.ListTransactionsResponseBody = {
   meta: {
     cursor: "eyJpZCI6IjQ1NiJ9",
     hasPreviousPage: false,
@@ -17,9 +16,12 @@ let value: ListTransactionsResponse = {
 };
 ```
 
-## Fields
+### `models.ErrorResponse`
 
-| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `meta`                                                                             | [operations.ListTransactionsMeta](../../models/operations/listtransactionsmeta.md) | :heavy_check_mark:                                                                 | Pagination metadata for the transactions response                                  |
-| `data`                                                                             | [models.TransactionResponse](../../models/transactionresponse.md)[]                | :heavy_check_mark:                                                                 | Array of transactions matching the query criteria                                  |
+```typescript
+const value: models.ErrorResponse = {
+  error: "Internal Server Error",
+  code: 500,
+};
+```
+

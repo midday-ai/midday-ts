@@ -18,6 +18,7 @@ export const UpdateTransactionsStatus = {
   Completed: "completed",
   Posted: "posted",
   Excluded: "excluded",
+  Exported: "exported",
 } as const;
 /**
  * Status to set for the transactions.
@@ -102,7 +103,7 @@ export type UpdateTransactionsMeta = {
 /**
  * Transactions updated
  */
-export type UpdateTransactionsResponse = {
+export type UpdateTransactionsResponseBody = {
   /**
    * Pagination metadata for the transactions response
    */
@@ -112,6 +113,10 @@ export type UpdateTransactionsResponse = {
    */
   data: Array<models.TransactionResponse>;
 };
+
+export type UpdateTransactionsResponse =
+  | UpdateTransactionsResponseBody
+  | models.ErrorResponse;
 
 /** @internal */
 export const UpdateTransactionsStatus$inboundSchema: z.ZodNativeEnum<
@@ -294,8 +299,8 @@ export function updateTransactionsMetaFromJSON(
 }
 
 /** @internal */
-export const UpdateTransactionsResponse$inboundSchema: z.ZodType<
-  UpdateTransactionsResponse,
+export const UpdateTransactionsResponseBody$inboundSchema: z.ZodType<
+  UpdateTransactionsResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -304,20 +309,78 @@ export const UpdateTransactionsResponse$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateTransactionsResponse$Outbound = {
+export type UpdateTransactionsResponseBody$Outbound = {
   meta: UpdateTransactionsMeta$Outbound;
   data: Array<models.TransactionResponse$Outbound>;
 };
+
+/** @internal */
+export const UpdateTransactionsResponseBody$outboundSchema: z.ZodType<
+  UpdateTransactionsResponseBody$Outbound,
+  z.ZodTypeDef,
+  UpdateTransactionsResponseBody
+> = z.object({
+  meta: z.lazy(() => UpdateTransactionsMeta$outboundSchema),
+  data: z.array(models.TransactionResponse$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateTransactionsResponseBody$ {
+  /** @deprecated use `UpdateTransactionsResponseBody$inboundSchema` instead. */
+  export const inboundSchema = UpdateTransactionsResponseBody$inboundSchema;
+  /** @deprecated use `UpdateTransactionsResponseBody$outboundSchema` instead. */
+  export const outboundSchema = UpdateTransactionsResponseBody$outboundSchema;
+  /** @deprecated use `UpdateTransactionsResponseBody$Outbound` instead. */
+  export type Outbound = UpdateTransactionsResponseBody$Outbound;
+}
+
+export function updateTransactionsResponseBodyToJSON(
+  updateTransactionsResponseBody: UpdateTransactionsResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateTransactionsResponseBody$outboundSchema.parse(
+      updateTransactionsResponseBody,
+    ),
+  );
+}
+
+export function updateTransactionsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateTransactionsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateTransactionsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateTransactionsResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateTransactionsResponse$inboundSchema: z.ZodType<
+  UpdateTransactionsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateTransactionsResponseBody$inboundSchema),
+  models.ErrorResponse$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateTransactionsResponse$Outbound =
+  | UpdateTransactionsResponseBody$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const UpdateTransactionsResponse$outboundSchema: z.ZodType<
   UpdateTransactionsResponse$Outbound,
   z.ZodTypeDef,
   UpdateTransactionsResponse
-> = z.object({
-  meta: z.lazy(() => UpdateTransactionsMeta$outboundSchema),
-  data: z.array(models.TransactionResponse$outboundSchema),
-});
+> = z.union([
+  z.lazy(() => UpdateTransactionsResponseBody$outboundSchema),
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

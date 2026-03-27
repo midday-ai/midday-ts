@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage transactions
+
 ### Available Operations
 
 * [list](#list) - List all transactions
@@ -59,8 +61,8 @@ async function run() {
       "user-2",
     ],
     statuses: [
-      "pending",
-      "completed",
+      "in_review",
+      "export_error",
     ],
     recurring: [
       "monthly",
@@ -76,6 +78,9 @@ async function run() {
       "299.99",
     ],
     type: "expense",
+    manual: "include",
+    exported: false,
+    fulfilled: true,
   });
 
   console.log(result);
@@ -128,8 +133,8 @@ async function run() {
       "user-2",
     ],
     statuses: [
-      "pending",
-      "completed",
+      "in_review",
+      "export_error",
     ],
     recurring: [
       "monthly",
@@ -145,6 +150,9 @@ async function run() {
       "299.99",
     ],
     type: "expense",
+    manual: "include",
+    exported: false,
+    fulfilled: true,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -193,7 +201,13 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.create();
+  const result = await midday.transactions.create({
+    name: "<value>",
+    amount: 5744.12,
+    currency: "Forint",
+    date: "2024-01-12",
+    bankAccountId: "<id>",
+  });
 
   console.log(result);
 }
@@ -218,7 +232,13 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsCreate(midday);
+  const res = await transactionsCreate(midday, {
+    name: "<value>",
+    amount: 5744.12,
+    currency: "Forint",
+    date: "2024-01-12",
+    bankAccountId: "<id>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -241,7 +261,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TransactionResponse](../../models/transactionresponse.md)\>**
+**Promise\<[operations.CreateTransactionResponse](../../models/operations/createtransactionresponse.md)\>**
 
 ### Errors
 
@@ -318,7 +338,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TransactionResponse](../../models/transactionresponse.md)\>**
+**Promise\<[operations.GetTransactionByIdResponse](../../models/operations/gettransactionbyidresponse.md)\>**
 
 ### Errors
 
@@ -345,6 +365,7 @@ const midday = new Midday({
 async function run() {
   const result = await midday.transactions.update({
     id: "f0c1d0ef-5679-4c1b-9698-2c64e97e8c1d",
+    requestBody: {},
   });
 
   console.log(result);
@@ -372,6 +393,7 @@ const midday = new MiddayCore({
 async function run() {
   const res = await transactionsUpdate(midday, {
     id: "f0c1d0ef-5679-4c1b-9698-2c64e97e8c1d",
+    requestBody: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -395,7 +417,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TransactionResponse](../../models/transactionresponse.md)\>**
+**Promise\<[operations.UpdateTransactionResponse](../../models/operations/updatetransactionresponse.md)\>**
 
 ### Errors
 
@@ -581,7 +603,13 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.updateMany();
+  const result = await midday.transactions.updateMany({
+    ids: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+  });
 
   console.log(result);
 }
@@ -606,7 +634,13 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsUpdateMany(midday);
+  const res = await transactionsUpdateMany(midday, {
+    ids: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -654,7 +688,15 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.createMany();
+  const result = await midday.transactions.createMany([
+    {
+      name: "<value>",
+      amount: 5142.41,
+      currency: "Gourde",
+      date: "2024-03-22",
+      bankAccountId: "<id>",
+    },
+  ]);
 
   console.log(result);
 }
@@ -679,7 +721,15 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsCreateMany(midday);
+  const res = await transactionsCreateMany(midday, [
+    {
+      name: "<value>",
+      amount: 5142.41,
+      currency: "Gourde",
+      date: "2024-03-22",
+      bankAccountId: "<id>",
+    },
+  ]);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -702,7 +752,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TransactionResponse[]](../../models/.md)\>**
+**Promise\<[operations.CreateTransactionsResponse](../../models/operations/createtransactionsresponse.md)\>**
 
 ### Errors
 
@@ -727,7 +777,11 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.transactions.deleteMany();
+  const result = await midday.transactions.deleteMany([
+    "c0db9ee1-75c5-4621-84a2-0c38d2dc3106",
+    "e5581754-1917-44fa-a324-166437019d98",
+    "a8bccdfb-07ed-4359-8712-46b82316d8f9",
+  ]);
 
   console.log(result);
 }
@@ -752,7 +806,11 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await transactionsDeleteMany(midday);
+  const res = await transactionsDeleteMany(midday, [
+    "c0db9ee1-75c5-4621-84a2-0c38d2dc3106",
+    "e5581754-1917-44fa-a324-166437019d98",
+    "a8bccdfb-07ed-4359-8712-46b82316d8f9",
+  ]);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -775,7 +833,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.DeleteTransactionsResponse[]](../../models/.md)\>**
+**Promise\<[operations.DeleteTransactionsResponse](../../models/operations/deletetransactionsresponse.md)\>**
 
 ### Errors
 

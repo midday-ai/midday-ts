@@ -7,7 +7,7 @@ import * as models from "../../models/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: models.UpdateAllNotificationsStatusSchema$inboundSchema.optional(),
+  request: models.UpdateAllNotificationsStatusSchema$inboundSchema,
 };
 
 export const tool$notificationsUpdateAllStatus: ToolDefinition<typeof args> = {

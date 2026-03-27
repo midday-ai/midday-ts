@@ -6,12 +6,26 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetSpendingReportsRequest = {
+  /**
+   * Start date (ISO 8601 format)
+   */
   from: string;
+  /**
+   * End date (ISO 8601 format)
+   */
   to: string;
+  /**
+   * Currency code (ISO 4217)
+   */
   currency?: string | undefined;
 };
+
+export type GetSpendingReportsResponse =
+  | models.ErrorResponse
+  | Array<models.SpendingResultArray>;
 
 /** @internal */
 export const GetSpendingReportsRequest$inboundSchema: z.ZodType<
@@ -70,5 +84,61 @@ export function getSpendingReportsRequestFromJSON(
     jsonString,
     (x) => GetSpendingReportsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetSpendingReportsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetSpendingReportsResponse$inboundSchema: z.ZodType<
+  GetSpendingReportsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  models.ErrorResponse$inboundSchema,
+  z.array(models.SpendingResultArray$inboundSchema),
+]);
+
+/** @internal */
+export type GetSpendingReportsResponse$Outbound =
+  | models.ErrorResponse$Outbound
+  | Array<models.SpendingResultArray$Outbound>;
+
+/** @internal */
+export const GetSpendingReportsResponse$outboundSchema: z.ZodType<
+  GetSpendingReportsResponse$Outbound,
+  z.ZodTypeDef,
+  GetSpendingReportsResponse
+> = z.union([
+  models.ErrorResponse$outboundSchema,
+  z.array(models.SpendingResultArray$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetSpendingReportsResponse$ {
+  /** @deprecated use `GetSpendingReportsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetSpendingReportsResponse$inboundSchema;
+  /** @deprecated use `GetSpendingReportsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetSpendingReportsResponse$outboundSchema;
+  /** @deprecated use `GetSpendingReportsResponse$Outbound` instead. */
+  export type Outbound = GetSpendingReportsResponse$Outbound;
+}
+
+export function getSpendingReportsResponseToJSON(
+  getSpendingReportsResponse: GetSpendingReportsResponse,
+): string {
+  return JSON.stringify(
+    GetSpendingReportsResponse$outboundSchema.parse(getSpendingReportsResponse),
+  );
+}
+
+export function getSpendingReportsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetSpendingReportsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetSpendingReportsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetSpendingReportsResponse' from JSON`,
   );
 }

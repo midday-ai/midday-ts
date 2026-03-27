@@ -3,6 +3,8 @@
 
 ## Overview
 
+Manage tracker projects
+
 ### Available Operations
 
 * [list](#list) - List all tracker projects
@@ -44,8 +46,8 @@ async function run() {
       "tag-2",
     ],
     sort: [
-      "-createdAt",
-      "name",
+      "created_at",
+      "desc",
     ],
   });
 
@@ -88,8 +90,8 @@ async function run() {
       "tag-2",
     ],
     sort: [
-      "-createdAt",
-      "name",
+      "created_at",
+      "desc",
     ],
   });
   if (res.ok) {
@@ -114,7 +116,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TrackerProjectsResponse](../../models/trackerprojectsresponse.md)\>**
+**Promise\<[operations.ListTrackerProjectsResponse](../../models/operations/listtrackerprojectsresponse.md)\>**
 
 ### Errors
 
@@ -193,7 +195,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TrackerProjectResponse](../../models/trackerprojectresponse.md)\>**
+**Promise\<[operations.CreateTrackerProjectResponse](../../models/operations/createtrackerprojectresponse.md)\>**
 
 ### Errors
 
@@ -310,7 +312,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TrackerProjectResponse](../../models/trackerprojectresponse.md)\>**
+**Promise\<[operations.UpdateTrackerProjectResponse](../../models/operations/updatetrackerprojectresponse.md)\>**
 
 ### Errors
 
@@ -387,7 +389,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TrackerProjectResponse](../../models/trackerprojectresponse.md)\>**
+**Promise\<[operations.GetTrackerProjectByIdResponse](../../models/operations/gettrackerprojectbyidresponse.md)\>**
 
 ### Errors
 

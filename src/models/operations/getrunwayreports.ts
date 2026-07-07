@@ -15,7 +15,9 @@ export type GetRunwayReportsRequest = {
   currency?: string | undefined;
 };
 
-export type GetRunwayReportsResponse = models.ErrorResponse | number;
+export type GetRunwayReportsResponse =
+  | models.GetRunwayResponseSchema
+  | models.ErrorResponse;
 
 /** @internal */
 export const GetRunwayReportsRequest$inboundSchema: z.ZodType<
@@ -76,19 +78,25 @@ export const GetRunwayReportsResponse$inboundSchema: z.ZodType<
   GetRunwayReportsResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([models.ErrorResponse$inboundSchema, z.number()]);
+> = z.union([
+  models.GetRunwayResponseSchema$inboundSchema,
+  models.ErrorResponse$inboundSchema,
+]);
 
 /** @internal */
 export type GetRunwayReportsResponse$Outbound =
-  | models.ErrorResponse$Outbound
-  | number;
+  | models.GetRunwayResponseSchema$Outbound
+  | models.ErrorResponse$Outbound;
 
 /** @internal */
 export const GetRunwayReportsResponse$outboundSchema: z.ZodType<
   GetRunwayReportsResponse$Outbound,
   z.ZodTypeDef,
   GetRunwayReportsResponse
-> = z.union([models.ErrorResponse$outboundSchema, z.number()]);
+> = z.union([
+  models.GetRunwayResponseSchema$outboundSchema,
+  models.ErrorResponse$outboundSchema,
+]);
 
 /**
  * @internal

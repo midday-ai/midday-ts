@@ -66,11 +66,11 @@ export type Account = {
   /**
    * Display name of the bank account
    */
-  name: string;
+  name: string | null;
   /**
    * Currency of the bank account in ISO 4217 format
    */
-  currency: string;
+  currency: string | null;
   /**
    * Bank connection information associated with the account. Null for manual accounts.
    */
@@ -319,16 +319,16 @@ export function connectionFromJSON(
 export const Account$inboundSchema: z.ZodType<Account, z.ZodTypeDef, unknown> =
   z.object({
     id: z.string(),
-    name: z.string(),
-    currency: z.string(),
+    name: z.nullable(z.string()),
+    currency: z.nullable(z.string()),
     connection: z.nullable(z.lazy(() => Connection$inboundSchema)),
   });
 
 /** @internal */
 export type Account$Outbound = {
   id: string;
-  name: string;
-  currency: string;
+  name: string | null;
+  currency: string | null;
   connection: Connection$Outbound | null;
 };
 
@@ -339,8 +339,8 @@ export const Account$outboundSchema: z.ZodType<
   Account
 > = z.object({
   id: z.string(),
-  name: z.string(),
-  currency: z.string(),
+  name: z.nullable(z.string()),
+  currency: z.nullable(z.string()),
   connection: z.nullable(z.lazy(() => Connection$outboundSchema)),
 });
 

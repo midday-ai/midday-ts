@@ -9,7 +9,6 @@ Integration endpoints
 
 * [slackOAuthCallback](#slackoauthcallback) - Slack OAuth callback
 * [getSlackInstallUrl](#getslackinstallurl) - Get Slack install URL
-* [slackWebhook](#slackwebhook) - Slack webhook handler
 * [slackInteractions](#slackinteractions) - Slack interactions handler
 * [gmailOAuthCallback](#gmailoauthcallback) - Gmail OAuth callback
 * [getGmailInstallUrl](#getgmailinstallurl) - Get Gmail install URL
@@ -168,78 +167,6 @@ run();
 ### Response
 
 **Promise\<[operations.GetSlackInstallUrlResponse](../../models/operations/getslackinstallurlresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## slackWebhook
-
-Handles incoming webhook events from Slack. Verifies request signature and processes events.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="slackWebhook" method="post" path="/apps/slack/webhook" -->
-```typescript
-import { Midday } from "@midday-ai/sdk";
-
-const midday = new Midday({
-  security: {
-    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
-  },
-});
-
-async function run() {
-  const result = await midday.integrations.slackWebhook();
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MiddayCore } from "@midday-ai/sdk/core.js";
-import { integrationsSlackWebhook } from "@midday-ai/sdk/funcs/integrationsSlackWebhook.js";
-
-// Use `MiddayCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const midday = new MiddayCore({
-  security: {
-    oauth2: process.env["MIDDAY_OAUTH2"] ?? "",
-  },
-});
-
-async function run() {
-  const res = await integrationsSlackWebhook(midday);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("integrationsSlackWebhook failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.SlackWebhookResponse](../../models/operations/slackwebhookresponse.md)\>**
 
 ### Errors
 

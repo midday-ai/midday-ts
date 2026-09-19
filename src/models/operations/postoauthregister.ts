@@ -46,7 +46,7 @@ export type PostOAuthRegisterRequest = {
 /**
  * Client registered successfully
  */
-export type PostOAuthRegisterResponseBody2 = {
+export type PostOAuthRegisterResponse = {
   /**
    * Assigned client ID
    */
@@ -72,40 +72,6 @@ export type PostOAuthRegisterResponseBody2 = {
    */
   responseTypes: Array<string>;
 };
-
-/**
- * Existing client returned (deduplicated)
- */
-export type PostOAuthRegisterResponseBody1 = {
-  /**
-   * Assigned client ID
-   */
-  clientId: string;
-  /**
-   * Human-readable name of the client
-   */
-  clientName: string;
-  /**
-   * Registered redirect URIs
-   */
-  redirectUris: Array<string>;
-  /**
-   * Granted grant types
-   */
-  grantTypes: Array<string>;
-  /**
-   * Token endpoint authentication method
-   */
-  tokenEndpointAuthMethod: string;
-  /**
-   * Supported response types
-   */
-  responseTypes: Array<string>;
-};
-
-export type PostOAuthRegisterResponse =
-  | PostOAuthRegisterResponseBody1
-  | PostOAuthRegisterResponseBody2;
 
 /** @internal */
 export const PostOAuthRegisterRequest$inboundSchema: z.ZodType<
@@ -203,207 +169,60 @@ export function postOAuthRegisterRequestFromJSON(
 }
 
 /** @internal */
-export const PostOAuthRegisterResponseBody2$inboundSchema: z.ZodType<
-  PostOAuthRegisterResponseBody2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  client_id: z.string(),
-  client_name: z.string(),
-  redirect_uris: z.array(z.string()),
-  grant_types: z.array(z.string()),
-  token_endpoint_auth_method: z.string(),
-  response_types: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "client_id": "clientId",
-    "client_name": "clientName",
-    "redirect_uris": "redirectUris",
-    "grant_types": "grantTypes",
-    "token_endpoint_auth_method": "tokenEndpointAuthMethod",
-    "response_types": "responseTypes",
-  });
-});
-
-/** @internal */
-export type PostOAuthRegisterResponseBody2$Outbound = {
-  client_id: string;
-  client_name: string;
-  redirect_uris: Array<string>;
-  grant_types: Array<string>;
-  token_endpoint_auth_method: string;
-  response_types: Array<string>;
-};
-
-/** @internal */
-export const PostOAuthRegisterResponseBody2$outboundSchema: z.ZodType<
-  PostOAuthRegisterResponseBody2$Outbound,
-  z.ZodTypeDef,
-  PostOAuthRegisterResponseBody2
-> = z.object({
-  clientId: z.string(),
-  clientName: z.string(),
-  redirectUris: z.array(z.string()),
-  grantTypes: z.array(z.string()),
-  tokenEndpointAuthMethod: z.string(),
-  responseTypes: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    clientId: "client_id",
-    clientName: "client_name",
-    redirectUris: "redirect_uris",
-    grantTypes: "grant_types",
-    tokenEndpointAuthMethod: "token_endpoint_auth_method",
-    responseTypes: "response_types",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostOAuthRegisterResponseBody2$ {
-  /** @deprecated use `PostOAuthRegisterResponseBody2$inboundSchema` instead. */
-  export const inboundSchema = PostOAuthRegisterResponseBody2$inboundSchema;
-  /** @deprecated use `PostOAuthRegisterResponseBody2$outboundSchema` instead. */
-  export const outboundSchema = PostOAuthRegisterResponseBody2$outboundSchema;
-  /** @deprecated use `PostOAuthRegisterResponseBody2$Outbound` instead. */
-  export type Outbound = PostOAuthRegisterResponseBody2$Outbound;
-}
-
-export function postOAuthRegisterResponseBody2ToJSON(
-  postOAuthRegisterResponseBody2: PostOAuthRegisterResponseBody2,
-): string {
-  return JSON.stringify(
-    PostOAuthRegisterResponseBody2$outboundSchema.parse(
-      postOAuthRegisterResponseBody2,
-    ),
-  );
-}
-
-export function postOAuthRegisterResponseBody2FromJSON(
-  jsonString: string,
-): SafeParseResult<PostOAuthRegisterResponseBody2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostOAuthRegisterResponseBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostOAuthRegisterResponseBody2' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostOAuthRegisterResponseBody1$inboundSchema: z.ZodType<
-  PostOAuthRegisterResponseBody1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  client_id: z.string(),
-  client_name: z.string(),
-  redirect_uris: z.array(z.string()),
-  grant_types: z.array(z.string()),
-  token_endpoint_auth_method: z.string(),
-  response_types: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "client_id": "clientId",
-    "client_name": "clientName",
-    "redirect_uris": "redirectUris",
-    "grant_types": "grantTypes",
-    "token_endpoint_auth_method": "tokenEndpointAuthMethod",
-    "response_types": "responseTypes",
-  });
-});
-
-/** @internal */
-export type PostOAuthRegisterResponseBody1$Outbound = {
-  client_id: string;
-  client_name: string;
-  redirect_uris: Array<string>;
-  grant_types: Array<string>;
-  token_endpoint_auth_method: string;
-  response_types: Array<string>;
-};
-
-/** @internal */
-export const PostOAuthRegisterResponseBody1$outboundSchema: z.ZodType<
-  PostOAuthRegisterResponseBody1$Outbound,
-  z.ZodTypeDef,
-  PostOAuthRegisterResponseBody1
-> = z.object({
-  clientId: z.string(),
-  clientName: z.string(),
-  redirectUris: z.array(z.string()),
-  grantTypes: z.array(z.string()),
-  tokenEndpointAuthMethod: z.string(),
-  responseTypes: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    clientId: "client_id",
-    clientName: "client_name",
-    redirectUris: "redirect_uris",
-    grantTypes: "grant_types",
-    tokenEndpointAuthMethod: "token_endpoint_auth_method",
-    responseTypes: "response_types",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostOAuthRegisterResponseBody1$ {
-  /** @deprecated use `PostOAuthRegisterResponseBody1$inboundSchema` instead. */
-  export const inboundSchema = PostOAuthRegisterResponseBody1$inboundSchema;
-  /** @deprecated use `PostOAuthRegisterResponseBody1$outboundSchema` instead. */
-  export const outboundSchema = PostOAuthRegisterResponseBody1$outboundSchema;
-  /** @deprecated use `PostOAuthRegisterResponseBody1$Outbound` instead. */
-  export type Outbound = PostOAuthRegisterResponseBody1$Outbound;
-}
-
-export function postOAuthRegisterResponseBody1ToJSON(
-  postOAuthRegisterResponseBody1: PostOAuthRegisterResponseBody1,
-): string {
-  return JSON.stringify(
-    PostOAuthRegisterResponseBody1$outboundSchema.parse(
-      postOAuthRegisterResponseBody1,
-    ),
-  );
-}
-
-export function postOAuthRegisterResponseBody1FromJSON(
-  jsonString: string,
-): SafeParseResult<PostOAuthRegisterResponseBody1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostOAuthRegisterResponseBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostOAuthRegisterResponseBody1' from JSON`,
-  );
-}
-
-/** @internal */
 export const PostOAuthRegisterResponse$inboundSchema: z.ZodType<
   PostOAuthRegisterResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => PostOAuthRegisterResponseBody1$inboundSchema),
-  z.lazy(() => PostOAuthRegisterResponseBody2$inboundSchema),
-]);
+> = z.object({
+  client_id: z.string(),
+  client_name: z.string(),
+  redirect_uris: z.array(z.string()),
+  grant_types: z.array(z.string()),
+  token_endpoint_auth_method: z.string(),
+  response_types: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    "client_id": "clientId",
+    "client_name": "clientName",
+    "redirect_uris": "redirectUris",
+    "grant_types": "grantTypes",
+    "token_endpoint_auth_method": "tokenEndpointAuthMethod",
+    "response_types": "responseTypes",
+  });
+});
 
 /** @internal */
-export type PostOAuthRegisterResponse$Outbound =
-  | PostOAuthRegisterResponseBody1$Outbound
-  | PostOAuthRegisterResponseBody2$Outbound;
+export type PostOAuthRegisterResponse$Outbound = {
+  client_id: string;
+  client_name: string;
+  redirect_uris: Array<string>;
+  grant_types: Array<string>;
+  token_endpoint_auth_method: string;
+  response_types: Array<string>;
+};
 
 /** @internal */
 export const PostOAuthRegisterResponse$outboundSchema: z.ZodType<
   PostOAuthRegisterResponse$Outbound,
   z.ZodTypeDef,
   PostOAuthRegisterResponse
-> = z.union([
-  z.lazy(() => PostOAuthRegisterResponseBody1$outboundSchema),
-  z.lazy(() => PostOAuthRegisterResponseBody2$outboundSchema),
-]);
+> = z.object({
+  clientId: z.string(),
+  clientName: z.string(),
+  redirectUris: z.array(z.string()),
+  grantTypes: z.array(z.string()),
+  tokenEndpointAuthMethod: z.string(),
+  responseTypes: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    clientId: "client_id",
+    clientName: "client_name",
+    redirectUris: "redirect_uris",
+    grantTypes: "grant_types",
+    tokenEndpointAuthMethod: "token_endpoint_auth_method",
+    responseTypes: "response_types",
+  });
+});
 
 /**
  * @internal

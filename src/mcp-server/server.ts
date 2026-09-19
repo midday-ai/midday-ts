@@ -49,7 +49,6 @@ import { tool$integrationsOutlookOAuthCallback } from "./tools/integrationsOutlo
 import { tool$integrationsQuickBooksOAuthCallback } from "./tools/integrationsQuickBooksOAuthCallback.js";
 import { tool$integrationsSlackInteractions } from "./tools/integrationsSlackInteractions.js";
 import { tool$integrationsSlackOAuthCallback } from "./tools/integrationsSlackOAuthCallback.js";
-import { tool$integrationsSlackWebhook } from "./tools/integrationsSlackWebhook.js";
 import { tool$integrationsXeroOAuthCallback } from "./tools/integrationsXeroOAuthCallback.js";
 import { tool$invoicePaymentsCreateInvoicePaymentIntent } from "./tools/invoicePaymentsCreateInvoicePaymentIntent.js";
 import { tool$invoicePaymentsDisconnectStripe } from "./tools/invoicePaymentsDisconnectStripe.js";
@@ -117,8 +116,6 @@ import { tool$webhooksPlaidWebhook } from "./tools/webhooksPlaidWebhook.js";
 import { tool$webhooksPolarWebhook } from "./tools/webhooksPolarWebhook.js";
 import { tool$webhooksStripeWebhook } from "./tools/webhooksStripeWebhook.js";
 import { tool$webhooksTellerWebhook } from "./tools/webhooksTellerWebhook.js";
-import { tool$webhooksWhatsappWebhook } from "./tools/webhooksWhatsappWebhook.js";
-import { tool$webhooksWhatsappWebhookVerify } from "./tools/webhooksWhatsappWebhookVerify.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -130,7 +127,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Midday",
-    version: "0.6.0",
+    version: "0.6.1",
   });
 
   const client = new MiddayCore({
@@ -170,14 +167,11 @@ export function createMCPServer(deps: {
   tool(tool$webhooksPolarWebhook);
   tool(tool$webhooksStripeWebhook);
   tool(tool$webhooksTellerWebhook);
-  tool(tool$webhooksWhatsappWebhookVerify);
-  tool(tool$webhooksWhatsappWebhook);
   tool(tool$filesProxy);
   tool(tool$filesDownloadFile);
   tool(tool$filesDownloadInvoice);
   tool(tool$integrationsSlackOAuthCallback);
   tool(tool$integrationsGetSlackInstallUrl);
-  tool(tool$integrationsSlackWebhook);
   tool(tool$integrationsSlackInteractions);
   tool(tool$integrationsGmailOAuthCallback);
   tool(tool$integrationsGetGmailInstallUrl);

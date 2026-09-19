@@ -3,23 +3,16 @@
  */
 
 import { oAuthPostOAuthRevoke } from "../../funcs/oAuthPostOAuthRevoke.js";
-import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
-const args = {
-  request: operations.PostOAuthRevokeRequest$inboundSchema,
-};
-
-export const tool$oAuthPostOAuthRevoke: ToolDefinition<typeof args> = {
+export const tool$oAuthPostOAuthRevoke: ToolDefinition = {
   name: "O-auth-post-O-auth-revoke",
   description: `OAuth Token Revocation
 
-Revoke an access token or refresh token`,
-  args,
-  tool: async (client, args, ctx) => {
+Revoke an access token or refresh token. Accepts application/json or application/x-www-form-urlencoded.`,
+  tool: async (client, ctx) => {
     const [result, apiCall] = await oAuthPostOAuthRevoke(
       client,
-      args.request,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 

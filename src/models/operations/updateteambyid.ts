@@ -140,6 +140,22 @@ export type UpdateTeamByIdResponseBody = {
    * Current subscription plan of the team
    */
   plan: UpdateTeamByIdPlan;
+  /**
+   * Primary contact email address for the team
+   */
+  email?: string | null | undefined;
+  /**
+   * Base currency for the team in ISO 4217 format (3-letter currency code)
+   */
+  baseCurrency?: string | null | undefined;
+  /**
+   * Country code for the team in ISO 3166-1 alpha-2 format
+   */
+  countryCode?: string | null | undefined;
+  /**
+   * Month when the fiscal year starts (1-12). Null for trailing 12 months.
+   */
+  fiscalYearStartMonth?: number | null | undefined;
 };
 
 export type UpdateTeamByIdResponse =
@@ -423,6 +439,10 @@ export const UpdateTeamByIdResponseBody$inboundSchema: z.ZodType<
   name: z.string(),
   logoUrl: z.nullable(z.string()),
   plan: UpdateTeamByIdPlan$inboundSchema,
+  email: z.nullable(z.string()).optional(),
+  baseCurrency: z.nullable(z.string()).optional(),
+  countryCode: z.nullable(z.string()).optional(),
+  fiscalYearStartMonth: z.nullable(z.number().int()).optional(),
 });
 
 /** @internal */
@@ -431,6 +451,10 @@ export type UpdateTeamByIdResponseBody$Outbound = {
   name: string;
   logoUrl: string | null;
   plan: string;
+  email?: string | null | undefined;
+  baseCurrency?: string | null | undefined;
+  countryCode?: string | null | undefined;
+  fiscalYearStartMonth?: number | null | undefined;
 };
 
 /** @internal */
@@ -443,6 +467,10 @@ export const UpdateTeamByIdResponseBody$outboundSchema: z.ZodType<
   name: z.string(),
   logoUrl: z.nullable(z.string()),
   plan: UpdateTeamByIdPlan$outboundSchema,
+  email: z.nullable(z.string()).optional(),
+  baseCurrency: z.nullable(z.string()).optional(),
+  countryCode: z.nullable(z.string()).optional(),
+  fiscalYearStartMonth: z.nullable(z.number().int()).optional(),
 });
 
 /**

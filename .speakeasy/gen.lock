@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 091cf3d7-4210-4977-a93c-0cefd2ff8475
 management:
-  docChecksum: 28f6416687db432ba1ed221acae7b4af
+  docChecksum: d649dec95ff6e6b3ace8f7582b031cd6
   docVersion: 0.0.1
   speakeasyVersion: 1.622.1
   generationVersion: 2.709.0
-  releaseVersion: 0.6.0
-  configChecksum: 88f12c98cdd49b3f889a43ea9cb18a56
+  releaseVersion: 0.6.1
+  configChecksum: 3205cabc8c1e94901808bd3bc1a0779e
   repoURL: https://github.com/midday-ai/midday-ts.git
   installationURL: https://github.com/midday-ai/midday-ts
   published: true
@@ -94,16 +94,12 @@ generatedFiles:
   - docs/models/getexpensesresponseschemameta.md
   - docs/models/getprofitresponseschema.md
   - docs/models/getrevenueresponseschema.md
-  - docs/models/granttypeauthorizationcode.md
-  - docs/models/granttyperefreshtoken.md
+  - docs/models/getrunwayresponseschema.md
   - docs/models/notificationresponseschema.md
   - docs/models/notificationschema.md
   - docs/models/notificationschemastatus.md
   - docs/models/notificationsresponseschema.md
   - docs/models/notificationsresponseschemameta.md
-  - docs/models/oauthtokenendpointrequest.md
-  - docs/models/oauthtokenendpointrequestauthorizationcode.md
-  - docs/models/oauthtokenendpointrequestrefreshtoken.md
   - docs/models/operations/attachments.md
   - docs/models/operations/bottomblock.md
   - docs/models/operations/breakdown.md
@@ -349,9 +345,6 @@ generatedFiles:
   - docs/models/operations/postoauthauthorizationresponse.md
   - docs/models/operations/postoauthregisterrequest.md
   - docs/models/operations/postoauthregisterresponse.md
-  - docs/models/operations/postoauthregisterresponsebody1.md
-  - docs/models/operations/postoauthregisterresponsebody2.md
-  - docs/models/operations/postoauthrevokerequest.md
   - docs/models/operations/postoauthrevokeresponse.md
   - docs/models/operations/postoauthrevokeresponsebody.md
   - docs/models/operations/postoauthtokenresponse.md
@@ -371,8 +364,6 @@ generatedFiles:
   - docs/models/operations/slackinteractionsresponsebody.md
   - docs/models/operations/slackoauthcallbackrequest.md
   - docs/models/operations/slackoauthcallbackresponse.md
-  - docs/models/operations/slackwebhookresponse.md
-  - docs/models/operations/slackwebhookresponsebody.md
   - docs/models/operations/starttimercustomer.md
   - docs/models/operations/starttimerdata.md
   - docs/models/operations/starttimerproject.md
@@ -402,7 +393,6 @@ generatedFiles:
   - docs/models/operations/templatenotedetails.md
   - docs/models/operations/templatepaymentdetails.md
   - docs/models/operations/tokentype.md
-  - docs/models/operations/tokentypehint.md
   - docs/models/operations/topblock.md
   - docs/models/operations/updateallnotificationsstatusresponse.md
   - docs/models/operations/updatebankaccountrequest.md
@@ -470,8 +460,6 @@ generatedFiles:
   - docs/models/operations/updatetransactionsresponsebody.md
   - docs/models/operations/updatetransactionsstatus.md
   - docs/models/operations/updatetransactionstatus.md
-  - docs/models/operations/whatsappwebhookresponse.md
-  - docs/models/operations/whatsappwebhookverifyrequest.md
   - docs/models/operations/xerooauthcallbackrequest.md
   - docs/models/operations/xerooauthcallbackresponse.md
   - docs/models/profitcurrent.md
@@ -573,7 +561,6 @@ generatedFiles:
   - src/funcs/integrationsQuickBooksOAuthCallback.ts
   - src/funcs/integrationsSlackInteractions.ts
   - src/funcs/integrationsSlackOAuthCallback.ts
-  - src/funcs/integrationsSlackWebhook.ts
   - src/funcs/integrationsXeroOAuthCallback.ts
   - src/funcs/invoicePaymentsCreateInvoicePaymentIntent.ts
   - src/funcs/invoicePaymentsDisconnectStripe.ts
@@ -641,8 +628,6 @@ generatedFiles:
   - src/funcs/webhooksPolarWebhook.ts
   - src/funcs/webhooksStripeWebhook.ts
   - src/funcs/webhooksTellerWebhook.ts
-  - src/funcs/webhooksWhatsappWebhook.ts
-  - src/funcs/webhooksWhatsappWebhookVerify.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -712,7 +697,6 @@ generatedFiles:
   - src/mcp-server/tools/integrationsQuickBooksOAuthCallback.ts
   - src/mcp-server/tools/integrationsSlackInteractions.ts
   - src/mcp-server/tools/integrationsSlackOAuthCallback.ts
-  - src/mcp-server/tools/integrationsSlackWebhook.ts
   - src/mcp-server/tools/integrationsXeroOAuthCallback.ts
   - src/mcp-server/tools/invoicePaymentsCreateInvoicePaymentIntent.ts
   - src/mcp-server/tools/invoicePaymentsDisconnectStripe.ts
@@ -780,8 +764,6 @@ generatedFiles:
   - src/mcp-server/tools/webhooksPolarWebhook.ts
   - src/mcp-server/tools/webhooksStripeWebhook.ts
   - src/mcp-server/tools/webhooksTellerWebhook.ts
-  - src/mcp-server/tools/webhooksWhatsappWebhook.ts
-  - src/mcp-server/tools/webhooksWhatsappWebhookVerify.ts
   - src/models/burnrateitem.ts
   - src/models/createtag.ts
   - src/models/createtransactionattachment.ts
@@ -811,11 +793,11 @@ generatedFiles:
   - src/models/getexpensesresponseschema.ts
   - src/models/getprofitresponseschema.ts
   - src/models/getrevenueresponseschema.ts
+  - src/models/getrunwayresponseschema.ts
   - src/models/index.ts
   - src/models/notificationresponseschema.ts
   - src/models/notificationschema.ts
   - src/models/notificationsresponseschema.ts
-  - src/models/oauthtokenendpointrequest.ts
   - src/models/operations/checkdesktopupdate.ts
   - src/models/operations/createbankaccount.ts
   - src/models/operations/createcustomer.ts
@@ -901,7 +883,6 @@ generatedFiles:
   - src/models/operations/search.ts
   - src/models/operations/slackinteractions.ts
   - src/models/operations/slackoauthcallback.ts
-  - src/models/operations/slackwebhook.ts
   - src/models/operations/starttimer.ts
   - src/models/operations/stoptimer.ts
   - src/models/operations/stripeconnectcallback.ts
@@ -920,8 +901,6 @@ generatedFiles:
   - src/models/operations/updatetrackerproject.ts
   - src/models/operations/updatetransaction.ts
   - src/models/operations/updatetransactions.ts
-  - src/models/operations/whatsappwebhook.ts
-  - src/models/operations/whatsappwebhookverify.ts
   - src/models/operations/xerooauthcallback.ts
   - src/models/profitcurrent.ts
   - src/models/profitmeta.ts
@@ -1556,7 +1535,7 @@ examples:
           id: "123e4567-e89b-12d3-a456-426614174000"
       responses:
         "200":
-          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "Acme Corporation", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "plan": "pro"}
+          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "Acme Corporation", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "plan": "pro", "email": "team@acme.com", "baseCurrency": "USD", "countryCode": "US", "fiscalYearStartMonth": 1}
         default:
           application/json: {"error": "Internal Server Error", "code": 500}
   updateTeamById:
@@ -1568,7 +1547,7 @@ examples:
         application/json: {"name": "Acme Corporation", "email": "team@acme.com", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "baseCurrency": "USD", "countryCode": "US", "fiscalYearStartMonth": 4, "companyType": "solo_founder", "heardAbout": "twitter"}
       responses:
         "200":
-          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "Acme Corporation", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "plan": "pro"}
+          application/json: {"id": "123e4567-e89b-12d3-a456-426614174000", "name": "Acme Corporation", "logoUrl": "https://cdn.midday.ai/logos/acme-corp.png", "plan": "pro", "email": "team@acme.com", "baseCurrency": "USD", "countryCode": "US", "fiscalYearStartMonth": 1}
         default:
           application/json: {"error": "Internal Server Error", "code": 500}
   listTeamMembers:
@@ -2235,7 +2214,7 @@ examples:
           currency: "USD"
       responses:
         "200":
-          application/json: 12
+          application/json: {"months": 8944.77, "medianBurn": 3339.01}
         default:
           application/json: {"error": "Internal Server Error", "code": 500}
   getExpensesReports:
@@ -2595,4 +2574,21 @@ examples:
           application/json: {"error": "Internal Server Error", "code": 500}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `midday.invoices.create()`:  `request` **Changed** **Breaking** :warning:\n* `midday.oAuth.postOAuthAuthorization()`:  `request` **Changed** **Breaking** :warning:\n* `midday.trackerTimer.getTimerStatus()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerTimer.getCurrentTimer()`:  `response` **Changed** **Breaking** :warning:\n* `midday.trackerTimer.stopTimer()`:  `response` **Changed** **Breaking** :warning:\n* `midday.trackerTimer.startTimer()`:  `response` **Changed** **Breaking** :warning:\n* `midday.trackerEntries.update()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerEntries.delete()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerEntries.createBulk()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerEntries.create()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerEntries.list()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerProjects.update()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerProjects.delete()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerProjects.get()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerProjects.create()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.trackerProjects.list()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.reports.spending()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.reports.expenses()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.reports.runway()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.reports.burnRate()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.reports.profit()`: \n  *  `request.revenueType` **Added**\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.teams.update()`: \n  *  `request.requestBody` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.reports.revenue()`: \n  *  `request.revenueType` **Added**\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.search.search()`:  `response` **Changed** **Breaking** :warning:\n* `midday.invoices.delete()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.teams.members()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.invoices.update()`: \n  *  `request.requestBody` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.invoices.get()`:  `response` **Changed** **Breaking** :warning:\n* `midday.invoices.summary()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.invoices.list()`: \n  *  `request` **Changed**\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.inbox.update()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.inbox.delete()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.inbox.get()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.inbox.list()`: \n  *  `request` **Changed**\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.documents.delete()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.tags.update()`: \n  *  `request.requestBody` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.oAuth.postOAuthToken()`:  `request` **Changed** **Breaking** :warning:\n* `midday.oAuth.postOAuthRevoke()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.notifications.list()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.notifications.updateStatus()`: \n  *  `request.requestBody` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.teams.get()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.transactions.list()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.transactions.create()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.transactions.get()`:  `response` **Changed** **Breaking** :warning:\n* `midday.transactions.delete()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.transactions.update()`: \n  *  `request.requestBody` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.transactions.createMany()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.transactions.deleteMany()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.transactions.updateMany()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.teams.list()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.notifications.updateAllStatus()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.documents.get()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.documents.list()`: \n  *  `request` **Changed**\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.users.get()`:  `response` **Changed** **Breaking** :warning:\n* `midday.users.update()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.customers.list()`:  `response` **Changed** **Breaking** :warning:\n* `midday.customers.create()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.customers.get()`:  `response` **Changed** **Breaking** :warning:\n* `midday.customers.delete()`:  `response` **Changed** **Breaking** :warning:\n* `midday.customers.update()`: \n  *  `request.requestBody` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.bankAccounts.list()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.bankAccounts.create()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.bankAccounts.get()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.bankAccounts.delete()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.bankAccounts.update()`: \n  *  `request.requestBody` **Changed** **Breaking** :warning:\n  *  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.tags.list()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.tags.create()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `midday.tags.get()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.tags.delete()`:  `response.status[default]` **Added** **Breaking** :warning:\n* `midday.invoicePayments.stripeConnectCallback()`: **Added**\n* `midday.invoicePayments.getStripeConnectUrl()`: **Added**\n* `midday.integrations.quickBooksOAuthCallback()`: **Added**\n* `midday.oAuth.getOAuthAuthorization()`:  `request` **Changed**\n* `midday.invoices.get/invoices/paymentStatus()`: **Deleted** **Breaking** :warning:\n* `midday.invoices.paymentStatus()`: **Added**\n* `midday.desktop.downloadUpdate()`: **Added**\n* `midday.desktop.checkUpdate()`: **Added**\n* `midday.invoicePayments.getStripeConnectStatus()`: **Added**\n* `midday.oAuth.postOAuthRegister()`: **Added**\n* `midday.invoicePayments.createInvoicePaymentIntent()`: **Added**\n* `midday.invoicePayments.disconnectStripe()`: **Added**\n* `midday.webhooks.inboxWebhook()`: **Added**\n* `midday.integrations.getFortnoxInstallUrl()`: **Added**\n* `midday.integrations.fortnoxOAuthCallback()`: **Added**\n* `midday.integrations.getQuickBooksInstallUrl()`: **Added**\n* `midday.integrations.getXeroInstallUrl()`: **Added**\n* `midday.integrations.xeroOAuthCallback()`: **Added**\n* `midday.integrations.getOutlookInstallUrl()`: **Added**\n* `midday.integrations.outlookOAuthCallback()`: **Added**\n* `midday.integrations.getGmailInstallUrl()`: **Added**\n* `midday.integrations.gmailOAuthCallback()`: **Added**\n* `midday.integrations.slackInteractions()`: **Added**\n* `midday.integrations.slackWebhook()`: **Added**\n* `midday.integrations.getSlackInstallUrl()`: **Added**\n* `midday.integrations.slackOAuthCallback()`: **Added**\n* `midday.files.downloadInvoice()`: **Added**\n* `midday.files.downloadFile()`: **Added**\n* `midday.files.proxy()`: **Added**\n* `midday.webhooks.whatsappWebhook()`: **Added**\n* `midday.webhooks.whatsappWebhookVerify()`: **Added**\n* `midday.webhooks.tellerWebhook()`: **Added**\n* `midday.webhooks.stripeWebhook()`: **Added**\n* `midday.webhooks.polarWebhook()`: **Added**\n* `midday.webhooks.plaidWebhook()`: **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes Detected:
+  * `midday.transactions.get()`:  `response.account` **Changed** **Breaking** :warning:
+  * `midday.transactions.update()`:  `response.account` **Changed** **Breaking** :warning:
+  * `midday.reports.runway()`:  `response` **Changed** **Breaking** :warning:
+  * `midday.oAuth.postOAuthRegister()`:  `response.status[200]` **Removed** **Breaking** :warning:
+  * `midday.oAuth.postOAuthToken()`:  `request` **Removed** **Breaking** :warning:
+  * `midday.oAuth.postOAuthRevoke()`:  `request` **Removed** **Breaking** :warning:
+  * `midday.transactions.updateMany()`:  `response.data.[].account` **Changed** **Breaking** :warning:
+  * `midday.transactions.list()`:  `response.data.[].account` **Changed** **Breaking** :warning:
+  * `midday.transactions.createMany()`:  `response.[].account` **Changed** **Breaking** :warning:
+  * `midday.transactions.create()`:  `response.account` **Changed** **Breaking** :warning:
+  * `midday.webhooks.whatsappWebhookVerify()`: **Deleted** **Breaking** :warning:
+  * `midday.webhooks.whatsappWebhook()`: **Deleted** **Breaking** :warning:
+  * `midday.teams.list()`:  `response.data.[]` **Changed**
+  * `midday.teams.get()`:  `response` **Changed**
+  * `midday.teams.update()`:  `response` **Changed**
+  * `midday.integrations.slackWebhook()`: **Deleted** **Breaking** :warning:

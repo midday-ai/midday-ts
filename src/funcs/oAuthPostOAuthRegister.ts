@@ -165,7 +165,6 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.PostOAuthRegisterResponse$inboundSchema),
     M.json(201, operations.PostOAuthRegisterResponse$inboundSchema),
     M.jsonErr(400, errors.OAuthErrorResponse$inboundSchema),
     M.fail("4XX"),

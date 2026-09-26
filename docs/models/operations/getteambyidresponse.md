@@ -11,6 +11,10 @@ const value: operations.GetTeamByIdResponseBody = {
   name: "Acme Corporation",
   logoUrl: "https://cdn.midday.ai/logos/acme-corp.png",
   plan: "pro",
+  email: "team@acme.com",
+  baseCurrency: "USD",
+  countryCode: "US",
+  fiscalYearStartMonth: 1,
 };
 ```
 

@@ -7,8 +7,6 @@ import { webhooksPlaidWebhook } from "../funcs/webhooksPlaidWebhook.js";
 import { webhooksPolarWebhook } from "../funcs/webhooksPolarWebhook.js";
 import { webhooksStripeWebhook } from "../funcs/webhooksStripeWebhook.js";
 import { webhooksTellerWebhook } from "../funcs/webhooksTellerWebhook.js";
-import { webhooksWhatsappWebhook } from "../funcs/webhooksWhatsappWebhook.js";
-import { webhooksWhatsappWebhookVerify } from "../funcs/webhooksWhatsappWebhookVerify.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -87,40 +85,6 @@ export class Webhooks extends ClientSDK {
   ): Promise<operations.TellerWebhookResponse> {
     return unwrapAsync(webhooksTellerWebhook(
       this,
-      options,
-    ));
-  }
-
-  /**
-   * WhatsApp webhook verification
-   *
-   * @remarks
-   * Verify webhook URL for WhatsApp Business API
-   */
-  async whatsappWebhookVerify(
-    request: operations.WhatsappWebhookVerifyRequest,
-    options?: RequestOptions,
-  ): Promise<string> {
-    return unwrapAsync(webhooksWhatsappWebhookVerify(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * WhatsApp webhook
-   *
-   * @remarks
-   * Receive messages, media, and button replies from WhatsApp Business API
-   */
-  async whatsappWebhook(
-    request: any,
-    options?: RequestOptions,
-  ): Promise<operations.WhatsappWebhookResponse> {
-    return unwrapAsync(webhooksWhatsappWebhook(
-      this,
-      request,
       options,
     ));
   }

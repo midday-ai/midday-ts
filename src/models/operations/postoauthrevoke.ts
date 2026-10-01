@@ -3,43 +3,10 @@
  */
 
 import * as z from "zod";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
-
-/**
- * Hint about the token type
- */
-export const TokenTypeHint = {
-  AccessToken: "access_token",
-  RefreshToken: "refresh_token",
-} as const;
-/**
- * Hint about the token type
- */
-export type TokenTypeHint = ClosedEnum<typeof TokenTypeHint>;
-
-export type PostOAuthRevokeRequest = {
-  /**
-   * Token to revoke (access token or refresh token)
-   */
-  token: string;
-  /**
-   * Hint about the token type
-   */
-  tokenTypeHint?: TokenTypeHint | undefined;
-  /**
-   * Client ID of the OAuth application
-   */
-  clientId: string;
-  /**
-   * Client secret of the OAuth application (required for confidential clients)
-   */
-  clientSecret?: string | undefined;
-};
 
 /**
  * Token revocation successful
@@ -51,102 +18,6 @@ export type PostOAuthRevokeResponseBody = {
 export type PostOAuthRevokeResponse =
   | PostOAuthRevokeResponseBody
   | models.ErrorResponse;
-
-/** @internal */
-export const TokenTypeHint$inboundSchema: z.ZodNativeEnum<
-  typeof TokenTypeHint
-> = z.nativeEnum(TokenTypeHint);
-
-/** @internal */
-export const TokenTypeHint$outboundSchema: z.ZodNativeEnum<
-  typeof TokenTypeHint
-> = TokenTypeHint$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TokenTypeHint$ {
-  /** @deprecated use `TokenTypeHint$inboundSchema` instead. */
-  export const inboundSchema = TokenTypeHint$inboundSchema;
-  /** @deprecated use `TokenTypeHint$outboundSchema` instead. */
-  export const outboundSchema = TokenTypeHint$outboundSchema;
-}
-
-/** @internal */
-export const PostOAuthRevokeRequest$inboundSchema: z.ZodType<
-  PostOAuthRevokeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  token: z.string(),
-  token_type_hint: TokenTypeHint$inboundSchema.optional(),
-  client_id: z.string(),
-  client_secret: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "token_type_hint": "tokenTypeHint",
-    "client_id": "clientId",
-    "client_secret": "clientSecret",
-  });
-});
-
-/** @internal */
-export type PostOAuthRevokeRequest$Outbound = {
-  token: string;
-  token_type_hint?: string | undefined;
-  client_id: string;
-  client_secret?: string | undefined;
-};
-
-/** @internal */
-export const PostOAuthRevokeRequest$outboundSchema: z.ZodType<
-  PostOAuthRevokeRequest$Outbound,
-  z.ZodTypeDef,
-  PostOAuthRevokeRequest
-> = z.object({
-  token: z.string(),
-  tokenTypeHint: TokenTypeHint$outboundSchema.optional(),
-  clientId: z.string(),
-  clientSecret: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    tokenTypeHint: "token_type_hint",
-    clientId: "client_id",
-    clientSecret: "client_secret",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostOAuthRevokeRequest$ {
-  /** @deprecated use `PostOAuthRevokeRequest$inboundSchema` instead. */
-  export const inboundSchema = PostOAuthRevokeRequest$inboundSchema;
-  /** @deprecated use `PostOAuthRevokeRequest$outboundSchema` instead. */
-  export const outboundSchema = PostOAuthRevokeRequest$outboundSchema;
-  /** @deprecated use `PostOAuthRevokeRequest$Outbound` instead. */
-  export type Outbound = PostOAuthRevokeRequest$Outbound;
-}
-
-export function postOAuthRevokeRequestToJSON(
-  postOAuthRevokeRequest: PostOAuthRevokeRequest,
-): string {
-  return JSON.stringify(
-    PostOAuthRevokeRequest$outboundSchema.parse(postOAuthRevokeRequest),
-  );
-}
-
-export function postOAuthRevokeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostOAuthRevokeRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostOAuthRevokeRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostOAuthRevokeRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const PostOAuthRevokeResponseBody$inboundSchema: z.ZodType<

@@ -8,7 +8,6 @@ import { oAuthPostOAuthRegister } from "../funcs/oAuthPostOAuthRegister.js";
 import { oAuthPostOAuthRevoke } from "../funcs/oAuthPostOAuthRevoke.js";
 import { oAuthPostOAuthToken } from "../funcs/oAuthPostOAuthToken.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -68,15 +67,13 @@ export class OAuth extends ClientSDK {
    * OAuth Token Exchange
    *
    * @remarks
-   * Exchange authorization code for access token or refresh an access token
+   * Exchange authorization code for access token or refresh an access token. Accepts application/json or application/x-www-form-urlencoded.
    */
   async postOAuthToken(
-    request: models.OAuthTokenEndpointRequest,
     options?: RequestOptions,
   ): Promise<operations.PostOAuthTokenResponse> {
     return unwrapAsync(oAuthPostOAuthToken(
       this,
-      request,
       options,
     ));
   }
@@ -85,15 +82,13 @@ export class OAuth extends ClientSDK {
    * OAuth Token Revocation
    *
    * @remarks
-   * Revoke an access token or refresh token
+   * Revoke an access token or refresh token. Accepts application/json or application/x-www-form-urlencoded.
    */
   async postOAuthRevoke(
-    request: operations.PostOAuthRevokeRequest,
     options?: RequestOptions,
   ): Promise<operations.PostOAuthRevokeResponse> {
     return unwrapAsync(oAuthPostOAuthRevoke(
       this,
-      request,
       options,
     ));
   }

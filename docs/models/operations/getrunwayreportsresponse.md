@@ -3,10 +3,13 @@
 
 ## Supported Types
 
-### `number`
+### `models.GetRunwayResponseSchema`
 
 ```typescript
-const value: number = 12;
+const value: models.GetRunwayResponseSchema = {
+  months: 4494.85,
+  medianBurn: 6495.9,
+};
 ```
 
 ### `models.ErrorResponse`

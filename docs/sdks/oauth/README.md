@@ -308,7 +308,7 @@ run();
 
 ## postOAuthToken
 
-Exchange authorization code for access token or refresh an access token
+Exchange authorization code for access token or refresh an access token. Accepts application/json or application/x-www-form-urlencoded.
 
 ### Example Usage
 
@@ -323,13 +323,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.oAuth.postOAuthToken({
-    grantType: "refresh_token",
-    refreshToken: "mid_rt_abcdef123456789",
-    clientId: "mid_client_abcdef123456789",
-    clientSecret: "mid_secret_abcdef123456789",
-    scope: "transactions.read invoices.read",
-  });
+  const result = await midday.oAuth.postOAuthToken();
 
   console.log(result);
 }
@@ -354,13 +348,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await oAuthPostOAuthToken(midday, {
-    grantType: "refresh_token",
-    refreshToken: "mid_rt_abcdef123456789",
-    clientId: "mid_client_abcdef123456789",
-    clientSecret: "mid_secret_abcdef123456789",
-    scope: "transactions.read invoices.read",
-  });
+  const res = await oAuthPostOAuthToken(midday);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -376,7 +364,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.OAuthTokenEndpointRequest](../../models/oauthtokenendpointrequest.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -394,7 +381,7 @@ run();
 
 ## postOAuthRevoke
 
-Revoke an access token or refresh token
+Revoke an access token or refresh token. Accepts application/json or application/x-www-form-urlencoded.
 
 ### Example Usage
 
@@ -409,12 +396,7 @@ const midday = new Midday({
 });
 
 async function run() {
-  const result = await midday.oAuth.postOAuthRevoke({
-    token: "mid_access_token_abcdef123456789",
-    tokenTypeHint: "access_token",
-    clientId: "mid_client_abcdef123456789",
-    clientSecret: "mid_secret_abcdef123456789",
-  });
+  const result = await midday.oAuth.postOAuthRevoke();
 
   console.log(result);
 }
@@ -439,12 +421,7 @@ const midday = new MiddayCore({
 });
 
 async function run() {
-  const res = await oAuthPostOAuthRevoke(midday, {
-    token: "mid_access_token_abcdef123456789",
-    tokenTypeHint: "access_token",
-    clientId: "mid_client_abcdef123456789",
-    clientSecret: "mid_secret_abcdef123456789",
-  });
+  const res = await oAuthPostOAuthRevoke(midday);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -460,7 +437,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostOAuthRevokeRequest](../../models/operations/postoauthrevokerequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

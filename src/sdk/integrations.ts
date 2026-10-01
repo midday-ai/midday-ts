@@ -14,7 +14,6 @@ import { integrationsOutlookOAuthCallback } from "../funcs/integrationsOutlookOA
 import { integrationsQuickBooksOAuthCallback } from "../funcs/integrationsQuickBooksOAuthCallback.js";
 import { integrationsSlackInteractions } from "../funcs/integrationsSlackInteractions.js";
 import { integrationsSlackOAuthCallback } from "../funcs/integrationsSlackOAuthCallback.js";
-import { integrationsSlackWebhook } from "../funcs/integrationsSlackWebhook.js";
 import { integrationsXeroOAuthCallback } from "../funcs/integrationsXeroOAuthCallback.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -48,21 +47,6 @@ export class Integrations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetSlackInstallUrlResponse> {
     return unwrapAsync(integrationsGetSlackInstallUrl(
-      this,
-      options,
-    ));
-  }
-
-  /**
-   * Slack webhook handler
-   *
-   * @remarks
-   * Handles incoming webhook events from Slack. Verifies request signature and processes events.
-   */
-  async slackWebhook(
-    options?: RequestOptions,
-  ): Promise<operations.SlackWebhookResponse> {
-    return unwrapAsync(integrationsSlackWebhook(
       this,
       options,
     ));

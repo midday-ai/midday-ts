@@ -3,23 +3,16 @@
  */
 
 import { oAuthPostOAuthToken } from "../../funcs/oAuthPostOAuthToken.js";
-import * as models from "../../models/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
-const args = {
-  request: models.OAuthTokenEndpointRequest$inboundSchema,
-};
-
-export const tool$oAuthPostOAuthToken: ToolDefinition<typeof args> = {
+export const tool$oAuthPostOAuthToken: ToolDefinition = {
   name: "O-auth-post-O-auth-token",
   description: `OAuth Token Exchange
 
-Exchange authorization code for access token or refresh an access token`,
-  args,
-  tool: async (client, args, ctx) => {
+Exchange authorization code for access token or refresh an access token. Accepts application/json or application/x-www-form-urlencoded.`,
+  tool: async (client, ctx) => {
     const [result, apiCall] = await oAuthPostOAuthToken(
       client,
-      args.request,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 
